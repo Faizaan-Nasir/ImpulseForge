@@ -1,0 +1,50 @@
+[
+  {
+    "ohms": 5,
+    "quantity": 4
+  },
+  {
+    "ohms": 10,
+    "quantity": 4
+  },
+  {
+    "ohms": 15,
+    "quantity": 4
+  },
+  {
+    "ohms": 20,
+    "quantity": 4
+  },
+  {
+    "ohms": 25,
+    "quantity": 4
+  },
+  {
+    "ohms": 30,
+    "quantity": 4
+  },
+  {
+    "ohms": 40,
+    "quantity": 4
+  },
+  {
+    "ohms": 50,
+    "quantity": 4
+  },
+  {
+    "ohms": 75,
+    "quantity": 4
+  },
+  {
+    "ohms": 100,
+    "quantity": 4
+  },
+  {
+    "ohms": 150,
+    "quantity": 4
+  },
+  {
+    "ohms": 200,
+    "quantity": 4
+  }
+]

@@ -1,0 +1,732 @@
+{
+  "$defs": {
+    "Assembly": {
+      "additionalProperties": false,
+      "properties": {
+        "assembly_id": {
+          "title": "Assembly Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "front",
+            "tail"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "equivalent_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Equivalent Ohm",
+          "type": "number"
+        },
+        "nominal_fraction": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Nominal Fraction",
+          "type": "object"
+        },
+        "recipe": {
+          "$ref": "#/$defs/Recipe"
+        },
+        "netlist": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Netlist",
+          "type": "array"
+        },
+        "type_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Type Counts",
+          "type": "object"
+        },
+        "total_resistors": {
+          "title": "Total Resistors",
+          "type": "integer"
+        },
+        "ratings_status": {
+          "default": "unknown",
+          "title": "Ratings Status",
+          "type": "string"
+        },
+        "search_guarantee": {
+          "default": "bounded",
+          "title": "Search Guarantee",
+          "type": "string"
+        }
+      },
+      "required": [
+        "assembly_id",
+        "role",
+        "equivalent_ohm",
+        "nominal_fraction",
+        "recipe",
+        "netlist",
+        "type_counts",
+        "total_resistors"
+      ],
+      "title": "Assembly",
+      "type": "object"
+    },
+    "Candidate": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "context_hash": {
+          "title": "Context Hash",
+          "type": "string"
+        },
+        "proposal": {
+          "$ref": "#/$defs/Proposal"
+        },
+        "N": {
+          "minimum": 1,
+          "title": "N",
+          "type": "integer"
+        },
+        "U_charge_V": {
+          "exclusiveMinimum": 0,
+          "title": "U Charge V",
+          "type": "number"
+        },
+        "front": {
+          "$ref": "#/$defs/Assembly"
+        },
+        "tail": {
+          "$ref": "#/$defs/Assembly"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "context_hash",
+        "proposal",
+        "N",
+        "U_charge_V",
+        "front",
+        "tail"
+      ],
+      "title": "Candidate",
+      "type": "object"
+    },
+    "Constraint": {
+      "additionalProperties": false,
+      "properties": {
+        "constraint_id": {
+          "title": "Constraint Id",
+          "type": "string"
+        },
+        "origin": {
+          "title": "Origin",
+          "type": "string"
+        },
+        "kind": {
+          "default": "hard",
+          "enum": [
+            "hard",
+            "metadata",
+            "waveform",
+            "support"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "enforced_by": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Enforced By",
+          "type": "array"
+        },
+        "rule": {
+          "title": "Rule",
+          "type": "string"
+        },
+        "observed_value": {
+          "default": null,
+          "title": "Observed Value"
+        },
+        "limit_value": {
+          "default": null,
+          "title": "Limit Value"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "margin": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail",
+            "unknown",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason Code"
+        }
+      },
+      "required": [
+        "constraint_id",
+        "origin",
+        "enforced_by",
+        "rule",
+        "status"
+      ],
+      "title": "Constraint",
+      "type": "object"
+    },
+    "Metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "front_s": {
+          "exclusiveMinimum": 0,
+          "title": "Front S",
+          "type": "number"
+        },
+        "tail_s": {
+          "exclusiveMinimum": 0,
+          "title": "Tail S",
+          "type": "number"
+        },
+        "crest_V": {
+          "exclusiveMinimum": 0,
+          "title": "Crest V",
+          "type": "number"
+        }
+      },
+      "required": [
+        "front_s",
+        "tail_s",
+        "crest_V"
+      ],
+      "title": "Metrics",
+      "type": "object"
+    },
+    "PerformanceReport": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "context_hash": {
+          "title": "Context Hash",
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/$defs/Metrics"
+        },
+        "physics": {
+          "additionalProperties": true,
+          "title": "Physics",
+          "type": "object"
+        },
+        "corrected": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Corrected"
+        },
+        "correction_status": {
+          "title": "Correction Status",
+          "type": "string"
+        },
+        "efficiency": {
+          "additionalProperties": true,
+          "title": "Efficiency",
+          "type": "object"
+        },
+        "stored_energy": {
+          "additionalProperties": true,
+          "title": "Stored Energy",
+          "type": "object"
+        },
+        "hardware": {
+          "additionalProperties": true,
+          "title": "Hardware",
+          "type": "object"
+        },
+        "model_quality": {
+          "additionalProperties": true,
+          "title": "Model Quality",
+          "type": "object"
+        },
+        "observed_accuracy": {
+          "additionalProperties": true,
+          "title": "Observed Accuracy",
+          "type": "object"
+        },
+        "runtime": {
+          "$ref": "#/$defs/RuntimePerformance"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "context_hash",
+        "target",
+        "physics",
+        "corrected",
+        "correction_status",
+        "efficiency",
+        "stored_energy",
+        "hardware",
+        "model_quality",
+        "observed_accuracy",
+        "runtime",
+        "interpretation"
+      ],
+      "title": "PerformanceReport",
+      "type": "object"
+    },
+    "PhysicsEvaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "context_hash": {
+          "title": "Context Hash",
+          "type": "string"
+        },
+        "physics_version": {
+          "title": "Physics Version",
+          "type": "string"
+        },
+        "baseline_mode": {
+          "enum": [
+            "calculator",
+            "exact"
+          ],
+          "title": "Baseline Mode",
+          "type": "string"
+        },
+        "derived": {
+          "additionalProperties": true,
+          "title": "Derived",
+          "type": "object"
+        },
+        "metrics": {
+          "$ref": "#/$defs/Metrics"
+        },
+        "voltage_efficiency": {
+          "exclusiveMinimum": 0,
+          "title": "Voltage Efficiency",
+          "type": "number"
+        },
+        "voltage_utilisation": {
+          "exclusiveMinimum": 0,
+          "title": "Voltage Utilisation",
+          "type": "number"
+        },
+        "stage_energy_J": {
+          "exclusiveMinimum": 0,
+          "title": "Stage Energy J",
+          "type": "number"
+        },
+        "total_energy_J": {
+          "exclusiveMinimum": 0,
+          "title": "Total Energy J",
+          "type": "number"
+        },
+        "landmarks": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Landmarks",
+          "type": "object"
+        },
+        "rates": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Rates",
+          "type": "object"
+        },
+        "trace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PhysicsTrace"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "component_stresses": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Component Stresses",
+          "type": "array"
+        },
+        "constraints": {
+          "items": {
+            "$ref": "#/$defs/Constraint"
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "diagnostics": {
+          "additionalProperties": true,
+          "title": "Diagnostics",
+          "type": "object"
+        },
+        "hardware_feasible": {
+          "title": "Hardware Feasible",
+          "type": "boolean"
+        },
+        "performance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PerformanceReport"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "candidate_id",
+        "context_hash",
+        "physics_version",
+        "baseline_mode",
+        "derived",
+        "metrics",
+        "voltage_efficiency",
+        "voltage_utilisation",
+        "stage_energy_J",
+        "total_energy_J",
+        "landmarks",
+        "rates",
+        "trace",
+        "component_stresses",
+        "constraints",
+        "diagnostics",
+        "hardware_feasible"
+      ],
+      "title": "PhysicsEvaluation",
+      "type": "object"
+    },
+    "PhysicsTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "time_s": {
+          "items": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "title": "Time S",
+          "type": "array"
+        },
+        "voltage_V": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Voltage V",
+          "type": "array"
+        },
+        "origin": {
+          "const": "physics",
+          "title": "Origin",
+          "type": "string"
+        }
+      },
+      "required": [
+        "time_s",
+        "voltage_V",
+        "origin"
+      ],
+      "title": "PhysicsTrace",
+      "type": "object"
+    },
+    "Proposal": {
+      "additionalProperties": false,
+      "properties": {
+        "N": {
+          "minimum": 1,
+          "title": "N",
+          "type": "integer"
+        },
+        "Rf_required_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Rf Required Ohm",
+          "type": "number"
+        },
+        "Rt_required_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Rt Required Ohm",
+          "type": "number"
+        },
+        "proposal_index": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Proposal Index",
+          "type": "integer"
+        },
+        "source": {
+          "default": "manual",
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "N",
+        "Rf_required_ohm",
+        "Rt_required_ohm"
+      ],
+      "title": "Proposal",
+      "type": "object"
+    },
+    "Recipe": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "enum": [
+            "resistor",
+            "series",
+            "parallel"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "type_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Type Id"
+        },
+        "ohm": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ohm"
+        },
+        "children": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Recipe"
+          },
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "title": "Recipe",
+      "type": "object"
+    },
+    "RuntimePerformance": {
+      "additionalProperties": false,
+      "properties": {
+        "clock": {
+          "const": "monotonic_wall_clock",
+          "default": "monotonic_wall_clock",
+          "title": "Clock",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "stage_seconds": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "title": "Stage Seconds",
+          "type": "object"
+        },
+        "total_seconds": {
+          "minimum": 0,
+          "title": "Total Seconds",
+          "type": "number"
+        },
+        "cache_hit": {
+          "default": false,
+          "title": "Cache Hit",
+          "type": "boolean"
+        },
+        "transport_time_included": {
+          "default": false,
+          "title": "Transport Time Included",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "scope",
+        "stage_seconds",
+        "total_seconds"
+      ],
+      "title": "RuntimePerformance",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Candidate"
+    },
+    "physics": {
+      "$ref": "#/$defs/PhysicsEvaluation"
+    },
+    "correction": {
+      "additionalProperties": true,
+      "title": "Correction",
+      "type": "object"
+    },
+    "objective": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Objective"
+    },
+    "eligible": {
+      "title": "Eligible",
+      "type": "boolean"
+    },
+    "cost": {
+      "minimum": 0,
+      "title": "Cost",
+      "type": "number"
+    },
+    "objective_origin": {
+      "anyOf": [
+        {
+          "enum": [
+            "residual_corrected",
+            "physics_baseline"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Objective Origin"
+    },
+    "cost_basis": {
+      "anyOf": [
+        {
+          "enum": [
+            "eligible_waveform",
+            "diagnostic_waveform_with_ineligibility_penalty",
+            "hard_rejection",
+            "ml_prediction_unavailable"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost Basis"
+    },
+    "performance": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PerformanceReport"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "candidate_id",
+    "candidate",
+    "physics",
+    "correction",
+    "objective",
+    "eligible",
+    "cost"
+  ],
+  "title": "CandidateEvaluation",
+  "type": "object"
+}

@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "Recipe": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "enum": [
+            "resistor",
+            "series",
+            "parallel"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "type_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Type Id"
+        },
+        "ohm": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ohm"
+        },
+        "children": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Recipe"
+          },
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "title": "Recipe",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/Recipe"
+}

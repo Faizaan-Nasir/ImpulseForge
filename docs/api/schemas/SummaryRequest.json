@@ -1,0 +1,12 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "refresh": {
+      "default": false,
+      "title": "Refresh",
+      "type": "boolean"
+    }
+  },
+  "title": "SummaryRequest",
+  "type": "object"
+}

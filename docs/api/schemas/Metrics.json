@@ -1,0 +1,27 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "front_s": {
+      "exclusiveMinimum": 0,
+      "title": "Front S",
+      "type": "number"
+    },
+    "tail_s": {
+      "exclusiveMinimum": 0,
+      "title": "Tail S",
+      "type": "number"
+    },
+    "crest_V": {
+      "exclusiveMinimum": 0,
+      "title": "Crest V",
+      "type": "number"
+    }
+  },
+  "required": [
+    "front_s",
+    "tail_s",
+    "crest_V"
+  ],
+  "title": "Metrics",
+  "type": "object"
+}

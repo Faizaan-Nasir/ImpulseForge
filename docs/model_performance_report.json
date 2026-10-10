@@ -1,0 +1,103 @@
+{
+  "model_version": "residual-tabpfn-v2-diagnostic-v1",
+  "categories": {
+    "Lightning": {
+      "status": "available",
+      "model_version": "residual-tabpfn-v2-diagnostic-v1",
+      "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+      "category": "Lightning",
+      "split": "Validation",
+      "dataset_origin": "synthetic_workbook",
+      "train_count": 700,
+      "validation_count": 150,
+      "hidden_test_evaluated": false,
+      "lab_validated": false,
+      "metrics": {
+        "residual_front_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 6.513955473413656e-09,
+          "validation_RMSE": 7.407555187557085e-09,
+          "validation_bias": 5.07431277513896e-10,
+          "validation_MAE_over_train_residual_std": 0.6650287981681047,
+          "physics_only_MAE": 8.240545740843459e-09,
+          "mean_residual_baseline_MAE": 8.207405713891005e-09,
+          "linear_residual_baseline_MAE": 6.518917806856653e-09
+        },
+        "residual_tail_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 5.831505458801432e-07,
+          "validation_RMSE": 6.692771396372145e-07,
+          "validation_bias": -1.750495252191678e-08,
+          "validation_MAE_over_train_residual_std": 0.7245254708983543,
+          "physics_only_MAE": 6.87652498761937e-07,
+          "mean_residual_baseline_MAE": 6.870463165712267e-07,
+          "linear_residual_baseline_MAE": 5.802299220732198e-07
+        },
+        "residual_crest_V": {
+          "unit": "V",
+          "validation_count": 150,
+          "validation_MAE": 4485.187180661017,
+          "validation_RMSE": 5193.163604605983,
+          "validation_bias": -366.26550849785013,
+          "validation_MAE_over_train_residual_std": 0.4114703557722134,
+          "physics_only_MAE": 9749.734449355396,
+          "mean_residual_baseline_MAE": 9735.026793715737,
+          "linear_residual_baseline_MAE": 4745.46329735606
+        }
+      },
+      "error_definition": "prediction_minus_observation",
+      "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+    },
+    "Switching": {
+      "status": "available",
+      "model_version": "residual-tabpfn-v2-diagnostic-v1",
+      "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+      "category": "Switching",
+      "split": "Validation",
+      "dataset_origin": "synthetic_workbook",
+      "train_count": 700,
+      "validation_count": 150,
+      "hidden_test_evaluated": false,
+      "lab_validated": false,
+      "metrics": {
+        "residual_front_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 1.6063153452190028e-06,
+          "validation_RMSE": 1.8279643577304699e-06,
+          "validation_bias": -1.0726242223898998e-07,
+          "validation_MAE_over_train_residual_std": 0.6741504481572254,
+          "physics_only_MAE": 2.0134694993384835e-06,
+          "mean_residual_baseline_MAE": 1.908414013515629e-06,
+          "linear_residual_baseline_MAE": 1.5804247094179118e-06
+        },
+        "residual_tail_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 2.2427951527125597e-05,
+          "validation_RMSE": 2.5914292148648314e-05,
+          "validation_bias": 2.226792489144754e-06,
+          "validation_MAE_over_train_residual_std": 0.6948733520446078,
+          "physics_only_MAE": 2.4757276996259968e-05,
+          "mean_residual_baseline_MAE": 2.4652469182858916e-05,
+          "linear_residual_baseline_MAE": 2.209340208225149e-05
+        },
+        "residual_crest_V": {
+          "unit": "V",
+          "validation_count": 150,
+          "validation_MAE": 3147.4734984569177,
+          "validation_RMSE": 3709.31127047061,
+          "validation_bias": -11.444559688727313,
+          "validation_MAE_over_train_residual_std": 0.3915231771408589,
+          "physics_only_MAE": 6788.953234656058,
+          "mean_residual_baseline_MAE": 6827.020558317406,
+          "linear_residual_baseline_MAE": 3330.509622721135
+        }
+      },
+      "error_definition": "prediction_minus_observation",
+      "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+    }
+  }
+}

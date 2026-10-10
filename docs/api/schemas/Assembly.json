@@ -1,0 +1,127 @@
+{
+  "$defs": {
+    "Recipe": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "enum": [
+            "resistor",
+            "series",
+            "parallel"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "type_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Type Id"
+        },
+        "ohm": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ohm"
+        },
+        "children": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Recipe"
+          },
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "title": "Recipe",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assembly_id": {
+      "title": "Assembly Id",
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "front",
+        "tail"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "equivalent_ohm": {
+      "exclusiveMinimum": 0,
+      "title": "Equivalent Ohm",
+      "type": "number"
+    },
+    "nominal_fraction": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Nominal Fraction",
+      "type": "object"
+    },
+    "recipe": {
+      "$ref": "#/$defs/Recipe"
+    },
+    "netlist": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Netlist",
+      "type": "array"
+    },
+    "type_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Type Counts",
+      "type": "object"
+    },
+    "total_resistors": {
+      "title": "Total Resistors",
+      "type": "integer"
+    },
+    "ratings_status": {
+      "default": "unknown",
+      "title": "Ratings Status",
+      "type": "string"
+    },
+    "search_guarantee": {
+      "default": "bounded",
+      "title": "Search Guarantee",
+      "type": "string"
+    }
+  },
+  "required": [
+    "assembly_id",
+    "role",
+    "equivalent_ohm",
+    "nominal_fraction",
+    "recipe",
+    "netlist",
+    "type_counts",
+    "total_resistors"
+  ],
+  "title": "Assembly",
+  "type": "object"
+}

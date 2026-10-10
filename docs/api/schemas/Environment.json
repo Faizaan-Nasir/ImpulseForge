@@ -1,0 +1,23 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "availability": {
+      "default": "not_recorded",
+      "enum": [
+        "not_recorded",
+        "recorded"
+      ],
+      "title": "Availability",
+      "type": "string"
+    },
+    "values": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Values",
+      "type": "object"
+    }
+  },
+  "title": "Environment",
+  "type": "object"
+}

@@ -1,0 +1,208 @@
+{
+  "$defs": {
+    "Assembly": {
+      "additionalProperties": false,
+      "properties": {
+        "assembly_id": {
+          "title": "Assembly Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "front",
+            "tail"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "equivalent_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Equivalent Ohm",
+          "type": "number"
+        },
+        "nominal_fraction": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Nominal Fraction",
+          "type": "object"
+        },
+        "recipe": {
+          "$ref": "#/$defs/Recipe"
+        },
+        "netlist": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Netlist",
+          "type": "array"
+        },
+        "type_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Type Counts",
+          "type": "object"
+        },
+        "total_resistors": {
+          "title": "Total Resistors",
+          "type": "integer"
+        },
+        "ratings_status": {
+          "default": "unknown",
+          "title": "Ratings Status",
+          "type": "string"
+        },
+        "search_guarantee": {
+          "default": "bounded",
+          "title": "Search Guarantee",
+          "type": "string"
+        }
+      },
+      "required": [
+        "assembly_id",
+        "role",
+        "equivalent_ohm",
+        "nominal_fraction",
+        "recipe",
+        "netlist",
+        "type_counts",
+        "total_resistors"
+      ],
+      "title": "Assembly",
+      "type": "object"
+    },
+    "Proposal": {
+      "additionalProperties": false,
+      "properties": {
+        "N": {
+          "minimum": 1,
+          "title": "N",
+          "type": "integer"
+        },
+        "Rf_required_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Rf Required Ohm",
+          "type": "number"
+        },
+        "Rt_required_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Rt Required Ohm",
+          "type": "number"
+        },
+        "proposal_index": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Proposal Index",
+          "type": "integer"
+        },
+        "source": {
+          "default": "manual",
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "N",
+        "Rf_required_ohm",
+        "Rt_required_ohm"
+      ],
+      "title": "Proposal",
+      "type": "object"
+    },
+    "Recipe": {
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "enum": [
+            "resistor",
+            "series",
+            "parallel"
+          ],
+          "title": "Op",
+          "type": "string"
+        },
+        "type_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Type Id"
+        },
+        "ohm": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ohm"
+        },
+        "children": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/Recipe"
+          },
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "title": "Recipe",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "context_hash": {
+      "title": "Context Hash",
+      "type": "string"
+    },
+    "proposal": {
+      "$ref": "#/$defs/Proposal"
+    },
+    "N": {
+      "minimum": 1,
+      "title": "N",
+      "type": "integer"
+    },
+    "U_charge_V": {
+      "exclusiveMinimum": 0,
+      "title": "U Charge V",
+      "type": "number"
+    },
+    "front": {
+      "$ref": "#/$defs/Assembly"
+    },
+    "tail": {
+      "$ref": "#/$defs/Assembly"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "context_hash",
+    "proposal",
+    "N",
+    "U_charge_V",
+    "front",
+    "tail"
+  ],
+  "title": "Candidate",
+  "type": "object"
+}

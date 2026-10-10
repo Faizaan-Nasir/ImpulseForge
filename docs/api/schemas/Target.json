@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "WaveformTolerances": {
+      "additionalProperties": false,
+      "properties": {
+        "front": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Front",
+          "type": "number"
+        },
+        "tail": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Tail",
+          "type": "number"
+        },
+        "crest": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Crest",
+          "type": "number"
+        }
+      },
+      "required": [
+        "front",
+        "tail",
+        "crest"
+      ],
+      "title": "WaveformTolerances",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "crest_V": {
+      "exclusiveMinimum": 0,
+      "title": "Crest V",
+      "type": "number"
+    },
+    "front_s": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Front S"
+    },
+    "tail_s": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tail S"
+    },
+    "tolerances": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/WaveformTolerances"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "crest_V"
+  ],
+  "title": "Target",
+  "type": "object"
+}

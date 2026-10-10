@@ -1,0 +1,547 @@
+{
+  "python": "3.12.14",
+  "platform": "macOS-27.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "packages": {
+    "absl-py": "2.5.1",
+    "annotated-doc": "0.0.5",
+    "annotated-types": "0.8.0",
+    "anyio": "4.15.1",
+    "attrs": "26.1.0",
+    "certifi": "2026.7.22",
+    "cffi": "2.1.1",
+    "charset-normalizer": "3.5.2",
+    "click": "8.5.0",
+    "cloudpickle": "3.1.2",
+    "ConfigSpace": "1.2.2",
+    "contourpy": "1.4.0",
+    "cryptography": "50.0.2",
+    "cycler": "0.12.1",
+    "dask": "2026.8.0",
+    "dask-jobqueue": "0.9.0",
+    "distributed": "2026.8.0",
+    "distro": "1.9.0",
+    "einops": "0.8.2",
+    "emcee": "3.1.6",
+    "et_xmlfile": "2.0.0",
+    "fastapi": "0.143.0",
+    "filelock": "4.1.0",
+    "fonttools": "4.66.1",
+    "fsspec": "2026.9.0",
+    "google-auth": "2.61.0",
+    "google-genai": "2.29.0",
+    "h11": "0.16.0",
+    "hf-xet": "1.7.0",
+    "httpcore": "1.0.9",
+    "httpcore2": "2.13.1",
+    "httpx": "0.28.1",
+    "httpx2": "2.13.1",
+    "huggingface_hub": "2.2.0",
+    "hypothesis": "6.168.5",
+    "idna": "3.20",
+    "immutabledict": "4.3.1",
+    "iniconfig": "2.3.1",
+    "Jinja2": "3.1.6",
+    "joblib": "1.6.0",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "kiwisolver": "1.5.1",
+    "lightgbm": "4.7.0",
+    "locket": "1.0.0",
+    "MarkupSafe": "3.0.4",
+    "matplotlib": "3.11.2",
+    "mlx": "0.32.3",
+    "mlx-metal": "0.32.3",
+    "more-itertools": "11.1.0",
+    "mpmath": "1.3.0",
+    "msgpack": "1.2.3",
+    "narwhals": "2.27.1",
+    "networkx": "3.7",
+    "nodeenv": "1.11.0",
+    "numpy": "2.5.3",
+    "openpyxl": "3.1.5",
+    "opentelemetry-api": "1.45.1",
+    "ortools": "9.15.6755",
+    "packaging": "26.3",
+    "pandas": "3.0.6",
+    "partd": "1.4.2",
+    "pillow": "12.3.0",
+    "pluggy": "1.6.0",
+    "powernext-backend": "0.1.0",
+    "protobuf": "6.33.6",
+    "psutil": "7.2.2",
+    "pyasn1": "0.6.4",
+    "pyasn1_modules": "0.4.2",
+    "pycparser": "3.11",
+    "pydantic": "2.14.0",
+    "pydantic-settings": "2.15.0",
+    "pydantic_core": "2.50.0",
+    "pydot": "4.0.1",
+    "Pygments": "2.21.0",
+    "pynisher": "1.0.10",
+    "pyparsing": "3.3.3",
+    "pyright": "1.1.414",
+    "pytest": "9.1.1",
+    "python-dateutil": "2.9.0.post0",
+    "python-dotenv": "1.2.4",
+    "PyYAML": "6.0.3",
+    "referencing": "0.37.0",
+    "regex": "2026.9.29",
+    "requests": "2.34.2",
+    "rpds-py": "2026.9.1",
+    "ruff": "0.17.0",
+    "safetensors": "0.8.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "setuptools": "84.0.0",
+    "shap": "0.53.0",
+    "six": "1.17.0",
+    "skrub": "0.10.1",
+    "slicer": "0.0.8",
+    "smac": "2.4.1",
+    "sniffio": "1.3.1",
+    "sortedcontainers": "2.4.0",
+    "SQLAlchemy": "2.1.4",
+    "starlette": "1.7.0",
+    "sympy": "1.14.0",
+    "tabpfn": "9.1.0",
+    "tblib": "3.2.2",
+    "tenacity": "9.1.4",
+    "threadpoolctl": "3.7.0",
+    "toolz": "1.2.0",
+    "torch": "2.14.1",
+    "tornado": "6.5.10",
+    "tqdm": "4.70.1",
+    "truststore": "0.10.4",
+    "typing-inspection": "0.4.4",
+    "typing_extensions": "4.16.0",
+    "urllib3": "2.8.0",
+    "uvicorn": "0.54.0",
+    "websockets": "16.1.1",
+    "zict": "3.0.0"
+  },
+  "device_used": "cpu",
+  "cuda_available": false,
+  "mps_available": true,
+  "lockfile_sha256": "70f8e29656614d514a5a61bcd671a0c86782ded71089ce96cca30d9cb2c0f6ff",
+  "model": {
+    "model_version": "residual-tabpfn-v2-diagnostic-v1",
+    "checkpoint_version": "v2",
+    "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+    "status": "fitted",
+    "categories": {
+      "Lightning": {
+        "category": "Lightning",
+        "features": [
+          "N",
+          "U_charge_V",
+          "Rf_stage_actual_ohm",
+          "Rt_stage_actual_ohm",
+          "C_object_F",
+          "C_divider_F",
+          "C_stray_F",
+          "L_effective_H",
+          "C_generator_F",
+          "C_load_effective_F",
+          "R_front_effective_ohm",
+          "R_tail_effective_ohm",
+          "physics_front_s",
+          "physics_tail_s",
+          "physics_crest_V",
+          "expected_voltage_efficiency"
+        ],
+        "selected_features": [
+          "N",
+          "U_charge_V",
+          "Rf_stage_actual_ohm",
+          "C_object_F",
+          "C_divider_F",
+          "C_stray_F",
+          "L_effective_H",
+          "C_generator_F",
+          "C_load_effective_F",
+          "R_front_effective_ohm",
+          "R_tail_effective_ohm",
+          "physics_front_s",
+          "physics_tail_s",
+          "physics_crest_V",
+          "expected_voltage_efficiency"
+        ],
+        "feature_ranges": {
+          "N": [
+            8.0,
+            10.0
+          ],
+          "U_charge_V": [
+            177830.80515556413,
+            199930.519929238
+          ],
+          "Rf_stage_actual_ohm": [
+            30.0,
+            65.0
+          ],
+          "Rt_stage_actual_ohm": [
+            25.0,
+            25.0
+          ],
+          "C_object_F": [
+            6.006340376799926e-10,
+            1.2490749789401889e-09
+          ],
+          "C_divider_F": [
+            3.501372819766402e-10,
+            7.495681126601994e-10
+          ],
+          "C_stray_F": [
+            8.011361931683496e-11,
+            3.298765719356015e-10
+          ],
+          "L_effective_H": [
+            8.03030293341726e-06,
+            2.995385653618723e-05
+          ],
+          "C_generator_F": [
+            3e-07,
+            3.75e-07
+          ],
+          "C_load_effective_F": [
+            1.1313985373778269e-09,
+            2.24351160404738e-09
+          ],
+          "R_front_effective_ohm": [
+            270.0,
+            600.0
+          ],
+          "R_tail_effective_ohm": [
+            200.0,
+            250.0
+          ],
+          "physics_front_s": [
+            1.1267987573160905e-06,
+            1.2812340594999916e-06
+          ],
+          "physics_tail_s": [
+            5.215524897646147e-05,
+            5.234523138857814e-05
+          ],
+          "physics_crest_V": [
+            1350000.7481197827,
+            1499658.0671751872
+          ],
+          "expected_voltage_efficiency": [
+            0.79008695616154,
+            0.8596574276592583
+          ]
+        },
+        "feature_status": {
+          "N": "selected",
+          "U_charge_V": "selected",
+          "Rf_stage_actual_ohm": "selected",
+          "Rt_stage_actual_ohm": "excluded_constant",
+          "C_object_F": "selected",
+          "C_divider_F": "selected",
+          "C_stray_F": "selected",
+          "L_effective_H": "selected",
+          "C_generator_F": "selected",
+          "C_load_effective_F": "selected",
+          "R_front_effective_ohm": "selected",
+          "R_tail_effective_ohm": "selected",
+          "physics_front_s": "selected",
+          "physics_tail_s": "selected",
+          "physics_crest_V": "selected",
+          "expected_voltage_efficiency": "selected"
+        },
+        "unavailable": [
+          "exact wiring",
+          "generator topology measurement",
+          "overshoot",
+          "environment",
+          "per-resistor heat"
+        ],
+        "targets": [
+          "residual_front_s",
+          "residual_tail_s",
+          "residual_crest_V"
+        ],
+        "target_units": [
+          "s",
+          "s",
+          "V"
+        ],
+        "baseline_mode": "calculator",
+        "baseline_profile": "workbook_benchmark_v1",
+        "train_count": 700,
+        "validation_count": 150,
+        "hidden_test_count": 150,
+        "provenance": "synthetic_only",
+        "lab_validated": false,
+        "training_mode": "pretrained_in_context",
+        "epochs_applicable": false,
+        "epochs": null,
+        "downstream_gradient_updates": 0,
+        "validation_metrics": {
+          "residual_front_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 6.513955473413656e-09,
+            "validation_RMSE": 7.407555187557085e-09,
+            "validation_bias": 5.07431277513896e-10,
+            "validation_MAE_over_train_residual_std": 0.6650287981681047,
+            "physics_only_MAE": 8.240545740843459e-09,
+            "mean_residual_baseline_MAE": 8.207405713891005e-09,
+            "linear_residual_baseline_MAE": 6.518917806856653e-09
+          },
+          "residual_tail_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 5.831505458801432e-07,
+            "validation_RMSE": 6.692771396372145e-07,
+            "validation_bias": -1.750495252191678e-08,
+            "validation_MAE_over_train_residual_std": 0.7245254708983543,
+            "physics_only_MAE": 6.87652498761937e-07,
+            "mean_residual_baseline_MAE": 6.870463165712267e-07,
+            "linear_residual_baseline_MAE": 5.802299220732198e-07
+          },
+          "residual_crest_V": {
+            "unit": "V",
+            "validation_count": 150,
+            "validation_MAE": 4485.187180661017,
+            "validation_RMSE": 5193.163604605983,
+            "validation_bias": -366.26550849785013,
+            "validation_MAE_over_train_residual_std": 0.4114703557722134,
+            "physics_only_MAE": 9749.734449355396,
+            "mean_residual_baseline_MAE": 9735.026793715737,
+            "linear_residual_baseline_MAE": 4745.46329735606
+          }
+        },
+        "checkpoint_version": "v2",
+        "checkpoint_filename": "tabpfn-v2-regressor.ckpt",
+        "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+        "artifact_sha256": "0d5cff8c80614bddb74bc45b29feea47a4744ce7078772812f7dfc6d13498a79",
+        "background_sha256": "1e454cad9471fe0b4bb7a5ba17919c41d685ae92ac0cbd7d6256cbbc5aaaba6e",
+        "dataset_sha256": "b3662646519a4d73846d467e11c710f26c44ef0d1b542d0317c65bee15674de5",
+        "feature_manifest_hash": "08198e0a606b50efd66ff6dd955e0487fad442fcd961cc9c358a1fb7c2250b1d",
+        "baseline_profile_hash": "4e77c01eae40ff10613dc5928241e9ae4bea4198f2c5ef273793c7ef2c7d7700",
+        "package_versions": {
+          "tabpfn": "9.1.0",
+          "torch": "2.14.1",
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1"
+        },
+        "device": "cpu",
+        "seed": 42,
+        "n_estimators": 2,
+        "hidden_test_evaluated": false
+      },
+      "Switching": {
+        "category": "Switching",
+        "features": [
+          "N",
+          "U_charge_V",
+          "Rf_stage_actual_ohm",
+          "Rt_stage_actual_ohm",
+          "C_object_F",
+          "C_divider_F",
+          "C_stray_F",
+          "L_effective_H",
+          "C_generator_F",
+          "C_load_effective_F",
+          "R_front_effective_ohm",
+          "R_tail_effective_ohm",
+          "physics_front_s",
+          "physics_tail_s",
+          "physics_crest_V",
+          "expected_voltage_efficiency"
+        ],
+        "selected_features": [
+          "N",
+          "U_charge_V",
+          "Rf_stage_actual_ohm",
+          "Rt_stage_actual_ohm",
+          "C_object_F",
+          "C_divider_F",
+          "C_stray_F",
+          "L_effective_H",
+          "C_generator_F",
+          "C_load_effective_F",
+          "R_front_effective_ohm",
+          "R_tail_effective_ohm",
+          "physics_front_s",
+          "physics_tail_s",
+          "physics_crest_V",
+          "expected_voltage_efficiency"
+        ],
+        "feature_ranges": {
+          "N": [
+            6.0,
+            7.0
+          ],
+          "U_charge_V": [
+            171456.90088307037,
+            199993.13260274986
+          ],
+          "Rf_stage_actual_ohm": [
+            9370.0,
+            21810.0
+          ],
+          "Rt_stage_actual_ohm": [
+            1195.0,
+            1200.0
+          ],
+          "C_object_F": [
+            6.000713513232767e-10,
+            1.2484323899494484e-09
+          ],
+          "C_divider_F": [
+            3.505392773076892e-10,
+            7.486888266168535e-10
+          ],
+          "C_stray_F": [
+            8.049884809413924e-11,
+            3.2948575400048864e-10
+          ],
+          "L_effective_H": [
+            8.114648364018648e-06,
+            2.9994382478762418e-05
+          ],
+          "C_generator_F": [
+            4.2857142857142857e-07,
+            5e-07
+          ],
+          "C_load_effective_F": [
+            1.10450245518703e-09,
+            2.282216902258806e-09
+          ],
+          "R_front_effective_ohm": [
+            65590.0,
+            135520.0
+          ],
+          "R_tail_effective_ohm": [
+            7170.0,
+            8400.0
+          ],
+          "physics_front_s": [
+            0.00024993836118409127,
+            0.000250061075443264
+          ],
+          "physics_tail_s": [
+            0.0024947950864786994,
+            0.0025052135849072585
+          ],
+          "physics_crest_V": [
+            950295.9176432341,
+            1099958.2600779831
+          ],
+          "expected_voltage_efficiency": [
+            0.7900192660861649,
+            0.8599677245062777
+          ]
+        },
+        "feature_status": {
+          "N": "selected",
+          "U_charge_V": "selected",
+          "Rf_stage_actual_ohm": "selected",
+          "Rt_stage_actual_ohm": "selected",
+          "C_object_F": "selected",
+          "C_divider_F": "selected",
+          "C_stray_F": "selected",
+          "L_effective_H": "selected",
+          "C_generator_F": "selected",
+          "C_load_effective_F": "selected",
+          "R_front_effective_ohm": "selected",
+          "R_tail_effective_ohm": "selected",
+          "physics_front_s": "selected",
+          "physics_tail_s": "selected",
+          "physics_crest_V": "selected",
+          "expected_voltage_efficiency": "selected"
+        },
+        "unavailable": [
+          "exact wiring",
+          "generator topology measurement",
+          "overshoot",
+          "environment",
+          "per-resistor heat"
+        ],
+        "targets": [
+          "residual_front_s",
+          "residual_tail_s",
+          "residual_crest_V"
+        ],
+        "target_units": [
+          "s",
+          "s",
+          "V"
+        ],
+        "baseline_mode": "calculator",
+        "baseline_profile": "workbook_benchmark_v1",
+        "train_count": 700,
+        "validation_count": 150,
+        "hidden_test_count": 150,
+        "provenance": "synthetic_only",
+        "lab_validated": false,
+        "training_mode": "pretrained_in_context",
+        "epochs_applicable": false,
+        "epochs": null,
+        "downstream_gradient_updates": 0,
+        "validation_metrics": {
+          "residual_front_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 1.6063153452190028e-06,
+            "validation_RMSE": 1.8279643577304699e-06,
+            "validation_bias": -1.0726242223898998e-07,
+            "validation_MAE_over_train_residual_std": 0.6741504481572254,
+            "physics_only_MAE": 2.0134694993384835e-06,
+            "mean_residual_baseline_MAE": 1.908414013515629e-06,
+            "linear_residual_baseline_MAE": 1.5804247094179118e-06
+          },
+          "residual_tail_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 2.2427951527125597e-05,
+            "validation_RMSE": 2.5914292148648314e-05,
+            "validation_bias": 2.226792489144754e-06,
+            "validation_MAE_over_train_residual_std": 0.6948733520446078,
+            "physics_only_MAE": 2.4757276996259968e-05,
+            "mean_residual_baseline_MAE": 2.4652469182858916e-05,
+            "linear_residual_baseline_MAE": 2.209340208225149e-05
+          },
+          "residual_crest_V": {
+            "unit": "V",
+            "validation_count": 150,
+            "validation_MAE": 3147.4734984569177,
+            "validation_RMSE": 3709.31127047061,
+            "validation_bias": -11.444559688727313,
+            "validation_MAE_over_train_residual_std": 0.3915231771408589,
+            "physics_only_MAE": 6788.953234656058,
+            "mean_residual_baseline_MAE": 6827.020558317406,
+            "linear_residual_baseline_MAE": 3330.509622721135
+          }
+        },
+        "checkpoint_version": "v2",
+        "checkpoint_filename": "tabpfn-v2-regressor.ckpt",
+        "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+        "artifact_sha256": "bd6256d5d3a18d9e8c53259698ea72e824cc030593de34ce553c23a6dc7d9b31",
+        "background_sha256": "ee1f95ad877c72cd083104f76571a3f14afc31ec1e87ccb482d8c4ea1c349898",
+        "dataset_sha256": "b3662646519a4d73846d467e11c710f26c44ef0d1b542d0317c65bee15674de5",
+        "feature_manifest_hash": "f846e5c9a22dc3794d262922820895479084a3ed241b2780d33856b6321b0f89",
+        "baseline_profile_hash": "4e77c01eae40ff10613dc5928241e9ae4bea4198f2c5ef273793c7ef2c7d7700",
+        "package_versions": {
+          "tabpfn": "9.1.0",
+          "torch": "2.14.1",
+          "numpy": "2.5.3",
+          "scikit-learn": "1.9.1"
+        },
+        "device": "cpu",
+        "seed": 42,
+        "n_estimators": 2,
+        "hidden_test_evaluated": false
+      }
+    },
+    "lab_validated": false,
+    "training_mode": "pretrained_in_context",
+    "epochs_applicable": false
+  },
+  "backend_artifacts_directory": "backend/artifacts",
+  "frontend": "React/Tailwind dashboard in frontend/; local Vite proxy"
+}

@@ -1,0 +1,17 @@
+{
+  "packages": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "tailwindcss": "4.3.3",
+    "vite": "7.3.7",
+    "lucide-react": "0.468.0",
+    "vitest": "4.1.11",
+    "prettier": "3.9.10"
+  },
+  "package_lock_sha256": "d88e796a8d0d1954696a9a350bbcbaa972286af9da9db7073473705f0daca3b0",
+  "runtime": "Node.js 25.9.0 / npm 11.12.1 used for verification",
+  "browser": "Codex in-app browser",
+  "reference_artifact": "https://claude.ai/artifact/UbRz4HMvFDn8LUzFdiKqJo",
+  "hosting": "local workspace, no hosted deployment",
+  "gemini_credentials": "server-only environment; not included in this report"
+}

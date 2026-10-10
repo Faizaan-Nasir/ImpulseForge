@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/faizaan-nasir/Documents/GitHub/PowerNext AI/backend
+configfile: pyproject.toml
+testpaths: tests
+plugins: hypothesis-6.168.5, anyio-4.15.1
+collected 107 items
+
+tests/test_api.py ...........                                            [ 10%]
+tests/test_assembly.py ........                                          [ 17%]
+tests/test_calibration.py ..                                             [ 19%]
+tests/test_context.py .....................                              [ 39%]
+tests/test_contracts.py ...                                              [ 42%]
+tests/test_correction.py .....                                           [ 46%]
+tests/test_dashboard.py .........                                        [ 55%]
+tests/test_model_real.py ...                                             [ 57%]
+tests/test_optimisation.py ...........                                   [ 68%]
+tests/test_performance.py .........                                      [ 76%]
+tests/test_physics.py .........                                          [ 85%]
+tests/test_pipeline.py ........                                          [ 92%]
+tests/test_plots.py ....                                                 [ 96%]
+tests/test_stress.py ....                                                [100%]
+
+=============================== warnings summary ===============================
+tests/test_optimisation.py: 29 warnings
+  /Users/faizaan-nasir/Documents/GitHub/PowerNext AI/backend/.venv/lib/python3.12/site-packages/smac/initial_design/abstract_initial_design.py:113: DeprecationWarning: Please use `dict(config)` instead of `config.get_dictionary()` or use it as a dictionary directly if needed.
+    "additional_configs": [c.get_dictionary() for c in self._additional_configs],
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 107 passed, 29 warnings in 34.17s =======================

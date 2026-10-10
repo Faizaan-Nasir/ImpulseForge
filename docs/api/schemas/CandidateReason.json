@@ -1,0 +1,31 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "reason": {
+      "maxLength": 1500,
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "title": "Evidence Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "reason",
+    "evidence_refs"
+  ],
+  "title": "CandidateReason",
+  "type": "object"
+}

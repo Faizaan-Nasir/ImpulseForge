@@ -1,0 +1,38 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "N": {
+      "minimum": 1,
+      "title": "N",
+      "type": "integer"
+    },
+    "Rf_required_ohm": {
+      "exclusiveMinimum": 0,
+      "title": "Rf Required Ohm",
+      "type": "number"
+    },
+    "Rt_required_ohm": {
+      "exclusiveMinimum": 0,
+      "title": "Rt Required Ohm",
+      "type": "number"
+    },
+    "proposal_index": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Proposal Index",
+      "type": "integer"
+    },
+    "source": {
+      "default": "manual",
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "required": [
+    "N",
+    "Rf_required_ohm",
+    "Rt_required_ohm"
+  ],
+  "title": "Proposal",
+  "type": "object"
+}

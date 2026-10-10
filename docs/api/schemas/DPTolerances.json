@@ -1,0 +1,19 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "front_relative": {
+      "default": 0.005,
+      "minimum": 0,
+      "title": "Front Relative",
+      "type": "number"
+    },
+    "tail_relative": {
+      "default": 0.005,
+      "minimum": 0,
+      "title": "Tail Relative",
+      "type": "number"
+    }
+  },
+  "title": "DPTolerances",
+  "type": "object"
+}

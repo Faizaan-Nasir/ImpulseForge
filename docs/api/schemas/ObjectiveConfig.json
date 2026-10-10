@@ -1,0 +1,32 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "policy": {
+      "const": "worst_normalised_then_weighted",
+      "default": "worst_normalised_then_weighted",
+      "title": "Policy",
+      "type": "string"
+    },
+    "weights": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Weights",
+      "type": "object"
+    },
+    "secondary_preference": {
+      "default": "balanced",
+      "enum": [
+        "balanced",
+        "accuracy",
+        "resistors",
+        "stages",
+        "voltage"
+      ],
+      "title": "Secondary Preference",
+      "type": "string"
+    }
+  },
+  "title": "ObjectiveConfig",
+  "type": "object"
+}

@@ -1,0 +1,33 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "N": {
+      "minimum": 1,
+      "title": "N",
+      "type": "integer"
+    },
+    "U_charge_V": {
+      "exclusiveMinimum": 0,
+      "title": "U Charge V",
+      "type": "number"
+    },
+    "Rf_actual_ohm": {
+      "exclusiveMinimum": 0,
+      "title": "Rf Actual Ohm",
+      "type": "number"
+    },
+    "Rt_actual_ohm": {
+      "exclusiveMinimum": 0,
+      "title": "Rt Actual Ohm",
+      "type": "number"
+    }
+  },
+  "required": [
+    "N",
+    "U_charge_V",
+    "Rf_actual_ohm",
+    "Rt_actual_ohm"
+  ],
+  "title": "WorkbookReferenceSettings",
+  "type": "object"
+}

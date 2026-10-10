@@ -1,0 +1,105 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "basic_C_F": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Basic C F",
+      "type": "number"
+    },
+    "shot_rate_per_minute": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Shot Rate Per Minute"
+    },
+    "divider_C_F": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Divider C F",
+      "type": "number"
+    },
+    "stray_C_F": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Stray C F",
+      "type": "number"
+    },
+    "stray_L_H": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Stray L H",
+      "type": "number"
+    },
+    "basic_capacitance_inclusion": {
+      "default": "add_separately",
+      "enum": [
+        "add_separately",
+        "already_included",
+        "benchmark_omitted"
+      ],
+      "title": "Basic Capacitance Inclusion",
+      "type": "string"
+    },
+    "external_front_series_ohm": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "External Front Series Ohm"
+    },
+    "auxiliary_states": {
+      "additionalProperties": {
+        "enum": [
+          "inactive",
+          "unknown"
+        ],
+        "type": "string"
+      },
+      "title": "Auxiliary States",
+      "type": "object"
+    },
+    "circuit_evidence_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Circuit Evidence Id"
+    },
+    "leads": {
+      "additionalProperties": true,
+      "title": "Leads",
+      "type": "object"
+    },
+    "return_path": {
+      "additionalProperties": true,
+      "title": "Return Path",
+      "type": "object"
+    },
+    "geometry": {
+      "additionalProperties": true,
+      "title": "Geometry",
+      "type": "object"
+    }
+  },
+  "title": "Setup",
+  "type": "object"
+}

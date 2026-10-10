@@ -1,0 +1,98 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "constraint_id": {
+      "title": "Constraint Id",
+      "type": "string"
+    },
+    "origin": {
+      "title": "Origin",
+      "type": "string"
+    },
+    "kind": {
+      "default": "hard",
+      "enum": [
+        "hard",
+        "metadata",
+        "waveform",
+        "support"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "enforced_by": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Enforced By",
+      "type": "array"
+    },
+    "rule": {
+      "title": "Rule",
+      "type": "string"
+    },
+    "observed_value": {
+      "default": null,
+      "title": "Observed Value"
+    },
+    "limit_value": {
+      "default": null,
+      "title": "Limit Value"
+    },
+    "unit": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unit"
+    },
+    "margin": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Margin"
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "fail",
+        "unknown",
+        "not_applicable"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "reason_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason Code"
+    }
+  },
+  "required": [
+    "constraint_id",
+    "origin",
+    "enforced_by",
+    "rule",
+    "status"
+  ],
+  "title": "Constraint",
+  "type": "object"
+}

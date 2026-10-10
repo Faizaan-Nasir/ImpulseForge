@@ -1,0 +1,45 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "clock": {
+      "const": "monotonic_wall_clock",
+      "default": "monotonic_wall_clock",
+      "title": "Clock",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "stage_seconds": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "number"
+      },
+      "title": "Stage Seconds",
+      "type": "object"
+    },
+    "total_seconds": {
+      "minimum": 0,
+      "title": "Total Seconds",
+      "type": "number"
+    },
+    "cache_hit": {
+      "default": false,
+      "title": "Cache Hit",
+      "type": "boolean"
+    },
+    "transport_time_included": {
+      "default": false,
+      "title": "Transport Time Included",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "scope",
+    "stage_seconds",
+    "total_seconds"
+  ],
+  "title": "RuntimePerformance",
+  "type": "object"
+}

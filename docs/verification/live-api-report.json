@@ -1,0 +1,6217 @@
+{
+  "health": {
+    "status": "ok",
+    "frontend": "react_dashboard",
+    "version": "0.1.0"
+  },
+  "frontend_input_precedence": {
+    "status": "passed",
+    "resolved_hardware": {
+      "profile_id": "haefely_pdf_v1",
+      "total_energy_max_J": 30000,
+      "stage_energy_max_J": 2500,
+      "C_stage_F": 3e-06,
+      "N_min": 1,
+      "N_max": 8,
+      "U_stage_max_V": 250000.0,
+      "C_basic_F": 0,
+      "per_type_stage_cap": 4,
+      "topology": "generator_side_tail_series_v1",
+      "physical_verified": false,
+      "constants": {
+        "k_front": 1.67,
+        "k_LC": 2.5,
+        "k_tail": 0.693
+      },
+      "source_data": {
+        "retained_problem_statement_parameters": {
+          "total_energy_max_J": 30000,
+          "stage_energy_max_J": 2500,
+          "C_stage_F": 1.25e-07
+        }
+      }
+    },
+    "value_sources": {
+      "profile_id": {
+        "source": "project_model_policy",
+        "value": "haefely_pdf_v1"
+      },
+      "total_energy_max_J": {
+        "source": "problem_statement_fallback",
+        "value": 30000
+      },
+      "stage_energy_max_J": {
+        "source": "problem_statement_fallback",
+        "value": 2500
+      },
+      "C_stage_F": {
+        "source": "frontend_input",
+        "input_field": "equipment_inputs.C_stage_F",
+        "workbook_cell": "Hybrid Calculator!B15",
+        "value": 3e-06,
+        "fallback_value": 1.25e-07,
+        "fallback_applied": false
+      },
+      "N_min": {
+        "source": "project_model_policy",
+        "value": 1
+      },
+      "N_max": {
+        "source": "frontend_input",
+        "input_field": "equipment_inputs.N_max",
+        "workbook_cell": "Hybrid Calculator!B13",
+        "value": 8,
+        "fallback_value": 15,
+        "fallback_applied": false
+      },
+      "U_stage_max_V": {
+        "source": "frontend_input",
+        "input_field": "equipment_inputs.U_stage_max_V",
+        "workbook_cell": "Hybrid Calculator!B14",
+        "value": 250000.0,
+        "fallback_value": 200000,
+        "fallback_applied": false
+      },
+      "C_basic_F": {
+        "source": "api_default",
+        "input_field": "setup.basic_C_F",
+        "value": 0
+      },
+      "per_type_stage_cap": {
+        "source": "project_model_policy",
+        "value": 4
+      },
+      "topology": {
+        "source": "project_model_policy",
+        "value": "generator_side_tail_series_v1"
+      },
+      "physical_verified": {
+        "source": "project_model_policy",
+        "value": false
+      },
+      "constants": {
+        "source": "project_model_policy",
+        "value": {
+          "k_front": 1.67,
+          "k_LC": 2.5,
+          "k_tail": 0.693
+        }
+      }
+    },
+    "input_sources": {
+      "system_max_voltage_V": {
+        "cell": "B5",
+        "unit": "V",
+        "workbook_to_SI": 1000,
+        "sheet": "Hybrid Calculator",
+        "value": 400000.0,
+        "source": "frontend_input"
+      },
+      "impulse_type": {
+        "cell": "B6",
+        "unit": "category",
+        "workbook_to_SI": null,
+        "sheet": "Hybrid Calculator",
+        "value": "Lightning",
+        "source": "selected_impulse_profile"
+      },
+      "target.crest_V": {
+        "cell": "B7",
+        "unit": "V",
+        "workbook_to_SI": 1000,
+        "sheet": "Hybrid Calculator",
+        "value": 1469466.0825887695,
+        "source": "frontend_input"
+      },
+      "load.C_F": {
+        "cell": "B8",
+        "unit": "F",
+        "workbook_to_SI": 1e-12,
+        "sheet": "Hybrid Calculator",
+        "value": 8.88302159041632e-10,
+        "source": "frontend_input"
+      },
+      "setup.divider_C_F": {
+        "cell": "B9",
+        "unit": "F",
+        "workbook_to_SI": 1e-12,
+        "sheet": "Hybrid Calculator",
+        "value": 5.990602798759937e-10,
+        "source": "frontend_input"
+      },
+      "setup.stray_C_F": {
+        "cell": "B10",
+        "unit": "F",
+        "workbook_to_SI": 1e-12,
+        "sheet": "Hybrid Calculator",
+        "value": 3.0299236099934205e-10,
+        "source": "frontend_input"
+      },
+      "setup.stray_L_H": {
+        "cell": "B11",
+        "unit": "H",
+        "workbook_to_SI": 1e-06,
+        "sheet": "Hybrid Calculator",
+        "value": 2.284642922785133e-05,
+        "source": "frontend_input"
+      },
+      "expected_voltage_efficiency": {
+        "cell": "B12",
+        "unit": "fraction",
+        "workbook_to_SI": 1,
+        "sheet": "Hybrid Calculator",
+        "value": 0.8211944965808653,
+        "source": "frontend_input"
+      },
+      "equipment_inputs.N_max": {
+        "cell": "B13",
+        "unit": "stages",
+        "workbook_to_SI": 1,
+        "sheet": "Hybrid Calculator",
+        "value": 8,
+        "source": "frontend_input"
+      },
+      "equipment_inputs.U_stage_max_V": {
+        "cell": "B14",
+        "unit": "V",
+        "workbook_to_SI": 1000,
+        "sheet": "Hybrid Calculator",
+        "value": 250000.0,
+        "source": "frontend_input"
+      },
+      "equipment_inputs.C_stage_F": {
+        "cell": "B15",
+        "unit": "F",
+        "workbook_to_SI": 1e-06,
+        "sheet": "Hybrid Calculator",
+        "value": 3e-06,
+        "source": "frontend_input"
+      }
+    }
+  },
+  "physics": {
+    "candidate_id": "9a6f4fcbc2e1ff021d3ec2e25c9d1462",
+    "context_hash": "827db7a676a83193fb69c0c84a083a7abe32e378a4a089614e82fcfeb9b95511",
+    "physics_version": "0.1.0",
+    "baseline_mode": "calculator",
+    "derived": {
+      "C1_F": 3.3333333333333335e-07,
+      "C2_F": 1.7903547999169678e-09,
+      "L_effective_H": 2.284642922785133e-05,
+      "R1_ohm": 360.0,
+      "R2_ohm": 225.0,
+      "V0_V": 1789425.1467917226,
+      "N": 9,
+      "topology": "generator_side_tail_series_v1",
+      "external_front_assumed_zero": true
+    },
+    "metrics": {
+      "front_s": 1.2015577788181402e-06,
+      "tail_s": 5.225416107217705e-05,
+      "crest_V": 1469466.0825887697
+    },
+    "voltage_efficiency": 0.8211944965808653,
+    "voltage_utilisation": 0.9941250815509569,
+    "stage_energy_J": 59297.08066612181,
+    "total_energy_J": 533673.7259950963,
+    "landmarks": {},
+    "rates": {},
+    "trace": null,
+    "component_stresses": [
+      {
+        "component_id": "stage_01/front/fixture_front-1",
+        "generator_stage_index": 1,
+        "role": "front",
+        "type_id": "fixture_front",
+        "nominal_ohm": 40.0,
+        "node_a": "stage_01/front/in",
+        "node_b": "stage_01/front/out",
+        "resistance_interval_ohm": [
+          40.0,
+          40.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_02/front/fixture_front-1",
+        "generator_stage_index": 2,
+        "role": "front",
+        "type_id": "fixture_front",
+        "nominal_ohm": 40.0,
+        "node_a": "stage_02/front/in",
+        "node_b": "stage_02/front/out",
+        "resistance_interval_ohm": [
+          40.0,
+          40.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_03/front/fixture_front-1",
+        "generator_stage_index": 3,
+        "role": "front",
+        "type_id": "fixture_front",
+        "nominal_ohm": 40.0,
+        "node_a": "stage_03/front/in",
+        "node_b": "stage_03/front/out",
+        "resistance_interval_ohm": [
+          40.0,
+          40.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_04/front/fixture_front-1",
+        "generator_stage_index": 4,
+        "role": "front",
+        "type_id": "fixture_front",
+        "nominal_ohm": 40.0,
+        "node_a": "stage_04/front/in",
+        "node_b": "stage_04/front/out",
+        "resistance_interval_ohm": [
+          40.0,
+          40.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_05/front/fixture_front-1",
+        "generator_stage_index": 5,
+        "role": "front",
+        "type_id": "fixture_front",
+        "nominal_ohm": 40.0,
+        "node_a": "stage_05/front/in",
+        "node_b": "stage_05/front/out",
+        "resistance_interval_ohm": [
+          40.0,
+          40.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_06/front/fixture_front-1",
+        "generator_stage_index": 6,
+        "role": "front",
+        "type_id": "fixture_front",
+        "nominal_ohm": 40.0,
+        "node_a": "stage_06/front/in",
+        "node_b": "stage_06/front/out",
+        "resistance_interval_ohm": [
+          40.0,
+          40.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_07/front/fixture_front-1",
+        "generator_stage_index": 7,
+        "role": "front",
+        "type_id": "fixture_front",
+        "nominal_ohm": 40.0,
+        "node_a": "stage_07/front/in",
+        "node_b": "stage_07/front/out",
+        "resistance_interval_ohm": [
+          40.0,
+          40.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_08/front/fixture_front-1",
+        "generator_stage_index": 8,
+        "role": "front",
+        "type_id": "fixture_front",
+        "nominal_ohm": 40.0,
+        "node_a": "stage_08/front/in",
+        "node_b": "stage_08/front/out",
+        "resistance_interval_ohm": [
+          40.0,
+          40.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_09/front/fixture_front-1",
+        "generator_stage_index": 9,
+        "role": "front",
+        "type_id": "fixture_front",
+        "nominal_ohm": 40.0,
+        "node_a": "stage_09/front/in",
+        "node_b": "stage_09/front/out",
+        "resistance_interval_ohm": [
+          40.0,
+          40.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_01/tail/fixture_tail-1",
+        "generator_stage_index": 1,
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "nominal_ohm": 25.0,
+        "node_a": "stage_01/tail/in",
+        "node_b": "stage_01/tail/out",
+        "resistance_interval_ohm": [
+          25.0,
+          25.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_02/tail/fixture_tail-1",
+        "generator_stage_index": 2,
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "nominal_ohm": 25.0,
+        "node_a": "stage_02/tail/in",
+        "node_b": "stage_02/tail/out",
+        "resistance_interval_ohm": [
+          25.0,
+          25.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_03/tail/fixture_tail-1",
+        "generator_stage_index": 3,
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "nominal_ohm": 25.0,
+        "node_a": "stage_03/tail/in",
+        "node_b": "stage_03/tail/out",
+        "resistance_interval_ohm": [
+          25.0,
+          25.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_04/tail/fixture_tail-1",
+        "generator_stage_index": 4,
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "nominal_ohm": 25.0,
+        "node_a": "stage_04/tail/in",
+        "node_b": "stage_04/tail/out",
+        "resistance_interval_ohm": [
+          25.0,
+          25.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_05/tail/fixture_tail-1",
+        "generator_stage_index": 5,
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "nominal_ohm": 25.0,
+        "node_a": "stage_05/tail/in",
+        "node_b": "stage_05/tail/out",
+        "resistance_interval_ohm": [
+          25.0,
+          25.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_06/tail/fixture_tail-1",
+        "generator_stage_index": 6,
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "nominal_ohm": 25.0,
+        "node_a": "stage_06/tail/in",
+        "node_b": "stage_06/tail/out",
+        "resistance_interval_ohm": [
+          25.0,
+          25.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_07/tail/fixture_tail-1",
+        "generator_stage_index": 7,
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "nominal_ohm": 25.0,
+        "node_a": "stage_07/tail/in",
+        "node_b": "stage_07/tail/out",
+        "resistance_interval_ohm": [
+          25.0,
+          25.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_08/tail/fixture_tail-1",
+        "generator_stage_index": 8,
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "nominal_ohm": 25.0,
+        "node_a": "stage_08/tail/in",
+        "node_b": "stage_08/tail/out",
+        "resistance_interval_ohm": [
+          25.0,
+          25.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      },
+      {
+        "component_id": "stage_09/tail/fixture_tail-1",
+        "generator_stage_index": 9,
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "nominal_ohm": 25.0,
+        "node_a": "stage_09/tail/in",
+        "node_b": "stage_09/tail/out",
+        "resistance_interval_ohm": [
+          25.0,
+          25.0
+        ],
+        "peak_voltage_V": null,
+        "peak_current_A": null,
+        "peak_power_W": null,
+        "pulse_energy_J": null,
+        "average_power_W": null,
+        "initial_temperature_K": null,
+        "estimated_peak_temperature_K": null,
+        "thermal_status": "unknown",
+        "thermal_details": null,
+        "ratings_status": "unknown",
+        "rating_limits": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "rating_checks": [
+          {
+            "rating": "pulse_voltage_limit_V",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_current_limit_A",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "pulse_energy_limit_J",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "average_power_limit_W",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          },
+          {
+            "rating": "temperature_limit_K",
+            "observed": null,
+            "limit": null,
+            "status": "unknown",
+            "margin": null
+          }
+        ],
+        "equal_sharing_assumed": true,
+        "assumptions": [
+          "nominal constant resistance",
+          "identical stage sharing",
+          "trace horizon bounds energy integration"
+        ]
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_id": "HW_STAGES",
+        "origin": "frontend_input",
+        "kind": "hard",
+        "enforced_by": [
+          "assembly",
+          "physics"
+        ],
+        "rule": "N_min <= active stages <= N_max",
+        "observed_value": 9,
+        "limit_value": [
+          1,
+          15
+        ],
+        "unit": null,
+        "margin": null,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "HW_STAGE_CHARGE",
+        "origin": "frontend_input",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "value <= 200000.0",
+        "observed_value": 198825.0163101914,
+        "limit_value": 200000.0,
+        "unit": "V",
+        "margin": 1174.9836898086069,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "HW_STAGE_ENERGY",
+        "origin": "problem_statement_fallback",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "value <= 2500",
+        "observed_value": 59297.08066612181,
+        "limit_value": 2500,
+        "unit": "J",
+        "margin": -56797.08066612181,
+        "status": "fail",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "HW_TOTAL_ENERGY",
+        "origin": "problem_statement_fallback",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "value <= 30000",
+        "observed_value": 533673.7259950963,
+        "limit_value": 30000,
+        "unit": "J",
+        "margin": -503673.72599509626,
+        "status": "fail",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "STOCK_front_fixture_front",
+        "origin": "request_inventory",
+        "kind": "hard",
+        "enforced_by": [
+          "assembly",
+          "physics"
+        ],
+        "rule": "Independent role per-type per-stage/global quantity cap",
+        "observed_value": 1,
+        "limit_value": 4,
+        "unit": null,
+        "margin": 3.0,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "STOCK_tail_fixture_tail",
+        "origin": "request_inventory",
+        "kind": "hard",
+        "enforced_by": [
+          "assembly",
+          "physics"
+        ],
+        "rule": "Independent role per-type per-stage/global quantity cap",
+        "observed_value": 1,
+        "limit_value": 4,
+        "unit": null,
+        "margin": 3.0,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+        "origin": "equipment_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "Registered topology/branch states have equipment evidence",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "unresolved_circuit_evidence"
+      },
+      {
+        "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+        "origin": "equipment_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "Internal transient/reversal rating verified",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "lumped_model_cannot_certify_internal_stresses"
+      },
+      {
+        "constraint_id": "RESISTOR_front_fixture_front_1",
+        "origin": "component_rating_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "All applicable per-component ratings verified",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "unresolved_component_rating"
+      },
+      {
+        "constraint_id": "RESISTOR_tail_fixture_tail_1",
+        "origin": "component_rating_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "All applicable per-component ratings verified",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "unresolved_component_rating"
+      }
+    ],
+    "diagnostics": {
+      "method": "calculator",
+      "trace_available": false,
+      "crest_is_efficiency_assumption": true
+    },
+    "hardware_feasible": false,
+    "performance": {
+      "schema_version": "1.0",
+      "candidate_id": "9a6f4fcbc2e1ff021d3ec2e25c9d1462",
+      "context_hash": "827db7a676a83193fb69c0c84a083a7abe32e378a4a089614e82fcfeb9b95511",
+      "target": {
+        "front_s": 1.2e-06,
+        "tail_s": 5e-05,
+        "crest_V": 1469466.0825887695
+      },
+      "physics": {
+        "metrics": {
+          "front_s": 1.2015577788181402e-06,
+          "tail_s": 5.225416107217705e-05,
+          "crest_V": 1469466.0825887697
+        },
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 1.2015577788181402e-06,
+            "signed_delta": 1.5577788181402913e-09,
+            "absolute_delta": 1.5577788181402913e-09,
+            "percentage_delta": 0.12981490151169095,
+            "absolute_percentage_delta": 0.12981490151169095,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "normalised_error": 0.004327163383723031,
+            "within_tolerance": true
+          },
+          "tail": {
+            "unit": "s",
+            "target": 5e-05,
+            "predicted": 5.225416107217705e-05,
+            "signed_delta": 2.254161072177049e-06,
+            "absolute_delta": 2.254161072177049e-06,
+            "percentage_delta": 4.508322144354098,
+            "absolute_percentage_delta": 4.508322144354098,
+            "allowed_delta": 1e-05,
+            "lower_limit": 4e-05,
+            "upper_limit": 6e-05,
+            "normalised_error": 0.2254161072177049,
+            "within_tolerance": true
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1469466.0825887695,
+            "predicted": 1469466.0825887697,
+            "signed_delta": 2.3283064365386963e-10,
+            "absolute_delta": 2.3283064365386963e-10,
+            "percentage_delta": 1.584457419008203e-14,
+            "absolute_percentage_delta": 1.584457419008203e-14,
+            "allowed_delta": 44083.982477663085,
+            "lower_limit": 1425382.1001111064,
+            "upper_limit": 1513550.0650664326,
+            "normalised_error": 5.2815247300273425e-15,
+            "within_tolerance": true
+          }
+        },
+        "S": 0.2254161072177049,
+        "J": 0.07658109020047774,
+        "cost": 0.18395066450490022,
+        "waveform_within_tolerance": true
+      },
+      "corrected": null,
+      "correction_status": "not_invoked",
+      "efficiency": {
+        "definition": "crest_V / (N * U_charge_V); voltage transfer, not energy efficiency",
+        "initial_erected_voltage_V": 1789425.1467917226,
+        "expected": 0.8211944965808653,
+        "requested_minimum": null,
+        "physics_voltage_transfer": 0.8211944965808653,
+        "corrected_voltage_transfer": null,
+        "stage_voltage_utilisation": 0.9941250815509569
+      },
+      "stored_energy": {
+        "stage_J": 59297.08066612181,
+        "stage_limit_J": 2500,
+        "stage_utilisation": 23.71883226644872,
+        "total_J": 533673.7259950963,
+        "total_limit_J": 30000,
+        "total_utilisation": 17.789124199836543
+      },
+      "hardware": {
+        "feasible": false,
+        "constraint_counts": {
+          "pass": 4,
+          "fail": 2,
+          "unknown": 4,
+          "not_applicable": 0
+        },
+        "failed_constraint_ids": [
+          "HW_STAGE_ENERGY",
+          "HW_TOTAL_ENERGY"
+        ],
+        "unknown_constraint_ids": [
+          "CIRCUIT_TOPOLOGY_VERIFIED",
+          "CAPACITOR_TRANSIENT_RATING",
+          "RESISTOR_front_fixture_front_1",
+          "RESISTOR_tail_fixture_tail_1"
+        ],
+        "corrected_constraint_counts": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0
+        }
+      },
+      "model_quality": {
+        "status": "available",
+        "model_version": "residual-tabpfn-v2-diagnostic-v1",
+        "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+        "category": "Lightning",
+        "split": "Validation",
+        "dataset_origin": "synthetic_workbook",
+        "train_count": 700,
+        "validation_count": 150,
+        "hidden_test_evaluated": false,
+        "lab_validated": false,
+        "metrics": {
+          "residual_front_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 6.513955473413656e-09,
+            "validation_RMSE": 7.407555187557085e-09,
+            "validation_bias": 5.07431277513896e-10,
+            "validation_MAE_over_train_residual_std": 0.6650287981681047,
+            "physics_only_MAE": 8.240545740843459e-09,
+            "mean_residual_baseline_MAE": 8.207405713891005e-09,
+            "linear_residual_baseline_MAE": 6.518917806856653e-09
+          },
+          "residual_tail_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 5.831505458801432e-07,
+            "validation_RMSE": 6.692771396372145e-07,
+            "validation_bias": -1.750495252191678e-08,
+            "validation_MAE_over_train_residual_std": 0.7245254708983543,
+            "physics_only_MAE": 6.87652498761937e-07,
+            "mean_residual_baseline_MAE": 6.870463165712267e-07,
+            "linear_residual_baseline_MAE": 5.802299220732198e-07
+          },
+          "residual_crest_V": {
+            "unit": "V",
+            "validation_count": 150,
+            "validation_MAE": 4485.187180661017,
+            "validation_RMSE": 5193.163604605983,
+            "validation_bias": -366.26550849785013,
+            "validation_MAE_over_train_residual_std": 0.4114703557722134,
+            "physics_only_MAE": 9749.734449355396,
+            "mean_residual_baseline_MAE": 9735.026793715737,
+            "linear_residual_baseline_MAE": 4745.46329735606
+          }
+        },
+        "error_definition": "prediction_minus_observation",
+        "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+      },
+      "observed_accuracy": {
+        "status": "unavailable",
+        "reason": "A matched measured result is required to assess this input's accuracy",
+        "errors": null,
+        "provenance": null
+      },
+      "runtime": {
+        "clock": "monotonic_wall_clock",
+        "scope": "physics_evaluation",
+        "stage_seconds": {
+          "physics": 0.011827707989141345
+        },
+        "total_seconds": 0.011827707989141345,
+        "cache_hit": false,
+        "transport_time_included": false
+      },
+      "interpretation": "Computed values are predictions. Target mismatch is not model accuracy; dataset validation does not establish this setup's measured result."
+    }
+  },
+  "correction": {
+    "model_version": "residual-tabpfn-v2-diagnostic-v1",
+    "support": {
+      "status": "supported_diagnostic",
+      "reasons": [],
+      "joint_domain_validated": false,
+      "lab_validated": false
+    },
+    "features": {
+      "N": 9.0,
+      "U_charge_V": 198825.0163101914,
+      "Rf_stage_actual_ohm": 40.0,
+      "Rt_stage_actual_ohm": 25.0,
+      "C_object_F": 8.88302159041632e-10,
+      "C_divider_F": 5.990602798759937e-10,
+      "C_stray_F": 3.0299236099934205e-10,
+      "L_effective_H": 2.284642922785133e-05,
+      "C_generator_F": 3.3333333333333335e-07,
+      "C_load_effective_F": 1.7903547999169678e-09,
+      "R_front_effective_ohm": 360.0,
+      "R_tail_effective_ohm": 225.0,
+      "physics_front_s": 1.2015577788181402e-06,
+      "physics_tail_s": 5.225416107217705e-05,
+      "physics_crest_V": 1469466.0825887697,
+      "expected_voltage_efficiency": 0.8211944965808653
+    },
+    "input_effects_not_modelled": [
+      "exact wiring",
+      "generator topology measurement",
+      "overshoot",
+      "environment",
+      "per-resistor heat"
+    ],
+    "hardware_feasible": false,
+    "physics_constraints": [
+      {
+        "constraint_id": "HW_STAGES",
+        "origin": "frontend_input",
+        "kind": "hard",
+        "enforced_by": [
+          "assembly",
+          "physics"
+        ],
+        "rule": "N_min <= active stages <= N_max",
+        "observed_value": 9,
+        "limit_value": [
+          1,
+          15
+        ],
+        "unit": null,
+        "margin": null,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "HW_STAGE_CHARGE",
+        "origin": "frontend_input",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "value <= 200000.0",
+        "observed_value": 198825.0163101914,
+        "limit_value": 200000.0,
+        "unit": "V",
+        "margin": 1174.9836898086069,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "HW_STAGE_ENERGY",
+        "origin": "problem_statement_fallback",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "value <= 2500",
+        "observed_value": 59297.08066612181,
+        "limit_value": 2500,
+        "unit": "J",
+        "margin": -56797.08066612181,
+        "status": "fail",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "HW_TOTAL_ENERGY",
+        "origin": "problem_statement_fallback",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "value <= 30000",
+        "observed_value": 533673.7259950963,
+        "limit_value": 30000,
+        "unit": "J",
+        "margin": -503673.72599509626,
+        "status": "fail",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "STOCK_front_fixture_front",
+        "origin": "request_inventory",
+        "kind": "hard",
+        "enforced_by": [
+          "assembly",
+          "physics"
+        ],
+        "rule": "Independent role per-type per-stage/global quantity cap",
+        "observed_value": 1,
+        "limit_value": 4,
+        "unit": null,
+        "margin": 3.0,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "STOCK_tail_fixture_tail",
+        "origin": "request_inventory",
+        "kind": "hard",
+        "enforced_by": [
+          "assembly",
+          "physics"
+        ],
+        "rule": "Independent role per-type per-stage/global quantity cap",
+        "observed_value": 1,
+        "limit_value": 4,
+        "unit": null,
+        "margin": 3.0,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+        "origin": "equipment_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "Registered topology/branch states have equipment evidence",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "unresolved_circuit_evidence"
+      },
+      {
+        "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+        "origin": "equipment_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "Internal transient/reversal rating verified",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "lumped_model_cannot_certify_internal_stresses"
+      },
+      {
+        "constraint_id": "RESISTOR_front_fixture_front_1",
+        "origin": "component_rating_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "All applicable per-component ratings verified",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "unresolved_component_rating"
+      },
+      {
+        "constraint_id": "RESISTOR_tail_fixture_tail_1",
+        "origin": "component_rating_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "physics"
+        ],
+        "rule": "All applicable per-component ratings verified",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "unresolved_component_rating"
+      }
+    ],
+    "corrected_constraint_checks": [],
+    "residuals": {
+      "residual_front_s": 1.3312674082141476e-09,
+      "residual_tail_s": -1.226552698039357e-07,
+      "residual_crest_V": -10036.67855338705
+    },
+    "corrected_metrics": {
+      "front_s": 1.2028890462263543e-06,
+      "tail_s": 5.2131505802373116e-05,
+      "crest_V": 1459429.4040353827
+    },
+    "status": "predicted_diagnostic",
+    "lab_validated": false,
+    "explanation_status": "available_on_request",
+    "performance": {
+      "schema_version": "1.0",
+      "candidate_id": "9a6f4fcbc2e1ff021d3ec2e25c9d1462",
+      "context_hash": "827db7a676a83193fb69c0c84a083a7abe32e378a4a089614e82fcfeb9b95511",
+      "target": {
+        "front_s": 1.2e-06,
+        "tail_s": 5e-05,
+        "crest_V": 1469466.0825887695
+      },
+      "physics": {
+        "metrics": {
+          "front_s": 1.2015577788181402e-06,
+          "tail_s": 5.225416107217705e-05,
+          "crest_V": 1469466.0825887697
+        },
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 1.2015577788181402e-06,
+            "signed_delta": 1.5577788181402913e-09,
+            "absolute_delta": 1.5577788181402913e-09,
+            "percentage_delta": 0.12981490151169095,
+            "absolute_percentage_delta": 0.12981490151169095,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "normalised_error": 0.004327163383723031,
+            "within_tolerance": true
+          },
+          "tail": {
+            "unit": "s",
+            "target": 5e-05,
+            "predicted": 5.225416107217705e-05,
+            "signed_delta": 2.254161072177049e-06,
+            "absolute_delta": 2.254161072177049e-06,
+            "percentage_delta": 4.508322144354098,
+            "absolute_percentage_delta": 4.508322144354098,
+            "allowed_delta": 1e-05,
+            "lower_limit": 4e-05,
+            "upper_limit": 6e-05,
+            "normalised_error": 0.2254161072177049,
+            "within_tolerance": true
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1469466.0825887695,
+            "predicted": 1469466.0825887697,
+            "signed_delta": 2.3283064365386963e-10,
+            "absolute_delta": 2.3283064365386963e-10,
+            "percentage_delta": 1.584457419008203e-14,
+            "absolute_percentage_delta": 1.584457419008203e-14,
+            "allowed_delta": 44083.982477663085,
+            "lower_limit": 1425382.1001111064,
+            "upper_limit": 1513550.0650664326,
+            "normalised_error": 5.2815247300273425e-15,
+            "within_tolerance": true
+          }
+        },
+        "S": 0.2254161072177049,
+        "J": 0.07658109020047774,
+        "cost": 0.18395066450490022,
+        "waveform_within_tolerance": true
+      },
+      "corrected": {
+        "metrics": {
+          "front_s": 1.2028890462263543e-06,
+          "tail_s": 5.2131505802373116e-05,
+          "crest_V": 1459429.4040353827
+        },
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 1.2028890462263543e-06,
+            "signed_delta": 2.8890462263543897e-09,
+            "absolute_delta": 2.8890462263543897e-09,
+            "percentage_delta": 0.24075385219619916,
+            "absolute_percentage_delta": 0.24075385219619916,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "normalised_error": 0.008025128406539971,
+            "within_tolerance": true
+          },
+          "tail": {
+            "unit": "s",
+            "target": 5e-05,
+            "predicted": 5.2131505802373116e-05,
+            "signed_delta": 2.1315058023731133e-06,
+            "absolute_delta": 2.1315058023731133e-06,
+            "percentage_delta": 4.263011604746226,
+            "absolute_percentage_delta": 4.263011604746226,
+            "allowed_delta": 1e-05,
+            "lower_limit": 4e-05,
+            "upper_limit": 6e-05,
+            "normalised_error": 0.21315058023731132,
+            "within_tolerance": true
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1469466.0825887695,
+            "predicted": 1459429.4040353827,
+            "signed_delta": -10036.678553386824,
+            "absolute_delta": 10036.678553386824,
+            "percentage_delta": -0.683015325927437,
+            "absolute_percentage_delta": 0.683015325927437,
+            "allowed_delta": 44083.982477663085,
+            "lower_limit": 1425382.1001111064,
+            "upper_limit": 1513550.0650664326,
+            "normalised_error": 0.22767177530914565,
+            "within_tolerance": true
+          }
+        },
+        "S": 0.22767177530914565,
+        "J": 0.14961582798433232,
+        "cost": 0.18545003631106088,
+        "waveform_within_tolerance": true
+      },
+      "correction_status": "predicted_diagnostic",
+      "efficiency": {
+        "definition": "crest_V / (N * U_charge_V); voltage transfer, not energy efficiency",
+        "initial_erected_voltage_V": 1789425.1467917226,
+        "expected": 0.8211944965808653,
+        "requested_minimum": null,
+        "physics_voltage_transfer": 0.8211944965808653,
+        "corrected_voltage_transfer": 0.8155856123135452,
+        "stage_voltage_utilisation": 0.9941250815509569
+      },
+      "stored_energy": {
+        "stage_J": 59297.08066612181,
+        "stage_limit_J": 2500,
+        "stage_utilisation": 23.71883226644872,
+        "total_J": 533673.7259950963,
+        "total_limit_J": 30000,
+        "total_utilisation": 17.789124199836543
+      },
+      "hardware": {
+        "feasible": false,
+        "constraint_counts": {
+          "pass": 4,
+          "fail": 2,
+          "unknown": 4,
+          "not_applicable": 0
+        },
+        "failed_constraint_ids": [
+          "HW_STAGE_ENERGY",
+          "HW_TOTAL_ENERGY"
+        ],
+        "unknown_constraint_ids": [
+          "CIRCUIT_TOPOLOGY_VERIFIED",
+          "CAPACITOR_TRANSIENT_RATING",
+          "RESISTOR_front_fixture_front_1",
+          "RESISTOR_tail_fixture_tail_1"
+        ],
+        "corrected_constraint_counts": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0
+        }
+      },
+      "model_quality": {
+        "status": "available",
+        "model_version": "residual-tabpfn-v2-diagnostic-v1",
+        "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+        "category": "Lightning",
+        "split": "Validation",
+        "dataset_origin": "synthetic_workbook",
+        "train_count": 700,
+        "validation_count": 150,
+        "hidden_test_evaluated": false,
+        "lab_validated": false,
+        "metrics": {
+          "residual_front_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 6.513955473413656e-09,
+            "validation_RMSE": 7.407555187557085e-09,
+            "validation_bias": 5.07431277513896e-10,
+            "validation_MAE_over_train_residual_std": 0.6650287981681047,
+            "physics_only_MAE": 8.240545740843459e-09,
+            "mean_residual_baseline_MAE": 8.207405713891005e-09,
+            "linear_residual_baseline_MAE": 6.518917806856653e-09
+          },
+          "residual_tail_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 5.831505458801432e-07,
+            "validation_RMSE": 6.692771396372145e-07,
+            "validation_bias": -1.750495252191678e-08,
+            "validation_MAE_over_train_residual_std": 0.7245254708983543,
+            "physics_only_MAE": 6.87652498761937e-07,
+            "mean_residual_baseline_MAE": 6.870463165712267e-07,
+            "linear_residual_baseline_MAE": 5.802299220732198e-07
+          },
+          "residual_crest_V": {
+            "unit": "V",
+            "validation_count": 150,
+            "validation_MAE": 4485.187180661017,
+            "validation_RMSE": 5193.163604605983,
+            "validation_bias": -366.26550849785013,
+            "validation_MAE_over_train_residual_std": 0.4114703557722134,
+            "physics_only_MAE": 9749.734449355396,
+            "mean_residual_baseline_MAE": 9735.026793715737,
+            "linear_residual_baseline_MAE": 4745.46329735606
+          }
+        },
+        "error_definition": "prediction_minus_observation",
+        "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+      },
+      "observed_accuracy": {
+        "status": "unavailable",
+        "reason": "A matched measured result is required to assess this input's accuracy",
+        "errors": null,
+        "provenance": null
+      },
+      "runtime": {
+        "clock": "monotonic_wall_clock",
+        "scope": "physics_and_correction",
+        "stage_seconds": {
+          "physics": 0.002595541998744011,
+          "correction": 6.009001666912809
+        },
+        "total_seconds": 6.011597833945416,
+        "cache_hit": false,
+        "transport_time_included": false
+      },
+      "interpretation": "Computed values are predictions. Target mismatch is not model accuracy; dataset validation does not establish this setup's measured result."
+    }
+  },
+  "performance": {
+    "schema_version": "1.0",
+    "candidate_id": "9a6f4fcbc2e1ff021d3ec2e25c9d1462",
+    "context_hash": "827db7a676a83193fb69c0c84a083a7abe32e378a4a089614e82fcfeb9b95511",
+    "target": {
+      "front_s": 1.2e-06,
+      "tail_s": 5e-05,
+      "crest_V": 1469466.0825887695
+    },
+    "physics": {
+      "metrics": {
+        "front_s": 1.2015577788181402e-06,
+        "tail_s": 5.225416107217705e-05,
+        "crest_V": 1469466.0825887697
+      },
+      "errors": {
+        "front": {
+          "unit": "s",
+          "target": 1.2e-06,
+          "predicted": 1.2015577788181402e-06,
+          "signed_delta": 1.5577788181402913e-09,
+          "absolute_delta": 1.5577788181402913e-09,
+          "percentage_delta": 0.12981490151169095,
+          "absolute_percentage_delta": 0.12981490151169095,
+          "allowed_delta": 3.6e-07,
+          "lower_limit": 8.4e-07,
+          "upper_limit": 1.5599999999999999e-06,
+          "normalised_error": 0.004327163383723031,
+          "within_tolerance": true
+        },
+        "tail": {
+          "unit": "s",
+          "target": 5e-05,
+          "predicted": 5.225416107217705e-05,
+          "signed_delta": 2.254161072177049e-06,
+          "absolute_delta": 2.254161072177049e-06,
+          "percentage_delta": 4.508322144354098,
+          "absolute_percentage_delta": 4.508322144354098,
+          "allowed_delta": 1e-05,
+          "lower_limit": 4e-05,
+          "upper_limit": 6e-05,
+          "normalised_error": 0.2254161072177049,
+          "within_tolerance": true
+        },
+        "crest": {
+          "unit": "V",
+          "target": 1469466.0825887695,
+          "predicted": 1469466.0825887697,
+          "signed_delta": 2.3283064365386963e-10,
+          "absolute_delta": 2.3283064365386963e-10,
+          "percentage_delta": 1.584457419008203e-14,
+          "absolute_percentage_delta": 1.584457419008203e-14,
+          "allowed_delta": 44083.982477663085,
+          "lower_limit": 1425382.1001111064,
+          "upper_limit": 1513550.0650664326,
+          "normalised_error": 5.2815247300273425e-15,
+          "within_tolerance": true
+        }
+      },
+      "S": 0.2254161072177049,
+      "J": 0.07658109020047774,
+      "cost": 0.18395066450490022,
+      "waveform_within_tolerance": true
+    },
+    "corrected": {
+      "metrics": {
+        "front_s": 1.2028890462263543e-06,
+        "tail_s": 5.2131505802373116e-05,
+        "crest_V": 1459429.4040353827
+      },
+      "errors": {
+        "front": {
+          "unit": "s",
+          "target": 1.2e-06,
+          "predicted": 1.2028890462263543e-06,
+          "signed_delta": 2.8890462263543897e-09,
+          "absolute_delta": 2.8890462263543897e-09,
+          "percentage_delta": 0.24075385219619916,
+          "absolute_percentage_delta": 0.24075385219619916,
+          "allowed_delta": 3.6e-07,
+          "lower_limit": 8.4e-07,
+          "upper_limit": 1.5599999999999999e-06,
+          "normalised_error": 0.008025128406539971,
+          "within_tolerance": true
+        },
+        "tail": {
+          "unit": "s",
+          "target": 5e-05,
+          "predicted": 5.2131505802373116e-05,
+          "signed_delta": 2.1315058023731133e-06,
+          "absolute_delta": 2.1315058023731133e-06,
+          "percentage_delta": 4.263011604746226,
+          "absolute_percentage_delta": 4.263011604746226,
+          "allowed_delta": 1e-05,
+          "lower_limit": 4e-05,
+          "upper_limit": 6e-05,
+          "normalised_error": 0.21315058023731132,
+          "within_tolerance": true
+        },
+        "crest": {
+          "unit": "V",
+          "target": 1469466.0825887695,
+          "predicted": 1459429.4040353827,
+          "signed_delta": -10036.678553386824,
+          "absolute_delta": 10036.678553386824,
+          "percentage_delta": -0.683015325927437,
+          "absolute_percentage_delta": 0.683015325927437,
+          "allowed_delta": 44083.982477663085,
+          "lower_limit": 1425382.1001111064,
+          "upper_limit": 1513550.0650664326,
+          "normalised_error": 0.22767177530914565,
+          "within_tolerance": true
+        }
+      },
+      "S": 0.22767177530914565,
+      "J": 0.14961582798433232,
+      "cost": 0.18545003631106088,
+      "waveform_within_tolerance": true
+    },
+    "correction_status": "predicted_diagnostic",
+    "efficiency": {
+      "definition": "crest_V / (N * U_charge_V); voltage transfer, not energy efficiency",
+      "initial_erected_voltage_V": 1789425.1467917226,
+      "expected": 0.8211944965808653,
+      "requested_minimum": null,
+      "physics_voltage_transfer": 0.8211944965808653,
+      "corrected_voltage_transfer": 0.8155856123135452,
+      "stage_voltage_utilisation": 0.9941250815509569
+    },
+    "stored_energy": {
+      "stage_J": 59297.08066612181,
+      "stage_limit_J": 2500,
+      "stage_utilisation": 23.71883226644872,
+      "total_J": 533673.7259950963,
+      "total_limit_J": 30000,
+      "total_utilisation": 17.789124199836543
+    },
+    "hardware": {
+      "feasible": false,
+      "constraint_counts": {
+        "pass": 4,
+        "fail": 2,
+        "unknown": 4,
+        "not_applicable": 0
+      },
+      "failed_constraint_ids": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ],
+      "unknown_constraint_ids": [
+        "CIRCUIT_TOPOLOGY_VERIFIED",
+        "CAPACITOR_TRANSIENT_RATING",
+        "RESISTOR_front_fixture_front_1",
+        "RESISTOR_tail_fixture_tail_1"
+      ],
+      "corrected_constraint_counts": {
+        "pass": 0,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0
+      }
+    },
+    "model_quality": {
+      "status": "available",
+      "model_version": "residual-tabpfn-v2-diagnostic-v1",
+      "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+      "category": "Lightning",
+      "split": "Validation",
+      "dataset_origin": "synthetic_workbook",
+      "train_count": 700,
+      "validation_count": 150,
+      "hidden_test_evaluated": false,
+      "lab_validated": false,
+      "metrics": {
+        "residual_front_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 6.513955473413656e-09,
+          "validation_RMSE": 7.407555187557085e-09,
+          "validation_bias": 5.07431277513896e-10,
+          "validation_MAE_over_train_residual_std": 0.6650287981681047,
+          "physics_only_MAE": 8.240545740843459e-09,
+          "mean_residual_baseline_MAE": 8.207405713891005e-09,
+          "linear_residual_baseline_MAE": 6.518917806856653e-09
+        },
+        "residual_tail_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 5.831505458801432e-07,
+          "validation_RMSE": 6.692771396372145e-07,
+          "validation_bias": -1.750495252191678e-08,
+          "validation_MAE_over_train_residual_std": 0.7245254708983543,
+          "physics_only_MAE": 6.87652498761937e-07,
+          "mean_residual_baseline_MAE": 6.870463165712267e-07,
+          "linear_residual_baseline_MAE": 5.802299220732198e-07
+        },
+        "residual_crest_V": {
+          "unit": "V",
+          "validation_count": 150,
+          "validation_MAE": 4485.187180661017,
+          "validation_RMSE": 5193.163604605983,
+          "validation_bias": -366.26550849785013,
+          "validation_MAE_over_train_residual_std": 0.4114703557722134,
+          "physics_only_MAE": 9749.734449355396,
+          "mean_residual_baseline_MAE": 9735.026793715737,
+          "linear_residual_baseline_MAE": 4745.46329735606
+        }
+      },
+      "error_definition": "prediction_minus_observation",
+      "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+    },
+    "observed_accuracy": {
+      "status": "unavailable",
+      "reason": "A matched measured result is required to assess this input's accuracy",
+      "errors": null,
+      "provenance": null
+    },
+    "runtime": {
+      "clock": "monotonic_wall_clock",
+      "scope": "single_setup_diagnostic",
+      "stage_seconds": {
+        "context": 0.0007040830096229911,
+        "physics": 0.0011735829757526517,
+        "correction": 4.2396421659504995
+      },
+      "total_seconds": 4.241623791051097,
+      "cache_hit": false,
+      "transport_time_included": false
+    },
+    "interpretation": "Computed values are predictions. Target mismatch is not model accuracy; dataset validation does not establish this setup's measured result."
+  },
+  "run": {
+    "schema_version": "1.0",
+    "run_id": "a4fb71b6b2964a2ba7ddd384160eb880",
+    "status": "completed_with_shortfall",
+    "context_id": "827db7a676a83193fb69c0c8",
+    "stop_reason": "maximum_proposals",
+    "requested_recommendations": 3,
+    "returned_recommendations": 0,
+    "shortfall_reason": "fewer_than_three_supported_hardware_verified_candidates",
+    "recommendations": [],
+    "counters": {
+      "proposals": 4,
+      "physics_evaluations": 1,
+      "ml_evaluations": 0,
+      "cache_hits": 0,
+      "unique_realised": 1
+    },
+    "rejections": {
+      "resistance_tolerance_unmet": 3,
+      "ineligible_evaluated_candidate": 1
+    },
+    "history_url": "/v1/runs/a4fb71b6b2964a2ba7ddd384160eb880/candidates",
+    "waveform_plot_bundle_url": "/v1/runs/a4fb71b6b2964a2ba7ddd384160eb880/waveforms",
+    "guarantee": "Best distinct eligible setups among evaluated candidates only",
+    "physical_recommendation_verified": false,
+    "evaluation_mode": "production_pipeline",
+    "performance": {
+      "clock": "monotonic_wall_clock",
+      "scope": "cumulative_active_worker_time_excluding_queue_and_interruption",
+      "elapsed_seconds": 0.03380862495396286,
+      "stage_seconds": {
+        "proposal": 0.0007739169523119926,
+        "assembly": 0.002516666892915964,
+        "physics": 0.001856875023804605,
+        "objective": 2.9103830456733704e-07
+      },
+      "proposals_per_second": 118.31212953210829,
+      "cache_hit_fraction": 0.0,
+      "model_quality": {
+        "status": "available",
+        "model_version": "residual-tabpfn-v2-diagnostic-v1",
+        "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+        "category": "Lightning",
+        "split": "Validation",
+        "dataset_origin": "synthetic_workbook",
+        "train_count": 700,
+        "validation_count": 150,
+        "hidden_test_evaluated": false,
+        "lab_validated": false,
+        "metrics": {
+          "residual_front_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 6.513955473413656e-09,
+            "validation_RMSE": 7.407555187557085e-09,
+            "validation_bias": 5.07431277513896e-10,
+            "validation_MAE_over_train_residual_std": 0.6650287981681047,
+            "physics_only_MAE": 8.240545740843459e-09,
+            "mean_residual_baseline_MAE": 8.207405713891005e-09,
+            "linear_residual_baseline_MAE": 6.518917806856653e-09
+          },
+          "residual_tail_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 5.831505458801432e-07,
+            "validation_RMSE": 6.692771396372145e-07,
+            "validation_bias": -1.750495252191678e-08,
+            "validation_MAE_over_train_residual_std": 0.7245254708983543,
+            "physics_only_MAE": 6.87652498761937e-07,
+            "mean_residual_baseline_MAE": 6.870463165712267e-07,
+            "linear_residual_baseline_MAE": 5.802299220732198e-07
+          },
+          "residual_crest_V": {
+            "unit": "V",
+            "validation_count": 150,
+            "validation_MAE": 4485.187180661017,
+            "validation_RMSE": 5193.163604605983,
+            "validation_bias": -366.26550849785013,
+            "validation_MAE_over_train_residual_std": 0.4114703557722134,
+            "physics_only_MAE": 9749.734449355396,
+            "mean_residual_baseline_MAE": 9735.026793715737,
+            "linear_residual_baseline_MAE": 4745.46329735606
+          }
+        },
+        "error_definition": "prediction_minus_observation",
+        "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+      }
+    }
+  },
+  "events_count": 13,
+  "generator_stages": [
+    {
+      "generator_stage_index": 1,
+      "active": true,
+      "charge_V": 198825.0163101914,
+      "C_stage_F": 3e-06,
+      "stored_energy_J": 59297.08066612181,
+      "stage_voltage_utilisation": 0.9941250815509569,
+      "front_assembly": {
+        "assembly_id": "75b022d3e28458528dba37f3",
+        "role": "front",
+        "equivalent_ohm": 40.0,
+        "nominal_fraction": {
+          "numerator": 40,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_01/front/fixture_front-1",
+            "type_id": "fixture_front",
+            "nominal_ohm": 40.0,
+            "node_a": "stage_01/front/in",
+            "node_b": "stage_01/front/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_front": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail_assembly": {
+        "assembly_id": "e9db80be7e424462e0f8d51d",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_01/tail/fixture_tail-1",
+            "type_id": "fixture_tail",
+            "nominal_ohm": 25.0,
+            "node_a": "stage_01/tail/in",
+            "node_b": "stage_01/tail/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_tail": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "component_stresses": [
+        {
+          "component_id": "stage_01/front/fixture_front-1",
+          "generator_stage_index": 1,
+          "role": "front",
+          "type_id": "fixture_front",
+          "nominal_ohm": 40.0,
+          "node_a": "stage_01/front/in",
+          "node_b": "stage_01/front/out",
+          "resistance_interval_ohm": [
+            40.0,
+            40.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_01/tail/fixture_tail-1",
+          "generator_stage_index": 1,
+          "role": "tail",
+          "type_id": "fixture_tail",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_01/tail/in",
+          "node_b": "stage_01/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "stage_connection_model": "generator_side_tail_series_v1",
+      "assembly_terminal_scope": "local_stage_recipe",
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 198825.0163101914,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 1174.9836898086069,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 59297.08066612181,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -56797.08066612181,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 533673.7259950963,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -503673.72599509626,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_fixture_front",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_fixture_tail",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_fixture_front_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_fixture_tail_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ]
+    },
+    {
+      "generator_stage_index": 2,
+      "active": true,
+      "charge_V": 198825.0163101914,
+      "C_stage_F": 3e-06,
+      "stored_energy_J": 59297.08066612181,
+      "stage_voltage_utilisation": 0.9941250815509569,
+      "front_assembly": {
+        "assembly_id": "75b022d3e28458528dba37f3",
+        "role": "front",
+        "equivalent_ohm": 40.0,
+        "nominal_fraction": {
+          "numerator": 40,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_02/front/fixture_front-1",
+            "type_id": "fixture_front",
+            "nominal_ohm": 40.0,
+            "node_a": "stage_02/front/in",
+            "node_b": "stage_02/front/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_front": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail_assembly": {
+        "assembly_id": "e9db80be7e424462e0f8d51d",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_02/tail/fixture_tail-1",
+            "type_id": "fixture_tail",
+            "nominal_ohm": 25.0,
+            "node_a": "stage_02/tail/in",
+            "node_b": "stage_02/tail/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_tail": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "component_stresses": [
+        {
+          "component_id": "stage_02/front/fixture_front-1",
+          "generator_stage_index": 2,
+          "role": "front",
+          "type_id": "fixture_front",
+          "nominal_ohm": 40.0,
+          "node_a": "stage_02/front/in",
+          "node_b": "stage_02/front/out",
+          "resistance_interval_ohm": [
+            40.0,
+            40.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_02/tail/fixture_tail-1",
+          "generator_stage_index": 2,
+          "role": "tail",
+          "type_id": "fixture_tail",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_02/tail/in",
+          "node_b": "stage_02/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "stage_connection_model": "generator_side_tail_series_v1",
+      "assembly_terminal_scope": "local_stage_recipe",
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 198825.0163101914,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 1174.9836898086069,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 59297.08066612181,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -56797.08066612181,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 533673.7259950963,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -503673.72599509626,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_fixture_front",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_fixture_tail",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_fixture_front_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_fixture_tail_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ]
+    },
+    {
+      "generator_stage_index": 3,
+      "active": true,
+      "charge_V": 198825.0163101914,
+      "C_stage_F": 3e-06,
+      "stored_energy_J": 59297.08066612181,
+      "stage_voltage_utilisation": 0.9941250815509569,
+      "front_assembly": {
+        "assembly_id": "75b022d3e28458528dba37f3",
+        "role": "front",
+        "equivalent_ohm": 40.0,
+        "nominal_fraction": {
+          "numerator": 40,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_03/front/fixture_front-1",
+            "type_id": "fixture_front",
+            "nominal_ohm": 40.0,
+            "node_a": "stage_03/front/in",
+            "node_b": "stage_03/front/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_front": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail_assembly": {
+        "assembly_id": "e9db80be7e424462e0f8d51d",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_03/tail/fixture_tail-1",
+            "type_id": "fixture_tail",
+            "nominal_ohm": 25.0,
+            "node_a": "stage_03/tail/in",
+            "node_b": "stage_03/tail/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_tail": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "component_stresses": [
+        {
+          "component_id": "stage_03/front/fixture_front-1",
+          "generator_stage_index": 3,
+          "role": "front",
+          "type_id": "fixture_front",
+          "nominal_ohm": 40.0,
+          "node_a": "stage_03/front/in",
+          "node_b": "stage_03/front/out",
+          "resistance_interval_ohm": [
+            40.0,
+            40.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_03/tail/fixture_tail-1",
+          "generator_stage_index": 3,
+          "role": "tail",
+          "type_id": "fixture_tail",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_03/tail/in",
+          "node_b": "stage_03/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "stage_connection_model": "generator_side_tail_series_v1",
+      "assembly_terminal_scope": "local_stage_recipe",
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 198825.0163101914,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 1174.9836898086069,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 59297.08066612181,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -56797.08066612181,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 533673.7259950963,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -503673.72599509626,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_fixture_front",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_fixture_tail",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_fixture_front_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_fixture_tail_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ]
+    },
+    {
+      "generator_stage_index": 4,
+      "active": true,
+      "charge_V": 198825.0163101914,
+      "C_stage_F": 3e-06,
+      "stored_energy_J": 59297.08066612181,
+      "stage_voltage_utilisation": 0.9941250815509569,
+      "front_assembly": {
+        "assembly_id": "75b022d3e28458528dba37f3",
+        "role": "front",
+        "equivalent_ohm": 40.0,
+        "nominal_fraction": {
+          "numerator": 40,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_04/front/fixture_front-1",
+            "type_id": "fixture_front",
+            "nominal_ohm": 40.0,
+            "node_a": "stage_04/front/in",
+            "node_b": "stage_04/front/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_front": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail_assembly": {
+        "assembly_id": "e9db80be7e424462e0f8d51d",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_04/tail/fixture_tail-1",
+            "type_id": "fixture_tail",
+            "nominal_ohm": 25.0,
+            "node_a": "stage_04/tail/in",
+            "node_b": "stage_04/tail/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_tail": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "component_stresses": [
+        {
+          "component_id": "stage_04/front/fixture_front-1",
+          "generator_stage_index": 4,
+          "role": "front",
+          "type_id": "fixture_front",
+          "nominal_ohm": 40.0,
+          "node_a": "stage_04/front/in",
+          "node_b": "stage_04/front/out",
+          "resistance_interval_ohm": [
+            40.0,
+            40.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_04/tail/fixture_tail-1",
+          "generator_stage_index": 4,
+          "role": "tail",
+          "type_id": "fixture_tail",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_04/tail/in",
+          "node_b": "stage_04/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "stage_connection_model": "generator_side_tail_series_v1",
+      "assembly_terminal_scope": "local_stage_recipe",
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 198825.0163101914,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 1174.9836898086069,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 59297.08066612181,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -56797.08066612181,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 533673.7259950963,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -503673.72599509626,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_fixture_front",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_fixture_tail",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_fixture_front_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_fixture_tail_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ]
+    },
+    {
+      "generator_stage_index": 5,
+      "active": true,
+      "charge_V": 198825.0163101914,
+      "C_stage_F": 3e-06,
+      "stored_energy_J": 59297.08066612181,
+      "stage_voltage_utilisation": 0.9941250815509569,
+      "front_assembly": {
+        "assembly_id": "75b022d3e28458528dba37f3",
+        "role": "front",
+        "equivalent_ohm": 40.0,
+        "nominal_fraction": {
+          "numerator": 40,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_05/front/fixture_front-1",
+            "type_id": "fixture_front",
+            "nominal_ohm": 40.0,
+            "node_a": "stage_05/front/in",
+            "node_b": "stage_05/front/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_front": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail_assembly": {
+        "assembly_id": "e9db80be7e424462e0f8d51d",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_05/tail/fixture_tail-1",
+            "type_id": "fixture_tail",
+            "nominal_ohm": 25.0,
+            "node_a": "stage_05/tail/in",
+            "node_b": "stage_05/tail/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_tail": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "component_stresses": [
+        {
+          "component_id": "stage_05/front/fixture_front-1",
+          "generator_stage_index": 5,
+          "role": "front",
+          "type_id": "fixture_front",
+          "nominal_ohm": 40.0,
+          "node_a": "stage_05/front/in",
+          "node_b": "stage_05/front/out",
+          "resistance_interval_ohm": [
+            40.0,
+            40.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_05/tail/fixture_tail-1",
+          "generator_stage_index": 5,
+          "role": "tail",
+          "type_id": "fixture_tail",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_05/tail/in",
+          "node_b": "stage_05/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "stage_connection_model": "generator_side_tail_series_v1",
+      "assembly_terminal_scope": "local_stage_recipe",
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 198825.0163101914,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 1174.9836898086069,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 59297.08066612181,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -56797.08066612181,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 533673.7259950963,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -503673.72599509626,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_fixture_front",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_fixture_tail",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_fixture_front_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_fixture_tail_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ]
+    },
+    {
+      "generator_stage_index": 6,
+      "active": true,
+      "charge_V": 198825.0163101914,
+      "C_stage_F": 3e-06,
+      "stored_energy_J": 59297.08066612181,
+      "stage_voltage_utilisation": 0.9941250815509569,
+      "front_assembly": {
+        "assembly_id": "75b022d3e28458528dba37f3",
+        "role": "front",
+        "equivalent_ohm": 40.0,
+        "nominal_fraction": {
+          "numerator": 40,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_06/front/fixture_front-1",
+            "type_id": "fixture_front",
+            "nominal_ohm": 40.0,
+            "node_a": "stage_06/front/in",
+            "node_b": "stage_06/front/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_front": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail_assembly": {
+        "assembly_id": "e9db80be7e424462e0f8d51d",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_06/tail/fixture_tail-1",
+            "type_id": "fixture_tail",
+            "nominal_ohm": 25.0,
+            "node_a": "stage_06/tail/in",
+            "node_b": "stage_06/tail/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_tail": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "component_stresses": [
+        {
+          "component_id": "stage_06/front/fixture_front-1",
+          "generator_stage_index": 6,
+          "role": "front",
+          "type_id": "fixture_front",
+          "nominal_ohm": 40.0,
+          "node_a": "stage_06/front/in",
+          "node_b": "stage_06/front/out",
+          "resistance_interval_ohm": [
+            40.0,
+            40.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_06/tail/fixture_tail-1",
+          "generator_stage_index": 6,
+          "role": "tail",
+          "type_id": "fixture_tail",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_06/tail/in",
+          "node_b": "stage_06/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "stage_connection_model": "generator_side_tail_series_v1",
+      "assembly_terminal_scope": "local_stage_recipe",
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 198825.0163101914,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 1174.9836898086069,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 59297.08066612181,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -56797.08066612181,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 533673.7259950963,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -503673.72599509626,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_fixture_front",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_fixture_tail",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_fixture_front_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_fixture_tail_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ]
+    },
+    {
+      "generator_stage_index": 7,
+      "active": true,
+      "charge_V": 198825.0163101914,
+      "C_stage_F": 3e-06,
+      "stored_energy_J": 59297.08066612181,
+      "stage_voltage_utilisation": 0.9941250815509569,
+      "front_assembly": {
+        "assembly_id": "75b022d3e28458528dba37f3",
+        "role": "front",
+        "equivalent_ohm": 40.0,
+        "nominal_fraction": {
+          "numerator": 40,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_07/front/fixture_front-1",
+            "type_id": "fixture_front",
+            "nominal_ohm": 40.0,
+            "node_a": "stage_07/front/in",
+            "node_b": "stage_07/front/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_front": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail_assembly": {
+        "assembly_id": "e9db80be7e424462e0f8d51d",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_07/tail/fixture_tail-1",
+            "type_id": "fixture_tail",
+            "nominal_ohm": 25.0,
+            "node_a": "stage_07/tail/in",
+            "node_b": "stage_07/tail/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_tail": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "component_stresses": [
+        {
+          "component_id": "stage_07/front/fixture_front-1",
+          "generator_stage_index": 7,
+          "role": "front",
+          "type_id": "fixture_front",
+          "nominal_ohm": 40.0,
+          "node_a": "stage_07/front/in",
+          "node_b": "stage_07/front/out",
+          "resistance_interval_ohm": [
+            40.0,
+            40.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_07/tail/fixture_tail-1",
+          "generator_stage_index": 7,
+          "role": "tail",
+          "type_id": "fixture_tail",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_07/tail/in",
+          "node_b": "stage_07/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "stage_connection_model": "generator_side_tail_series_v1",
+      "assembly_terminal_scope": "local_stage_recipe",
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 198825.0163101914,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 1174.9836898086069,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 59297.08066612181,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -56797.08066612181,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 533673.7259950963,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -503673.72599509626,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_fixture_front",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_fixture_tail",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_fixture_front_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_fixture_tail_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ]
+    },
+    {
+      "generator_stage_index": 8,
+      "active": true,
+      "charge_V": 198825.0163101914,
+      "C_stage_F": 3e-06,
+      "stored_energy_J": 59297.08066612181,
+      "stage_voltage_utilisation": 0.9941250815509569,
+      "front_assembly": {
+        "assembly_id": "75b022d3e28458528dba37f3",
+        "role": "front",
+        "equivalent_ohm": 40.0,
+        "nominal_fraction": {
+          "numerator": 40,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_08/front/fixture_front-1",
+            "type_id": "fixture_front",
+            "nominal_ohm": 40.0,
+            "node_a": "stage_08/front/in",
+            "node_b": "stage_08/front/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_front": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail_assembly": {
+        "assembly_id": "e9db80be7e424462e0f8d51d",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_08/tail/fixture_tail-1",
+            "type_id": "fixture_tail",
+            "nominal_ohm": 25.0,
+            "node_a": "stage_08/tail/in",
+            "node_b": "stage_08/tail/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_tail": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "component_stresses": [
+        {
+          "component_id": "stage_08/front/fixture_front-1",
+          "generator_stage_index": 8,
+          "role": "front",
+          "type_id": "fixture_front",
+          "nominal_ohm": 40.0,
+          "node_a": "stage_08/front/in",
+          "node_b": "stage_08/front/out",
+          "resistance_interval_ohm": [
+            40.0,
+            40.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_08/tail/fixture_tail-1",
+          "generator_stage_index": 8,
+          "role": "tail",
+          "type_id": "fixture_tail",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_08/tail/in",
+          "node_b": "stage_08/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "stage_connection_model": "generator_side_tail_series_v1",
+      "assembly_terminal_scope": "local_stage_recipe",
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 198825.0163101914,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 1174.9836898086069,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 59297.08066612181,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -56797.08066612181,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 533673.7259950963,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -503673.72599509626,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_fixture_front",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_fixture_tail",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_fixture_front_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_fixture_tail_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ]
+    },
+    {
+      "generator_stage_index": 9,
+      "active": true,
+      "charge_V": 198825.0163101914,
+      "C_stage_F": 3e-06,
+      "stored_energy_J": 59297.08066612181,
+      "stage_voltage_utilisation": 0.9941250815509569,
+      "front_assembly": {
+        "assembly_id": "75b022d3e28458528dba37f3",
+        "role": "front",
+        "equivalent_ohm": 40.0,
+        "nominal_fraction": {
+          "numerator": 40,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_09/front/fixture_front-1",
+            "type_id": "fixture_front",
+            "nominal_ohm": 40.0,
+            "node_a": "stage_09/front/in",
+            "node_b": "stage_09/front/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_front": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail_assembly": {
+        "assembly_id": "e9db80be7e424462e0f8d51d",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "stage_09/tail/fixture_tail-1",
+            "type_id": "fixture_tail",
+            "nominal_ohm": 25.0,
+            "node_a": "stage_09/tail/in",
+            "node_b": "stage_09/tail/out"
+          }
+        ],
+        "type_counts": {
+          "fixture_tail": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "component_stresses": [
+        {
+          "component_id": "stage_09/front/fixture_front-1",
+          "generator_stage_index": 9,
+          "role": "front",
+          "type_id": "fixture_front",
+          "nominal_ohm": 40.0,
+          "node_a": "stage_09/front/in",
+          "node_b": "stage_09/front/out",
+          "resistance_interval_ohm": [
+            40.0,
+            40.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_09/tail/fixture_tail-1",
+          "generator_stage_index": 9,
+          "role": "tail",
+          "type_id": "fixture_tail",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_09/tail/in",
+          "node_b": "stage_09/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "stage_connection_model": "generator_side_tail_series_v1",
+      "assembly_terminal_scope": "local_stage_recipe",
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 198825.0163101914,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 1174.9836898086069,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 59297.08066612181,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -56797.08066612181,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 533673.7259950963,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -503673.72599509626,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_fixture_front",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_fixture_tail",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_fixture_front_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_fixture_tail_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ]
+    }
+  ],
+  "candidate_performance": {
+    "schema_version": "1.0",
+    "candidate_id": "9a6f4fcbc2e1ff021d3ec2e25c9d1462",
+    "context_hash": "827db7a676a83193fb69c0c84a083a7abe32e378a4a089614e82fcfeb9b95511",
+    "target": {
+      "front_s": 1.2e-06,
+      "tail_s": 5e-05,
+      "crest_V": 1469466.0825887695
+    },
+    "physics": {
+      "metrics": {
+        "front_s": 1.2015577788181402e-06,
+        "tail_s": 5.225416107217705e-05,
+        "crest_V": 1469466.0825887697
+      },
+      "errors": {
+        "front": {
+          "unit": "s",
+          "target": 1.2e-06,
+          "predicted": 1.2015577788181402e-06,
+          "signed_delta": 1.5577788181402913e-09,
+          "absolute_delta": 1.5577788181402913e-09,
+          "percentage_delta": 0.12981490151169095,
+          "absolute_percentage_delta": 0.12981490151169095,
+          "allowed_delta": 3.6e-07,
+          "lower_limit": 8.4e-07,
+          "upper_limit": 1.5599999999999999e-06,
+          "normalised_error": 0.004327163383723031,
+          "within_tolerance": true
+        },
+        "tail": {
+          "unit": "s",
+          "target": 5e-05,
+          "predicted": 5.225416107217705e-05,
+          "signed_delta": 2.254161072177049e-06,
+          "absolute_delta": 2.254161072177049e-06,
+          "percentage_delta": 4.508322144354098,
+          "absolute_percentage_delta": 4.508322144354098,
+          "allowed_delta": 1e-05,
+          "lower_limit": 4e-05,
+          "upper_limit": 6e-05,
+          "normalised_error": 0.2254161072177049,
+          "within_tolerance": true
+        },
+        "crest": {
+          "unit": "V",
+          "target": 1469466.0825887695,
+          "predicted": 1469466.0825887697,
+          "signed_delta": 2.3283064365386963e-10,
+          "absolute_delta": 2.3283064365386963e-10,
+          "percentage_delta": 1.584457419008203e-14,
+          "absolute_percentage_delta": 1.584457419008203e-14,
+          "allowed_delta": 44083.982477663085,
+          "lower_limit": 1425382.1001111064,
+          "upper_limit": 1513550.0650664326,
+          "normalised_error": 5.2815247300273425e-15,
+          "within_tolerance": true
+        }
+      },
+      "S": 0.2254161072177049,
+      "J": 0.07658109020047774,
+      "cost": 0.18395066450490022,
+      "waveform_within_tolerance": true
+    },
+    "corrected": null,
+    "correction_status": "not_invoked",
+    "efficiency": {
+      "definition": "crest_V / (N * U_charge_V); voltage transfer, not energy efficiency",
+      "initial_erected_voltage_V": 1789425.1467917226,
+      "expected": 0.8211944965808653,
+      "requested_minimum": null,
+      "physics_voltage_transfer": 0.8211944965808653,
+      "corrected_voltage_transfer": null,
+      "stage_voltage_utilisation": 0.9941250815509569
+    },
+    "stored_energy": {
+      "stage_J": 59297.08066612181,
+      "stage_limit_J": 2500,
+      "stage_utilisation": 23.71883226644872,
+      "total_J": 533673.7259950963,
+      "total_limit_J": 30000,
+      "total_utilisation": 17.789124199836543
+    },
+    "hardware": {
+      "feasible": false,
+      "constraint_counts": {
+        "pass": 4,
+        "fail": 2,
+        "unknown": 4,
+        "not_applicable": 0
+      },
+      "failed_constraint_ids": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ],
+      "unknown_constraint_ids": [
+        "CIRCUIT_TOPOLOGY_VERIFIED",
+        "CAPACITOR_TRANSIENT_RATING",
+        "RESISTOR_front_fixture_front_1",
+        "RESISTOR_tail_fixture_tail_1"
+      ],
+      "corrected_constraint_counts": {
+        "pass": 0,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0
+      }
+    },
+    "model_quality": {
+      "status": "available",
+      "model_version": "residual-tabpfn-v2-diagnostic-v1",
+      "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+      "category": "Lightning",
+      "split": "Validation",
+      "dataset_origin": "synthetic_workbook",
+      "train_count": 700,
+      "validation_count": 150,
+      "hidden_test_evaluated": false,
+      "lab_validated": false,
+      "metrics": {
+        "residual_front_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 6.513955473413656e-09,
+          "validation_RMSE": 7.407555187557085e-09,
+          "validation_bias": 5.07431277513896e-10,
+          "validation_MAE_over_train_residual_std": 0.6650287981681047,
+          "physics_only_MAE": 8.240545740843459e-09,
+          "mean_residual_baseline_MAE": 8.207405713891005e-09,
+          "linear_residual_baseline_MAE": 6.518917806856653e-09
+        },
+        "residual_tail_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 5.831505458801432e-07,
+          "validation_RMSE": 6.692771396372145e-07,
+          "validation_bias": -1.750495252191678e-08,
+          "validation_MAE_over_train_residual_std": 0.7245254708983543,
+          "physics_only_MAE": 6.87652498761937e-07,
+          "mean_residual_baseline_MAE": 6.870463165712267e-07,
+          "linear_residual_baseline_MAE": 5.802299220732198e-07
+        },
+        "residual_crest_V": {
+          "unit": "V",
+          "validation_count": 150,
+          "validation_MAE": 4485.187180661017,
+          "validation_RMSE": 5193.163604605983,
+          "validation_bias": -366.26550849785013,
+          "validation_MAE_over_train_residual_std": 0.4114703557722134,
+          "physics_only_MAE": 9749.734449355396,
+          "mean_residual_baseline_MAE": 9735.026793715737,
+          "linear_residual_baseline_MAE": 4745.46329735606
+        }
+      },
+      "error_definition": "prediction_minus_observation",
+      "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+    },
+    "observed_accuracy": {
+      "status": "unavailable",
+      "reason": "A matched measured result is required to assess this input's accuracy",
+      "errors": null,
+      "provenance": null
+    },
+    "runtime": {
+      "clock": "monotonic_wall_clock",
+      "scope": "original_unique_candidate_evaluation_including_pair_retries",
+      "stage_seconds": {
+        "assembly": 0.002516666892915964,
+        "physics": 0.001856875023804605,
+        "objective": 2.9103830456733704e-07
+      },
+      "total_seconds": 0.004895541002042592,
+      "cache_hit": false,
+      "transport_time_included": false
+    },
+    "interpretation": "Computed values are predictions. Target mismatch is not model accuracy; dataset validation does not establish this setup's measured result."
+  },
+  "csv_rows": 8005,
+  "four_curve_plot": {
+    "curves": 4,
+    "points": 8080,
+    "origins": [
+      "target_reference",
+      "ml_parameter_reconstruction",
+      "ml_parameter_reconstruction",
+      "ml_parameter_reconstruction"
+    ]
+  }
+}

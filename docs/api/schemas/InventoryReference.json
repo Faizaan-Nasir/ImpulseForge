@@ -1,0 +1,25 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "source": {
+      "const": "registered",
+      "title": "Source",
+      "type": "string"
+    },
+    "profile_id": {
+      "title": "Profile Id",
+      "type": "string"
+    },
+    "version": {
+      "default": "1",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "profile_id"
+  ],
+  "title": "InventoryReference",
+  "type": "object"
+}

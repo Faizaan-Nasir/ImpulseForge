@@ -1,0 +1,138 @@
+{
+  "hardware_authority": "Frontend workbook inputs and example defaults; exactly two document energy limits plus capacitance fallback",
+  "implemented": [
+    {
+      "id": "HW_STAGES",
+      "unit": "stages",
+      "module": "contracts/models.py; profiles/resolve.py; assembly/cp_sat.py; physics/forward.py",
+      "tests": "test_context.py; test_assembly.py",
+      "fallback_value": [
+        1,
+        15
+      ],
+      "value": "resolved frontend input; fallback only when omitted/null",
+      "input_field": "equipment_inputs.N_max",
+      "source": "Frontend maximum or workbook default; positive-integer model domain"
+    },
+    {
+      "id": "HW_STAGE_CHARGE",
+      "unit": "V",
+      "module": "contracts/models.py; profiles/resolve.py; profiles/resolve.py; physics/forward.py",
+      "tests": "test_context.py",
+      "fallback_value": 200000,
+      "value": "resolved frontend input; fallback only when omitted/null",
+      "input_field": "equipment_inputs.U_stage_max_V",
+      "source": "Frontend maximum or workbook default"
+    },
+    {
+      "id": "HW_STAGE_ENERGY",
+      "value": 2500,
+      "unit": "J",
+      "module": "physics/forward.py",
+      "tests": "test_physics.py",
+      "source": "Retained problem-statement energy constraint"
+    },
+    {
+      "id": "HW_TOTAL_ENERGY",
+      "value": 30000,
+      "unit": "J",
+      "module": "physics/forward.py",
+      "tests": "test_physics.py",
+      "source": "Retained problem-statement energy constraint"
+    },
+    {
+      "id": "STAGE_CAPACITANCE",
+      "unit": "F",
+      "module": "contracts/models.py; profiles/resolve.py; profiles/registry.py; physics/forward.py",
+      "tests": "test_physics.py",
+      "fallback_value": 1.25e-07,
+      "value": "resolved frontend input; fallback only when omitted/null",
+      "input_field": "equipment_inputs.C_stage_F",
+      "source": "Frontend capacitance wins; 0.125 \u00b5F document fallback only"
+    },
+    {
+      "id": "INDEPENDENT_STOCK_CAPS",
+      "value": 4,
+      "unit": "per type per role per stage",
+      "module": "contracts/models.py; assembly/validate.py; assembly/cp_sat.py",
+      "tests": "test_assembly.py; test_context.py"
+    },
+    {
+      "id": "REQUEST_MIN_EFFICIENCY",
+      "value": "optional request input",
+      "unit": "fraction",
+      "module": "physics/forward.py",
+      "tests": "test_calibration.py"
+    },
+    {
+      "id": "DP_SCOPE_AND_TOLERANCE",
+      "value": "request input",
+      "unit": "declared search scope",
+      "module": "assembly/dp.py; assembly/cp_sat.py",
+      "tests": "test_assembly.py"
+    },
+    {
+      "id": "ML_SUPPORT",
+      "value": "train-only ranges and baseline/load/model compatibility",
+      "unit": "support policy",
+      "module": "correction/model.py",
+      "tests": "test_correction.py; test_model_real.py"
+    }
+  ],
+  "unknown_blocks_physical_recommendations": [
+    {
+      "id": "CIRCUIT_TOPOLOGY_VERIFIED",
+      "module": "physics/forward.py",
+      "requires": "approved circuit evidence and resolved auxiliary branches"
+    },
+    {
+      "id": "CAPACITOR_TRANSIENT_RATING",
+      "module": "physics/forward.py",
+      "status": "always unknown in current lumped solver",
+      "requires": "internal stage transient/reversal model and ratings"
+    },
+    {
+      "id": "RESISTOR_RATINGS",
+      "module": "physics/stress.py",
+      "requires": "approved types; ratings; thermal parameters and equipment evidence"
+    },
+    {
+      "id": "MODEL_LAB_VALIDATION",
+      "module": "correction/model.py; pipeline/runner.py",
+      "status": "synthetic diagnostic only"
+    }
+  ],
+  "numerical_service_limits": {
+    "ode_max_step_intervals": 250000,
+    "independent_forward_deadline_s": 60,
+    "local_workers": 2,
+    "assembly_cache_entries": 4
+  },
+  "not_verified": [
+    "IEC standards certification",
+    "ringing/overshoot/chopped impulse evaluation",
+    "distributed transformer model",
+    "internal stage transients",
+    "nonlinear electrothermal resistance feedback",
+    "laboratory performance"
+  ],
+  "input_precedence": [
+    "frontend_input",
+    "workbook_example_default",
+    "retained_problem_statement_fallback"
+  ],
+  "retained_document_parameters": {
+    "total_energy_max_J": 30000,
+    "stage_energy_max_J": 2500,
+    "C_stage_F": 1.25e-07
+  },
+  "excluded_document_parameters": [
+    "stack/crest voltage limits",
+    "stage count/minimum",
+    "stage voltage",
+    "basic capacitance",
+    "shot rate",
+    "auxiliary resistors",
+    "sphere gap/installation metadata"
+  ]
+}

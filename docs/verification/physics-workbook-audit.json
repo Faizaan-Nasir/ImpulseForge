@@ -1,0 +1,147 @@
+{
+  "records": 1700,
+  "hidden_test_evaluated": false,
+  "categories": {
+    "Lightning": {
+      "count": 850,
+      "max_absolute_error": {
+        "front_us": 6.661338147750939e-16,
+        "tail_us": 7.105427357601002e-15,
+        "crest_kV": 4.547473508864641e-13
+      },
+      "mismatches": 0,
+      "stage_energy_failures": 850,
+      "total_energy_failures": 850
+    },
+    "Switching": {
+      "count": 850,
+      "max_absolute_error": {
+        "front_us": 1.1368683772161603e-13,
+        "tail_us": 0,
+        "crest_kV": 2.2737367544323206e-13
+      },
+      "mismatches": 0,
+      "stage_energy_failures": 850,
+      "total_energy_failures": 850
+    }
+  },
+  "default_calculator": {
+    "workbook": {
+      "E8": 9,
+      "E9": 193.08943089430895,
+      "E11": 0.3333333333333333,
+      "E13": 49.52213922066368,
+      "E16": 23.94228377304535,
+      "E18": 1.2100299583068181,
+      "E19": 52.20888749999999,
+      "E20": 1425,
+      "H12": "YES"
+    },
+    "backend_N": 9,
+    "backend_charge_kV": 193.08943089430895,
+    "inverse": {
+      "N": 9,
+      "Rf_required_ohm": 49.522139220663675,
+      "Rt_required_ohm": 23.942283773045347,
+      "U_charge_V": 193089.43089430896,
+      "derived": {
+        "C1_F": 3.3333333333333335e-07,
+        "C2_F": 1.5000000000000002e-09,
+        "L_effective_H": 1.85e-05,
+        "R1_ohm": 9,
+        "R2_ohm": 9,
+        "V0_V": 1737804.8780487806,
+        "N": 9,
+        "topology": "generator_side_tail_series_v1",
+        "external_front_assumed_zero": true
+      },
+      "inverse_mode": "calculator_seed",
+      "topology": "generator_side_tail_series_v1"
+    },
+    "metrics": {
+      "front_s": 1.2100299583068183e-06,
+      "tail_s": 5.2208887499999997e-05,
+      "crest_V": 1425000.0
+    },
+    "energy_per_stage_J": 55925.29248463217,
+    "energy_total_J": 503327.6323616895
+  },
+  "same_settings_exact": {
+    "metrics": {
+      "front_s": 1.8192641882030679e-06,
+      "tail_s": 5.6215217760013e-05,
+      "crest_V": 1661687.489666702
+    },
+    "voltage_efficiency": 0.956199116860839,
+    "method": "Radau"
+  },
+  "duration_seconds": 12.614937708945945,
+  "live_api_verification": {
+    "calculator": {
+      "metrics": {
+        "front_s": 1.2100299583068183e-06,
+        "tail_s": 5.2208887499999997e-05,
+        "crest_V": 1425000.0
+      },
+      "method": "calculator",
+      "hardware_feasible": false
+    },
+    "exact": {
+      "metrics": {
+        "front_s": 1.8192641882030679e-06,
+        "tail_s": 5.6215217760013e-05,
+        "crest_V": 1661687.489666702
+      },
+      "method": "Radau",
+      "hardware_feasible": false
+    },
+    "previous_run": {
+      "evaluated": 10,
+      "costs": [
+        2
+      ],
+      "ml_statuses": [
+        "not_invoked"
+      ]
+    }
+  },
+  "findings": [
+    {
+      "id": "calculator_matches_source",
+      "severity": "info",
+      "detail": "Actual backend evaluation reproduces all 1700 Train/Validation physics metrics; no Hidden Test evaluation."
+    },
+    {
+      "id": "mode_mismatch",
+      "severity": "high",
+      "detail": "Frontend default is Exact; workbook and fitted residual model use Calculator. Exact reference matches formula-book benchmark."
+    },
+    {
+      "id": "missing_exact_inverse",
+      "severity": "high",
+      "detail": "inverse() always returns calculator_seed, even for Exact requests; it never root-finds the Exact forward model."
+    },
+    {
+      "id": "flat_optimizer_feedback",
+      "severity": "high",
+      "detail": "All evaluated candidates in inspected live run have cost 2. Ineligible candidate waveform differences are not sent to SMAC."
+    },
+    {
+      "id": "energy_data_conflict",
+      "severity": "high",
+      "detail": "All 1700 checked source records exceed retained 2500 J/stage and 30000 J total constraints. Workbook feasible flag checks only N and charging voltage."
+    },
+    {
+      "id": "inventory_policy_difference",
+      "severity": "info",
+      "detail": "Workbook rounds continuous resistance to 5 ohms, whereas current DP returns closest buildable inventory network under configured limits."
+    }
+  ],
+  "default_settings_energy_voltage_bound": {
+    "N_max": 15,
+    "C_stage_F": 3e-06,
+    "eta_assumed": 0.82,
+    "maximum_crest_V_with_both_energy_limits": 449132.49715423625,
+    "scope": "Calculator bound with adjustable charge and maximum 15 identical stages; fixed charge may be more restrictive."
+  }
+}

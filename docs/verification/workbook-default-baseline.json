@@ -1,0 +1,4517 @@
+{
+  "status": "evaluated",
+  "settings": {
+    "N": 9,
+    "U_charge_V": 193089.43089430896,
+    "Rf_actual_ohm": 50.0,
+    "Rt_actual_ohm": 25.0
+  },
+  "ideal": {
+    "N": 9,
+    "Rf_required_ohm": 49.522139220663675,
+    "Rt_required_ohm": 23.942283773045347,
+    "U_charge_V": 193089.43089430896,
+    "derived": {
+      "C1_F": 3.3333333333333335e-07,
+      "C2_F": 1.5000000000000002e-09,
+      "L_effective_H": 1.85e-05,
+      "R1_ohm": 9,
+      "R2_ohm": 9,
+      "V0_V": 1737804.8780487806,
+      "N": 9,
+      "topology": "generator_side_tail_series_v1",
+      "external_front_assumed_zero": true
+    },
+    "inverse_mode": "calculator_seed",
+    "topology": "generator_side_tail_series_v1"
+  },
+  "record": {
+    "physics": {
+      "candidate_id": "7c04e35262549b0cb1a21d4c1978b2bd",
+      "context_hash": "d1cfe042353a068b29001482740f1b72dd3bf82d6a96a65f63035475ca1042c8",
+      "physics_version": "0.1.0",
+      "baseline_mode": "calculator",
+      "derived": {
+        "C1_F": 3.3333333333333335e-07,
+        "C2_F": 1.5000000000000002e-09,
+        "L_effective_H": 1.85e-05,
+        "R1_ohm": 450.0,
+        "R2_ohm": 225.0,
+        "V0_V": 1737804.8780487806,
+        "N": 9,
+        "topology": "generator_side_tail_series_v1",
+        "external_front_assumed_zero": true
+      },
+      "metrics": {
+        "front_s": 1.2100299583068183e-06,
+        "tail_s": 5.2208887499999997e-05,
+        "crest_V": 1425000.0
+      },
+      "voltage_efficiency": 0.82,
+      "voltage_utilisation": 0.9654471544715448,
+      "stage_energy_J": 55925.29248463217,
+      "total_energy_J": 503327.6323616895,
+      "landmarks": {},
+      "rates": {},
+      "trace": null,
+      "component_stresses": [
+        {
+          "component_id": "stage_01/front/front_50-1",
+          "generator_stage_index": 1,
+          "role": "front",
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "node_a": "stage_01/front/in",
+          "node_b": "stage_01/front/out",
+          "resistance_interval_ohm": [
+            50.0,
+            50.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_02/front/front_50-1",
+          "generator_stage_index": 2,
+          "role": "front",
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "node_a": "stage_02/front/in",
+          "node_b": "stage_02/front/out",
+          "resistance_interval_ohm": [
+            50.0,
+            50.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_03/front/front_50-1",
+          "generator_stage_index": 3,
+          "role": "front",
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "node_a": "stage_03/front/in",
+          "node_b": "stage_03/front/out",
+          "resistance_interval_ohm": [
+            50.0,
+            50.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_04/front/front_50-1",
+          "generator_stage_index": 4,
+          "role": "front",
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "node_a": "stage_04/front/in",
+          "node_b": "stage_04/front/out",
+          "resistance_interval_ohm": [
+            50.0,
+            50.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_05/front/front_50-1",
+          "generator_stage_index": 5,
+          "role": "front",
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "node_a": "stage_05/front/in",
+          "node_b": "stage_05/front/out",
+          "resistance_interval_ohm": [
+            50.0,
+            50.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_06/front/front_50-1",
+          "generator_stage_index": 6,
+          "role": "front",
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "node_a": "stage_06/front/in",
+          "node_b": "stage_06/front/out",
+          "resistance_interval_ohm": [
+            50.0,
+            50.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_07/front/front_50-1",
+          "generator_stage_index": 7,
+          "role": "front",
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "node_a": "stage_07/front/in",
+          "node_b": "stage_07/front/out",
+          "resistance_interval_ohm": [
+            50.0,
+            50.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_08/front/front_50-1",
+          "generator_stage_index": 8,
+          "role": "front",
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "node_a": "stage_08/front/in",
+          "node_b": "stage_08/front/out",
+          "resistance_interval_ohm": [
+            50.0,
+            50.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_09/front/front_50-1",
+          "generator_stage_index": 9,
+          "role": "front",
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "node_a": "stage_09/front/in",
+          "node_b": "stage_09/front/out",
+          "resistance_interval_ohm": [
+            50.0,
+            50.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_01/tail/tail_25-1",
+          "generator_stage_index": 1,
+          "role": "tail",
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_01/tail/in",
+          "node_b": "stage_01/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_02/tail/tail_25-1",
+          "generator_stage_index": 2,
+          "role": "tail",
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_02/tail/in",
+          "node_b": "stage_02/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_03/tail/tail_25-1",
+          "generator_stage_index": 3,
+          "role": "tail",
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_03/tail/in",
+          "node_b": "stage_03/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_04/tail/tail_25-1",
+          "generator_stage_index": 4,
+          "role": "tail",
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_04/tail/in",
+          "node_b": "stage_04/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_05/tail/tail_25-1",
+          "generator_stage_index": 5,
+          "role": "tail",
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_05/tail/in",
+          "node_b": "stage_05/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_06/tail/tail_25-1",
+          "generator_stage_index": 6,
+          "role": "tail",
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_06/tail/in",
+          "node_b": "stage_06/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_07/tail/tail_25-1",
+          "generator_stage_index": 7,
+          "role": "tail",
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_07/tail/in",
+          "node_b": "stage_07/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_08/tail/tail_25-1",
+          "generator_stage_index": 8,
+          "role": "tail",
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_08/tail/in",
+          "node_b": "stage_08/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        },
+        {
+          "component_id": "stage_09/tail/tail_25-1",
+          "generator_stage_index": 9,
+          "role": "tail",
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "node_a": "stage_09/tail/in",
+          "node_b": "stage_09/tail/out",
+          "resistance_interval_ohm": [
+            25.0,
+            25.0
+          ],
+          "peak_voltage_V": null,
+          "peak_current_A": null,
+          "peak_power_W": null,
+          "pulse_energy_J": null,
+          "average_power_W": null,
+          "initial_temperature_K": null,
+          "estimated_peak_temperature_K": null,
+          "thermal_status": "unknown",
+          "thermal_details": null,
+          "ratings_status": "unknown",
+          "rating_limits": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "rating_checks": [
+            {
+              "rating": "pulse_voltage_limit_V",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_current_limit_A",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "pulse_energy_limit_J",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "average_power_limit_W",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            },
+            {
+              "rating": "temperature_limit_K",
+              "observed": null,
+              "limit": null,
+              "status": "unknown",
+              "margin": null
+            }
+          ],
+          "equal_sharing_assumed": true,
+          "assumptions": [
+            "nominal constant resistance",
+            "identical stage sharing",
+            "trace horizon bounds energy integration"
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 193089.43089430896,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 6910.569105691044,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 55925.29248463217,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -53425.29248463217,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 503327.6323616895,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -473327.6323616895,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_10",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_20",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_30",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_50",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_75",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_100",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_150",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_200",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_300",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_500",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_5",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_10",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_15",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_20",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_25",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_30",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_40",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_50",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_75",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_100",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_150",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_200",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_front_50_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_tail_25_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ],
+      "diagnostics": {
+        "method": "calculator",
+        "trace_available": false,
+        "crest_is_efficiency_assumption": true
+      },
+      "hardware_feasible": false
+    },
+    "correction": {
+      "corrected_constraint_checks": [],
+      "model_version": "residual-tabpfn-v2-diagnostic-v1",
+      "support": {
+        "status": "supported_diagnostic",
+        "reasons": [],
+        "joint_domain_validated": false,
+        "lab_validated": false
+      },
+      "features": {
+        "N": 9,
+        "U_charge_V": 193089.43089430896,
+        "Rf_stage_actual_ohm": 50.0,
+        "Rt_stage_actual_ohm": 25.0,
+        "C_object_F": 8.5e-10,
+        "C_divider_F": 5e-10,
+        "C_stray_F": 1.5e-10,
+        "L_effective_H": 1.85e-05,
+        "C_generator_F": 3.3333333333333335e-07,
+        "C_load_effective_F": 1.5000000000000002e-09,
+        "R_front_effective_ohm": 450.0,
+        "R_tail_effective_ohm": 225.0,
+        "physics_front_s": 1.2100299583068183e-06,
+        "physics_tail_s": 5.2208887499999997e-05,
+        "physics_crest_V": 1425000.0,
+        "expected_voltage_efficiency": 0.82
+      },
+      "input_effects_not_modelled": [
+        "exact wiring",
+        "generator topology measurement",
+        "overshoot",
+        "environment",
+        "per-resistor heat"
+      ],
+      "hardware_feasible": false,
+      "physics_constraints": [
+        {
+          "constraint_id": "HW_STAGES",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "N_min <= active stages <= N_max",
+          "observed_value": 9,
+          "limit_value": [
+            1,
+            15
+          ],
+          "unit": null,
+          "margin": null,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_CHARGE",
+          "origin": "frontend_input",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 200000.0",
+          "observed_value": 193089.43089430896,
+          "limit_value": 200000.0,
+          "unit": "V",
+          "margin": 6910.569105691044,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_STAGE_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 2500",
+          "observed_value": 55925.29248463217,
+          "limit_value": 2500,
+          "unit": "J",
+          "margin": -53425.29248463217,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "HW_TOTAL_ENERGY",
+          "origin": "problem_statement_fallback",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "value <= 30000",
+          "observed_value": 503327.6323616895,
+          "limit_value": 30000,
+          "unit": "J",
+          "margin": -473327.6323616895,
+          "status": "fail",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_10",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_20",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_30",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_50",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_75",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_100",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_150",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_200",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_300",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_front_front_500",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_5",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_10",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_15",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_20",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_25",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 1,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 3.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_30",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_40",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_50",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_75",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_100",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_150",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "STOCK_tail_tail_200",
+          "origin": "request_inventory",
+          "kind": "hard",
+          "enforced_by": [
+            "assembly",
+            "physics"
+          ],
+          "rule": "Independent role per-type per-stage/global quantity cap",
+          "observed_value": 0,
+          "limit_value": 4,
+          "unit": null,
+          "margin": 4.0,
+          "status": "pass",
+          "reason_code": null
+        },
+        {
+          "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Registered topology/branch states have equipment evidence",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_circuit_evidence"
+        },
+        {
+          "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+          "origin": "equipment_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "Internal transient/reversal rating verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "lumped_model_cannot_certify_internal_stresses"
+        },
+        {
+          "constraint_id": "RESISTOR_front_front_50_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        },
+        {
+          "constraint_id": "RESISTOR_tail_tail_25_1",
+          "origin": "component_rating_evidence",
+          "kind": "hard",
+          "enforced_by": [
+            "physics"
+          ],
+          "rule": "All applicable per-component ratings verified",
+          "observed_value": null,
+          "limit_value": null,
+          "unit": null,
+          "margin": null,
+          "status": "unknown",
+          "reason_code": "unresolved_component_rating"
+        }
+      ],
+      "residuals": {
+        "residual_front_s": -2.796609188964504e-09,
+        "residual_tail_s": -2.222135648525009e-07,
+        "residual_crest_V": 5213.553698022368
+      },
+      "corrected_metrics": {
+        "front_s": 1.2072333491178539e-06,
+        "tail_s": 5.1986673935147495e-05,
+        "crest_V": 1430213.5536980224
+      },
+      "status": "predicted_diagnostic",
+      "lab_validated": false,
+      "explanation_status": "available_on_request"
+    },
+    "eligible": false,
+    "evaluation_mode": "workbook_reference",
+    "candidate_id": "7c04e35262549b0cb1a21d4c1978b2bd",
+    "candidate": {
+      "candidate_id": "7c04e35262549b0cb1a21d4c1978b2bd",
+      "context_hash": "d1cfe042353a068b29001482740f1b72dd3bf82d6a96a65f63035475ca1042c8",
+      "proposal": {
+        "N": 9,
+        "Rf_required_ohm": 50.0,
+        "Rt_required_ohm": 25.0,
+        "proposal_index": 0,
+        "source": "workbook_round5"
+      },
+      "N": 9,
+      "U_charge_V": 193089.43089430896,
+      "front": {
+        "assembly_id": "644963c47d797a3110f6178c",
+        "role": "front",
+        "equivalent_ohm": 50.0,
+        "nominal_fraction": {
+          "numerator": 50,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "front_50",
+          "ohm": 50.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "front/front_50-1",
+            "type_id": "front_50",
+            "nominal_ohm": 50.0,
+            "node_a": "in",
+            "node_b": "out"
+          }
+        ],
+        "type_counts": {
+          "front_50": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail": {
+        "assembly_id": "6f11ce4dcd68bab3fd4960ff",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "tail_25",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "tail/tail_25-1",
+            "type_id": "tail_25",
+            "nominal_ohm": 25.0,
+            "node_a": "in",
+            "node_b": "out"
+          }
+        ],
+        "type_counts": {
+          "tail_25": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      }
+    },
+    "objective": {
+      "errors": {
+        "front": {
+          "unit": "s",
+          "target": 1.2e-06,
+          "predicted": 1.2072333491178539e-06,
+          "signed_delta": 7.233349117853906e-09,
+          "absolute_delta": 7.233349117853906e-09,
+          "percentage_delta": 0.6027790931544922,
+          "absolute_percentage_delta": 0.6027790931544922,
+          "allowed_delta": 3.6e-07,
+          "lower_limit": 8.4e-07,
+          "upper_limit": 1.5599999999999999e-06,
+          "normalised_error": 0.020092636438483073,
+          "within_tolerance": true
+        },
+        "tail": {
+          "unit": "s",
+          "target": 5e-05,
+          "predicted": 5.1986673935147495e-05,
+          "signed_delta": 1.986673935147493e-06,
+          "absolute_delta": 1.986673935147493e-06,
+          "percentage_delta": 3.973347870294986,
+          "absolute_percentage_delta": 3.973347870294986,
+          "allowed_delta": 1e-05,
+          "lower_limit": 4e-05,
+          "upper_limit": 6e-05,
+          "normalised_error": 0.19866739351474927,
+          "within_tolerance": true
+        },
+        "crest": {
+          "unit": "V",
+          "target": 1425000.0,
+          "predicted": 1430213.5536980224,
+          "signed_delta": 5213.553698022384,
+          "absolute_delta": 5213.553698022384,
+          "percentage_delta": 0.3658634174050796,
+          "absolute_percentage_delta": 0.3658634174050796,
+          "allowed_delta": 42750.0,
+          "lower_limit": 1382250.0,
+          "upper_limit": 1467750.0,
+          "normalised_error": 0.12195447246835986,
+          "within_tolerance": true
+        }
+      },
+      "S": 0.19866739351474927,
+      "J": 0.1135715008071974,
+      "cost": 0.16574021666862396,
+      "waveform_within_tolerance": true
+    },
+    "performance": {
+      "schema_version": "1.0",
+      "candidate_id": "7c04e35262549b0cb1a21d4c1978b2bd",
+      "context_hash": "d1cfe042353a068b29001482740f1b72dd3bf82d6a96a65f63035475ca1042c8",
+      "target": {
+        "front_s": 1.2e-06,
+        "tail_s": 5e-05,
+        "crest_V": 1425000.0
+      },
+      "physics": {
+        "metrics": {
+          "front_s": 1.2100299583068183e-06,
+          "tail_s": 5.2208887499999997e-05,
+          "crest_V": 1425000.0
+        },
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 1.2100299583068183e-06,
+            "signed_delta": 1.002995830681836e-08,
+            "absolute_delta": 1.002995830681836e-08,
+            "percentage_delta": 0.83582985890153,
+            "absolute_percentage_delta": 0.83582985890153,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "normalised_error": 0.027860995296717667,
+            "within_tolerance": true
+          },
+          "tail": {
+            "unit": "s",
+            "target": 5e-05,
+            "predicted": 5.2208887499999997e-05,
+            "signed_delta": 2.208887499999994e-06,
+            "absolute_delta": 2.208887499999994e-06,
+            "percentage_delta": 4.417774999999988,
+            "absolute_percentage_delta": 4.417774999999988,
+            "allowed_delta": 1e-05,
+            "lower_limit": 4e-05,
+            "upper_limit": 6e-05,
+            "normalised_error": 0.2208887499999994,
+            "within_tolerance": true
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1425000.0,
+            "predicted": 1425000.0,
+            "signed_delta": 0.0,
+            "absolute_delta": 0.0,
+            "percentage_delta": 0.0,
+            "absolute_percentage_delta": 0.0,
+            "allowed_delta": 42750.0,
+            "lower_limit": 1382250.0,
+            "upper_limit": 1467750.0,
+            "normalised_error": 0.0,
+            "within_tolerance": true
+          }
+        },
+        "S": 0.2208887499999994,
+        "J": 0.08291658176557236,
+        "cost": 0.18092455188894116,
+        "waveform_within_tolerance": true
+      },
+      "corrected": {
+        "metrics": {
+          "front_s": 1.2072333491178539e-06,
+          "tail_s": 5.1986673935147495e-05,
+          "crest_V": 1430213.5536980224
+        },
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 1.2072333491178539e-06,
+            "signed_delta": 7.233349117853906e-09,
+            "absolute_delta": 7.233349117853906e-09,
+            "percentage_delta": 0.6027790931544922,
+            "absolute_percentage_delta": 0.6027790931544922,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "normalised_error": 0.020092636438483073,
+            "within_tolerance": true
+          },
+          "tail": {
+            "unit": "s",
+            "target": 5e-05,
+            "predicted": 5.1986673935147495e-05,
+            "signed_delta": 1.986673935147493e-06,
+            "absolute_delta": 1.986673935147493e-06,
+            "percentage_delta": 3.973347870294986,
+            "absolute_percentage_delta": 3.973347870294986,
+            "allowed_delta": 1e-05,
+            "lower_limit": 4e-05,
+            "upper_limit": 6e-05,
+            "normalised_error": 0.19866739351474927,
+            "within_tolerance": true
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1425000.0,
+            "predicted": 1430213.5536980224,
+            "signed_delta": 5213.553698022384,
+            "absolute_delta": 5213.553698022384,
+            "percentage_delta": 0.3658634174050796,
+            "absolute_percentage_delta": 0.3658634174050796,
+            "allowed_delta": 42750.0,
+            "lower_limit": 1382250.0,
+            "upper_limit": 1467750.0,
+            "normalised_error": 0.12195447246835986,
+            "within_tolerance": true
+          }
+        },
+        "S": 0.19866739351474927,
+        "J": 0.1135715008071974,
+        "cost": 0.16574021666862396,
+        "waveform_within_tolerance": true
+      },
+      "correction_status": "predicted_diagnostic",
+      "efficiency": {
+        "definition": "crest_V / (N * U_charge_V); voltage transfer, not energy efficiency",
+        "initial_erected_voltage_V": 1737804.8780487806,
+        "expected": 0.82,
+        "requested_minimum": null,
+        "physics_voltage_transfer": 0.82,
+        "corrected_voltage_transfer": 0.8230000800227216,
+        "stage_voltage_utilisation": 0.9654471544715448
+      },
+      "stored_energy": {
+        "stage_J": 55925.29248463217,
+        "stage_limit_J": 2500,
+        "stage_utilisation": 22.370116993852868,
+        "total_J": 503327.6323616895,
+        "total_limit_J": 30000,
+        "total_utilisation": 16.77758774538965
+      },
+      "hardware": {
+        "feasible": false,
+        "constraint_counts": {
+          "pass": 24,
+          "fail": 2,
+          "unknown": 4,
+          "not_applicable": 0
+        },
+        "failed_constraint_ids": [
+          "HW_STAGE_ENERGY",
+          "HW_TOTAL_ENERGY"
+        ],
+        "unknown_constraint_ids": [
+          "CIRCUIT_TOPOLOGY_VERIFIED",
+          "CAPACITOR_TRANSIENT_RATING",
+          "RESISTOR_front_front_50_1",
+          "RESISTOR_tail_tail_25_1"
+        ],
+        "corrected_constraint_counts": {
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0
+        }
+      },
+      "model_quality": {
+        "status": "available",
+        "model_version": "residual-tabpfn-v2-diagnostic-v1",
+        "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+        "category": "Lightning",
+        "split": "Validation",
+        "dataset_origin": "synthetic_workbook",
+        "train_count": 700,
+        "validation_count": 150,
+        "hidden_test_evaluated": false,
+        "lab_validated": false,
+        "metrics": {
+          "residual_front_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 6.513955473413656e-09,
+            "validation_RMSE": 7.407555187557085e-09,
+            "validation_bias": 5.07431277513896e-10,
+            "validation_MAE_over_train_residual_std": 0.6650287981681047,
+            "physics_only_MAE": 8.240545740843459e-09,
+            "mean_residual_baseline_MAE": 8.207405713891005e-09,
+            "linear_residual_baseline_MAE": 6.518917806856653e-09
+          },
+          "residual_tail_s": {
+            "unit": "s",
+            "validation_count": 150,
+            "validation_MAE": 5.831505458801432e-07,
+            "validation_RMSE": 6.692771396372145e-07,
+            "validation_bias": -1.750495252191678e-08,
+            "validation_MAE_over_train_residual_std": 0.7245254708983543,
+            "physics_only_MAE": 6.87652498761937e-07,
+            "mean_residual_baseline_MAE": 6.870463165712267e-07,
+            "linear_residual_baseline_MAE": 5.802299220732198e-07
+          },
+          "residual_crest_V": {
+            "unit": "V",
+            "validation_count": 150,
+            "validation_MAE": 4485.187180661017,
+            "validation_RMSE": 5193.163604605983,
+            "validation_bias": -366.26550849785013,
+            "validation_MAE_over_train_residual_std": 0.4114703557722134,
+            "physics_only_MAE": 9749.734449355396,
+            "mean_residual_baseline_MAE": 9735.026793715737,
+            "linear_residual_baseline_MAE": 4745.46329735606
+          }
+        },
+        "error_definition": "prediction_minus_observation",
+        "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+      },
+      "observed_accuracy": {
+        "status": "unavailable",
+        "reason": "A matched measured result is required to assess this input's accuracy",
+        "errors": null,
+        "provenance": null
+      },
+      "runtime": {
+        "clock": "monotonic_wall_clock",
+        "scope": "independent_workbook_reference",
+        "stage_seconds": {},
+        "total_seconds": 5.502934791031294,
+        "cache_hit": false,
+        "transport_time_included": false
+      },
+      "interpretation": "Computed values are predictions. Target mismatch is not model accuracy; dataset validation does not establish this setup's measured result."
+    }
+  },
+  "context": {
+    "context_id": "d1cfe042353a068b29001482",
+    "context_hash": "d1cfe042353a068b29001482740f1b72dd3bf82d6a96a65f63035475ca1042c8",
+    "request": {
+      "schema_version": "1.0",
+      "purpose": "diagnostic",
+      "equipment_profile_id": "workbook_benchmark_v1",
+      "equipment_inputs": {
+        "N_max": 15,
+        "U_stage_max_V": 200000.0,
+        "C_stage_F": 3e-06
+      },
+      "inventory": {
+        "source": "inline",
+        "front": [
+          {
+            "type_id": "front_10",
+            "nominal_ohm": 10.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "front_20",
+            "nominal_ohm": 20.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "front_30",
+            "nominal_ohm": 30.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "front_50",
+            "nominal_ohm": 50.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "front_75",
+            "nominal_ohm": 75.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "front_100",
+            "nominal_ohm": 100.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "front_150",
+            "nominal_ohm": 150.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "front_200",
+            "nominal_ohm": 200.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "front_300",
+            "nominal_ohm": 300.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "front_500",
+            "nominal_ohm": 500.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          }
+        ],
+        "tail": [
+          {
+            "type_id": "tail_5",
+            "nominal_ohm": 5.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_10",
+            "nominal_ohm": 10.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_15",
+            "nominal_ohm": 15.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_20",
+            "nominal_ohm": 20.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_25",
+            "nominal_ohm": 25.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_30",
+            "nominal_ohm": 30.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_40",
+            "nominal_ohm": 40.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_50",
+            "nominal_ohm": 50.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_75",
+            "nominal_ohm": 75.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_100",
+            "nominal_ohm": 100.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_150",
+            "nominal_ohm": 150.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          },
+          {
+            "type_id": "tail_200",
+            "nominal_ohm": 200.0,
+            "available_quantity": 4,
+            "quantity_scope": "per_stage",
+            "tolerance_fraction": 0.0,
+            "approved": false,
+            "ratings": {
+              "pulse_voltage_limit_V": null,
+              "pulse_current_limit_A": null,
+              "pulse_energy_limit_J": null,
+              "average_power_limit_W": null,
+              "temperature_limit_K": null,
+              "R_theta_K_per_W": null,
+              "C_theta_J_per_K": null,
+              "evidence_id": null
+            }
+          }
+        ]
+      },
+      "impulse_type": null,
+      "impulse_profile_id": "lightning_project_v1",
+      "system_max_voltage_V": 400000.0,
+      "target": {
+        "crest_V": 1425000.0,
+        "front_s": null,
+        "tail_s": null,
+        "tolerances": null
+      },
+      "load": {
+        "model_id": "capacitive_v1",
+        "C_F": 8.5e-10,
+        "R_ohm": null,
+        "L_H": null,
+        "topology": "shunt_at_test_terminals",
+        "terminal_connections": {}
+      },
+      "setup": {
+        "basic_C_F": 0.0,
+        "shot_rate_per_minute": null,
+        "divider_C_F": 5e-10,
+        "stray_C_F": 1.5e-10,
+        "stray_L_H": 1.85e-05,
+        "basic_capacitance_inclusion": "benchmark_omitted",
+        "external_front_series_ohm": null,
+        "auxiliary_states": {},
+        "circuit_evidence_id": null,
+        "leads": {},
+        "return_path": {},
+        "geometry": {}
+      },
+      "environment": {
+        "availability": "not_recorded",
+        "values": {}
+      },
+      "expected_voltage_efficiency": 0.82,
+      "minimum_voltage_efficiency": null,
+      "charging_policy": {
+        "kind": "seed_then_fixed",
+        "U_charge_V": null
+      },
+      "dp_tolerances": {
+        "front_relative": 1e-12,
+        "tail_relative": 1e-12
+      },
+      "search": {
+        "max_proposals": 4,
+        "max_forward_evaluations": 100,
+        "max_ml_evaluations": 100,
+        "dp_max_parts": 1,
+        "dp_max_states": 100000,
+        "dp_seconds": 10.0,
+        "cp_sat_seconds": 2.0,
+        "cp_pair_retries": 5,
+        "repeat_window": 10,
+        "archive_stagnation_window": 20,
+        "wall_time_seconds": 300.0
+      },
+      "objective": {
+        "policy": "worst_normalised_then_weighted",
+        "weights": {
+          "front": 1.0,
+          "tail": 1.0,
+          "crest": 1.0
+        },
+        "secondary_preference": "balanced"
+      },
+      "physics_mode": "calculator",
+      "model_version": "residual-tabpfn-v2-diagnostic-v1",
+      "seed": 42
+    },
+    "model_bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+    "hardware": {
+      "profile_id": "workbook_benchmark_v1",
+      "total_energy_max_J": 30000,
+      "stage_energy_max_J": 2500,
+      "C_stage_F": 3e-06,
+      "N_min": 1,
+      "N_max": 15,
+      "U_stage_max_V": 200000.0,
+      "C_basic_F": 0.0,
+      "per_type_stage_cap": 4,
+      "topology": "generator_side_tail_series_v1",
+      "physical_verified": false,
+      "constants": {
+        "k_front": 1.67,
+        "k_LC": 2.5,
+        "k_tail": 0.693
+      },
+      "source_data": {
+        "retained_problem_statement_parameters": {
+          "total_energy_max_J": 30000,
+          "stage_energy_max_J": 2500,
+          "C_stage_F": 1.25e-07
+        }
+      }
+    },
+    "value_sources": {
+      "profile_id": {
+        "source": "project_model_policy",
+        "value": "workbook_benchmark_v1"
+      },
+      "total_energy_max_J": {
+        "source": "problem_statement_fallback",
+        "value": 30000
+      },
+      "stage_energy_max_J": {
+        "source": "problem_statement_fallback",
+        "value": 2500
+      },
+      "C_stage_F": {
+        "source": "frontend_input",
+        "input_field": "equipment_inputs.C_stage_F",
+        "workbook_cell": "Hybrid Calculator!B15",
+        "value": 3e-06,
+        "fallback_value": 1.25e-07,
+        "fallback_applied": false
+      },
+      "N_min": {
+        "source": "project_model_policy",
+        "value": 1
+      },
+      "N_max": {
+        "source": "frontend_input",
+        "input_field": "equipment_inputs.N_max",
+        "workbook_cell": "Hybrid Calculator!B13",
+        "value": 15,
+        "fallback_value": 15,
+        "fallback_applied": false
+      },
+      "U_stage_max_V": {
+        "source": "frontend_input",
+        "input_field": "equipment_inputs.U_stage_max_V",
+        "workbook_cell": "Hybrid Calculator!B14",
+        "value": 200000.0,
+        "fallback_value": 200000,
+        "fallback_applied": false
+      },
+      "C_basic_F": {
+        "source": "frontend_input",
+        "input_field": "setup.basic_C_F",
+        "value": 0.0
+      },
+      "per_type_stage_cap": {
+        "source": "project_model_policy",
+        "value": 4
+      },
+      "topology": {
+        "source": "project_model_policy",
+        "value": "generator_side_tail_series_v1"
+      },
+      "physical_verified": {
+        "source": "project_model_policy",
+        "value": false
+      },
+      "constants": {
+        "source": "project_model_policy",
+        "value": {
+          "k_front": 1.67,
+          "k_LC": 2.5,
+          "k_tail": 0.693
+        }
+      }
+    },
+    "source_precedence": [
+      "frontend_input",
+      "workbook_example_default",
+      "retained_problem_statement_fallback"
+    ],
+    "input_sources": {
+      "system_max_voltage_V": {
+        "cell": "B5",
+        "unit": "V",
+        "workbook_to_SI": 1000,
+        "sheet": "Hybrid Calculator",
+        "value": 400000.0,
+        "source": "frontend_input"
+      },
+      "impulse_type": {
+        "cell": "B6",
+        "unit": "category",
+        "workbook_to_SI": null,
+        "sheet": "Hybrid Calculator",
+        "value": "Lightning",
+        "source": "selected_impulse_profile"
+      },
+      "target.crest_V": {
+        "cell": "B7",
+        "unit": "V",
+        "workbook_to_SI": 1000,
+        "sheet": "Hybrid Calculator",
+        "value": 1425000.0,
+        "source": "frontend_input"
+      },
+      "load.C_F": {
+        "cell": "B8",
+        "unit": "F",
+        "workbook_to_SI": 1e-12,
+        "sheet": "Hybrid Calculator",
+        "value": 8.5e-10,
+        "source": "frontend_input"
+      },
+      "setup.divider_C_F": {
+        "cell": "B9",
+        "unit": "F",
+        "workbook_to_SI": 1e-12,
+        "sheet": "Hybrid Calculator",
+        "value": 5e-10,
+        "source": "frontend_input"
+      },
+      "setup.stray_C_F": {
+        "cell": "B10",
+        "unit": "F",
+        "workbook_to_SI": 1e-12,
+        "sheet": "Hybrid Calculator",
+        "value": 1.5e-10,
+        "source": "frontend_input"
+      },
+      "setup.stray_L_H": {
+        "cell": "B11",
+        "unit": "H",
+        "workbook_to_SI": 1e-06,
+        "sheet": "Hybrid Calculator",
+        "value": 1.85e-05,
+        "source": "frontend_input"
+      },
+      "expected_voltage_efficiency": {
+        "cell": "B12",
+        "unit": "fraction",
+        "workbook_to_SI": 1,
+        "sheet": "Hybrid Calculator",
+        "value": 0.82,
+        "source": "frontend_input"
+      },
+      "equipment_inputs.N_max": {
+        "cell": "B13",
+        "unit": "stages",
+        "workbook_to_SI": 1,
+        "sheet": "Hybrid Calculator",
+        "value": 15,
+        "source": "frontend_input"
+      },
+      "equipment_inputs.U_stage_max_V": {
+        "cell": "B14",
+        "unit": "V",
+        "workbook_to_SI": 1000,
+        "sheet": "Hybrid Calculator",
+        "value": 200000.0,
+        "source": "frontend_input"
+      },
+      "equipment_inputs.C_stage_F": {
+        "cell": "B15",
+        "unit": "F",
+        "workbook_to_SI": 1e-06,
+        "sheet": "Hybrid Calculator",
+        "value": 3e-06,
+        "source": "frontend_input"
+      }
+    },
+    "test": {
+      "category": "Lightning",
+      "front_s": 1.2e-06,
+      "tail_s": 5e-05,
+      "tolerances": {
+        "front": 0.3,
+        "tail": 0.2,
+        "crest": 0.03
+      },
+      "timing": "virtual_origin_lightning",
+      "standard_verified": false
+    },
+    "target_sources": {
+      "front_s": "impulse_profile_default",
+      "tail_s": "impulse_profile_default",
+      "tolerances": "impulse_profile_default"
+    },
+    "inventory": {
+      "source": "inline",
+      "front": [
+        {
+          "type_id": "front_10",
+          "nominal_ohm": 10.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "front_20",
+          "nominal_ohm": 20.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "front_30",
+          "nominal_ohm": 30.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "front_50",
+          "nominal_ohm": 50.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "front_75",
+          "nominal_ohm": 75.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "front_100",
+          "nominal_ohm": 100.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "front_150",
+          "nominal_ohm": 150.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "front_200",
+          "nominal_ohm": 200.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "front_300",
+          "nominal_ohm": 300.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "front_500",
+          "nominal_ohm": 500.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        }
+      ],
+      "tail": [
+        {
+          "type_id": "tail_5",
+          "nominal_ohm": 5.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_10",
+          "nominal_ohm": 10.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_15",
+          "nominal_ohm": 15.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_20",
+          "nominal_ohm": 20.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_25",
+          "nominal_ohm": 25.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_30",
+          "nominal_ohm": 30.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_40",
+          "nominal_ohm": 40.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_50",
+          "nominal_ohm": 50.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_75",
+          "nominal_ohm": 75.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_100",
+          "nominal_ohm": 100.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_150",
+          "nominal_ohm": 150.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        },
+        {
+          "type_id": "tail_200",
+          "nominal_ohm": 200.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        }
+      ]
+    },
+    "inventory_hash": "0b61b7842a8538c31aef77e1210da14d54659177c31ce5307cdaabee66e930f7",
+    "U_charge_V": 193089.43089430896,
+    "seed_N": 9,
+    "charge_policy_derivation": {
+      "policy": "seed_then_fixed",
+      "seed_N": 9,
+      "selected_V": 193089.43089430896
+    },
+    "unknowns": [
+      "equipment circuit approval",
+      "component ratings unless provided",
+      "model laboratory validation"
+    ],
+    "stock_by_N": {
+      "1": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "2": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "3": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "4": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "5": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "6": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "7": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "8": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "9": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "10": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "11": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "12": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "13": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "14": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      },
+      "15": {
+        "front": {
+          "type_count": 10,
+          "effective_quantities": {
+            "front_10": 4,
+            "front_20": 4,
+            "front_30": 4,
+            "front_50": 4,
+            "front_75": 4,
+            "front_100": 4,
+            "front_150": 4,
+            "front_200": 4,
+            "front_300": 4,
+            "front_500": 4
+          },
+          "available_parts": 40,
+          "min_ohm": 1.0259917920656634,
+          "max_ohm": 5740.0,
+          "count_vectors": 9765625
+        },
+        "tail": {
+          "type_count": 12,
+          "effective_quantities": {
+            "tail_5": 4,
+            "tail_10": 4,
+            "tail_15": 4,
+            "tail_20": 4,
+            "tail_25": 4,
+            "tail_30": 4,
+            "tail_40": 4,
+            "tail_50": 4,
+            "tail_75": 4,
+            "tail_100": 4,
+            "tail_150": 4,
+            "tail_200": 4
+          },
+          "available_parts": 48,
+          "min_ohm": 0.43859649122807015,
+          "max_ohm": 2880.0,
+          "count_vectors": 244140625
+        }
+      }
+    }
+  },
+  "inventory_check": {
+    "status": "buildable",
+    "solver": {
+      "solver": "OR-Tools CP-SAT",
+      "status": "OPTIMAL",
+      "primary_status": "OPTIMAL",
+      "quantity_tiebreak_status": "OPTIMAL",
+      "lexicographic_optimal": true,
+      "primary_bound": 0.0,
+      "integer_scale": 100000000,
+      "front": {
+        "status": "completed",
+        "canonical_recipes": 10,
+        "count_vectors": 10,
+        "max_parts": 1,
+        "elapsed_s": 5.7582976296544075e-05,
+        "scope": "bounded canonical series-parallel recipes",
+        "cache_hit": false,
+        "option_count": 1,
+        "selected_pool_count": 1,
+        "pool_truncated": false
+      },
+      "tail": {
+        "status": "completed",
+        "canonical_recipes": 12,
+        "count_vectors": 12,
+        "max_parts": 1,
+        "elapsed_s": 3.6415993236005306e-05,
+        "scope": "bounded canonical series-parallel recipes",
+        "cache_hit": false,
+        "option_count": 1,
+        "selected_pool_count": 1,
+        "pool_truncated": false
+      },
+      "guarantee": "Finite option pool; integer-scaled mismatch, quantity tie-break; exact tolerance rechecked"
+    }
+  },
+  "policy": "Calculator sizing, five-ohm rounding and one physical resistor per role; diagnostic correction never waives hard constraints"
+}

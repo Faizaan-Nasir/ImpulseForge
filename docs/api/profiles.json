@@ -1,0 +1,153 @@
+{
+  "hardware": {
+    "profile_id": "haefely_pdf_v1",
+    "total_energy_max_J": 30000,
+    "stage_energy_max_J": 2500,
+    "C_stage_F": 1.25e-07,
+    "N_min": 1,
+    "N_max": 15,
+    "U_stage_max_V": 200000,
+    "C_basic_F": 0,
+    "per_type_stage_cap": 4,
+    "topology": "generator_side_tail_series_v1",
+    "physical_verified": false,
+    "constants": {
+      "k_front": 1.67,
+      "k_LC": 2.5,
+      "k_tail": 0.693
+    },
+    "source_data": {
+      "retained_problem_statement_parameters": {
+        "total_energy_max_J": 30000,
+        "stage_energy_max_J": 2500,
+        "C_stage_F": 1.25e-07
+      }
+    }
+  },
+  "benchmark": {
+    "profile_id": "workbook_benchmark_v1",
+    "total_energy_max_J": 30000,
+    "stage_energy_max_J": 2500,
+    "C_stage_F": 1.25e-07,
+    "N_min": 1,
+    "N_max": 15,
+    "U_stage_max_V": 200000,
+    "C_basic_F": 0,
+    "per_type_stage_cap": 4,
+    "topology": "generator_side_tail_series_v1",
+    "physical_verified": false,
+    "constants": {
+      "k_front": 1.67,
+      "k_LC": 2.5,
+      "k_tail": 0.693
+    },
+    "source_data": {
+      "retained_problem_statement_parameters": {
+        "total_energy_max_J": 30000,
+        "stage_energy_max_J": 2500,
+        "C_stage_F": 1.25e-07
+      }
+    }
+  },
+  "tests": {
+    "lightning_project_v1": {
+      "category": "Lightning",
+      "front_s": 1.2e-06,
+      "tail_s": 5e-05,
+      "tolerances": {
+        "front": 0.3,
+        "tail": 0.2,
+        "crest": 0.03
+      },
+      "timing": "virtual_origin_lightning",
+      "standard_verified": false
+    },
+    "switching_workbook_legacy_v1": {
+      "category": "Switching",
+      "front_s": 0.00025,
+      "tail_s": 0.0025,
+      "tolerances": {
+        "front": 0.2,
+        "tail": 0.2,
+        "crest": 0.03
+      },
+      "timing": "legacy_peak_true_origin",
+      "standard_verified": false
+    },
+    "switching_legacy_extended_tail_v1": {
+      "category": "Switching",
+      "front_s": 0.00025,
+      "tail_s": 0.0025,
+      "tolerances": {
+        "front": 0.2,
+        "tail": 0.6,
+        "crest": 0.03
+      },
+      "timing": "legacy_peak_true_origin",
+      "standard_verified": false
+    }
+  },
+  "profile_role": "fallback templates; explicit equipment_inputs take precedence",
+  "workbook_input_fields": {
+    "system_max_voltage_V": {
+      "cell": "B5",
+      "unit": "V",
+      "workbook_to_SI": 1000
+    },
+    "impulse_type": {
+      "cell": "B6",
+      "unit": "category",
+      "workbook_to_SI": null
+    },
+    "target.crest_V": {
+      "cell": "B7",
+      "unit": "V",
+      "workbook_to_SI": 1000
+    },
+    "load.C_F": {
+      "cell": "B8",
+      "unit": "F",
+      "workbook_to_SI": 1e-12
+    },
+    "setup.divider_C_F": {
+      "cell": "B9",
+      "unit": "F",
+      "workbook_to_SI": 1e-12
+    },
+    "setup.stray_C_F": {
+      "cell": "B10",
+      "unit": "F",
+      "workbook_to_SI": 1e-12
+    },
+    "setup.stray_L_H": {
+      "cell": "B11",
+      "unit": "H",
+      "workbook_to_SI": 1e-06
+    },
+    "expected_voltage_efficiency": {
+      "cell": "B12",
+      "unit": "fraction",
+      "workbook_to_SI": 1
+    },
+    "equipment_inputs.N_max": {
+      "cell": "B13",
+      "unit": "stages",
+      "workbook_to_SI": 1
+    },
+    "equipment_inputs.U_stage_max_V": {
+      "cell": "B14",
+      "unit": "V",
+      "workbook_to_SI": 1000
+    },
+    "equipment_inputs.C_stage_F": {
+      "cell": "B15",
+      "unit": "F",
+      "workbook_to_SI": 1e-06
+    }
+  },
+  "retained_document_parameters": {
+    "total_energy_max_J": 30000,
+    "stage_energy_max_J": 2500,
+    "C_stage_F": 1.25e-07
+  }
+}

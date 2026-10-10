@@ -1,0 +1,50 @@
+{
+  "target_ohms": 49.52213922066368,
+  "equivalent_ohms": 49.523809523809526,
+  "exact_equivalent_ohms": "1040/21",
+  "signed_error_ohms": 0.0016703031458438096,
+  "absolute_error_percent": 0.0033728412627757735,
+  "parts_used": 4,
+  "assembly": "((100 + 30) || (50 + 30))",
+  "notation": "+ means series; || means parallel; leaves are ohms",
+  "components": [
+    {
+      "ohms": 30.0,
+      "quantity": 2
+    },
+    {
+      "ohms": 50.0,
+      "quantity": 1
+    },
+    {
+      "ohms": 100.0,
+      "quantity": 1
+    }
+  ],
+  "distinct_resistances_up_to_limit": 10565,
+  "statistics_by_part_count": {
+    "1": {
+      "inventory_count_states": 10,
+      "state_resistance_entries": 10,
+      "distinct_resistances_using_exactly_this_many_parts": 10
+    },
+    "2": {
+      "inventory_count_states": 55,
+      "state_resistance_entries": 110,
+      "distinct_resistances_using_exactly_this_many_parts": 85
+    },
+    "3": {
+      "inventory_count_states": 220,
+      "state_resistance_entries": 1540,
+      "distinct_resistances_using_exactly_this_many_parts": 859
+    },
+    "4": {
+      "inventory_count_states": 715,
+      "state_resistance_entries": 25398,
+      "distinct_resistances_using_exactly_this_many_parts": 10565
+    }
+  },
+  "guarantee": "Closest nominal resistance across all series-parallel networks within supplied inventory quantities and max_parts. Equal-error ties prefer fewer parts, then a deterministic witness.",
+  "hardware_status": "Not checked: permitted wiring, ratings and parasitics.",
+  "elapsed_seconds": 0.0921919170068577
+}

@@ -1,0 +1,125 @@
+{
+  "run_id": "1cef127df5284596a02c2c626101d214",
+  "status": "completed_with_shortfall",
+  "stop_reason": "three_ml_waveforms_within_tolerance",
+  "ml_converged": true,
+  "counters": {
+    "proposals": 7,
+    "physics_evaluations": 5,
+    "ml_evaluations": 5,
+    "physics_predictions": 5,
+    "ml_predictions": 5,
+    "cache_hits": 0,
+    "unique_realised": 5
+  },
+  "returned_predictions": 3,
+  "returned_recommendations": 0,
+  "cases": [
+    {
+      "candidate_id": "a79f345fb1a8f01c7e67c11f93922a9e",
+      "N": 9,
+      "Rf_ohm": 49.523809523809526,
+      "Rt_ohm": 23.943661971830984,
+      "correction_status": "predicted_extrapolation",
+      "support": {
+        "status": "extrapolated_diagnostic",
+        "reasons": [
+          "feature_outside_training_envelope:Rt_stage_actual_ohm",
+          "feature_outside_training_envelope:physics_tail_s"
+        ],
+        "joint_domain_validated": false,
+        "lab_validated": false,
+        "prediction_trusted": false
+      },
+      "metrics": {
+        "front_s": 1.196619019884708e-06,
+        "tail_s": 4.9719612171093076e-05,
+        "crest_V": 1432547.3940640758
+      },
+      "S": 0.17654722956902408,
+      "origin": "residual_corrected",
+      "environment_effects": {
+        "status": "not_modelled",
+        "requested_conditions": {},
+        "reason": "Current synthetic training data has no environmental measurements or labels"
+      }
+    },
+    {
+      "candidate_id": "2e0886459ee7467c734db97cdbacb4d4",
+      "N": 9,
+      "Rf_ohm": 50.0,
+      "Rt_ohm": 25.0,
+      "correction_status": "predicted_diagnostic",
+      "support": {
+        "status": "supported_diagnostic",
+        "reasons": [],
+        "joint_domain_validated": false,
+        "lab_validated": false
+      },
+      "metrics": {
+        "front_s": 1.2072333491178539e-06,
+        "tail_s": 5.1986673935147495e-05,
+        "crest_V": 1430213.5536980224
+      },
+      "S": 0.19866739351474927,
+      "origin": "residual_corrected",
+      "environment_effects": {
+        "status": "not_modelled",
+        "requested_conditions": {},
+        "reason": "Current synthetic training data has no environmental measurements or labels"
+      }
+    },
+    {
+      "candidate_id": "e1662e01f78fe12c7a19345155e47487",
+      "N": 9,
+      "Rf_ohm": 47.04545454545455,
+      "Rt_ohm": 25.136612021857925,
+      "correction_status": "predicted_extrapolation",
+      "support": {
+        "status": "extrapolated_diagnostic",
+        "reasons": [
+          "feature_outside_training_envelope:Rt_stage_actual_ohm",
+          "feature_outside_training_envelope:physics_tail_s"
+        ],
+        "joint_domain_validated": false,
+        "lab_validated": false,
+        "prediction_trusted": false
+      },
+      "metrics": {
+        "front_s": 1.1512579388671902e-06,
+        "tail_s": 5.232556342439914e-05,
+        "crest_V": 1427308.9621306302
+      },
+      "S": 0.23255634243991383,
+      "origin": "residual_corrected",
+      "environment_effects": {
+        "status": "not_modelled",
+        "requested_conditions": {},
+        "reason": "Current synthetic training data has no environmental measurements or labels"
+      }
+    }
+  ],
+  "sequence": [
+    "physics",
+    "correction",
+    "evaluation",
+    "physics",
+    "correction",
+    "evaluation",
+    "physics",
+    "correction",
+    "evaluation",
+    "physics",
+    "correction",
+    "evaluation",
+    "physics",
+    "correction",
+    "evaluation"
+  ],
+  "waveform_origins": [
+    "target_reference",
+    "ml_parameter_reconstruction",
+    "ml_parameter_reconstruction",
+    "ml_parameter_reconstruction"
+  ]
+}

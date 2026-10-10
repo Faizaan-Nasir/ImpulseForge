@@ -1,0 +1,47 @@
+[project]
+name = "powernext-backend"
+version = "0.1.0"
+description = "Transparent physics, residual ML and constraint-aware Marx generator recommendations"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+ "pydantic>=2,<3",
+ "pydantic-settings>=2,<3",
+ "numpy",
+ "scipy",
+ "pandas",
+ "openpyxl",
+ "scikit-learn",
+ "tabpfn",
+ "torch",
+ "smac",
+ "ConfigSpace",
+ "ortools",
+ "shap",
+ "fastapi",
+ "uvicorn",
+ "sqlalchemy>=2,<3",
+ "google-genai>=2.29.0",
+]
+
+[dependency-groups]
+dev = ["pytest", "httpx", "jsonschema", "hypothesis", "ruff", "pyright", "matplotlib"]
+challenger = ["tabm"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["model: requires local TabPFN v2 checkpoint", "slow: extended numerical checks"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pyright]
+pythonVersion = "3.12"
+typeCheckingMode = "basic"
+include = ["src"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/powernext"]

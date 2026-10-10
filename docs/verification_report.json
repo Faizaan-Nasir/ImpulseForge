@@ -1,0 +1,178 @@
+{
+  "checked_at": "2026-10-11",
+  "software_tests": {
+    "status": "passed",
+    "passed": 107,
+    "skipped": 0,
+    "report": "verification/tests.txt"
+  },
+  "lint": {
+    "status": "passed",
+    "report": "verification/lint.txt"
+  },
+  "typecheck": {
+    "status": "passed",
+    "report": "verification/typecheck.txt"
+  },
+  "locked_environment": {
+    "status": "verified",
+    "resolved_packages": 141,
+    "installed_packages": 116
+  },
+  "live_http_and_worker": {
+    "status": "passed",
+    "report": "verification/live-api-report.json"
+  },
+  "actual_tabpfn_v2": {
+    "status": "fitted_and_validation_tested",
+    "regressors": 6,
+    "train_per_category": 700,
+    "validation_per_category": 150,
+    "hidden_test_evaluated": false,
+    "report": "model_fit_report.json"
+  },
+  "shap_additivity": {
+    "status": "passed",
+    "outputs": 3,
+    "report": "verification/model-explanation-report.json"
+  },
+  "reference_inventory_search": {
+    "front": {
+      "status": "completed",
+      "canonical_recipes": 27620,
+      "count_vectors": 1000,
+      "max_parts": 4,
+      "elapsed_s": 0.5723668340360746,
+      "scope": "bounded canonical series-parallel recipes"
+    },
+    "tail": {
+      "status": "completed",
+      "canonical_recipes": 55028,
+      "count_vectors": 1819,
+      "max_parts": 4,
+      "elapsed_s": 1.2158111670287326,
+      "scope": "bounded canonical series-parallel recipes"
+    }
+  },
+  "physical_equipment_validation": {
+    "status": "not_verified",
+    "reason": "Missing approved circuit, capacitor transient/reversal and component evidence; synthetic-only correction model"
+  },
+  "standards_validation": {
+    "status": "not_verified"
+  },
+  "frontend": {
+    "status": "implemented",
+    "stack": "React 19 / Tailwind 4 / Vite 7",
+    "tests_passed": 10,
+    "build": "passed",
+    "audit_vulnerabilities": 0,
+    "tests_report": "verification/frontend-tests.txt",
+    "preview": "verification/dashboard-preview.jpg",
+    "root_launcher": "verified: backend readiness precedes frontend startup; both local URLs returned HTTP 200",
+    "physics_row_reproduction": {
+      "status": "passed_in_firefox",
+      "report": "verification/firefox-physics-row-1.json",
+      "screenshot": "verification/firefox-physics-row-1.jpg"
+    },
+    "default_mode": "calculator",
+    "workbook_baseline": "verified from untouched defaults in Firefox"
+  },
+  "unresolved_evidence": "backend_implementation_status.md",
+  "stage_count_correction": {
+    "example_max": 15,
+    "minimum": 1,
+    "source": "Positive-integer model domain; workbook/frontend maximum",
+    "runtime_bound": "equipment_inputs.N_max; workbook example default if missing"
+  },
+  "frontend_input_precedence": {
+    "status": "passed",
+    "fields": [
+      "equipment_inputs.N_max",
+      "equipment_inputs.U_stage_max_V",
+      "equipment_inputs.C_stage_F"
+    ],
+    "all_workbook_inputs_mapped": 11,
+    "missing_values": "Workbook defaults for stage/voltage maxima; permitted capacitance fallback only",
+    "non_input_limits_retained": [
+      "total stored energy 30000 J",
+      "per-stage stored energy 2500 J"
+    ],
+    "live_http_report": "verification/live-api-report.json"
+  },
+  "retained_problem_statement_parameters": {
+    "total_energy_max_J": 30000,
+    "stage_energy_max_J": 2500,
+    "C_stage_F": 1.25e-07
+  },
+  "capacitance_policy": "Supplied frontend value wins; document value is fallback only (explicit user confirmation)",
+  "removed_document_enforcement": [
+    "stack voltage",
+    "crest voltage",
+    "minimum two stages",
+    "basic capacitance",
+    "shot rate",
+    "auxiliary resistor and installation values"
+  ],
+  "stored_energy_retries": {
+    "status": "passed",
+    "energy_limits_applied_to_all_profiles": true,
+    "resistor_pair_retries_skipped_for_energy_failure": true,
+    "failed_candidates_retained_for_api": true,
+    "repeated_candidates_use_cache": true
+  },
+  "performance_reporting": {
+    "status": "passed",
+    "scope": [
+      "setup target deviations and tolerances",
+      "model validation MAE/RMSE/bias and baseline comparisons",
+      "observed metrics comparison with provenance",
+      "backend stage/run/HTTP durations",
+      "per-candidate persistence, three candidates and cache reporting"
+    ],
+    "combined_endpoint": "POST /v1/performance/evaluate",
+    "live_report": "verification/live-api-report.json",
+    "model_report": "model_performance_report.json",
+    "individual_accuracy_requires_observation": true
+  },
+  "dashboard_api": {
+    "status": "passed",
+    "report": "verification/dashboard-api-report.json",
+    "diagnostic_records_cannot_change_eligibility": true,
+    "actual_tabpfn_correction": "verified",
+    "browser_flow": "calculation, three diagnostic cases, case switching, waveform modes/overlay, inventory tab, export preview"
+  },
+  "gemini": {
+    "model_environment_variable": "GEMINI_MODEL",
+    "key_environment_variable": "GEMINI_API_KEY",
+    "generation_cache_reference_validation_and_failure_tests": "passed with mocked provider",
+    "live_generation": "verified in default Firefox run",
+    "key_exposed_to_frontend": false
+  },
+  "diagnostic_optimisation": {
+    "status": "verified",
+    "report": "verification/workbook-default-reconciliation.json",
+    "support_checks": 21,
+    "corrected_candidates": 1,
+    "varying_feedback": true,
+    "energy_limits_unchanged": true,
+    "eligible_recommendations": 0,
+    "superseded_by": "required_ml_loop; prior report records the earlier support-gated behaviour"
+  },
+  "required_ml_loop": {
+    "status": "passed_live_api_and_firefox",
+    "report": "verification/ml-required-loop.json",
+    "physics_predictions": 5,
+    "ml_evaluations": 5,
+    "ml_predictions": 5,
+    "returned_predictions": 3,
+    "ml_converged": true,
+    "stop_reason": "three_ml_waveforms_within_tolerance",
+    "physics_only_objective_fallback": false,
+    "extrapolated_predictions": 2,
+    "environment_effects": "not_modelled; synthetic dataset contains no environmental measurements",
+    "eligible_recommendations": 0,
+    "firefox_report": "verification/firefox-ml-required-loop.json",
+    "screenshot": "verification/firefox-ml-required-loop.jpg"
+  }
+}

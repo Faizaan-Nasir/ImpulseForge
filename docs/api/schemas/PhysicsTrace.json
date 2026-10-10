@@ -1,0 +1,32 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "time_s": {
+      "items": {
+        "minimum": 0,
+        "type": "number"
+      },
+      "title": "Time S",
+      "type": "array"
+    },
+    "voltage_V": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Voltage V",
+      "type": "array"
+    },
+    "origin": {
+      "const": "physics",
+      "title": "Origin",
+      "type": "string"
+    }
+  },
+  "required": [
+    "time_s",
+    "voltage_V",
+    "origin"
+  ],
+  "title": "PhysicsTrace",
+  "type": "object"
+}

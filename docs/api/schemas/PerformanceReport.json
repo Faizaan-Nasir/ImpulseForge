@@ -1,0 +1,166 @@
+{
+  "$defs": {
+    "Metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "front_s": {
+          "exclusiveMinimum": 0,
+          "title": "Front S",
+          "type": "number"
+        },
+        "tail_s": {
+          "exclusiveMinimum": 0,
+          "title": "Tail S",
+          "type": "number"
+        },
+        "crest_V": {
+          "exclusiveMinimum": 0,
+          "title": "Crest V",
+          "type": "number"
+        }
+      },
+      "required": [
+        "front_s",
+        "tail_s",
+        "crest_V"
+      ],
+      "title": "Metrics",
+      "type": "object"
+    },
+    "RuntimePerformance": {
+      "additionalProperties": false,
+      "properties": {
+        "clock": {
+          "const": "monotonic_wall_clock",
+          "default": "monotonic_wall_clock",
+          "title": "Clock",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "stage_seconds": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "title": "Stage Seconds",
+          "type": "object"
+        },
+        "total_seconds": {
+          "minimum": 0,
+          "title": "Total Seconds",
+          "type": "number"
+        },
+        "cache_hit": {
+          "default": false,
+          "title": "Cache Hit",
+          "type": "boolean"
+        },
+        "transport_time_included": {
+          "default": false,
+          "title": "Transport Time Included",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "scope",
+        "stage_seconds",
+        "total_seconds"
+      ],
+      "title": "RuntimePerformance",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "candidate_id": {
+      "title": "Candidate Id",
+      "type": "string"
+    },
+    "context_hash": {
+      "title": "Context Hash",
+      "type": "string"
+    },
+    "target": {
+      "$ref": "#/$defs/Metrics"
+    },
+    "physics": {
+      "additionalProperties": true,
+      "title": "Physics",
+      "type": "object"
+    },
+    "corrected": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Corrected"
+    },
+    "correction_status": {
+      "title": "Correction Status",
+      "type": "string"
+    },
+    "efficiency": {
+      "additionalProperties": true,
+      "title": "Efficiency",
+      "type": "object"
+    },
+    "stored_energy": {
+      "additionalProperties": true,
+      "title": "Stored Energy",
+      "type": "object"
+    },
+    "hardware": {
+      "additionalProperties": true,
+      "title": "Hardware",
+      "type": "object"
+    },
+    "model_quality": {
+      "additionalProperties": true,
+      "title": "Model Quality",
+      "type": "object"
+    },
+    "observed_accuracy": {
+      "additionalProperties": true,
+      "title": "Observed Accuracy",
+      "type": "object"
+    },
+    "runtime": {
+      "$ref": "#/$defs/RuntimePerformance"
+    },
+    "interpretation": {
+      "title": "Interpretation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "candidate_id",
+    "context_hash",
+    "target",
+    "physics",
+    "corrected",
+    "correction_status",
+    "efficiency",
+    "stored_energy",
+    "hardware",
+    "model_quality",
+    "observed_accuracy",
+    "runtime",
+    "interpretation"
+  ],
+  "title": "PerformanceReport",
+  "type": "object"
+}

@@ -1,0 +1,37 @@
+{
+  "run_id": "4cbf76a28f7846b1ae6f2dce18df817b",
+  "status": "completed_with_shortfall",
+  "counters": {
+    "proposals": 24,
+    "physics_evaluations": 21,
+    "ml_evaluations": 21,
+    "cache_hits": 0,
+    "unique_realised": 21
+  },
+  "corrected_candidates": 1,
+  "costs": [
+    1.0002877340866754,
+    1.1657402166686244,
+    1.7874015748031495,
+    1.7982171374286073,
+    1.881057268722467,
+    1.9078258420772691,
+    1.9094587001972487,
+    1.9174311926605505,
+    1.9349392660877656,
+    1.9367681498829041,
+    1.948045824308358,
+    1.9487666034155597,
+    1.9628610729023384,
+    1.9774674473197227,
+    1.9851838330727665,
+    1.993867605528084
+  ],
+  "eligible_recommendations": 0,
+  "displayed_cases": 3,
+  "default_input_verification": "untouched Firefox defaults: calculator, 1425 kV, 850/500/150 pF, 18.5 uH, eta 0.82, 15 max stages, 200 kV stage limit, 3 uF stages, full 10/12 type inventory, 24 proposal budget",
+  "baseline_report": "workbook-default-baseline.json",
+  "firefox_screenshot": "firefox-workbook-default.jpg",
+  "gemini_summary_status": "generated",
+  "gemini_cached": true
+}

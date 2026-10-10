@@ -1,0 +1,79 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "max_proposals": {
+      "default": 100,
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Max Proposals",
+      "type": "integer"
+    },
+    "max_forward_evaluations": {
+      "default": 100,
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Max Forward Evaluations",
+      "type": "integer"
+    },
+    "max_ml_evaluations": {
+      "default": 100,
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "Max Ml Evaluations",
+      "type": "integer"
+    },
+    "dp_max_parts": {
+      "default": 4,
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Dp Max Parts",
+      "type": "integer"
+    },
+    "dp_max_states": {
+      "default": 100000,
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Dp Max States",
+      "type": "integer"
+    },
+    "dp_seconds": {
+      "default": 10,
+      "exclusiveMinimum": 0,
+      "title": "Dp Seconds",
+      "type": "number"
+    },
+    "cp_sat_seconds": {
+      "default": 2,
+      "exclusiveMinimum": 0,
+      "title": "Cp Sat Seconds",
+      "type": "number"
+    },
+    "cp_pair_retries": {
+      "default": 5,
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Cp Pair Retries",
+      "type": "integer"
+    },
+    "repeat_window": {
+      "default": 10,
+      "minimum": 1,
+      "title": "Repeat Window",
+      "type": "integer"
+    },
+    "archive_stagnation_window": {
+      "default": 20,
+      "minimum": 1,
+      "title": "Archive Stagnation Window",
+      "type": "integer"
+    },
+    "wall_time_seconds": {
+      "default": 300,
+      "exclusiveMinimum": 0,
+      "title": "Wall Time Seconds",
+      "type": "number"
+    }
+  },
+  "title": "Search",
+  "type": "object"
+}

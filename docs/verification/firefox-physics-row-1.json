@@ -1,0 +1,47 @@
+{
+  "verification": "actual Firefox UI on http://127.0.0.1:5173/",
+  "source": "user-pasted synthetic dataset training row ID 1",
+  "physics_mode": "calculator",
+  "N": 9,
+  "charge_kV_Stage": 186.345008973,
+  "Rf_stage_ohm": 55,
+  "Rt_stage_ohm": 25,
+  "inputs": {
+    "target_crest_kV": 1404.498256,
+    "load_C_pF": 796.907347,
+    "divider_C_pF": 383.9852149,
+    "stray_C_pF": 163.876987,
+    "L_uH": 21.27743093,
+    "expected_efficiency": 0.837453939,
+    "stage_C_uF": 3,
+    "basic_C_pF": 0,
+    "N_max": 15,
+    "U_stage_max_kV": 200,
+    "max_proposals": 1,
+    "inventory_scope": "55 ohm front and 25 ohm tail available; other role quantities set to zero; single resistor mode"
+  },
+  "source_physics": {
+    "front_us": 1.198028683,
+    "tail_us": 52.18468319,
+    "crest_kV": 1404.498256
+  },
+  "visible_physics": {
+    "front_us": 1.198028683,
+    "tail_us": 52.184683192,
+    "crest_kV": 1404.498256
+  },
+  "visible_diagnostic_ml": {
+    "front_us": 1.189383868,
+    "tail_us": 51.856917396,
+    "crest_kV": 1410.312045888
+  },
+  "ml_is_observed_label_replay": false,
+  "eligible_recommendations": 0,
+  "energy_limits_unchanged": {
+    "per_stage_J": 2500,
+    "total_J": 30000
+  },
+  "frontend_precision_bug_fixed": "efficiency step changed from 0.01 to any",
+  "screenshot": "firefox-physics-row-1.jpg",
+  "limitations": "Displayed values are rounded to 9 decimal places. The pasted input record is rounded; fixed row charge differs slightly from seed-derived charge. This is one evaluated diagnostic setup, not optimisation convergence."
+}

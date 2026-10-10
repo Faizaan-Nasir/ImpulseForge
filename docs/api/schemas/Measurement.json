@@ -1,0 +1,49 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "acquired_at": {
+      "format": "date-time",
+      "title": "Acquired At",
+      "type": "string"
+    },
+    "equipment_profile_id": {
+      "title": "Equipment Profile Id",
+      "type": "string"
+    },
+    "actual_settings": {
+      "additionalProperties": true,
+      "title": "Actual Settings",
+      "type": "object"
+    },
+    "time_s": {
+      "items": {
+        "type": "number"
+      },
+      "minItems": 3,
+      "title": "Time S",
+      "type": "array"
+    },
+    "voltage_V": {
+      "items": {
+        "type": "number"
+      },
+      "minItems": 3,
+      "title": "Voltage V",
+      "type": "array"
+    },
+    "provenance": {
+      "default": "external_measured_trace",
+      "title": "Provenance",
+      "type": "string"
+    }
+  },
+  "required": [
+    "acquired_at",
+    "equipment_profile_id",
+    "actual_settings",
+    "time_s",
+    "voltage_V"
+  ],
+  "title": "Measurement",
+  "type": "object"
+}

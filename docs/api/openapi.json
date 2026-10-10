@@ -1,0 +1,3592 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "PowerNext Marx Generator Backend",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/v1/dashboard/bootstrap": {
+      "get": {
+        "summary": "Dashboard Bootstrap",
+        "operationId": "dashboard_bootstrap_v1_dashboard_bootstrap_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/dashboard/workbook-baseline": {
+      "post": {
+        "summary": "Dashboard Baseline",
+        "operationId": "dashboard_baseline_v1_dashboard_workbook_baseline_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModuleInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkbookBaseline"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs": {
+      "get": {
+        "summary": "List Runs",
+        "operationId": "list_runs_v1_runs_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Run",
+        "operationId": "create_run_v1_runs_post",
+        "parameters": [
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs/{identifier}/dashboard": {
+      "get": {
+        "summary": "Dashboard Result",
+        "operationId": "dashboard_result_v1_runs__identifier__dashboard_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs/{identifier}/decision-summary": {
+      "post": {
+        "summary": "Decision Summary",
+        "operationId": "decision_summary_v1_runs__identifier__decision_summary_post",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SummaryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecisionSummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/candidates/{identifier}/diagnostic-evaluation": {
+      "post": {
+        "summary": "Diagnostic Candidate",
+        "operationId": "diagnostic_candidate_v1_candidates__identifier__diagnostic_evaluation_post",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/profiles/equipment/{identifier}": {
+      "get": {
+        "summary": "Equipment Route",
+        "operationId": "equipment_route_v1_profiles_equipment__identifier__get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/profiles/tests/{identifier}": {
+      "get": {
+        "summary": "Tests Route",
+        "operationId": "tests_route_v1_profiles_tests__identifier__get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/profiles/inventory/{identifier}": {
+      "get": {
+        "summary": "Inventory Route",
+        "operationId": "inventory_route_v1_profiles_inventory__identifier__get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/inventories/validate": {
+      "post": {
+        "summary": "Validate Inventory",
+        "operationId": "validate_inventory_v1_inventories_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryValidation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/inventories": {
+      "post": {
+        "summary": "Register Inventory",
+        "operationId": "register_inventory_v1_inventories_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InlineInventory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/models/{version}": {
+      "get": {
+        "summary": "Model Report",
+        "operationId": "model_report_v1_models__version__get",
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/models/{version}/performance": {
+      "get": {
+        "summary": "Model Performance",
+        "operationId": "model_performance_v1_models__version__performance_get",
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/requests/validate": {
+      "post": {
+        "summary": "Validate Request",
+        "operationId": "validate_request_v1_requests_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/requests/{identifier}/constraints": {
+      "get": {
+        "summary": "Request Constraints",
+        "operationId": "request_constraints_v1_requests__identifier__constraints_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/physics/inverse": {
+      "post": {
+        "summary": "Inverse Route",
+        "operationId": "inverse_route_v1_physics_inverse_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModuleInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/assemblies/realise": {
+      "post": {
+        "summary": "Realise Route",
+        "operationId": "realise_route_v1_assemblies_realise_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModuleInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/physics/evaluate": {
+      "post": {
+        "summary": "Physics Route",
+        "operationId": "physics_route_v1_physics_evaluate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModuleInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhysicsEvaluation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/corrections/predict": {
+      "post": {
+        "summary": "Correction Route",
+        "operationId": "correction_route_v1_corrections_predict_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModuleInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CorrectionPrediction"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/performance/evaluate": {
+      "post": {
+        "summary": "Performance Route",
+        "operationId": "performance_route_v1_performance_evaluate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerformanceInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerformanceReport"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/objectives/evaluate": {
+      "post": {
+        "summary": "Objective Route",
+        "operationId": "objective_route_v1_objectives_evaluate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlotInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/waveforms/reconstruct": {
+      "post": {
+        "summary": "Waveform Route",
+        "operationId": "waveform_route_v1_waveforms_reconstruct_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlotInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs/{identifier}": {
+      "get": {
+        "summary": "Run Route",
+        "operationId": "run_route_v1_runs__identifier__get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs/{identifier}/events": {
+      "get": {
+        "summary": "Events Route",
+        "operationId": "events_route_v1_runs__identifier__events_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "After"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs/{identifier}/candidates": {
+      "get": {
+        "summary": "Candidates Route",
+        "operationId": "candidates_route_v1_runs__identifier__candidates_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs/{identifier}/result": {
+      "get": {
+        "summary": "Result Route",
+        "operationId": "result_route_v1_runs__identifier__result_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs/{identifier}/waveforms": {
+      "get": {
+        "summary": "Waveform Bundle",
+        "operationId": "waveform_bundle_v1_runs__identifier__waveforms_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "title": "Format"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/candidates/{identifier}": {
+      "get": {
+        "summary": "Candidate Route",
+        "operationId": "candidate_route_v1_candidates__identifier__get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/candidates/{identifier}/performance": {
+      "get": {
+        "summary": "Candidate Performance",
+        "operationId": "candidate_performance_v1_candidates__identifier__performance_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/candidates/{identifier}/generator-stages": {
+      "get": {
+        "summary": "Generator Stages",
+        "operationId": "generator_stages_v1_candidates__identifier__generator_stages_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/candidates/{identifier}/explanations": {
+      "get": {
+        "summary": "Explanation Route",
+        "operationId": "explanation_route_v1_candidates__identifier__explanations_get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/candidates/{identifier}/waveforms/{kind}": {
+      "get": {
+        "summary": "Candidate Waveform",
+        "operationId": "candidate_waveform_v1_candidates__identifier__waveforms__kind__get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          },
+          {
+            "name": "kind",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Kind"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs/{identifier}/resume": {
+      "post": {
+        "summary": "Resume",
+        "operationId": "resume_v1_runs__identifier__resume_post",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/runs/{identifier}/cancel": {
+      "post": {
+        "summary": "Cancel",
+        "operationId": "cancel_v1_runs__identifier__cancel_post",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/measurements": {
+      "post": {
+        "summary": "Measurement Route",
+        "operationId": "measurement_route_v1_measurements_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Measurement"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/measurements/{identifier}": {
+      "get": {
+        "summary": "Get Measurement",
+        "operationId": "get_measurement_v1_measurements__identifier__get",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "title": "Identifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/calibration/labels": {
+      "post": {
+        "summary": "Calibration Labels",
+        "operationId": "calibration_labels_v1_calibration_labels_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalibrationInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Assembly": {
+        "properties": {
+          "assembly_id": {
+            "type": "string",
+            "title": "Assembly Id"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "front",
+              "tail"
+            ],
+            "title": "Role"
+          },
+          "equivalent_ohm": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Equivalent Ohm"
+          },
+          "nominal_fraction": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Nominal Fraction"
+          },
+          "recipe": {
+            "$ref": "#/components/schemas/Recipe"
+          },
+          "netlist": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Netlist"
+          },
+          "type_counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Type Counts"
+          },
+          "total_resistors": {
+            "type": "integer",
+            "title": "Total Resistors"
+          },
+          "ratings_status": {
+            "type": "string",
+            "title": "Ratings Status",
+            "default": "unknown"
+          },
+          "search_guarantee": {
+            "type": "string",
+            "title": "Search Guarantee",
+            "default": "bounded"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "assembly_id",
+          "role",
+          "equivalent_ohm",
+          "nominal_fraction",
+          "recipe",
+          "netlist",
+          "type_counts",
+          "total_resistors"
+        ],
+        "title": "Assembly"
+      },
+      "CalibrationInput": {
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/RunRequest"
+          },
+          "candidate": {
+            "$ref": "#/components/schemas/Candidate"
+          },
+          "measurement_id": {
+            "type": "string",
+            "title": "Measurement Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request",
+          "candidate",
+          "measurement_id"
+        ],
+        "title": "CalibrationInput"
+      },
+      "Candidate": {
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "title": "Candidate Id"
+          },
+          "context_hash": {
+            "type": "string",
+            "title": "Context Hash"
+          },
+          "proposal": {
+            "$ref": "#/components/schemas/Proposal"
+          },
+          "N": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "N"
+          },
+          "U_charge_V": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "U Charge V"
+          },
+          "front": {
+            "$ref": "#/components/schemas/Assembly"
+          },
+          "tail": {
+            "$ref": "#/components/schemas/Assembly"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "context_hash",
+          "proposal",
+          "N",
+          "U_charge_V",
+          "front",
+          "tail"
+        ],
+        "title": "Candidate"
+      },
+      "CandidateReason": {
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "title": "Candidate Id"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 1500,
+            "minLength": 1,
+            "title": "Reason"
+          },
+          "evidence_refs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 4,
+            "minItems": 1,
+            "title": "Evidence Refs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "reason",
+          "evidence_refs"
+        ],
+        "title": "CandidateReason"
+      },
+      "ChargingPolicy": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "fixed",
+              "seed_then_fixed"
+            ],
+            "title": "Kind",
+            "default": "fixed"
+          },
+          "U_charge_V": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "U Charge V"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ChargingPolicy"
+      },
+      "Constraint": {
+        "properties": {
+          "constraint_id": {
+            "type": "string",
+            "title": "Constraint Id"
+          },
+          "origin": {
+            "type": "string",
+            "title": "Origin"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "hard",
+              "metadata",
+              "waveform",
+              "support"
+            ],
+            "title": "Kind",
+            "default": "hard"
+          },
+          "enforced_by": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Enforced By"
+          },
+          "rule": {
+            "type": "string",
+            "title": "Rule"
+          },
+          "observed_value": {
+            "title": "Observed Value"
+          },
+          "limit_value": {
+            "title": "Limit Value"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit"
+          },
+          "margin": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Margin"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "unknown",
+              "not_applicable"
+            ],
+            "title": "Status"
+          },
+          "reason_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason Code"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "constraint_id",
+          "origin",
+          "enforced_by",
+          "rule",
+          "status"
+        ],
+        "title": "Constraint"
+      },
+      "CorrectionPrediction": {
+        "properties": {
+          "model_version": {
+            "type": "string",
+            "title": "Model Version"
+          },
+          "support": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Support"
+          },
+          "features": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Features"
+          },
+          "input_effects_not_modelled": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Input Effects Not Modelled"
+          },
+          "hardware_feasible": {
+            "type": "boolean",
+            "title": "Hardware Feasible"
+          },
+          "physics_constraints": {
+            "items": {
+              "$ref": "#/components/schemas/Constraint"
+            },
+            "type": "array",
+            "title": "Physics Constraints"
+          },
+          "corrected_constraint_checks": {
+            "items": {
+              "$ref": "#/components/schemas/Constraint"
+            },
+            "type": "array",
+            "title": "Corrected Constraint Checks"
+          },
+          "residuals": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "number"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Residuals"
+          },
+          "corrected_metrics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metrics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "lab_validated": {
+            "type": "boolean",
+            "title": "Lab Validated"
+          },
+          "explanation_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Explanation Status"
+          },
+          "environment_effects": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Environment Effects"
+          },
+          "performance": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PerformanceReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "model_version",
+          "support",
+          "features",
+          "input_effects_not_modelled",
+          "hardware_feasible",
+          "physics_constraints",
+          "residuals",
+          "corrected_metrics",
+          "status",
+          "lab_validated"
+        ],
+        "title": "CorrectionPrediction"
+      },
+      "DPTolerances": {
+        "properties": {
+          "front_relative": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Front Relative",
+            "default": 0.005
+          },
+          "tail_relative": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Tail Relative",
+            "default": 0.005
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "DPTolerances"
+      },
+      "DecisionSummary": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "generated",
+              "unavailable",
+              "provider_error",
+              "invalid_response"
+            ],
+            "title": "Status"
+          },
+          "provider": {
+            "type": "string",
+            "const": "gemini",
+            "title": "Provider",
+            "default": "gemini"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "recommended_candidate_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recommended Candidate Id"
+          },
+          "narrative": {
+            "$ref": "#/components/schemas/SummaryNarrative"
+          },
+          "score_breakdown": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Score Breakdown"
+          },
+          "evidence_hash": {
+            "type": "string",
+            "title": "Evidence Hash"
+          },
+          "cached": {
+            "type": "boolean",
+            "title": "Cached",
+            "default": false
+          },
+          "generation_seconds": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Generation Seconds"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "authority": {
+            "type": "string",
+            "title": "Authority",
+            "default": "Explanation only; backend metrics and constraint verdicts remain authoritative"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "model",
+          "recommended_candidate_id",
+          "narrative",
+          "score_breakdown",
+          "evidence_hash",
+          "generation_seconds"
+        ],
+        "title": "DecisionSummary"
+      },
+      "Environment": {
+        "properties": {
+          "availability": {
+            "type": "string",
+            "enum": [
+              "not_recorded",
+              "recorded"
+            ],
+            "title": "Availability",
+            "default": "not_recorded"
+          },
+          "values": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Values"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Environment"
+      },
+      "EquipmentInputs": {
+        "properties": {
+          "N_max": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "N Max",
+            "description": "Frontend maximum stages (Hybrid Calculator B13); example 15."
+          },
+          "U_stage_max_V": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "U Stage Max V",
+            "description": "Frontend maximum charging voltage per stage in V (B14); example 200000."
+          },
+          "C_stage_F": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "C Stage F",
+            "description": "Frontend stage capacitance in F (B15); example 3e-6."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "EquipmentInputs",
+        "description": "Editable workbook fields; omitted/null values request the profile fallback."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "InlineInventory": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "const": "inline",
+            "title": "Source",
+            "default": "inline"
+          },
+          "front": {
+            "items": {
+              "$ref": "#/components/schemas/ResistorType"
+            },
+            "type": "array",
+            "title": "Front"
+          },
+          "tail": {
+            "items": {
+              "$ref": "#/components/schemas/ResistorType"
+            },
+            "type": "array",
+            "title": "Tail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "front",
+          "tail"
+        ],
+        "title": "InlineInventory"
+      },
+      "InventoryReference": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "const": "registered",
+            "title": "Source"
+          },
+          "profile_id": {
+            "type": "string",
+            "title": "Profile Id"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version",
+            "default": "1"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source",
+          "profile_id"
+        ],
+        "title": "InventoryReference"
+      },
+      "InventoryValidation": {
+        "properties": {
+          "inventory": {
+            "$ref": "#/components/schemas/InlineInventory"
+          },
+          "N": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "N",
+            "default": 2
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "inventory"
+        ],
+        "title": "InventoryValidation"
+      },
+      "Load": {
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "enum": [
+              "capacitive_v1",
+              "parallel_rc_v1",
+              "parallel_rlc_v1"
+            ],
+            "title": "Model Id",
+            "default": "capacitive_v1"
+          },
+          "C_F": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "C F"
+          },
+          "R_ohm": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "R Ohm"
+          },
+          "L_H": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "L H"
+          },
+          "topology": {
+            "type": "string",
+            "title": "Topology",
+            "default": "shunt_at_test_terminals"
+          },
+          "terminal_connections": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Terminal Connections"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "C_F"
+        ],
+        "title": "Load"
+      },
+      "Measurement": {
+        "properties": {
+          "acquired_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Acquired At"
+          },
+          "equipment_profile_id": {
+            "type": "string",
+            "title": "Equipment Profile Id"
+          },
+          "actual_settings": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Actual Settings"
+          },
+          "time_s": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "minItems": 3,
+            "title": "Time S"
+          },
+          "voltage_V": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "minItems": 3,
+            "title": "Voltage V"
+          },
+          "provenance": {
+            "type": "string",
+            "title": "Provenance",
+            "default": "external_measured_trace"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "acquired_at",
+          "equipment_profile_id",
+          "actual_settings",
+          "time_s",
+          "voltage_V"
+        ],
+        "title": "Measurement"
+      },
+      "Metrics": {
+        "properties": {
+          "front_s": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Front S"
+          },
+          "tail_s": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Tail S"
+          },
+          "crest_V": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Crest V"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "front_s",
+          "tail_s",
+          "crest_V"
+        ],
+        "title": "Metrics"
+      },
+      "ModuleInput": {
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/RunRequest"
+          },
+          "proposal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Proposal"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "candidate": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Candidate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "N": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "N"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request"
+        ],
+        "title": "ModuleInput"
+      },
+      "ObjectiveConfig": {
+        "properties": {
+          "policy": {
+            "type": "string",
+            "const": "worst_normalised_then_weighted",
+            "title": "Policy",
+            "default": "worst_normalised_then_weighted"
+          },
+          "weights": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Weights"
+          },
+          "secondary_preference": {
+            "type": "string",
+            "enum": [
+              "balanced",
+              "accuracy",
+              "resistors",
+              "stages",
+              "voltage"
+            ],
+            "title": "Secondary Preference",
+            "default": "balanced"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ObjectiveConfig"
+      },
+      "PerformanceInput": {
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/RunRequest"
+          },
+          "proposal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Proposal"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "candidate": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Candidate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "N": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "N"
+          },
+          "observed_metrics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Metrics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "observation_provenance": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observation Provenance"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request"
+        ],
+        "title": "PerformanceInput"
+      },
+      "PerformanceReport": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "candidate_id": {
+            "type": "string",
+            "title": "Candidate Id"
+          },
+          "context_hash": {
+            "type": "string",
+            "title": "Context Hash"
+          },
+          "target": {
+            "$ref": "#/components/schemas/Metrics"
+          },
+          "physics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Physics"
+          },
+          "corrected": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Corrected"
+          },
+          "correction_status": {
+            "type": "string",
+            "title": "Correction Status"
+          },
+          "efficiency": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Efficiency"
+          },
+          "stored_energy": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Stored Energy"
+          },
+          "hardware": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Hardware"
+          },
+          "model_quality": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Model Quality"
+          },
+          "observed_accuracy": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Observed Accuracy"
+          },
+          "runtime": {
+            "$ref": "#/components/schemas/RuntimePerformance"
+          },
+          "interpretation": {
+            "type": "string",
+            "title": "Interpretation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "context_hash",
+          "target",
+          "physics",
+          "corrected",
+          "correction_status",
+          "efficiency",
+          "stored_energy",
+          "hardware",
+          "model_quality",
+          "observed_accuracy",
+          "runtime",
+          "interpretation"
+        ],
+        "title": "PerformanceReport"
+      },
+      "PhysicsEvaluation": {
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "title": "Candidate Id"
+          },
+          "context_hash": {
+            "type": "string",
+            "title": "Context Hash"
+          },
+          "physics_version": {
+            "type": "string",
+            "title": "Physics Version"
+          },
+          "baseline_mode": {
+            "type": "string",
+            "enum": [
+              "calculator",
+              "exact"
+            ],
+            "title": "Baseline Mode"
+          },
+          "derived": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Derived"
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/Metrics"
+          },
+          "voltage_efficiency": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Voltage Efficiency"
+          },
+          "voltage_utilisation": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Voltage Utilisation"
+          },
+          "stage_energy_J": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Stage Energy J"
+          },
+          "total_energy_J": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Total Energy J"
+          },
+          "landmarks": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Landmarks"
+          },
+          "rates": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Rates"
+          },
+          "trace": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PhysicsTrace"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "component_stresses": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Component Stresses"
+          },
+          "constraints": {
+            "items": {
+              "$ref": "#/components/schemas/Constraint"
+            },
+            "type": "array",
+            "title": "Constraints"
+          },
+          "diagnostics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Diagnostics"
+          },
+          "hardware_feasible": {
+            "type": "boolean",
+            "title": "Hardware Feasible"
+          },
+          "performance": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PerformanceReport"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "context_hash",
+          "physics_version",
+          "baseline_mode",
+          "derived",
+          "metrics",
+          "voltage_efficiency",
+          "voltage_utilisation",
+          "stage_energy_J",
+          "total_energy_J",
+          "landmarks",
+          "rates",
+          "trace",
+          "component_stresses",
+          "constraints",
+          "diagnostics",
+          "hardware_feasible"
+        ],
+        "title": "PhysicsEvaluation"
+      },
+      "PhysicsTrace": {
+        "properties": {
+          "time_s": {
+            "items": {
+              "type": "number",
+              "minimum": 0.0
+            },
+            "type": "array",
+            "title": "Time S"
+          },
+          "voltage_V": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Voltage V"
+          },
+          "origin": {
+            "type": "string",
+            "const": "physics",
+            "title": "Origin"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "time_s",
+          "voltage_V",
+          "origin"
+        ],
+        "title": "PhysicsTrace"
+      },
+      "PlotInput": {
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/RunRequest"
+          },
+          "candidate_metrics": {
+            "items": {
+              "$ref": "#/components/schemas/Metrics"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Candidate Metrics"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request"
+        ],
+        "title": "PlotInput"
+      },
+      "Proposal": {
+        "properties": {
+          "N": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "N"
+          },
+          "Rf_required_ohm": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Rf Required Ohm"
+          },
+          "Rt_required_ohm": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Rt Required Ohm"
+          },
+          "proposal_index": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Proposal Index",
+            "default": 0
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "default": "manual"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "N",
+          "Rf_required_ohm",
+          "Rt_required_ohm"
+        ],
+        "title": "Proposal"
+      },
+      "Ratings": {
+        "properties": {
+          "pulse_voltage_limit_V": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pulse Voltage Limit V"
+          },
+          "pulse_current_limit_A": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pulse Current Limit A"
+          },
+          "pulse_energy_limit_J": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pulse Energy Limit J"
+          },
+          "average_power_limit_W": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Average Power Limit W"
+          },
+          "temperature_limit_K": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temperature Limit K"
+          },
+          "R_theta_K_per_W": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "R Theta K Per W"
+          },
+          "C_theta_J_per_K": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "C Theta J Per K"
+          },
+          "evidence_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evidence Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Ratings"
+      },
+      "Recipe": {
+        "properties": {
+          "op": {
+            "type": "string",
+            "enum": [
+              "resistor",
+              "series",
+              "parallel"
+            ],
+            "title": "Op"
+          },
+          "type_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type Id"
+          },
+          "ohm": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ohm"
+          },
+          "children": {
+            "items": {
+              "$ref": "#/components/schemas/Recipe"
+            },
+            "type": "array",
+            "title": "Children",
+            "default": []
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "op"
+        ],
+        "title": "Recipe"
+      },
+      "ResistorType": {
+        "properties": {
+          "type_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Type Id"
+          },
+          "nominal_ohm": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Nominal Ohm"
+          },
+          "available_quantity": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Available Quantity"
+          },
+          "quantity_scope": {
+            "type": "string",
+            "enum": [
+              "per_stage",
+              "global"
+            ],
+            "title": "Quantity Scope",
+            "default": "per_stage"
+          },
+          "tolerance_fraction": {
+            "type": "number",
+            "exclusiveMaximum": 1.0,
+            "minimum": 0.0,
+            "title": "Tolerance Fraction",
+            "default": 0
+          },
+          "approved": {
+            "type": "boolean",
+            "title": "Approved",
+            "default": false
+          },
+          "ratings": {
+            "$ref": "#/components/schemas/Ratings"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type_id",
+          "nominal_ohm",
+          "available_quantity"
+        ],
+        "title": "ResistorType"
+      },
+      "RunRequest": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "purpose": {
+            "type": "string",
+            "enum": [
+              "diagnostic",
+              "recommendation"
+            ],
+            "title": "Purpose",
+            "default": "diagnostic"
+          },
+          "equipment_profile_id": {
+            "type": "string",
+            "title": "Equipment Profile Id",
+            "default": "haefely_pdf_v1"
+          },
+          "equipment_inputs": {
+            "$ref": "#/components/schemas/EquipmentInputs"
+          },
+          "inventory": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/InlineInventory"
+              },
+              {
+                "$ref": "#/components/schemas/InventoryReference"
+              }
+            ],
+            "title": "Inventory",
+            "discriminator": {
+              "propertyName": "source",
+              "mapping": {
+                "inline": "#/components/schemas/InlineInventory",
+                "registered": "#/components/schemas/InventoryReference"
+              }
+            }
+          },
+          "impulse_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Lightning",
+                  "Switching"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Impulse Type"
+          },
+          "impulse_profile_id": {
+            "type": "string",
+            "title": "Impulse Profile Id",
+            "default": "lightning_project_v1"
+          },
+          "system_max_voltage_V": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "System Max Voltage V",
+            "default": 400000
+          },
+          "target": {
+            "$ref": "#/components/schemas/Target"
+          },
+          "load": {
+            "$ref": "#/components/schemas/Load"
+          },
+          "setup": {
+            "$ref": "#/components/schemas/Setup"
+          },
+          "environment": {
+            "$ref": "#/components/schemas/Environment"
+          },
+          "expected_voltage_efficiency": {
+            "type": "number",
+            "maximum": 1.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Expected Voltage Efficiency",
+            "default": 0.82
+          },
+          "minimum_voltage_efficiency": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Minimum Voltage Efficiency"
+          },
+          "charging_policy": {
+            "$ref": "#/components/schemas/ChargingPolicy"
+          },
+          "dp_tolerances": {
+            "$ref": "#/components/schemas/DPTolerances"
+          },
+          "search": {
+            "$ref": "#/components/schemas/Search"
+          },
+          "objective": {
+            "$ref": "#/components/schemas/ObjectiveConfig"
+          },
+          "physics_mode": {
+            "type": "string",
+            "enum": [
+              "calculator",
+              "exact"
+            ],
+            "title": "Physics Mode",
+            "default": "exact"
+          },
+          "model_version": {
+            "type": "string",
+            "title": "Model Version",
+            "default": "residual-tabpfn-v2-diagnostic-v1"
+          },
+          "ml_domain_policy": {
+            "type": "string",
+            "enum": [
+              "strict",
+              "diagnostic_extrapolation"
+            ],
+            "title": "Ml Domain Policy",
+            "default": "strict"
+          },
+          "seed": {
+            "type": "integer",
+            "maximum": 2147483647.0,
+            "minimum": 0.0,
+            "title": "Seed",
+            "default": 42
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "inventory",
+          "target",
+          "load",
+          "charging_policy"
+        ],
+        "title": "RunRequest"
+      },
+      "RuntimePerformance": {
+        "properties": {
+          "clock": {
+            "type": "string",
+            "const": "monotonic_wall_clock",
+            "title": "Clock",
+            "default": "monotonic_wall_clock"
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope"
+          },
+          "stage_seconds": {
+            "additionalProperties": {
+              "type": "number",
+              "minimum": 0.0
+            },
+            "type": "object",
+            "title": "Stage Seconds"
+          },
+          "total_seconds": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Total Seconds"
+          },
+          "cache_hit": {
+            "type": "boolean",
+            "title": "Cache Hit",
+            "default": false
+          },
+          "transport_time_included": {
+            "type": "boolean",
+            "title": "Transport Time Included",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scope",
+          "stage_seconds",
+          "total_seconds"
+        ],
+        "title": "RuntimePerformance"
+      },
+      "Search": {
+        "properties": {
+          "max_proposals": {
+            "type": "integer",
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Max Proposals",
+            "default": 100
+          },
+          "max_forward_evaluations": {
+            "type": "integer",
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Max Forward Evaluations",
+            "default": 100
+          },
+          "max_ml_evaluations": {
+            "type": "integer",
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Max Ml Evaluations",
+            "default": 100
+          },
+          "dp_max_parts": {
+            "type": "integer",
+            "maximum": 12.0,
+            "minimum": 1.0,
+            "title": "Dp Max Parts",
+            "default": 4
+          },
+          "dp_max_states": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Dp Max States",
+            "default": 100000
+          },
+          "dp_seconds": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Dp Seconds",
+            "default": 10
+          },
+          "cp_sat_seconds": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Cp Sat Seconds",
+            "default": 2
+          },
+          "cp_pair_retries": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Cp Pair Retries",
+            "default": 5
+          },
+          "repeat_window": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Repeat Window",
+            "default": 10
+          },
+          "archive_stagnation_window": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Archive Stagnation Window",
+            "default": 20
+          },
+          "wall_time_seconds": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Wall Time Seconds",
+            "default": 300
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Search"
+      },
+      "Setup": {
+        "properties": {
+          "basic_C_F": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Basic C F",
+            "default": 0
+          },
+          "shot_rate_per_minute": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shot Rate Per Minute"
+          },
+          "divider_C_F": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Divider C F",
+            "default": 0
+          },
+          "stray_C_F": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Stray C F",
+            "default": 0
+          },
+          "stray_L_H": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Stray L H",
+            "default": 0
+          },
+          "basic_capacitance_inclusion": {
+            "type": "string",
+            "enum": [
+              "add_separately",
+              "already_included",
+              "benchmark_omitted"
+            ],
+            "title": "Basic Capacitance Inclusion",
+            "default": "add_separately"
+          },
+          "external_front_series_ohm": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Front Series Ohm"
+          },
+          "auxiliary_states": {
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "inactive",
+                "unknown"
+              ]
+            },
+            "type": "object",
+            "title": "Auxiliary States"
+          },
+          "circuit_evidence_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Circuit Evidence Id"
+          },
+          "leads": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Leads"
+          },
+          "return_path": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Return Path"
+          },
+          "geometry": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Geometry"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Setup"
+      },
+      "SummaryNarrative": {
+        "properties": {
+          "lead": {
+            "type": "string",
+            "maxLength": 3000,
+            "minLength": 1,
+            "title": "Lead"
+          },
+          "why_others_rank_lower": {
+            "items": {
+              "$ref": "#/components/schemas/CandidateReason"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Why Others Rank Lower"
+          },
+          "needs_attention": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 12,
+            "title": "Needs Attention"
+          },
+          "evidence_refs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 4,
+            "minItems": 1,
+            "title": "Evidence Refs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "lead",
+          "why_others_rank_lower",
+          "needs_attention",
+          "evidence_refs"
+        ],
+        "title": "SummaryNarrative"
+      },
+      "SummaryRequest": {
+        "properties": {
+          "refresh": {
+            "type": "boolean",
+            "title": "Refresh",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "SummaryRequest"
+      },
+      "Target": {
+        "properties": {
+          "crest_V": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Crest V"
+          },
+          "front_s": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Front S"
+          },
+          "tail_s": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tail S"
+          },
+          "tolerances": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WaveformTolerances"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "crest_V"
+        ],
+        "title": "Target"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WaveformTolerances": {
+        "properties": {
+          "front": {
+            "type": "number",
+            "maximum": 1.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Front"
+          },
+          "tail": {
+            "type": "number",
+            "maximum": 1.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Tail"
+          },
+          "crest": {
+            "type": "number",
+            "maximum": 1.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Crest"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "front",
+          "tail",
+          "crest"
+        ],
+        "title": "WaveformTolerances"
+      },
+      "WorkbookBaseline": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "evaluated",
+              "reference_only"
+            ],
+            "title": "Status"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/WorkbookReferenceSettings"
+          },
+          "ideal": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Ideal"
+          },
+          "record": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Record"
+          },
+          "context": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Context"
+          },
+          "inventory_check": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Inventory Check"
+          },
+          "policy": {
+            "type": "string",
+            "title": "Policy"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "settings",
+          "ideal",
+          "record",
+          "context",
+          "inventory_check",
+          "policy"
+        ],
+        "title": "WorkbookBaseline"
+      },
+      "WorkbookReferenceSettings": {
+        "properties": {
+          "N": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "N"
+          },
+          "U_charge_V": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "U Charge V"
+          },
+          "Rf_actual_ohm": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Rf Actual Ohm"
+          },
+          "Rt_actual_ohm": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Rt Actual Ohm"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "N",
+          "U_charge_V",
+          "Rf_actual_ohm",
+          "Rt_actual_ohm"
+        ],
+        "title": "WorkbookReferenceSettings"
+      }
+    }
+  }
+}

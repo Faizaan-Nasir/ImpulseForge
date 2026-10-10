@@ -1,0 +1,50 @@
+{
+  "additionalProperties": false,
+  "description": "Editable workbook fields; omitted/null values request the profile fallback.",
+  "properties": {
+    "N_max": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Frontend maximum stages (Hybrid Calculator B13); example 15.",
+      "title": "N Max"
+    },
+    "U_stage_max_V": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Frontend maximum charging voltage per stage in V (B14); example 200000.",
+      "title": "U Stage Max V"
+    },
+    "C_stage_F": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Frontend stage capacitance in F (B15); example 3e-6.",
+      "title": "C Stage F"
+    }
+  },
+  "title": "EquipmentInputs",
+  "type": "object"
+}

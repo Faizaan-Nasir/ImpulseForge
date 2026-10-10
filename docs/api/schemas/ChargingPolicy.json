@@ -1,0 +1,29 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "default": "fixed",
+      "enum": [
+        "fixed",
+        "seed_then_fixed"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "U_charge_V": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "U Charge V"
+    }
+  },
+  "title": "ChargingPolicy",
+  "type": "object"
+}

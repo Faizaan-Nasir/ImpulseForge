@@ -1,0 +1,134 @@
+{
+  "files": [
+    {
+      "name": "Dashboard_Implementation.md",
+      "sha256": "a781b48c32747c944d097eb3896f9dc23546a4d26264518fef4b1f4c000cc8e8",
+      "size_bytes": 14333
+    },
+    {
+      "name": "HV IG Problem Statement.pdf",
+      "sha256": "9ab169fbda5eb612a7ff9ccfbadca8e85f5b49c2257c23388945d4e7c5532e93",
+      "size_bytes": 171908
+    },
+    {
+      "name": "Hybrid_Physics_ML_Impulse_Generator_Optimiser.xlsx",
+      "sha256": "b3662646519a4d73846d467e11c710f26c44ef0d1b542d0317c65bee15674de5",
+      "size_bytes": 919071
+    },
+    {
+      "name": "Impulse Generator Physics Engine \u2014 Technical Specification.md",
+      "sha256": "79651e2f44501eb70fd267c8f62b61eab5d4b00b6a42d0d886dcccf741edbd41",
+      "size_bytes": 22462
+    },
+    {
+      "name": "Impulse Generator Physics Engine \u2014 Technical Specification.pdf",
+      "sha256": "3aff01b4a527852cd89ebbcf21f996c602fbe4afee4bf1bb57f584664607d3f9",
+      "size_bytes": 467767
+    },
+    {
+      "name": "Marx_Generator_Architecture_Working_Document.md",
+      "sha256": "570eec420863456a4a75f912f17ccf6ac71fb5883421aecf18c1e583a5a5a478",
+      "size_bytes": 68201
+    },
+    {
+      "name": "Marx_Generator_Architecture_Working_Document.pdf",
+      "sha256": "2c912c78cea888a0891bcba92b3b2ed956081acffc9ce49eaf64d1d0f84d204e",
+      "size_bytes": 956793
+    },
+    {
+      "name": "Marx_Generator_Technical_Implementation_Specification.md",
+      "sha256": "117d81334de021b8c46a927def817aa246d62185fcb72b9e0699328bae64a5c2",
+      "size_bytes": 150946
+    },
+    {
+      "name": "Marx_Generator_Technical_Implementation_Specification.pdf",
+      "sha256": "abb581c6e29e44e4a17e5a974a131c6f914b3bca795999773fec76f418cff29c",
+      "size_bytes": 1184634
+    },
+    {
+      "name": "README.md",
+      "sha256": "f717c69362fb65a6adab78e67093375a404e1e1e21e86e50e2b5ef0045456ec8",
+      "size_bytes": 2097
+    },
+    {
+      "name": "backend_implementation_status.md",
+      "sha256": "b077a31fa4e0bbb74c8b5775a86c51b8523a747645d7618dbf97ff757ac2a49d",
+      "size_bytes": 12320
+    },
+    {
+      "name": "frontend_environment_report.json",
+      "sha256": "e5a0732b50faad29cbe86f606d2f074428be1925c8be4e4cca9e43dc35fc5d07",
+      "size_bytes": 611
+    },
+    {
+      "name": "model_performance_report.json",
+      "sha256": "af95b954e70abb9b44a11843a117f7dd5ca64385f07e4ca5e3508d3d28a337b7",
+      "size_bytes": 4292
+    },
+    {
+      "name": "resistor_inventory_front.json",
+      "sha256": "518a6b817b27ddf423c3c4144e96cc6f6ad731ab5f082c81f7b4be7bd59f6c24",
+      "size_bytes": 438
+    },
+    {
+      "name": "resistor_inventory_search.py",
+      "sha256": "eb6e89fd97a608371fc9b26c4ad4eebb1459ab02193dbb5043a3a2c73b2f4a8e",
+      "size_bytes": 7881
+    },
+    {
+      "name": "resistor_inventory_tail.json",
+      "sha256": "40b5e53ea3dc23d0f70b25ace769db01045be62c2f8bf625431702a14e43b52e",
+      "size_bytes": 521
+    },
+    {
+      "name": "resistor_search_example.json",
+      "sha256": "570d48c6677cdbdd85ef51f39e3b1f3485d58f16fc5156f8f59242e2b01920ed",
+      "size_bytes": 1560
+    },
+    {
+      "name": "verification_report.json",
+      "sha256": "82820af8f8a6342c71fb0db9964e4251602cfe2c9354ce73eac027d4f1db3441",
+      "size_bytes": 6190
+    },
+    {
+      "name": "~$Hybrid_Physics_ML_Impulse_Generator_Optimiser.xlsx",
+      "sha256": "621e0649ec7f060eae43b4e7e8db183ee9c1dab3715eaa2b4243e761493c9ca7",
+      "size_bytes": 165
+    }
+  ],
+  "frontend_reference": {
+    "url": "https://claude.ai/artifact/UbRz4HMvFDn8LUzFdiKqJo",
+    "files": [
+      {
+        "name": "reference/claude-dashboard.css",
+        "sha256": "223ee284ead3156c35b5e04f66d104d9f739b447e7a2d5995d8bbbb7c0a4304a"
+      },
+      {
+        "name": "reference/claude-dashboard.html",
+        "sha256": "289f8bbceb1413c5d29ffc980232ff44605c404326703ee9a635daad1babb882"
+      },
+      {
+        "name": "reference/claude-dashboard.js",
+        "sha256": "594b397a10b9528ddeacbb7e1f93061d5d938e690b575113ce4ae568598158a9"
+      }
+    ],
+    "authority": "Visual reference; prior project constraints override illustrative values"
+  },
+  "authority": {
+    "hardware": "Frontend workbook inputs; exactly two retained document energy limits plus capacitance fallback",
+    "workbook_input_sheet": "Hybrid Calculator!B5:B15; Resistor Inventory",
+    "retained_document_parameters": {
+      "total_energy_max_J": 30000,
+      "stage_energy_max_J": 2500,
+      "C_stage_F": 1.25e-07
+    },
+    "workbook": "primary input-field definition; example values and synthetic diagnostic data",
+    "architecture": "latest user instructions and technical Markdown"
+  },
+  "unresolved": [
+    "capacitor transient/reverse ratings",
+    "approved stage connections",
+    "component ratings",
+    "laboratory/environmental data"
+  ]
+}

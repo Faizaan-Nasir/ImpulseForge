@@ -1,0 +1,166 @@
+{
+  "$defs": {
+    "CandidateReason": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 1500,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "reason",
+        "evidence_refs"
+      ],
+      "title": "CandidateReason",
+      "type": "object"
+    },
+    "SummaryNarrative": {
+      "additionalProperties": false,
+      "properties": {
+        "lead": {
+          "maxLength": 3000,
+          "minLength": 1,
+          "title": "Lead",
+          "type": "string"
+        },
+        "why_others_rank_lower": {
+          "items": {
+            "$ref": "#/$defs/CandidateReason"
+          },
+          "maxItems": 3,
+          "title": "Why Others Rank Lower",
+          "type": "array"
+        },
+        "needs_attention": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 12,
+          "title": "Needs Attention",
+          "type": "array"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "lead",
+        "why_others_rank_lower",
+        "needs_attention",
+        "evidence_refs"
+      ],
+      "title": "SummaryNarrative",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "generated",
+        "unavailable",
+        "provider_error",
+        "invalid_response"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "provider": {
+      "const": "gemini",
+      "default": "gemini",
+      "title": "Provider",
+      "type": "string"
+    },
+    "model": {
+      "title": "Model",
+      "type": "string"
+    },
+    "recommended_candidate_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Recommended Candidate Id"
+    },
+    "narrative": {
+      "$ref": "#/$defs/SummaryNarrative"
+    },
+    "score_breakdown": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Score Breakdown",
+      "type": "array"
+    },
+    "evidence_hash": {
+      "title": "Evidence Hash",
+      "type": "string"
+    },
+    "cached": {
+      "default": false,
+      "title": "Cached",
+      "type": "boolean"
+    },
+    "generation_seconds": {
+      "minimum": 0,
+      "title": "Generation Seconds",
+      "type": "number"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    },
+    "authority": {
+      "default": "Explanation only; backend metrics and constraint verdicts remain authoritative",
+      "title": "Authority",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "model",
+    "recommended_candidate_id",
+    "narrative",
+    "score_breakdown",
+    "evidence_hash",
+    "generation_seconds"
+  ],
+  "title": "DecisionSummary",
+  "type": "object"
+}

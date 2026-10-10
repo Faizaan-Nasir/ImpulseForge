@@ -1,0 +1,384 @@
+{
+  "$defs": {
+    "Constraint": {
+      "additionalProperties": false,
+      "properties": {
+        "constraint_id": {
+          "title": "Constraint Id",
+          "type": "string"
+        },
+        "origin": {
+          "title": "Origin",
+          "type": "string"
+        },
+        "kind": {
+          "default": "hard",
+          "enum": [
+            "hard",
+            "metadata",
+            "waveform",
+            "support"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "enforced_by": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Enforced By",
+          "type": "array"
+        },
+        "rule": {
+          "title": "Rule",
+          "type": "string"
+        },
+        "observed_value": {
+          "default": null,
+          "title": "Observed Value"
+        },
+        "limit_value": {
+          "default": null,
+          "title": "Limit Value"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "margin": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Margin"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail",
+            "unknown",
+            "not_applicable"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason_code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason Code"
+        }
+      },
+      "required": [
+        "constraint_id",
+        "origin",
+        "enforced_by",
+        "rule",
+        "status"
+      ],
+      "title": "Constraint",
+      "type": "object"
+    },
+    "Metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "front_s": {
+          "exclusiveMinimum": 0,
+          "title": "Front S",
+          "type": "number"
+        },
+        "tail_s": {
+          "exclusiveMinimum": 0,
+          "title": "Tail S",
+          "type": "number"
+        },
+        "crest_V": {
+          "exclusiveMinimum": 0,
+          "title": "Crest V",
+          "type": "number"
+        }
+      },
+      "required": [
+        "front_s",
+        "tail_s",
+        "crest_V"
+      ],
+      "title": "Metrics",
+      "type": "object"
+    },
+    "PerformanceReport": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "context_hash": {
+          "title": "Context Hash",
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/$defs/Metrics"
+        },
+        "physics": {
+          "additionalProperties": true,
+          "title": "Physics",
+          "type": "object"
+        },
+        "corrected": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Corrected"
+        },
+        "correction_status": {
+          "title": "Correction Status",
+          "type": "string"
+        },
+        "efficiency": {
+          "additionalProperties": true,
+          "title": "Efficiency",
+          "type": "object"
+        },
+        "stored_energy": {
+          "additionalProperties": true,
+          "title": "Stored Energy",
+          "type": "object"
+        },
+        "hardware": {
+          "additionalProperties": true,
+          "title": "Hardware",
+          "type": "object"
+        },
+        "model_quality": {
+          "additionalProperties": true,
+          "title": "Model Quality",
+          "type": "object"
+        },
+        "observed_accuracy": {
+          "additionalProperties": true,
+          "title": "Observed Accuracy",
+          "type": "object"
+        },
+        "runtime": {
+          "$ref": "#/$defs/RuntimePerformance"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "context_hash",
+        "target",
+        "physics",
+        "corrected",
+        "correction_status",
+        "efficiency",
+        "stored_energy",
+        "hardware",
+        "model_quality",
+        "observed_accuracy",
+        "runtime",
+        "interpretation"
+      ],
+      "title": "PerformanceReport",
+      "type": "object"
+    },
+    "RuntimePerformance": {
+      "additionalProperties": false,
+      "properties": {
+        "clock": {
+          "const": "monotonic_wall_clock",
+          "default": "monotonic_wall_clock",
+          "title": "Clock",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "stage_seconds": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "title": "Stage Seconds",
+          "type": "object"
+        },
+        "total_seconds": {
+          "minimum": 0,
+          "title": "Total Seconds",
+          "type": "number"
+        },
+        "cache_hit": {
+          "default": false,
+          "title": "Cache Hit",
+          "type": "boolean"
+        },
+        "transport_time_included": {
+          "default": false,
+          "title": "Transport Time Included",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "scope",
+        "stage_seconds",
+        "total_seconds"
+      ],
+      "title": "RuntimePerformance",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "model_version": {
+      "title": "Model Version",
+      "type": "string"
+    },
+    "support": {
+      "additionalProperties": true,
+      "title": "Support",
+      "type": "object"
+    },
+    "features": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Features",
+      "type": "object"
+    },
+    "input_effects_not_modelled": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Effects Not Modelled",
+      "type": "array"
+    },
+    "hardware_feasible": {
+      "title": "Hardware Feasible",
+      "type": "boolean"
+    },
+    "physics_constraints": {
+      "items": {
+        "$ref": "#/$defs/Constraint"
+      },
+      "title": "Physics Constraints",
+      "type": "array"
+    },
+    "corrected_constraint_checks": {
+      "items": {
+        "$ref": "#/$defs/Constraint"
+      },
+      "title": "Corrected Constraint Checks",
+      "type": "array"
+    },
+    "residuals": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Residuals"
+    },
+    "corrected_metrics": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Metrics"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "lab_validated": {
+      "title": "Lab Validated",
+      "type": "boolean"
+    },
+    "explanation_status": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Explanation Status"
+    },
+    "environment_effects": {
+      "additionalProperties": true,
+      "title": "Environment Effects",
+      "type": "object"
+    },
+    "performance": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PerformanceReport"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "model_version",
+    "support",
+    "features",
+    "input_effects_not_modelled",
+    "hardware_feasible",
+    "physics_constraints",
+    "residuals",
+    "corrected_metrics",
+    "status",
+    "lab_validated"
+  ],
+  "title": "CorrectionPrediction",
+  "type": "object"
+}

@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "WorkbookReferenceSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "N": {
+          "minimum": 1,
+          "title": "N",
+          "type": "integer"
+        },
+        "U_charge_V": {
+          "exclusiveMinimum": 0,
+          "title": "U Charge V",
+          "type": "number"
+        },
+        "Rf_actual_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Rf Actual Ohm",
+          "type": "number"
+        },
+        "Rt_actual_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Rt Actual Ohm",
+          "type": "number"
+        }
+      },
+      "required": [
+        "N",
+        "U_charge_V",
+        "Rf_actual_ohm",
+        "Rt_actual_ohm"
+      ],
+      "title": "WorkbookReferenceSettings",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "evaluated",
+        "reference_only"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "settings": {
+      "$ref": "#/$defs/WorkbookReferenceSettings"
+    },
+    "ideal": {
+      "additionalProperties": true,
+      "title": "Ideal",
+      "type": "object"
+    },
+    "record": {
+      "additionalProperties": true,
+      "title": "Record",
+      "type": "object"
+    },
+    "context": {
+      "additionalProperties": true,
+      "title": "Context",
+      "type": "object"
+    },
+    "inventory_check": {
+      "additionalProperties": true,
+      "title": "Inventory Check",
+      "type": "object"
+    },
+    "policy": {
+      "title": "Policy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "settings",
+    "ideal",
+    "record",
+    "context",
+    "inventory_check",
+    "policy"
+  ],
+  "title": "WorkbookBaseline",
+  "type": "object"
+}

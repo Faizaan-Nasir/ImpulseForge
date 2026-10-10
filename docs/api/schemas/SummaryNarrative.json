@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "CandidateReason": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 1500,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "reason",
+        "evidence_refs"
+      ],
+      "title": "CandidateReason",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "lead": {
+      "maxLength": 3000,
+      "minLength": 1,
+      "title": "Lead",
+      "type": "string"
+    },
+    "why_others_rank_lower": {
+      "items": {
+        "$ref": "#/$defs/CandidateReason"
+      },
+      "maxItems": 3,
+      "title": "Why Others Rank Lower",
+      "type": "array"
+    },
+    "needs_attention": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 12,
+      "title": "Needs Attention",
+      "type": "array"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 1,
+      "title": "Evidence Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "lead",
+    "why_others_rank_lower",
+    "needs_attention",
+    "evidence_refs"
+  ],
+  "title": "SummaryNarrative",
+  "type": "object"
+}

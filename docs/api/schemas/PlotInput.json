@@ -1,0 +1,905 @@
+{
+  "$defs": {
+    "ChargingPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "default": "fixed",
+          "enum": [
+            "fixed",
+            "seed_then_fixed"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "U_charge_V": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "U Charge V"
+        }
+      },
+      "title": "ChargingPolicy",
+      "type": "object"
+    },
+    "DPTolerances": {
+      "additionalProperties": false,
+      "properties": {
+        "front_relative": {
+          "default": 0.005,
+          "minimum": 0,
+          "title": "Front Relative",
+          "type": "number"
+        },
+        "tail_relative": {
+          "default": 0.005,
+          "minimum": 0,
+          "title": "Tail Relative",
+          "type": "number"
+        }
+      },
+      "title": "DPTolerances",
+      "type": "object"
+    },
+    "Environment": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "default": "not_recorded",
+          "enum": [
+            "not_recorded",
+            "recorded"
+          ],
+          "title": "Availability",
+          "type": "string"
+        },
+        "values": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Values",
+          "type": "object"
+        }
+      },
+      "title": "Environment",
+      "type": "object"
+    },
+    "EquipmentInputs": {
+      "additionalProperties": false,
+      "description": "Editable workbook fields; omitted/null values request the profile fallback.",
+      "properties": {
+        "N_max": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Frontend maximum stages (Hybrid Calculator B13); example 15.",
+          "title": "N Max"
+        },
+        "U_stage_max_V": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Frontend maximum charging voltage per stage in V (B14); example 200000.",
+          "title": "U Stage Max V"
+        },
+        "C_stage_F": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Frontend stage capacitance in F (B15); example 3e-6.",
+          "title": "C Stage F"
+        }
+      },
+      "title": "EquipmentInputs",
+      "type": "object"
+    },
+    "InlineInventory": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "const": "inline",
+          "default": "inline",
+          "title": "Source",
+          "type": "string"
+        },
+        "front": {
+          "items": {
+            "$ref": "#/$defs/ResistorType"
+          },
+          "title": "Front",
+          "type": "array"
+        },
+        "tail": {
+          "items": {
+            "$ref": "#/$defs/ResistorType"
+          },
+          "title": "Tail",
+          "type": "array"
+        }
+      },
+      "required": [
+        "front",
+        "tail"
+      ],
+      "title": "InlineInventory",
+      "type": "object"
+    },
+    "InventoryReference": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "const": "registered",
+          "title": "Source",
+          "type": "string"
+        },
+        "profile_id": {
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "version": {
+          "default": "1",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "profile_id"
+      ],
+      "title": "InventoryReference",
+      "type": "object"
+    },
+    "Load": {
+      "additionalProperties": false,
+      "properties": {
+        "model_id": {
+          "default": "capacitive_v1",
+          "enum": [
+            "capacitive_v1",
+            "parallel_rc_v1",
+            "parallel_rlc_v1"
+          ],
+          "title": "Model Id",
+          "type": "string"
+        },
+        "C_F": {
+          "exclusiveMinimum": 0,
+          "title": "C F",
+          "type": "number"
+        },
+        "R_ohm": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "R Ohm"
+        },
+        "L_H": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "L H"
+        },
+        "topology": {
+          "default": "shunt_at_test_terminals",
+          "title": "Topology",
+          "type": "string"
+        },
+        "terminal_connections": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Terminal Connections",
+          "type": "object"
+        }
+      },
+      "required": [
+        "C_F"
+      ],
+      "title": "Load",
+      "type": "object"
+    },
+    "Metrics": {
+      "additionalProperties": false,
+      "properties": {
+        "front_s": {
+          "exclusiveMinimum": 0,
+          "title": "Front S",
+          "type": "number"
+        },
+        "tail_s": {
+          "exclusiveMinimum": 0,
+          "title": "Tail S",
+          "type": "number"
+        },
+        "crest_V": {
+          "exclusiveMinimum": 0,
+          "title": "Crest V",
+          "type": "number"
+        }
+      },
+      "required": [
+        "front_s",
+        "tail_s",
+        "crest_V"
+      ],
+      "title": "Metrics",
+      "type": "object"
+    },
+    "ObjectiveConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "policy": {
+          "const": "worst_normalised_then_weighted",
+          "default": "worst_normalised_then_weighted",
+          "title": "Policy",
+          "type": "string"
+        },
+        "weights": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Weights",
+          "type": "object"
+        },
+        "secondary_preference": {
+          "default": "balanced",
+          "enum": [
+            "balanced",
+            "accuracy",
+            "resistors",
+            "stages",
+            "voltage"
+          ],
+          "title": "Secondary Preference",
+          "type": "string"
+        }
+      },
+      "title": "ObjectiveConfig",
+      "type": "object"
+    },
+    "Ratings": {
+      "additionalProperties": false,
+      "properties": {
+        "pulse_voltage_limit_V": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pulse Voltage Limit V"
+        },
+        "pulse_current_limit_A": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pulse Current Limit A"
+        },
+        "pulse_energy_limit_J": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pulse Energy Limit J"
+        },
+        "average_power_limit_W": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Average Power Limit W"
+        },
+        "temperature_limit_K": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Temperature Limit K"
+        },
+        "R_theta_K_per_W": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "R Theta K Per W"
+        },
+        "C_theta_J_per_K": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "C Theta J Per K"
+        },
+        "evidence_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Id"
+        }
+      },
+      "title": "Ratings",
+      "type": "object"
+    },
+    "ResistorType": {
+      "additionalProperties": false,
+      "properties": {
+        "type_id": {
+          "minLength": 1,
+          "title": "Type Id",
+          "type": "string"
+        },
+        "nominal_ohm": {
+          "exclusiveMinimum": 0,
+          "title": "Nominal Ohm",
+          "type": "number"
+        },
+        "available_quantity": {
+          "minimum": 0,
+          "title": "Available Quantity",
+          "type": "integer"
+        },
+        "quantity_scope": {
+          "default": "per_stage",
+          "enum": [
+            "per_stage",
+            "global"
+          ],
+          "title": "Quantity Scope",
+          "type": "string"
+        },
+        "tolerance_fraction": {
+          "default": 0,
+          "exclusiveMaximum": 1,
+          "minimum": 0,
+          "title": "Tolerance Fraction",
+          "type": "number"
+        },
+        "approved": {
+          "default": false,
+          "title": "Approved",
+          "type": "boolean"
+        },
+        "ratings": {
+          "$ref": "#/$defs/Ratings"
+        }
+      },
+      "required": [
+        "type_id",
+        "nominal_ohm",
+        "available_quantity"
+      ],
+      "title": "ResistorType",
+      "type": "object"
+    },
+    "RunRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "purpose": {
+          "default": "diagnostic",
+          "enum": [
+            "diagnostic",
+            "recommendation"
+          ],
+          "title": "Purpose",
+          "type": "string"
+        },
+        "equipment_profile_id": {
+          "default": "haefely_pdf_v1",
+          "title": "Equipment Profile Id",
+          "type": "string"
+        },
+        "equipment_inputs": {
+          "$ref": "#/$defs/EquipmentInputs"
+        },
+        "inventory": {
+          "discriminator": {
+            "mapping": {
+              "inline": "#/$defs/InlineInventory",
+              "registered": "#/$defs/InventoryReference"
+            },
+            "propertyName": "source"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/InlineInventory"
+            },
+            {
+              "$ref": "#/$defs/InventoryReference"
+            }
+          ],
+          "title": "Inventory"
+        },
+        "impulse_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "Lightning",
+                "Switching"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Impulse Type"
+        },
+        "impulse_profile_id": {
+          "default": "lightning_project_v1",
+          "title": "Impulse Profile Id",
+          "type": "string"
+        },
+        "system_max_voltage_V": {
+          "default": 400000,
+          "exclusiveMinimum": 0,
+          "title": "System Max Voltage V",
+          "type": "number"
+        },
+        "target": {
+          "$ref": "#/$defs/Target"
+        },
+        "load": {
+          "$ref": "#/$defs/Load"
+        },
+        "setup": {
+          "$ref": "#/$defs/Setup"
+        },
+        "environment": {
+          "$ref": "#/$defs/Environment"
+        },
+        "expected_voltage_efficiency": {
+          "default": 0.82,
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Expected Voltage Efficiency",
+          "type": "number"
+        },
+        "minimum_voltage_efficiency": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum Voltage Efficiency"
+        },
+        "charging_policy": {
+          "$ref": "#/$defs/ChargingPolicy"
+        },
+        "dp_tolerances": {
+          "$ref": "#/$defs/DPTolerances"
+        },
+        "search": {
+          "$ref": "#/$defs/Search"
+        },
+        "objective": {
+          "$ref": "#/$defs/ObjectiveConfig"
+        },
+        "physics_mode": {
+          "default": "exact",
+          "enum": [
+            "calculator",
+            "exact"
+          ],
+          "title": "Physics Mode",
+          "type": "string"
+        },
+        "model_version": {
+          "default": "residual-tabpfn-v2-diagnostic-v1",
+          "title": "Model Version",
+          "type": "string"
+        },
+        "ml_domain_policy": {
+          "default": "strict",
+          "enum": [
+            "strict",
+            "diagnostic_extrapolation"
+          ],
+          "title": "Ml Domain Policy",
+          "type": "string"
+        },
+        "seed": {
+          "default": 42,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "inventory",
+        "target",
+        "load",
+        "charging_policy"
+      ],
+      "title": "RunRequest",
+      "type": "object"
+    },
+    "Search": {
+      "additionalProperties": false,
+      "properties": {
+        "max_proposals": {
+          "default": 100,
+          "maximum": 10000,
+          "minimum": 1,
+          "title": "Max Proposals",
+          "type": "integer"
+        },
+        "max_forward_evaluations": {
+          "default": 100,
+          "maximum": 10000,
+          "minimum": 1,
+          "title": "Max Forward Evaluations",
+          "type": "integer"
+        },
+        "max_ml_evaluations": {
+          "default": 100,
+          "maximum": 10000,
+          "minimum": 1,
+          "title": "Max Ml Evaluations",
+          "type": "integer"
+        },
+        "dp_max_parts": {
+          "default": 4,
+          "maximum": 12,
+          "minimum": 1,
+          "title": "Dp Max Parts",
+          "type": "integer"
+        },
+        "dp_max_states": {
+          "default": 100000,
+          "maximum": 1000000,
+          "minimum": 1,
+          "title": "Dp Max States",
+          "type": "integer"
+        },
+        "dp_seconds": {
+          "default": 10,
+          "exclusiveMinimum": 0,
+          "title": "Dp Seconds",
+          "type": "number"
+        },
+        "cp_sat_seconds": {
+          "default": 2,
+          "exclusiveMinimum": 0,
+          "title": "Cp Sat Seconds",
+          "type": "number"
+        },
+        "cp_pair_retries": {
+          "default": 5,
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Cp Pair Retries",
+          "type": "integer"
+        },
+        "repeat_window": {
+          "default": 10,
+          "minimum": 1,
+          "title": "Repeat Window",
+          "type": "integer"
+        },
+        "archive_stagnation_window": {
+          "default": 20,
+          "minimum": 1,
+          "title": "Archive Stagnation Window",
+          "type": "integer"
+        },
+        "wall_time_seconds": {
+          "default": 300,
+          "exclusiveMinimum": 0,
+          "title": "Wall Time Seconds",
+          "type": "number"
+        }
+      },
+      "title": "Search",
+      "type": "object"
+    },
+    "Setup": {
+      "additionalProperties": false,
+      "properties": {
+        "basic_C_F": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Basic C F",
+          "type": "number"
+        },
+        "shot_rate_per_minute": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shot Rate Per Minute"
+        },
+        "divider_C_F": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Divider C F",
+          "type": "number"
+        },
+        "stray_C_F": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Stray C F",
+          "type": "number"
+        },
+        "stray_L_H": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Stray L H",
+          "type": "number"
+        },
+        "basic_capacitance_inclusion": {
+          "default": "add_separately",
+          "enum": [
+            "add_separately",
+            "already_included",
+            "benchmark_omitted"
+          ],
+          "title": "Basic Capacitance Inclusion",
+          "type": "string"
+        },
+        "external_front_series_ohm": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "External Front Series Ohm"
+        },
+        "auxiliary_states": {
+          "additionalProperties": {
+            "enum": [
+              "inactive",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "title": "Auxiliary States",
+          "type": "object"
+        },
+        "circuit_evidence_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Circuit Evidence Id"
+        },
+        "leads": {
+          "additionalProperties": true,
+          "title": "Leads",
+          "type": "object"
+        },
+        "return_path": {
+          "additionalProperties": true,
+          "title": "Return Path",
+          "type": "object"
+        },
+        "geometry": {
+          "additionalProperties": true,
+          "title": "Geometry",
+          "type": "object"
+        }
+      },
+      "title": "Setup",
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "properties": {
+        "crest_V": {
+          "exclusiveMinimum": 0,
+          "title": "Crest V",
+          "type": "number"
+        },
+        "front_s": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Front S"
+        },
+        "tail_s": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tail S"
+        },
+        "tolerances": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WaveformTolerances"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "crest_V"
+      ],
+      "title": "Target",
+      "type": "object"
+    },
+    "WaveformTolerances": {
+      "additionalProperties": false,
+      "properties": {
+        "front": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Front",
+          "type": "number"
+        },
+        "tail": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Tail",
+          "type": "number"
+        },
+        "crest": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Crest",
+          "type": "number"
+        }
+      },
+      "required": [
+        "front",
+        "tail",
+        "crest"
+      ],
+      "title": "WaveformTolerances",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "request": {
+      "$ref": "#/$defs/RunRequest"
+    },
+    "candidate_metrics": {
+      "items": {
+        "$ref": "#/$defs/Metrics"
+      },
+      "maxItems": 3,
+      "title": "Candidate Metrics",
+      "type": "array"
+    }
+  },
+  "required": [
+    "request"
+  ],
+  "title": "PlotInput",
+  "type": "object"
+}

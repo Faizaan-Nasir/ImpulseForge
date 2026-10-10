@@ -1,0 +1,63 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "model_id": {
+      "default": "capacitive_v1",
+      "enum": [
+        "capacitive_v1",
+        "parallel_rc_v1",
+        "parallel_rlc_v1"
+      ],
+      "title": "Model Id",
+      "type": "string"
+    },
+    "C_F": {
+      "exclusiveMinimum": 0,
+      "title": "C F",
+      "type": "number"
+    },
+    "R_ohm": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "R Ohm"
+    },
+    "L_H": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "L H"
+    },
+    "topology": {
+      "default": "shunt_at_test_terminals",
+      "title": "Topology",
+      "type": "string"
+    },
+    "terminal_connections": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Terminal Connections",
+      "type": "object"
+    }
+  },
+  "required": [
+    "C_F"
+  ],
+  "title": "Load",
+  "type": "object"
+}

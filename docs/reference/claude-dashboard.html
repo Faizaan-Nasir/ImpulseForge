@@ -1,0 +1,1965 @@
+<!doctype html><html><head><!-- frame-runtime --><script>window.__FRAME_PREAMBLE={"v":1,"capabilities":{"artifact":"artifact.w_ePPE-a.js","assets":"assets.DOAjpBS9.js","comments":"comments.BcqPhVn7.js","db":"db.zFlAA4qL.js","dictation":"dictation.f3j7VXQ8.js","downloads":"downloads.axDW2QAi.js","embed":"embed.SWCZLzn6.js","endpoints":"endpoints.BPfoKaE1.js","files":"files.IkpCjcgM.js","mcp":"mcp.kl0G36TA.js","network":"network.B5UA9Su4.js","permissions":"permissions.6yWoDecA.js","reads":"reads.Bgov9hIw.js","room":"room.Dy3vHyq9.js","sample":"sample.D5wHJkl_.js","self":"artifact.w_ePPE-a.js","user":"user.CB0zJsP2.js"},"transforms":"_transforms.DF0fPd9f.js","comments":"_comments.CVOoGJSh.js","translate":"_translate.DqxC5ek1.js","ldx":"_ldx.B4FSryPi.js"}                   </script><script>(function(){"use strict";function fr(t){return t==="cookie"||t==="query"?t:void 0}function dr(t){return typeof t=="number"&&Number.isSafeInteger(t)&&t>0?t:void 0}var to=3e5;function hr(t,e){try{const r=t("navigation")[0],n=[r.responseStart,r.redirectEnd-r.redirectStart,r.domContentLoadedEventStart,e(),r.connectEnd-r.domainLookupStart,r.responseStart-r.requestStart];r.requestStart>0||(n.length=4);for(let a=0;a<n.length;a++)if(n[a]>=0&&n[a]<=3e5)n[a]=n[a]|0;else{if(a<4)return;n.length=4}return n}catch{return}}var pr=["light","dark","system"],mr=/^[A-Za-z0-9_-]{1,64}$/,Lt=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,vr=new Set(["class","hidden","value","checked","style","title","alt","placeholder","lang","dir","role","tabindex","disabled","readonly","contenteditable","open","colspan","rowspan"]);function _r(t){const e=t.toLowerCase();return e.startsWith("data-")||e.startsWith("aria-")||vr.has(e)}var Ot="data-ldx-props";function yr(t,e){if(e.toLowerCase()===Ot)return!0;const r=t.getAttribute(Ot);if(r===null)return!1;try{const n=JSON.parse(r);if(n===null||typeof n!="object"||Array.isArray(n))return!0;const a=e.toLowerCase();return Object.keys(n).some(s=>s.toLowerCase()===a)}catch{return!0}}var ro="http://www.w3.org/1999/xhtml",gr="http://www.w3.org/2000/svg",wr=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),br=new Set(["script","style"]);function Er(t){const e=t.localName.toLowerCase();return t.namespaceURI==="http://www.w3.org/1999/xhtml"?!wr.has(e):t.namespaceURI===gr?!br.has(e):!1}function tt(t,e){return t===e||(t===160||t===32)&&(e===160||e===32)}function Sr(t,e){const r=t.length,n=e.length;let a=0;for(;a<r&&a<n&&tt(t.charCodeAt(a),e.charCodeAt(a));)a++;let s=0;for(;s<r-a&&s<n-a&&tt(t.charCodeAt(r-1-s),e.charCodeAt(n-1-s));)s++;return{p:a,s}}function kr(t,e){const r=t.firstChild;if(t.childNodes.length!==1||r===null||r.nodeType!==Node.TEXT_NODE){t.textContent=e;return}const n=r.data,a=n.length,s=e.length,{p:l,s:c}=Sr(n,e);l===a&&c===0&&a===s||r.replaceData(l,a-l-c,e.slice(l,s-c));const T=r.data,w=t.ownerDocument.getSelection?.()??null,_=w!==null&&w.rangeCount>0&&(w.anchorNode===r||w.focusNode===r)?{anchor:w.anchorNode,anchorOffset:w.anchorOffset,focus:w.focusNode,focusOffset:w.focusOffset}:null;let h=-1,A=-1;for(let p=0;p<T.length&&p<e.length;p++){const j=T.charCodeAt(p),R=e.charCodeAt(p);j!==R&&tt(j,R)&&(h<0&&(h=p),A=p)}const O=h>=0;if(O&&r.replaceData(h,A-h+1,e.slice(h,A+1)),O&&_!==null&&_.anchor!==null&&_.focus!==null)try{w.setBaseAndExtent(_.anchor,_.anchorOffset,_.focus,_.focusOffset)}catch{}}var Ar=new Set(["html","head","body","frameset"]);function Rr(t){return t.namespaceURI==="http://www.w3.org/1999/xhtml"&&Ar.has(t.localName)}function Tr(t){if(t===null||typeof t!="object")return!1;const e=t;if(typeof e.target!="string"||!mr.test(e.target)||e.text!==void 0&&typeof e.text!="string")return!1;if(e.attrsSet!==void 0){if(e.attrsSet===null||typeof e.attrsSet!="object")return!1;for(const[r,n]of Object.entries(e.attrsSet))if(!Lt.test(r)||typeof n!="string")return!1}if(e.attrsRemoved!==void 0){if(!Array.isArray(e.attrsRemoved))return!1;for(const r of e.attrsRemoved)if(typeof r!="string"||!Lt.test(r))return!1}return!0}function Lr(t,e){if(t===null||typeof t!="object")return!1;const{seq:r,elements:n}=t;if(typeof r!="number"||!Number.isSafeInteger(r)||!Array.isArray(n)||n.length===0||n.length>64)return!1;for(let a=0;a<n.length;a++)if(!e(n[a]))return!1;return!0}function Or(t){return t===null||typeof t!="object"?!1:Lr(t.__frame_patch,Tr)}function Mr(t){if(t===null||typeof t!="object")return!1;const e=t.__frame_init;return e!==null&&typeof e=="object"}function Pr(t){return t!==null&&typeof t=="object"&&t.__frame_size_poke===!0}function Nr(t){if(t===null||typeof t!="object")return!1;const e=t.__frame_host_visible;return e!==null&&typeof e=="object"&&typeof e.visible=="boolean"}function Cr(t){if(t===null||typeof t!="object")return!1;const e=t.__frame_theme;if(e===null||typeof e!="object")return!1;const r=e.theme;return typeof r=="string"&&pr.includes(r)}var Fr=["ok","empty","snapshot_error","snapshot_timeout","unclonable","oversize","unavailable","restore_error","withheld"],jr=["TypeError","RangeError","ReferenceError","SyntaxError","DataCloneError","QuotaExceededError","AbortError","TimeoutError","SecurityError","Error","other"];function xr(t){return typeof t=="string"&&jr.includes(t)?t:"other"}var Ir=Object.freeze({until:null,now:!1}),Dr="__claude_hot",Hr="__claude_hot_in",Br=/^__claude_hot(?:_in)?(?::|$)/,Mt=/^[0-9a-z]{1,32}$/,rt=t=>t===void 0?Dr:"__claude_hot:"+t,Le=t=>t===void 0?Hr:"__claude_hot_in:"+t;function qr(t,e){const r=[];for(let n=0;n<t.length;n++){const a=t.key(n);a!==null&&a!==e&&Br.test(a)&&r.push(a)}for(const n of r)t.removeItem(n)}function Ur(t){let e=null;try{e=q(JSON.parse(t)?.hot)}catch{return null}return e===null||typeof e.k!="string"||!Mt.test(e.k)?null:he(e.g)?{k:e.k,g:e.g}:{k:e.k}}var no=262144,Kr=3e3,Gr=5e3,Pt=/^[a-z0-9._:-]{1,64}$/,$r=["none","hot-restart","hard-reload"],zr=["asset","doc","added","removed"],Wr=1500,Vr=/^[0-9a-f]{64}$/;function q(t){return t!==null&&typeof t=="object"?t:null}function he(t){return typeof t=="number"&&Number.isInteger(t)&&t>=0&&t<2**31}function Nt(t){return t===void 0||typeof t=="number"&&Number.isFinite(t)}function Xr(t){return t===void 0||typeof t=="string"&&Pt.test(t)}function Ct(t){const e=q(t);return e!==null&&(e.until===null||typeof e.until=="number"&&Number.isFinite(e.until))&&typeof e.now=="boolean"}function nt(t){const e=q(t);return e!==null&&typeof e.ver=="string"&&e.ver.length<=128&&Nt(e.seq)&&typeof e.handoff=="string"&&Fr.includes(e.handoff)&&Xr(e.note)}function Ft(t){const e=q(t);return e!==null&&he(e.gen)&&(e.phase==="final"||e.phase==="pending")&&(e.from===null||nt(e.from))}function Yr(t){const e=q(t);return e!==null&&e.kv===1&&he(e.gen)&&nt(e.from)&&Object.hasOwn(e,"data")}function Jr(t){const e=q(t);return e!==null&&e.__frame_hot_snapshot===!0&&he(e.gen)&&typeof e.timeoutMs=="number"&&e.timeoutMs>=0&&e.timeoutMs<=6e4&&(e.handoff===void 0||typeof e.handoff=="boolean")&&(e.deadline===void 0||Ct(e.deadline))&&Nt(e.seq)&&(e.note===void 0||typeof e.note=="string")&&(e.key===void 0||typeof e.key=="string")}function Zr(t){const e=q(t);return e!==null&&e.__frame_hot_start===!0&&he(e.gen)&&nt(e.from)}function Qr(t){return typeof t=="string"&&t.length>=1&&t.length<=128}function jt(t){return q(t)!==null&&!Array.isArray(t)}function en(t){const e=q(t);return e!==null&&e.__frame_cap_grant===!0&&typeof e.cap=="string"&&Qr(e.ver)&&(e.grant===void 0||jt(e.grant))&&(e.budgets===void 0||jt(e.budgets)&&Object.values(e.budgets).every(Number.isFinite))&&(e.brokerGen===void 0||he(e.brokerGen))}function tn(t){const e=q(t);return e!==null&&e.__frame_cap_rewired===!0&&(e.caps===void 0||Array.isArray(e.caps)&&e.caps.every(r=>typeof r=="string"))&&(e.brokerGen===void 0||he(e.brokerGen))}function Ge(t){const e=q(t);return e!==null&&typeof e.ver=="string"&&e.ver.length<=128&&Number.isFinite(e.seq)}function xt(t){if(t==null||typeof t=="string")return!0;const e=q(t);return e!==null&&typeof e.doc=="string"&&typeof e.profile=="string"}function rn(t){const e=q(t);return e!==null&&typeof e.path=="string"&&zr.includes(e.kind)&&xt(e.from)&&xt(e.to)}function nn(t){return t===null?null:Object.freeze(t.filter(rn))}function on(t){const e=q(t);return e!==null&&e.__frame_hot_update===!0&&Number.isFinite(e.id)&&Ge(e.from)&&Ge(e.to)&&(e.changed===null||Array.isArray(e.changed))&&$r.includes(e.required)&&Ct(e.deadline)&&typeof e.verdictTimeoutMs=="number"&&e.verdictTimeoutMs>=0&&e.verdictTimeoutMs<=6e4&&(e.preflight===void 0||typeof e.preflight=="string"&&Vr.test(e.preflight))}function an(t){const e=q(t);return e!==null&&e.__frame_hot_readdress===!0&&Ge(e.from)&&Ge(e.to)}var pe=/^[\w.-]+\.js$/;function sn(t,e,r){return r?"inert":typeof e=="string"&&pe.test(e)?t?[e]:"inert":t?"inert":"framed"}var It=Object.freeze({[Symbol("claude.hot.restart")]:!0});function Dt(t,e){let r;try{r=t??sessionStorage}catch{return null}const n=rt(e?.k),a=Le(e?.k);let s=null;try{s=r.getItem(n)}catch{}try{r.removeItem(n)}catch{}try{qr(r,a)}catch{}let l=null;if(s!==null&&!(e!==null&&e.g===void 0))try{const c=JSON.parse(s);Yr(c)&&(e===null||c.gen===e.g)&&(l=c)}catch{}if(l===null)try{r.removeItem(a)}catch{}return l}function Ht(){const t=/^\/_f\/([^/]{1,128})\//.exec(location.pathname);return t?t[1]:""}var ln=/^[^/\\?#]{1,128}$/,ot=t=>ln.test(t)&&t!=="."&&t!=="..";function Bt(t,e,r){const n=new URL(t),a="/_f/"+e+"/";if(!e||!n.pathname.startsWith(a)||!ot(r))return null;const s=n.search.slice(1).split("&").filter(l=>!/^__frame_t(?:=|$)/.test(l)).join("&");return n.origin+"/_f/"+r+"/"+n.pathname.slice(a.length)+(s?"?"+s:"")+n.hash}var $e="{}";function Oe(t){if(!t)return null;const e={ver:t.ver,handoff:t.handoff};return t.seq!==void 0&&(e.seq=t.seq),t.note!==void 0&&(e.note=t.note),e}function qt(t,e){return t!==null&&t.note===void 0&&e?.note!==void 0?{...t,note:e.note}:t}function Ut(t){const e=t?.k;return e!==null&&typeof e=="object"?e:void 0}function cn(t,e,r,n=null){const a=setTimeout,s=clearTimeout,l=queueMicrotask,c=performance.now.bind(performance),T=new TextEncoder;let w=null,_=null;try{w=history,_=w.replaceState.bind(w)}catch{}const h=(...o)=>{try{console.warn(...o)}catch{}};let A=Ht(),O=null;try{O=sessionStorage}catch{}const p={storage:O,fetch:typeof fetch=="function"?fetch.bind(globalThis):null,entry:location.origin+location.pathname+location.search,ver:A,priors:[],key:n?.k};let j=n?.k;const R=typeof requestAnimationFrame=="function"?requestAnimationFrame:o=>a(()=>o(c()),16);let y=e?.data??{},b=Oe(e?.from),x=e?.gen??0,D=e!==null,B=!1,G=!1,H=null,be=!1;const Fe=new AbortController;let je=null,U=null,Ee=null,xe=!1,le=()=>{};const ce=new Promise(o=>{le=o});let ve=!1,u=!1,E=!1,m,g=null,I=!1,$=!1,K=!1,te=!1,Y=!1,_e=!1;const ye=o=>{for(const f of[rt(o),Le(o)])try{O?.removeItem(f)}catch{}},z=(o,f)=>{try{f!==null&&r.post(o,f)}catch{}},Ie=()=>Y||=K&&(U===null||te),J=()=>{const o={__frame_hot:!0,ready:U!==null,accept:Ee!==null,demand:!0};_e=!Y,_e&&(o.booting=!0),ve&&(o.readData=!0),E&&(o.threw=!0),g?.assess&&(o.preflight=!0),z(o,H)};let De=!1,re=!1,ue=!1,He=!1;const Je=()=>{De||!be||ue||(De=!0,z({__frame_reveal_hold:!0},"*"))},Se=()=>new Promise(o=>{let f,d=0;const v=M=>{if(f===void 0)f=M;else if(M!==f||++d>=8){o();return}try{R(v)}catch{o()}};try{R(v)}catch{o()}}),Be=()=>{ue=!0,z({__frame_reveal_ready:!0},"*")},qe=o=>{re||(re=!0,o.then(f=>{if(f===!1)return;let d=null;try{d=g?.settle?.()??null}catch{}return(d===null?Se():new Promise(v=>{a(v,50),Promise.resolve(d).then(v,v)}).then(Se)).then(Be)}))},gt=()=>{if(He||!ue)return;He=!0;const o=()=>{try{g?.afterReveal?.()}catch{}};o(),Se().then(()=>{o(),Be()})},ee=(o=!1)=>{if(xe||U===null||!D||!G)return;xe=!0;const f=U,d=y;l(()=>{let v;try{v=f(d)}catch(P){throw le(!1),P}let M=!1;try{M=typeof v?.then=="function"}catch{}if(!M){le(!0);return}Promise.resolve(v).then(()=>le(!0),P=>{le(!1),l(()=>{throw P})})}),qe(o?ce:r.dcl.then(()=>ce))},fe=o=>typeof o=="string"&&Pt.test(o)?o:void 0,ke=o=>{const f={__frame_hot_restart:!0},d=fe(o?.note);d!==void 0&&(f.note=d),o?.required==="hard-reload"&&(f.required="hard-reload"),z(f,H)},Ue=Object.freeze({get data(){return G||(u=!0),!D&&!ve&&(ve=!0,G&&J()),y},get from(){return b},get gen(){return x},signal:Fe.signal,snapshot(o){typeof o=="function"&&(je=o)},ready(o){typeof o!="function"||U!==null||(U=o,Je(),J(),B&&z({__frame_hot_ready:!0,gen:x},H),ee())},accept(o){typeof o=="function"&&(Ee=o,J())},restart(o){const f={note:o?.note,required:o?.required};if(G){ke(f);return}const d=m;m={note:fe(d?.note)??f.note,required:d?.required==="hard-reload"||f.required==="hard-reload"?"hard-reload":void 0}}});let i=null,S=()=>{};const k=new Promise(o=>{S=o});let N=null;const Z=()=>N??=r.dcl.then(()=>{let o=!1;try{o=i!==null&&i.expect()}catch{}if(!o)return;const f=i.maxMs;return new Promise(d=>{k.then(d),a(d,f)})}),Q=()=>{if(!I||$||g===null)return;$=!0;const o=g;Z().then(()=>{try{ue||o.afterStart(Ut(e),!1)}catch{}})},de=o=>{e!==null&&u&&(ve=!0),y={},b=null,x=0;try{O?.removeItem(Le(n?.k))}catch{}e!==null&&!o&&qe(r.dcl.then(()=>U!==null?ce:void 0))},$n=()=>{I=!0,qe(Z().then(()=>U!==null?ce:void 0)),Q()};try{addEventListener("error",()=>{E||U!==null||(E=!0,J())})}catch{}const sr=()=>{a(()=>{!Y&&Ie()&&_e&&J()},0)};try{K=document.readyState==="complete",K||addEventListener("load",()=>{K=!0,sr()},{once:!0})}catch{K=!0}Ie(),ce.then(()=>{te=!0,sr()});let ge=-1,wt,bt,Ke=!0,Et=!1,St,Ze=null;const kt=o=>{const f=Ze===null;Ze=Ke&&o[0]!=="withheld"?o:["withheld",o[1],$e];let d=o[0];if(Ke&&d!=="withheld"){const M={ver:A,handoff:d};wt!==void 0&&(M.seq=wt),bt!==void 0&&(M.note=bt);try{if(O===null)throw new Error("no storage");O.setItem(rt(j),'{"kv":1,"gen":'+ge+',"from":'+JSON.stringify(M)+(St!==void 0?',"k":'+JSON.stringify(St):"")+',"data":'+(d==="ok"?o[2]:$e)+"}")}catch{d="unavailable"}}else{d="withheld",ye(j);try{g?.release?.()}catch{}}const v={__frame_hot_snapshotted:!0,gen:ge,handoff:d,bytes:o[1]};o[3]!==void 0&&(v.errName=o[3]),z(v,H),f&&(d==="snapshot_error"||d==="unclonable"||d==="oversize")&&h("claude.hot: snapshot",d,o[3])},Ae=o=>{try{return xr(o?.name)}catch{return"other"}},Re=(o,f,d=0)=>kt(f===void 0?[o,d,$e]:[o,d,$e,Ae(f)]),zn=o=>{if(o.gen<=ge)return;const f=ge>=0;if(ge=o.gen,wt=o.seq,bt=fe(o.note),typeof o.key=="string"&&Mt.test(o.key)&&o.key!==j&&(ye(j),j=o.key),Ke&&=o.handoff!==!1,f){Ze!==null?kt(Ze):Et&&z({__frame_hot_held:!0,gen:ge},H);return}Fe.abort();const d=Object.freeze({handoff:Ke,timeoutMs:o.timeoutMs,deadline:o.deadline??Ir}),v=je,M=()=>{if(Ke)try{St=g?.capture()}catch{}if(v===null){Re("empty");return}let L=!1;const W=a(()=>{L||(L=!0,Re("snapshot_timeout"))},Math.max(0,d.timeoutMs));Promise.resolve().then(()=>v(d)).then(Te=>{if(L)return;L=!0,s(W);let ne;try{ne=JSON.stringify(Te)}catch(At){Re("unclonable",At);return}if(typeof ne!="string"){Re("unclonable");return}let oe=ne.length;try{oe=T.encode(ne).length}catch{}if(oe>262144){Re("oversize",void 0,oe);return}kt(["ok",oe,ne])},Te=>{L||(L=!0,s(W),Re("snapshot_error",Te))})};let P=null;try{P=g?.holdForIme()??null}catch{}if(P===null)M();else{Et=!0,z({__frame_hot_held:!0,gen:ge},H);const L=()=>{Et=!1,M()};P.then(L,L)}},Wn=o=>{if(!B||D||U===null||o.gen!==x)return;let f=null;try{f=Dt(O,n&&{k:n.k,g:o.gen})}catch{}if(f!==null&&f.gen!==o.gen){f=null;try{O?.removeItem(Le(n?.k))}catch{}}y=f?.data??{},b=qt(Oe(f?.from??o.from),Oe(o.from)),f!==null&&(x=f.gen),D=!0,B=!1;const d=Ut(f);ce.then(v=>{try{v&&g?.afterStart(d,!0)}catch{}}),ee(!0)},ir=o=>{const f=A,d=p.entry;let v="",M,P=null;try{if(v=location.href,M=w.state,P=Bt(v,f,o),P!==null)if(_(M,"",P),location.pathname.startsWith("/_f/"+o+"/"))P=location.href;else return{failed:"navigate event canceled"}}catch(L){return{failed:Ae(L)}}A=p.ver=o,p.priors.push(f)>8&&p.priors.splice(1,1);try{p.entry=Bt(d,f,o)??d}catch{}return[P,f,d,v,M]},Vn=({from:o,to:f})=>{let d,v;if(!ot(f.ver))d="adopt_failed",v="not a version path segment";else if(f.ver===A)d="adopted";else if(!A||o.ver!==A)d="stale";else{const P=ir(f.ver);"failed"in P?(d="adopt_failed",v=P.failed):d=P[0]===null?"adopt_skipped":"adopted"}v!==void 0&&h(`claude.hot: could not move this page's URL to its new version folder /_f/${f.ver}/ (${v})`);const M={__frame_hot_readdressed:!0,to:f.ver,at:A,outcome:d};z(M,H)};let Qe=0;const Xn=o=>{const f=Ee;if(f===null||o.id<=Qe)return;Qe=o.id;const d=g?.assess;if(o.preflight===void 0||d===void 0){lr(o,f);return}let v=!1;const M=W=>{v||(v=!0,s(L),o.id===Qe&&lr(o,f,W))},P=()=>M(d.timeout(o)),L=a(P,Wr+100);d.run(o,window).then(M,P)},lr=(o,f,d)=>{let v,M=!1,P=!1,L,W,Te=null;const ne=C=>{if(P)return!1;if(L!==void 0&&L!==C)return h(`claude.hot: u.${C}() ignored - u.${L}() was called first`),!1;const ae=L===void 0;return L=C,ae},oe=C=>{L="restart",h(`claude.hot: ${C} - restarting`)},At=()=>{if(!ne("adopt")||o.id!==Qe)return;const C=o.to.ver;if(et.required!=="none"){oe(`u.adopt() needs required 'none', it is '${et.required}'`);return}if(!ot(C)){oe("u.adopt() cannot address this version");return}if(!A||C===A)return;const ae=ir(C);if("failed"in ae){W="adopt_failed",oe(`adopt_failed ${ae.failed}; URL not changed`);return}const[X,Tt,Zn,ur,Qn]=ae;X===null?(W="adopt_skipped",h(`claude.hot: adopt_skipped - page already left /_f/${Tt}/; URL not changed, update still applied`)):W="adopted",Te=()=>{if(A===C){if(X!==null)try{if(location.href!==X)h("claude.hot: adopt_revert_skipped - update not applied; URL left where the page navigated");else{if(_(Qn,"",ur),location.href!==ur){h("claude.hot: adopt_revert_failed navigate event canceled - URL still at the new version");return}W="adopt_reverted",h("claude.hot: adopt_reverted - adopt() was called but the handler threw; URL restored")}}catch(eo){h(`claude.hot: adopt_revert_failed ${Ae(eo)} - URL still at the new version`);return}A=p.ver=Tt,p.entry=Zn,p.priors[p.priors.length-1]===Tt&&p.priors.pop(),X===null&&(W=void 0)}}},et=Object.freeze({from:{ver:o.from.ver,seq:o.from.seq},to:{ver:o.to.ver,seq:o.to.seq},changed:nn(o.changed),required:o.required,deadline:o.deadline,adopt:At,defer(){return ne("defer")&&et.deadline.now&&oe("u.defer() past the deadline"),It},restart(C){return ne("restart"),L==="restart"&&!P&&(v??=fe(C?.note),M||=C?.required==="hard-reload"),It},...d?.update}),Yn=(C,ae)=>{P=!0,C==="threw"?(Te?.(),v??=Ae(ae).toLowerCase()):L===void 0&&h(C==="timeout"?"claude.hot: accept handler did not answer in time - restarting":"claude.hot: accept handler settled without defer/restart/adopt - restarting");const X={__frame_hot_verdict:!0,id:o.id};X.verdict=C==="threw"||L===void 0||L==="restart"?"restart":L==="adopt"?"applied":"deferred",X.verdict==="restart"&&(M&&(X.required="hard-reload"),v!==void 0&&(X.note=v)),W!==void 0&&(X.verdict==="applied"||W!=="adopted")&&(X.adopt=W),z(Object.assign(X,d?.verdict),H)};let cr=!1;const Rt=(C,ae)=>cr?!1:(cr=!0,s(Jn),Yn(C,ae),!0),Jn=a(()=>Rt("timeout"),o.verdictTimeoutMs);Promise.resolve().then(()=>f(et)).then(()=>Rt("settled"),C=>{!Rt("threw",C)&&L==="adopt"&&ke({note:Ae(C).toLowerCase()}),h("claude.hot: accept",Ae(C))})};try{t.hot===void 0&&Object.defineProperty(t,"hot",{value:Ue,writable:!1,configurable:!1,enumerable:!1})}catch{}return{hot:Ue,boot:p,afterConnect(){be=!0,(e!==null||U!==null)&&Je()},onInit(o,f){H=f,G=!0;const d=Ft(o)?o:null;d?.phase==="final"&&e!==null&&e.gen===d.gen?(D=!0,b=qt(b,Oe(d.from)),$n()):(B=d?.phase==="pending",de(B),D=!B,x=d?.gen??0,b=Oe(d?.from)),J(),_e&&a(()=>{Y||(Y=!0,J())},Gr),B&&U!==null&&z({__frame_hot_ready:!0,gen:x},f),m!==void 0&&(ke(m),m=void 0),ee()},onNoInit(){G=!0,de(!1),D=!0,ee()},onShell(o){return o?.__frame_revealed===!0?(gt(),!1):Jr(o)?(zn(o),!0):Zr(o)?(Wn(o),!0):on(o)?(Xn(o),!0):an(o)?(Vn(o),!0):!1},attachExtras(o){g=o,Q(),o.assess&&J()},inSlot:()=>Le(j),hydration(o,f){i??={expect:o,maxMs:f}},hydrated(){S()},carried(){return D?y:{}},presented:()=>ue}}var oo="frame_ldx_runtime",un="frame_ldx_build",ao="script#an-form",fn=256;function at(t,e,r){for(const n of t)r(n)&&t.delete(n);t.size>=fn&&!t.has(e)&&t.delete(t.values().next().value),t.add(e)}function Me(t,e,r,n){try{const a=t[e];if(typeof a!="function")return;t[e]=function(...s){if(n){let c;try{c=n(this)}catch{}if(c!==void 0)return c}const l=a.apply(this,s);try{r?.(this)}catch{}return l}}catch{}}var dn=()=>{},st;function hn(){if(st)return st;const t={media:new Set,contexts:new Set,wakeLocks:new Set,gate:null,refuse:null,onStart:null,onStop:null};st=t;const e=l=>t.gate?.(l),r=l=>{t.onStop?.(l)},n=window.HTMLMediaElement?.prototype;n&&(Me(n,"play",l=>{at(t.media,l,c=>c.paused),t.onStart?.(l)},e),Me(n,"pause",r));const a=window.AudioContext,s=window.AudioNode?.prototype;a&&s&&(Me(s,"connect",l=>{const c=l.context;c instanceof a&&(at(t.contexts,c,T=>T.state==="closed"),t.onStart?.(c))}),Me(a.prototype,"resume",void 0,e),Me(a.prototype,"suspend",r));try{const l=window.WakeLock?.prototype,c=l?.request;l&&typeof c=="function"&&(l.request=function(...T){if(t.refuse)return t.refuse();const w=c.apply(this,T);return Promise.resolve(w).then(_=>{at(t.wakeLocks,_,h=>h.released),t.onStart?.(_)},dn),w})}catch{}return t}function pn(t){let e=window;for(let r=0;e.parent&&e.parent!==e&&r<8;r++)if(e=e.parent,t(e))return!0;return!1}function mn(){let t=null;const e=()=>t??parent,r=n=>t?n===t:pn(a=>a===n);return{post(n,a){if(t){e().postMessage(n,a);return}let s=parent;for(let l=0;l<8&&(s.postMessage(n,a),!(!s.parent||s.parent===s));l++)s=s.parent},on(n){const a=s=>{const l=s.source;r(l)&&n(s.data,s.origin,s.isTrusted,()=>{t??=l})};return addEventListener("message",a),()=>removeEventListener("message",a)},port:n=>({post(a,s){if(s?.activation){e().postMessage(a,{targetOrigin:n,includeUserActivation:!0});return}if(s?.transfer){e().postMessage(a,n,s.transfer);return}e().postMessage(a,n)},on(a,s){const l=c=>{r(c.source)&&c.origin===n&&a(c.data,c)};return addEventListener("message",l,s),()=>removeEventListener("message",l,s)}})}}function vn(){const t={post:()=>{},on:()=>()=>{}};return{...t,port:()=>t}}var _n=500,yn=2e4,gn="data-token-reads",wn="data-frame-refused-watch",bn="data-frame-unsupported",En=/(?:^|\s)stylesheet(?:\s|$)/i;function Sn(t,e){let r="";if(t instanceof HTMLScriptElement?r=t.src:t instanceof HTMLLinkElement&&En.test(t.rel)&&(r=t.href),!r)return null;try{const n=new URL(r);return n.origin===location.origin&&n.pathname.startsWith(e)?n.origin+n.pathname:null}catch{return null}}function kn(t,e,r){if(!t||e!=="query")return;const n="/_f/"+t+"/";document.documentElement.setAttribute(wn,"");const a=location.href,s=fetch,l=setTimeout,c={method:"HEAD",cache:"no-store",credentials:"same-origin"},T=p=>p.ok||p.status===304;let w=!1,_=!1;const h=()=>removeEventListener("error",O,!0),A=async p=>{const j=await s(p,c);if(T(j))_=!0;else if(j.status===403){const R=await s(a,c);if(T(R)){const y=(await s(p,c)).status;y===403?(_=!0,document.documentElement.setAttribute(bn,""),r()):y<500&&(_=!0)}else R.status>=400&&R.status<500&&(_=!0)}},O=p=>{if(_||w)return;if(document.documentElement.hasAttribute(gn)){_=!0,h();return}const j=Sn(p.target,n);j&&(w=!0,l(()=>{A(j).catch(()=>{}).finally(()=>{w=!1,_&&h()})},_n))};addEventListener("error",O,!0),addEventListener("load",h,{once:!0}),l(h,yn)}var it="__frame_scroll",An=150,Rn=310,Tn=160,Ln=3e4,Kt="p,h1,h2,h3,h4,h5,h6,li,pre,blockquote,tr,dt,dd,figcaption,summary",Gt=()=>innerWidth<=Rn&&innerHeight<=Tn,$t=t=>{const e=document.createTreeWalker(t,NodeFilter.SHOW_TEXT);let r="";for(;r.length<600&&e.nextNode();)r+=e.currentNode.nodeValue.slice(0,600-r.length);const n=r.replace(/\s+/g," ").trim().slice(0,120);let a=2166136261;for(let s=0;s<n.length;s++)a=Math.imul(a^n.charCodeAt(s),16777619);return n.length>11?a>>>0||1:0},zt=t=>{for(let e=t;e&&e!==document.scrollingElement;e=e.parentElement){const r=getComputedStyle(e).position;if(r==="fixed"||r==="sticky"||e!==t&&e.scrollTop)return!1}return!0},On=()=>{const t=[],e=[];try{for(let r=0;r<16;r++){const n=document.elementFromPoint(innerWidth/(r%2?4:2),innerHeight*(r>>1)/8+1);let a=n?.closest(Kt)??n;for(;a&&!a.matches(Kt)&&![...a.childNodes].some(l=>l.nodeType===3&&l.nodeValue?.trim());)a=a.parentElement;const s=a&&!e.includes(a)?$t(a):0;s&&!t.some(l=>l[0]===s&&l[2]===a.tagName)&&zt(a)&&(e.push(a),t.push([s,Math.round(a.getBoundingClientRect().top),a.tagName]))}}catch{}return t.sort((r,n)=>+(r[1]<0)-+(n[1]<0)),t.length?t.slice(0,3):void 0},Mn=t=>{try{for(const[e,r,n]of t.a??[]){const a=document.getElementsByTagName(n);let s;for(let c=0;c<a.length&&a.length<5e3;c++)$t(a[c])===e&&(s=s===void 0||s?.contains(a[c])?a[c]:null);const l=s?.getBoundingClientRect();if(l?.height&&s.checkVisibility?.()!==!1&&zt(s)&&isFinite(r))return Math.max(0,Math.round(scrollY+l.top-r))}}catch{}return t.y};function Pn(){let t=0,e=!1,r=!1,n=!1,a={y:0},s=null;const l=b=>{try{sessionStorage.setItem(it,JSON.stringify(b))}catch{}},c=b=>{if(clearTimeout(t),s===null)return;const x=s;s=null,l({y:x,a:b&&x>0?On():void 0})},T=()=>{if(e){e=!1;return}r=!0,s=scrollY,clearTimeout(t),t=setTimeout(c,An,!0)};try{addEventListener("scroll",T,{passive:!0}),addEventListener("pagehide",()=>c())}catch{}const w=()=>{let b;try{b=sessionStorage.getItem(it)}catch{return null}if(b===null)return null;let x;try{x=JSON.parse(b)}catch{x=null}const{y:D,a:B}=x??{};if(!(typeof D=="number"&&Number.isFinite(D)&&D>=0)){try{sessionStorage.removeItem(it)}catch{}return null}const G=H=>Array.isArray(H)&&typeof H[0]=="number"&&Number.isFinite(H[1])&&typeof H[2]=="string";return{y:D,a:Array.isArray(B)&&B.length<4&&B.every(G)?B:void 0}};let _=!1,h=-1;const A=b=>{try{const x=scrollY,D=Mn(b);scrollTo({top:D,left:0,behavior:"instant"}),a=Gt()?b:{y:D,a:b.a},n=!0,clearTimeout(t),s=null,l(a),h=scrollY,h!==x&&(e=!0);const B=D!==b.y&&document.readyState!=="complete";(h!==D||B)&&!_&&(_=!0,addEventListener("load",()=>{try{scrollY===h&&A(w()??a)}catch{}},{once:!0}))}catch{}},O=()=>{try{return!!location.hash}catch{return!0}};let p=!1;const j=()=>{try{if(p||!Gt())return;p=!0;const b=Date.now(),x=()=>{try{removeEventListener("resize",x)}catch{}Date.now()-b>Ln||r||O()||A(w()??a)};addEventListener("resize",x)}catch{}};let R=!1,y=!1;return{restore(){if(R||(R=!0,O()))return;const b=w();b!==null&&(A(b),j())},promoted(){if(y||(y=!0,O()))return;const b=w();b!==null?(A(b),j()):n&&A(a)}}}function Nn(t,e,r,n){let a=null;try{a=window.trustedTypes?.createPolicy("frame-runtime",{createScriptURL:T=>T})??null}catch{}const s=window.Worker,l=s?.prototype,c=Object.freeze({Worker:s,workerOn:l?.addEventListener,workerPost:l?.postMessage,workerTerminate:l?.terminate,fetch:window.fetch.bind(window),preventDefault:Event.prototype.preventDefault,now:Date.now,policy:a,origins:e});r(t).then(T=>T?.bootTopLevel?T.bootTopLevel(c,n):n.settle()).catch(()=>n.settle())}var so="modulepreload",io=function(t){return"/"+t},lo={},Cn=function(e,r,n){let a=Promise.resolve();function s(l){const c=new Event("vite:preloadError",{cancelable:!0});if(c.payload=l,window.dispatchEvent(c),!c.defaultPrevented)throw l}return a.then(l=>{for(const c of l||[])c.status==="rejected"&&s(c.reason);return e().catch(s)})},Fn=window===top,Wt=Object.getOwnPropertyDescriptor(window,"claude"),ze=sn(Fn,window.__FRAME_PREAMBLE?.topLevel,Wt?.writable===!1),lt=typeof ze=="object"&&ze[0],F=lt?vn():mn();(function(){const t=Object.defineProperty,e=globalThis,r=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let n=0;for(let a=0;a<r.length;a++){const s=r[a];try{t(e,s,{value:void 0,writable:!1,configurable:!1})}catch{try{delete e[s]}catch{}try{t(e,s,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof e[s]=="function"&&n++}if(n&&ze==="framed")try{F.post({__frame_rtc_lockdown_failed:n},"*")}catch{}})();var Vt=1e4,jn=2e3,ct=2e3,ut=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function Xt(t){for(const e of ut)if(e.endsWith(":*"))try{const r=new URL(t);if(`${r.protocol}//${r.hostname}:*`===e)return!0}catch{}else if(t===e)return!0;return!1}var Pe=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),Ne=window.__FRAME_PREAMBLE?.transforms,ft=window.__FRAME_PREAMBLE?.comments,dt=window.__FRAME_PREAMBLE?.translate,me=window.__FRAME_PREAMBLE?.ldx,We=fr(window.__FRAME_PREAMBLE?.cred),Yt=(()=>{try{const[t]=performance.getEntriesByType("navigation"),e=t?.serverTiming?.find(r=>r.name==="frame-cred-exp");return e!==void 0&&/^\d{1,15}$/.test(e.description)?dr(Number(e.description)):void 0}catch{return}})();function Jt(t){return Cn(()=>import("/_runtime/"+t),void 0)}var Ce=new Set,Zt=setTimeout,xn=fetch,In=AbortController,Dn=800+800*Math.random(),Hn=3e3,Ve=null,Qt=new Map;function Bn(t,e){let r=Qt.get(t);return r||Qt.set(t,r=qn(t,e)),r}function qn(t,e){if(Ve?.has(t))return Promise.resolve("csp");if(navigator.onLine===!1)return Promise.resolve("offline");const r=new In;let n=!1;return Zt(()=>{n=!0,r.abort()},Hn),xn("/_runtime/"+t,{signal:r.signal}).then(a=>(r.abort(),a.ok?/javascript/i.test(a.headers.get("content-type")??"")?e instanceof Error&&/:\d+:\d+\)?$/m.test(e.stack??"")?"eval":"served":"mime":"http"),()=>n?"timeout":Ve?.has(t)?"csp":"net")}function se(t){if(!Ve){const e=Ve=new Set;try{document.addEventListener("securitypolicyviolation",r=>{const n=/\/_runtime\/([^/?#]+)/.exec(r.blockedURI);n&&r.disposition!=="report"&&e.add(n[1])})}catch{}}return Jt(t).catch(()=>new Promise(e=>Zt(e,Dn)).then(()=>Jt(t+"?r=1")).then(e=>(e!==void 0&&Ce.add(t),e)))}function er(t,e,r){return{contract:t.contract,changes:new Set(t.changes??[]),flags:new Set(t.flags??[]),capabilities:t.capabilities??{},capBudgets:t.capBudgets??{},brokerGen:t.brokerGen,transforms:new Map,shellOrigin:e,shell:r,mount:yt,hooks:Xe,pipe:()=>({wrap:(n,a)=>(...s)=>{try{return a(...s)}catch(l){return Promise.reject(l)}}})}}var we=null,V=null;function tr(t,e,r){try{Object.defineProperty(t,e,{value:r,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(t,e,{value:r,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var ht=!1,Xe={editBefore:null,edit:null};function Un(t,e,r=!1){const n=[];let a;if(r)try{Xe.editBefore?.(t)}catch{}for(const s of t.elements){const l=document.querySelector(`[data-id="${s.target}"]`);if(!l){a=s.target;break}if([...Object.keys(s.attrsSet??{}),...s.attrsRemoved??[]].some(c=>!_r(c)||yr(l,c))){a=s.target;break}if(s.text!==void 0&&(!Er(l)||Rr(l))){a=s.target;break}for(const[c,T]of Object.entries(s.attrsSet??{}))if(!nr(l,c)){try{l.setAttribute(c,T)}catch{}rr(l,c,T)}for(const c of s.attrsRemoved??[])nr(l,c)||(l.removeAttribute(c),rr(l,c,null));typeof s.text=="string"&&kr(l,s.text),n.push(s.target)}if(r)try{Xe.edit?.(t.seq,n,a)}catch{}if(a!==void 0){F.post({__frame_patch_miss:{seq:t.seq}},e);return}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:t.seq,targets:n}}))}catch{}}function rr(t,e,r){if(!(t instanceof HTMLInputElement))return;const n=e.toLowerCase();n==="checked"?t.checked=r!==null:n==="value"&&t.type!=="file"&&(t.value=r??"")}function nr(t,e){const r=e.toLowerCase(),n=t;return r==="data-id"||(r==="value"||r==="checked")&&(n.__artifactSecret===!0||/^(password|hidden|file)$/.test(n.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${t.getAttribute("autocomplete")??""} ${n.autocomplete??""}`))}function or(t){const e=document.documentElement;t==="light"||t==="dark"?(e.dataset.theme=t,e.style.colorScheme=t,ht=!0):ht&&(delete e.dataset.theme,e.style.colorScheme="",ht=!1)}var ie=new Map,pt=null;function mt(){let t;const e={u:new Promise(r=>{t=r}),r:r=>{e.done=!0,t(r)},done:!1,nulled:!1};return e}function Ye(t,e){t.nulled=!0,t.ver=e,t.r(null)}function vt(t,e){for(const[r,n]of ie)n.done||(e&&n.asked?e(r,n):Ye(n,t))}function Kn(){for(const t of ie.values())if(t.asked&&!t.done)return!0;return!1}var Gn=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),_t=!1,yt=(t,e)=>{let r=ie.get(t);if(r?.nulled&&_t)r=mt(),ie.set(t,r);else if(!r||r.done){r?.nulled&&V&&F.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:t,phase:"install"}},V);return}const n=typeof e=="function"?Object.setPrototypeOf(e,Gn):Object.assign(Object.create(null),e);typeof n.then=="function"&&delete n.then,r.want=void 0,r.r(Object.freeze(n))};function ar(){const t=Wt?.value??{};tr(window,"claude",t);for(const e of Object.keys(Pe)){if(t[e]!==void 0){tr(t,e,t[e]);continue}ie.set(e,mt())}if(t.use===void 0){const e=r=>{if(typeof r!="string"||!Object.hasOwn(Pe,r))return Promise.resolve(null);let n=ie.get(r);return n?(pt&&(n.nulled||n.want!==void 0)&&(n=pt(r,n)),n.asked=!0,n.u):Promise.resolve(t[r]??null)};try{Object.defineProperty(t,"use",{value:e,writable:!0,configurable:!0,enumerable:!1})}catch{}}return t}if(ze==="framed"){let t;const e=Ne&&pe.test(Ne)?se(Ne).catch(u=>{t={f:Ne,e:u}}):Promise.resolve(void 0),r=u=>{if(u.type==="auxclick"&&u.button!==1)return;const E=u.target,m=E&&E.closest?E.closest("a[href],area[href]"):null;if(!m)return;const g=m.getAttribute("href");if(!g)return;let I;try{I=new URL(g,document.baseURI)}catch{return}if((I.protocol==="http:"||I.protocol==="https:")&&I.origin!==location.origin){u.preventDefault();const $=(m.getAttribute("target")??"").toLowerCase(),K=u.type==="auxclick"||u.metaKey||u.ctrlKey||u.shiftKey||u.altKey||!["","_self","_top","_parent"].includes($);F.post({__frame_nav:!0,url:I.href,newTab:K},"*")}};addEventListener("click",r,!0),addEventListener("auxclick",r,!0);const n={},a=u=>{u.isTrusted&&(n.pointer=!0)},s=u=>{u.isTrusted&&(n.click=!0)};addEventListener("pointermove",a,{capture:!0,passive:!0}),addEventListener("click",s,{capture:!0,passive:!0});const l={cb:null};addEventListener("keydown",u=>l.cb?.(u),!0);const c={cb:null};addEventListener("keydown",u=>c.cb?.(u));const T=hn();e.then(u=>u?.installEscapeForward?.(l,E=>{V&&F.post(E,V)})),e.then(u=>{try{u?.installFocusKeep?.()}catch{}}),e.then(u=>{if(!u?.wireNav)return;const E=F.port("*");u.wireNav(E),removeEventListener("click",r,!0),removeEventListener("auxclick",r,!0),removeEventListener("pointermove",a,!0),removeEventListener("click",s,!0),u.wireEngagement?.(n,E,T)});let w=null;try{w=Pn()}catch{}const _=document.readyState==="loading"?new Promise(u=>document.addEventListener("DOMContentLoaded",()=>u(),{once:!0})):Promise.resolve();let h="dcl",A=!1;_.then(()=>{A=!0});let O=null,p=null;try{p=Ur(window.name),O=Dt(null,p)}catch{}const j=ar();let R=null;try{R=cn(j,O,{post:(u,E)=>F.post(u,E),dcl:_},p)}catch{}e.then(u=>{try{R&&u?.installHotExtras?.(R)}catch{}});let y=null;const b=()=>Array.isArray(y?.flags)&&y.flags.includes("frame_ldx_runtime")&&!!me&&pe.test(me)&&document.querySelector("script#an-form")!==null;try{R?.hydration(b,Kr)}catch{}let x=null,D=0;const B=F.on((u,E,m,g)=>{Xt(E)&&Mr(u)&&(g(),y=u.__frame_init,V=E,B(),clearTimeout(D),x?.())});if(We){const u=Yt===void 0?{__frame_cred:We}:{__frame_cred:We,exp:Yt};for(const E of ut)try{E.endsWith(":*")||F.post(u,E)}catch{}}F.post({__frame_connect:!0},"*");try{R?.afterConnect()}catch{}const G=setTimeout,H=clearTimeout;let be=()=>NaN,Fe=()=>[];try{be=performance.now.bind(performance),Fe=performance.getEntriesByType.bind(performance)}catch{}let je=0;const U=()=>{try{F.post({__frame_alive:!0},"*")}catch{}je=G(U,jn)},Ee=()=>H(je);U(),addEventListener("load",Ee,{once:!0});const xe=new Promise(u=>{x=u,D=setTimeout(()=>{B(),u()},Vt)}),le=new WeakSet;addEventListener("error",u=>{u.target&&le.add(u.target)},!0);try{kn(Ht(),We,()=>{e.then(u=>{try{u?.drawRefusedNotice?.()}catch{}})})}catch{}const ce=()=>{let u=[];try{u=[...document.querySelectorAll("link[rel~=stylesheet]:not([rel~=alternate])")].filter(m=>!m.sheet&&!m.disabled&&!le.has(m)&&m.getAttribute("href")&&URL.canParse(m.href)&&(!m.media||matchMedia(m.media).matches))}catch{}let E=u.length;return E===0?Promise.resolve():new Promise(m=>{try{const g=ct-be();g>0&&(h="sheets");const I=G(m,g>0?g<ct?g:ct:0),$=()=>{--E===0&&(H(I),m())};for(const K of u)K.addEventListener("load",$,{once:!0}),K.addEventListener("error",$,{once:!0})}catch{m()}})};_.then(()=>{try{w?.restore()}catch{}}),Promise.all([xe,_,e]).then(([,,u])=>{if(y?.hostOverlays!==!0||!V)return;const E=I=>{try{return I?.()===!0}catch{return!1}},m=E(u?.declaresCover),g=y.hostSides===!0?{cover:m,sides:E(u?.declaresSides)}:{cover:m};if(F.post({__frame_layout:g},V),y.hostBackground===!0){const I=V;try{u?.watchBackground?.($=>F.post({__frame_layout:{...g,background:$}},I))}catch{}}});const ve={cb:null};F.on((u,E)=>{if(Xt(E)&&Pr(u)){try{w?.promoted()}catch{}ve.cb?.()}}),xe.then(async()=>{if(!y||!V){vt();try{R?.onNoInit()}catch{}return}if(or(y.theme),y.hostVisible===!1&&e.then(i=>i?.applyHostVisible?.(!1,T)),y.hostKeys!==void 0){const i=V,S=y.hostKeys;e.then(k=>k?.installHostKeyForward?.(c,S,N=>F.post(N,i)))}try{R?.onInit(y.hot,V)}catch{}let u;const E=()=>{try{!u&&me&&b()&&(u=se(me),u.then(i=>i?.prefetch?.()).catch(()=>{}))}catch{}};E(),_.then(E);const m=V,g=F.port(m),I=(i,S)=>F.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:i,phase:S}},m),$=(i,S,k)=>{new Promise(N=>N(Bn(S,k))).then(N=>I(i,N),()=>I(i))},K=i=>F.post({__frame_cap_recovered:{cap:i}},m);let te=y.brokerGen;const Y=()=>R?.boot.ver??"",_e=Y(),ye=(i,S)=>{const k=Y();H(S.t),S.want=k,S.t=G(()=>{S.done||Ye(S,k)},Vt),F.post({__frame_cap_want:!0,cap:i,ver:k},m)},z=(i,S)=>{const k=ie.get(i.cap),N=Pe[i.cap];if(!S||!k||k.done||k.want!==i.ver||!pe.test(N))return;if(H(k.t),k.want=void 0,te=i.brokerGen??te,i.ver!==Y()){ye(i.cap,k);return}if(!i.grant||i.cap==="network"){Ye(k,i.ver);return}const Z=we,Q=we={...Z,capabilities:{...Z.capabilities,[i.cap]:i.grant},capBudgets:{...Z.capBudgets,[i.cap]:{...Z.capBudgets[i.cap],...i.budgets}}};se(N).then(de=>{Ce.has(N)&&K(i.cap),Q.brokerGen=te,_t=!0;try{de?.install?.(Q)}catch{I(i.cap,"install")}finally{_t=!1}},de=>$(i.cap,N,de)).then(()=>{k.done||Ye(k,i.ver)})};let Ie=!1,J=!1;F.on((i,S,k)=>{if(S!==m)return;try{if(R?.onShell(i))return}catch{}if(Cr(i)&&or(i.__frame_theme.theme),en(i)&&z(i,k),k&&tn(i)&&(te=i.brokerGen??te),Nr(i)){const Q=i.__frame_host_visible.visible;e.then(de=>de?.applyHostVisible?.(Q,T))}Or(i)&&Un(i.__frame_patch,m,k);const N=i?.__fc_mode;N&&typeof N=="object"&&!Ie&&ft&&pe.test(ft)&&(Ie=!0,se(ft).then(Q=>Q.install?.(m,N.on===!0,g)).catch(()=>{}));const Z=i?.__ft_cmd;Z&&typeof Z=="object"&&!J&&dt&&pe.test(dt)&&(J=!0,se(dt).then(Q=>Q.install?.(m,Z,g)).catch(()=>{}))});const De=Object.keys(y.capabilities??{}).filter(i=>Object.hasOwn(Pe,i)).map(i=>[i,Pe[i]]).filter(i=>typeof i[1]=="string"&&pe.test(i[1])),re=m;let ue=!1,He=()=>{};const Je=new Promise(i=>{He=()=>{ue=!0,i()}}),Se=()=>(ue||(h="caps"),Je),Be=O!==null||Ft(y.hot)||y.hostVisible===!1||y.hostOverlays===!0;A&&(h="init");const qe=_.then(()=>Be?Se():new Promise(i=>G(i,0))).then(ce).then(()=>{let i=!0;try{i=Be||Kn()}catch{}return i?Se():void 0}).then(()=>{Ee();const i=hr(Fe,be);F.post(i?{__frame_ready:!0,nav:i,gate:h}:{__frame_ready:!0,gate:h},re),e.then(S=>{S?.installSizeReporter?.(re,ve,g),S?.installPaintReporter?.(g)})}),gt=await Promise.allSettled(De.map(([,i])=>se(i))),ee=await e;if(ee?.buildBoot||(t?$("_transforms",t.f,t.e):I("_transforms")),ee?.buildBoot)try{we=ee.buildBoot(y,ee.TRANSFORMS??{},{shellOrigin:re,mount:yt,hooks:Xe,shell:g},i=>F.post({__frame_cap_telemetry:i},re))}catch{I("_transforms","install"),we=er(y,re,g)}else we=er(y,re,g);ee?.buildBoot&&Ce.has(Ne??"")&&K("_transforms");const fe=we;fe.brokerGen=te,gt.forEach((i,S)=>{const[k,N]=De[S];if(i.status!=="fulfilled"){$(k,N,i.reason);return}Ce.has(N)&&K(k);try{i.value?.install?.(fe)}catch{I(k,"install")}});const ke=y.capWants===!0;ke&&(pt=(i,S)=>{const k=Y();if(!k)return S;if(!S.nulled)return S.want!==k&&ye(i,S),S;if(k===S.ver)return S;const N=mt();return ie.set(i,N),ye(i,N),N}),vt(_e,ke&&Y()!==_e?ye:void 0),He(),await qe;let Ue=!1;try{Ue=b()}catch{}me&&Ue?(u??se(me)).then(i=>i?.boot?.({shellOrigin:m,build:fe.flags.has(un),hot:R?.hot??null,carried:R?.carried(),presented:()=>R?.presented()??!0})).catch(()=>!1).then(i=>{R?.hydrated(),i!==!0?I("_ldx"):Ce.has(me)&&K("_ldx")}):R?.hydrated()})}else lt&&(ar(),Nn(lt,ut,se,{settle:vt,mount:yt}))})();</script><!-- /frame-runtime --><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Impulse Physics Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Direction: an HV test-bay instrument. DIN-style Barlow for panel labels and headings (the lettering
+   on generator nameplates and control panels), Barlow for reading, Plex Mono for every measured value.
+   Signature: the waveform sits on a recorder graticule (major/minor divisions inside a framed screen).
+   Layout: compact header; 27.5 % configuration rail; 72.5 % results column. Light theme only, as specified. */
+:root {
+  color-scheme: light;
+  --bg: #f1f0ec;            /* warm stone */
+  --card: #ffffff;
+  --sunken: #f6f5f1;
+  --line: #e2dfd8;
+  --line-strong: #cbc7bd;
+  --ink: #1c2023;           /* charcoal */
+  --ink-2: #4c5359;
+  --ink-3: #798086;
+  --teal: #286b65;          /* muted teal: actions, selection */
+  --teal-hover: #1f5752;
+  --teal-weak: #e2eeec;
+  --teal-line: #b3d1cc;
+  --pred: #3b5d8a;          /* predicted trace: slate blue */
+  --target: #c46a1c;        /* target trace: amber, dashed */
+  --good: #2c7848;  --good-bg: #e4f0e8;
+  --warn: #8f5d10;  --warn-bg: #f8edd9;
+  --bad: #a13f38;   --bad-bg: #f6e3e0;
+  --worse: #d2762f; --better: #3e6fb0;
+  --grid: #e6e3dc; --grid-minor: #f1efea;
+  --display: "Barlow Semi Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font: "Barlow", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --r: 6px;
+  --gap: 20px;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body { color: var(--ink); font-family: var(--font); font-size: 14.5px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.num, .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.muted { color: var(--ink-2); }
+.small { font-size: 13.5px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* panel lettering: the one typographic voice for labels across the page */
+.k, .group > legend, .eyebrow, .tabs button, .inv-head, table th, .seg button, .cases button, .colbtn .ctag, .metric .name, .facts dt {
+  font-family: var(--display);
+}
+
+.page { max-width: 1560px; margin: 0 auto; padding-inline: 24px; padding-block: 16px 48px; }
+@media (max-width: 640px) { .page { padding-inline: 16px; } }
+
+/* ---------------------------------------------------------------- header */
+.appbar { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px 24px; padding-bottom: 12px; margin-bottom: var(--gap); border-bottom: 2px solid var(--ink); }
+.appbar h1 { font-family: var(--display); font-size: 26px; font-weight: 700; letter-spacing: .005em; line-height: 1.05; text-transform: uppercase; }
+.appbar p { color: var(--ink-2); margin-top: 2px; font-size: 14px; }
+.appbar .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.badge { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--warn); background: var(--warn-bg); border-radius: 4px; padding: 6px 10px; font-weight: 500; }
+.badge svg { flex: none; }
+
+/* ---------------------------------------------------------------- buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 16px; border-radius: 5px; border: 1px solid var(--line-strong); background: var(--card); cursor: pointer; font-weight: 600; font-family: var(--display); font-size: 15px; letter-spacing: .02em; transition: background .12s, border-color .12s; }
+.btn:hover { border-color: var(--ink-3); background: var(--sunken); }
+.btn.primary { background: var(--teal); border-color: var(--teal); color: #fff; }
+.btn.primary:hover { background: var(--teal-hover); border-color: var(--teal-hover); }
+.btn:disabled { opacity: .6; cursor: progress; }
+.btn.small { min-height: 34px; padding: 5px 12px; font-size: 14px; }
+.btn.ghost { border-color: transparent; background: transparent; color: var(--teal); padding-inline: 4px; }
+.btn.ghost:hover { background: transparent; text-decoration: underline; text-underline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+
+/* ---------------------------------------------------------------- layout */
+.layout { display: grid; grid-template-columns: minmax(300px, 27.5%) minmax(0, 1fr); gap: var(--gap); align-items: start; }
+@media (max-width: 1100px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------------------------------------------------------------- configuration rail */
+.rail { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); }
+.rail.sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+.rail-head { padding: 16px 18px 14px; display: grid; gap: 10px; border-bottom: 1px solid var(--line); }
+.rail-head h2 { font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: .01em; }
+.rail-head .btn { width: 100%; min-height: 42px; font-size: 15.5px; letter-spacing: .03em; }
+.calc-status { font-size: 13.5px; color: var(--ink-3); text-align: center; min-height: 1.4em; }
+.spin { width: 15px; height: 15px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+
+.group { border: 0; margin: 0; padding: 14px 18px; border-top: 1px solid var(--line); display: grid; gap: 10px; min-width: 0; }
+.rail-head + .group { border-top: 0; }
+.rail > .group:last-of-type { padding-bottom: 18px; }
+.group > legend { float: left; width: 100%; padding: 0; font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px 10px; }
+.field { display: grid; gap: 3px; min-width: 0; align-content: start; }
+.field > label, .field > .lbl { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+.ctl { display: flex; align-items: stretch; min-height: 36px; border: 1px solid var(--line-strong); border-radius: 5px; background: var(--card); overflow: hidden; transition: border-color .12s, box-shadow .12s; }
+.ctl:hover { border-color: var(--ink-3); }
+.ctl:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-weak); }
+.ctl input, .ctl select { border: 0; background: transparent; padding: 6px 10px; width: 100%; min-width: 0; font-family: var(--mono); font-size: 14px; font-variant-numeric: tabular-nums; }
+.ctl select { font-family: var(--font); font-size: 15px; cursor: pointer; }
+.ctl input:focus, .ctl select:focus { outline: none; }
+.ctl input:disabled { color: var(--ink-3); background: var(--sunken); }
+.ctl .unit { display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: var(--ink-3); background: var(--sunken); border-left: 1px solid var(--line); white-space: nowrap; font-family: var(--display); letter-spacing: .02em; }
+.field.invalid .ctl { border-color: var(--bad); box-shadow: 0 0 0 3px var(--bad-bg); }
+.err { font-size: 13px; color: var(--bad); font-weight: 500; }
+.hint { font-size: 12.5px; color: var(--ink-3); line-height: 1.45; }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); border: 1px solid var(--line-strong); border-radius: 5px; overflow: hidden; background: var(--card); }
+.seg button { border: 0; border-left: 1px solid var(--line); background: transparent; min-height: 36px; padding: 6px 8px; cursor: pointer; color: var(--ink-2); font-size: 15px; font-weight: 600; letter-spacing: .02em; line-height: 1.2; }
+.seg button:first-child { border-left: 0; }
+.seg button:hover:not([aria-pressed="true"]) { background: var(--sunken); color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--teal); color: #fff; }
+.seg button small { display: block; font-size: 12px; opacity: .8; font-family: var(--mono); font-weight: 400; letter-spacing: 0; margin-top: 1px; }
+.check { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--ink-2); min-height: 36px; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--teal); }
+
+/* inventory */
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); }
+.tabs button { border: 0; background: transparent; padding: 6px 12px; min-height: 36px; cursor: pointer; color: var(--ink-3); border-bottom: 2px solid transparent; margin-bottom: -1px; font-weight: 600; font-size: 15px; letter-spacing: .03em; }
+.tabs button:hover { color: var(--ink); }
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--teal); }
+.tabs button .num { font-size: 12.5px; color: var(--ink-3); font-weight: 400; margin-left: 2px; }
+.inv-head, .inv-row { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) 36px; gap: 6px; align-items: start; }
+.inv-head { font-size: 12.5px; color: var(--ink-3); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.inv-list { display: grid; gap: 6px; }
+.iconbtn { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 5px; background: var(--card); cursor: pointer; display: grid; place-items: center; color: var(--ink-3); }
+.iconbtn:hover { color: var(--bad); border-color: var(--bad); background: var(--bad-bg); }
+
+/* ---------------------------------------------------------------- results */
+.results { display: grid; gap: var(--gap); min-width: 0; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 20px; min-width: 0; }
+@media (max-width: 640px) { .card { padding: 18px 16px; } }
+.card-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 12px; }
+.card-head h2, .case-top h2 { font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: .01em; }
+.card-head .sub { color: var(--ink-3); font-size: 13.5px; font-family: var(--display); letter-spacing: .04em; text-transform: uppercase; font-weight: 500; }
+.results.busy .card { opacity: .45; transition: opacity .15s; }
+@media (prefers-reduced-motion: reduce) { .results.busy .card { transition: none; } }
+
+.banner { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; border-radius: var(--r); padding: 14px 18px; border-left: 4px solid; font-size: 14.5px; }
+.banner.stale { background: var(--warn-bg); border-color: var(--warn); }
+.banner.error { background: var(--bad-bg); border-color: var(--bad); }
+.banner.info { background: var(--teal-weak); border-color: var(--teal); }
+.banner ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 2px; }
+.banner strong { font-weight: 600; }
+
+.pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 14px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+.pill.good { color: var(--good); background: var(--good-bg); }
+.pill.warn { color: var(--warn); background: var(--warn-bg); }
+.pill.bad { color: var(--bad); background: var(--bad-bg); }
+.pill.neutral { color: var(--ink-2); background: var(--sunken); }
+.pill svg { flex: none; }
+
+/* ---------------------------------------------------------------- section 1 */
+.case-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.cases { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 5px; overflow: hidden; }
+.cases button { min-height: 34px; padding: 4px 16px; border: 0; border-left: 1px solid var(--line); background: var(--card); cursor: pointer; font-weight: 600; font-size: 15px; letter-spacing: .03em; color: var(--ink-2); }
+.cases button:first-child { border-left: 0; }
+.cases button:hover:not([aria-pressed="true"]) { background: var(--sunken); color: var(--ink); }
+.cases button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.case-title { margin-top: 12px; display: grid; gap: 2px; }
+.case-title h3 { font-family: var(--display); font-size: 18px; font-weight: 600; letter-spacing: .01em; }
+.settings { margin-top: 12px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line); }
+.settings > div { padding: 12px 16px 10px; border-left: 1px solid var(--line); min-width: 0; display: grid; gap: 4px; align-content: start; }
+.settings > div:first-child { border-left: 0; padding-left: 0; }
+@media (max-width: 760px) { .settings { grid-template-columns: repeat(2, minmax(0, 1fr)); } .settings > div:nth-child(3) { border-left: 0; padding-left: 0; } .settings > div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+.k { font-size: 13px; color: var(--ink-3); font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+.big { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 26px; font-weight: 500; line-height: 1.1; letter-spacing: -.01em; }
+.big small { font-size: 14px; color: var(--ink-3); font-weight: 400; margin-left: 5px; font-family: var(--display); letter-spacing: .02em; }
+.support { font-size: 13px; color: var(--ink-2); overflow-wrap: anywhere; }
+.settings .k { min-height: 2.6em; display: flex; align-items: flex-end; }
+@media (max-width: 760px) { .settings .k { min-height: 0; } }
+.facts b.num { white-space: nowrap; }
+.nc { text-transform: none; }
+
+/* ---------------------------------------------------------------- section 2: networks */
+.nets { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap); }
+@media (max-width: 900px) { .nets { grid-template-columns: minmax(0, 1fr); } }
+.schem { border: 1px solid var(--line); border-radius: var(--r); padding: 10px; overflow-x: auto;
+  background-color: #fbfaf8;
+  background-image: radial-gradient(circle, #dedad2 1px, transparent 1.2px);
+  background-size: 16px 16px; background-position: 8px 8px; }
+.schem svg { display: block; width: 100%; min-width: 340px; height: auto; }
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 18px; margin: 12px 0 0; font-size: 13.5px; }
+.facts dt { color: var(--ink-3); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding-top: 2px; }
+.facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; border-radius: 4px; padding: 2px 8px; background: var(--good-bg); color: var(--good); font-weight: 500; }
+.chip.bad { background: var(--bad-bg); color: var(--bad); }
+
+/* ---------------------------------------------------------------- section 3: waveform + metrics */
+.wave-row { display: grid; grid-template-columns: minmax(0, 65fr) minmax(0, 35fr); gap: var(--gap); align-items: start; }
+@media (max-width: 1280px) { .wave-row { grid-template-columns: minmax(0, 1fr); } }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.toolbar .seg { display: inline-grid; }
+.toolbar .seg button { padding-inline: 16px; min-height: 36px; font-size: 14.5px; }
+.zoom { display: flex; gap: 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 14px; color: var(--ink-2); margin-bottom: 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend .ln { width: 26px; height: 0; border-top: 2.5px solid var(--pred); }
+.legend .ln.target { border-top: 2px dashed var(--target); }
+.plot { position: relative; user-select: none; -webkit-user-select: none; border: 1px solid var(--line-strong); border-radius: var(--r); background: #fcfcfa; padding: 4px 4px 0; }
+.plot > svg { display: block; width: 100%; height: 330px; touch-action: pan-y; cursor: crosshair; }
+@media (max-width: 640px) { .plot > svg { height: 300px; } }
+.tip svg { display: inline-block; width: 18px; height: 4px; flex: none; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: #fff; border-radius: 5px; padding: 8px 11px; font-size: 13px; box-shadow: 0 6px 18px rgba(28,32,35,.18); white-space: nowrap; z-index: 3; }
+.tip .t { color: #c9ced2; margin-bottom: 4px; font-family: var(--mono); font-size: 12.5px; }
+.tip .r { display: flex; align-items: center; gap: 8px; }
+.tip .r b { font-family: var(--mono); font-weight: 500; min-width: 84px; color: #fff; }
+.tip .r span { color: #c9ced2; }
+.plot-note { font-size: 12.5px; color: var(--ink-3); margin-top: 8px; line-height: 1.55; }
+
+.metrics { display: grid; }
+.metric { padding: 9px 0; border-top: 1px solid var(--line); display: grid; gap: 3px; }
+.metric:first-child { border-top: 0; padding-top: 0; }
+.metric .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.metric .name { font-size: 13px; color: var(--ink-3); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.metric .val { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 17px; font-weight: 500; }
+.metric .detail { font-size: 12.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; line-height: 1.45; }
+.metric .detail b { color: var(--ink-2); font-weight: 500; font-family: var(--mono); font-size: 13px; }
+.status-chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--display); font-size: 14px; font-weight: 600; letter-spacing: .03em; white-space: nowrap; }
+.status-chip.good { color: var(--good); }
+.status-chip.bad { color: var(--bad); }
+.status-chip.info { color: var(--ink-3); font-weight: 500; }
+.defs { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); display: grid; gap: 6px; line-height: 1.5; }
+
+/* ---------------------------------------------------------------- tables */
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 8px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+th { font-weight: 600; font-size: 13px; letter-spacing: .05em; text-transform: uppercase; line-height: 1.3; color: var(--ink-3); background: var(--sunken); white-space: normal; vertical-align: bottom; }
+td { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+th.l, td.l { text-align: left; }
+td.txt { font-family: var(--font); }
+tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+.table-foot { margin-top: 14px; font-size: 13.5px; color: var(--ink-3); max-width: 92ch; line-height: 1.5; }
+
+/* comparison: one column per case */
+table.cmp { table-layout: fixed; min-width: 560px; }
+table.cmp th.rowhead { width: 28%; font-weight: 500; font-size: 14.5px; letter-spacing: 0; text-transform: none; font-family: var(--font); color: var(--ink-2); background: transparent; white-space: nowrap; }
+table.cmp thead th { background: transparent; padding: 10px 14px 8px; vertical-align: bottom; text-align: left; border-bottom: 2px solid var(--ink); text-transform: none; letter-spacing: 0; }
+table.cmp td { text-align: left; padding: 8px 14px; font-size: 14px; cursor: pointer; vertical-align: middle; }
+table.cmp tbody th.rowhead { vertical-align: middle; padding: 8px 14px; }
+table.cmp tbody tr.grp th { background: var(--sunken); font-size: 12px; letter-spacing: .1em; color: var(--teal); padding: 5px 14px; }
+table.cmp td.sel, table.cmp th.sel { background: var(--teal-weak); }
+table.cmp td:hover:not(.sel) { background: var(--sunken); }
+table.cmp .u { color: var(--ink-3); font-size: 12.5px; font-family: var(--display); margin-left: 3px; letter-spacing: .02em; }
+table.cmp .dev { display: block; font-size: 12.5px; color: var(--good); margin-top: 2px; }
+table.cmp .dev.out { color: var(--bad); }
+.colbtn { all: unset; cursor: pointer; display: grid; gap: 1px; border-radius: 3px; }
+.colbtn:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+.colbtn .cname { font-family: var(--display); font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: .01em; }
+.colbtn .ctag { font-size: 13px; color: var(--ink-3); font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+th.sel .colbtn .cname { color: var(--teal); }
+
+/* ---------------------------------------------------------------- decision summary (brief) */
+.summary { display: grid; gap: 16px; }
+.summary .lead { font-size: 15px; line-height: 1.55; color: var(--ink); padding-left: 12px; border-left: 3px solid var(--teal); }
+.summary .lead b { font-weight: 600; }
+.rep-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 1000px) { .rep-row { grid-template-columns: minmax(0, 1fr); } }
+.rep-sec { display: grid; gap: 8px; min-width: 0; align-content: start; }
+.rep-sec h3 { font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+table.score-tbl th, table.score-tbl td { padding: 6px 12px; }
+table.score-tbl thead th { background: transparent; border-bottom: 2px solid var(--ink); }
+table.score-tbl tbody th { font-weight: 500; font-family: var(--font); color: var(--ink-2); font-size: 13.5px; letter-spacing: 0; text-transform: none; background: transparent; }
+table.score-tbl tr.total th, table.score-tbl tr.total td { border-top: 1.5px solid var(--line-strong); }
+table.score-tbl tr.total th { color: var(--ink); font-weight: 600; }
+table.score-tbl .sel { background: var(--teal-weak); }
+.formula-line { font-size: 12.5px; color: var(--ink-3); }
+.why, .attn { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.why b { color: var(--ink); }
+.why .num { font-size: 13px; }
+.why .up { color: var(--warn); }
+.why .down { color: var(--good); }
+.attn li { padding-left: 14px; position: relative; }
+.attn li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--warn); }
+.attn li.bad::before { background: var(--bad); }
+.attn li.bad { color: var(--bad); }
+
+.empty { display: grid; gap: 14px; }
+.empty h2 { font-family: var(--display); font-size: 21px; font-weight: 600; }
+.empty ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+
+/* ---------------------------------------------------------------- report dialog */
+dialog { border: 1px solid var(--line-strong); border-radius: var(--r); padding: 0; width: min(760px, calc(100vw - 32px)); background: var(--card); color: var(--ink); }
+dialog::backdrop { background: rgba(28, 32, 35, .4); }
+.dlg-head, .dlg-foot { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.dlg-head { border-bottom: 1px solid var(--line); }
+.dlg-head h2 { font-family: var(--display); font-size: 19px; font-weight: 600; }
+.dlg-foot { border-top: 1px solid var(--line); }
+dialog textarea { display: block; width: calc(100% - 40px); margin: 16px 20px; height: 50vh; font-family: var(--mono); font-size: 13px; border: 1px solid var(--line); border-radius: 5px; padding: 12px; resize: vertical; background: var(--sunken); }
+</style>
+<div class="page">
+  <header class="appbar">
+    <div>
+      <h1>Impulse Physics Engine</h1>
+      <p>Configure impulse tests, compare settings, and inspect predicted waveforms.</p>
+    </div>
+    <div class="actions">
+      <span class="badge" title="Values come from the deterministic physics model. They have not been checked against laboratory measurements.">
+        <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Illustrative data · model output, not lab-validated
+      </span>
+      <button class="btn" type="button" id="exportBtn">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 6.5 8 10l3.5-3.5M3 13h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Export report
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- ======================= CONFIGURATION ======================= -->
+    <form class="rail" id="rail" novalidate autocomplete="off">
+      <div class="rail-head">
+        <h2>Test configuration</h2>
+        <button type="submit" class="btn primary" id="calcBtn">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>
+          Calculate recommendations</button>
+        <div class="calc-status" id="calcStatus" aria-live="polite"></div>
+      </div>
+
+      <fieldset class="group">
+        <legend>Impulse type</legend>
+        <div class="seg" id="impulseSeg" role="group" aria-label="Impulse type">
+          <button type="button" data-impulse="lightning" aria-pressed="true">Lightning<small>1.2/50 µs</small></button>
+          <button type="button" data-impulse="switching" aria-pressed="false">Switching<small>250/2500 µs</small></button>
+        </div>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend>Test inputs</legend>
+        <div class="field" data-for="vTest"><label for="vTest">Desired crest voltage</label>
+          <div class="ctl"><input id="vTest" data-field="vTest" type="number" inputmode="decimal" step="any"><span class="unit">kV</span></div></div>
+        <div class="field" data-for="cLoad"><label for="cLoad">Insulator / test-object capacitance</label>
+          <div class="ctl"><input id="cLoad" data-field="cLoad" type="number" inputmode="decimal" step="any"><span class="unit">pF</span></div></div>
+        <div class="field" data-for="cDiv"><label for="cDiv">Measurement-system / divider capacitance</label>
+          <div class="ctl"><input id="cDiv" data-field="cDiv" type="number" inputmode="decimal" step="any"><span class="unit">pF</span></div></div>
+        <div class="grid2">
+          <div class="field" data-for="cStray"><label for="cStray">Stray capacitance</label>
+            <div class="ctl"><input id="cStray" data-field="cStray" type="number" inputmode="decimal" step="any"><span class="unit">pF</span></div></div>
+          <div class="field" data-for="lStray"><label for="lStray">Loop inductance</label>
+            <div class="ctl"><input id="lStray" data-field="lStray" type="number" inputmode="decimal" step="any"><span class="unit">µH</span></div></div>
+        </div>
+        <div class="field" data-for="eta"><label for="eta">Expected efficiency η</label>
+          <div class="ctl"><input id="eta" data-field="eta" type="number" inputmode="decimal" step="0.01" min="0" max="1"><span class="unit">0–1</span></div>
+          <span class="hint" id="etaHint">Used by Calculator mode. Exact mode computes η from the circuit.</span></div>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend>Generator settings</legend>
+        <div class="field"><label for="profile">Generator profile</label>
+          <div class="ctl"><select id="profile">
+            <option value="workbook">Workbook generator · 3 µF stages</option>
+            <option value="haefely">Haefely 508085/E datasheet · 0.125 µF stages</option>
+            <option value="custom">Custom</option>
+          </select></div>
+          <span class="hint">Loads stage data and resistor inventory. Editing any value switches to Custom.</span></div>
+        <div class="grid2">
+          <div class="field" data-for="nMax"><label for="nMax">Available stages</label>
+            <div class="ctl"><input id="nMax" data-field="nMax" data-int="1" type="number" inputmode="numeric" step="1" min="2"><span class="unit">stages</span></div></div>
+          <div class="field" data-for="uMax"><label for="uMax">Max charging voltage</label>
+            <div class="ctl"><input id="uMax" data-field="uMax" type="number" inputmode="decimal" step="any"><span class="unit">kV/stage</span></div></div>
+          <div class="field" data-for="cStage"><label for="cStage">Stage capacitance</label>
+            <div class="ctl"><input id="cStage" data-field="cStage" type="number" inputmode="decimal" step="any"><span class="unit">µF</span></div></div>
+          <div class="field" data-for="wStage"><label for="wStage">Energy limit per stage</label>
+            <div class="ctl"><input id="wStage" data-field="wStage" data-optional="1" type="number" inputmode="decimal" step="any" placeholder="none"><span class="unit">kJ</span></div></div>
+        </div>
+        <div class="grid2">
+          <div class="field" data-for="cBo"><label for="cBo">Basic load C<sub>bo</sub></label>
+            <div class="ctl"><input id="cBo" data-field="cBo" type="number" inputmode="decimal" step="any"><span class="unit">pF</span></div></div>
+          <div class="field"><span class="lbl">&nbsp;</span><label class="check"><input type="checkbox" id="includeCbo" data-field="includeCbo"><span>Add C<sub>bo</sub> to the load</span></label></div>
+        </div>
+        <div class="field"><span class="lbl" id="modeLbl">Calculation mode</span>
+          <div class="seg" role="group" aria-labelledby="modeLbl" id="modeSeg">
+            <button type="button" data-mode="calculator" aria-pressed="false">Calculator</button>
+            <button type="button" data-mode="exact" aria-pressed="true">Exact</button>
+          </div>
+          <span class="hint">Calculator uses the workbook's closed-form formulas. Exact solves the circuit and measures times per IEC 60060-1.</span></div>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend>Constraints</legend>
+        <div class="grid2">
+          <div class="field" data-for="tFront"><label for="tFront" id="tFrontLbl">Target front time T1</label>
+            <div class="ctl"><input id="tFront" data-field="tFront" type="number" inputmode="decimal" step="any"><span class="unit">µs</span></div></div>
+          <div class="field" data-for="tTail"><label for="tTail">Target tail time T2</label>
+            <div class="ctl"><input id="tTail" data-field="tTail" type="number" inputmode="decimal" step="any"><span class="unit">µs</span></div></div>
+        </div>
+        <div class="field"><label for="tolProfile">Tolerance profile</label>
+          <div class="ctl"><select id="tolProfile">
+            <option value="iec">IEC 60060-1</option>
+            <option value="workbook">Workbook sheet</option>
+            <option value="custom">Custom</option>
+          </select></div></div>
+        <div class="grid2" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+          <div class="field" data-for="tolCrest"><label for="tolCrest">Crest ±</label>
+            <div class="ctl"><input id="tolCrest" data-field="tolCrest" data-tol="1" type="number" inputmode="decimal" step="any"><span class="unit">%</span></div></div>
+          <div class="field" data-for="tolFront"><label for="tolFront" id="tolFrontLbl">T1 ±</label>
+            <div class="ctl"><input id="tolFront" data-field="tolFront" data-tol="1" type="number" inputmode="decimal" step="any"><span class="unit">%</span></div></div>
+          <div class="field" data-for="tolTail"><label for="tolTail">T2 ±</label>
+            <div class="ctl"><input id="tolTail" data-field="tolTail" data-tol="1" type="number" inputmode="decimal" step="any"><span class="unit">%</span></div></div>
+        </div>
+        <div class="field"><span class="lbl" id="selLbl">Resistor selection</span>
+          <div class="seg" role="group" aria-labelledby="selLbl" id="selSeg">
+            <button type="button" data-sel="single" aria-pressed="false">Single resistor</button>
+            <button type="button" data-sel="combo" aria-pressed="true">Series–parallel</button>
+          </div></div>
+        <div class="field" data-for="maxUnits"><label for="maxUnits">Max resistors per combination</label>
+          <div class="ctl"><input id="maxUnits" data-field="maxUnits" data-int="1" type="number" inputmode="numeric" step="1" min="1" max="6"><span class="unit">per stage</span></div>
+          <span class="hint">Your assumption: the source data does not say how many resistors one stage may combine.</span></div>
+        <div class="field"><label for="ranking">Ranking priority</label>
+          <div class="ctl"><select id="ranking" data-field="ranking">
+            <option value="balanced">Balanced</option>
+            <option value="accuracy">Accuracy only</option>
+            <option value="components">Fewest resistors</option>
+            <option value="stages">Fewest stages</option>
+            <option value="margin">Voltage margin</option>
+          </select></div></div>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend>Resistor inventory</legend>
+        <div class="tabs" role="tablist" aria-label="Resistor inventory">
+          <button type="button" role="tab" id="tab-front" aria-controls="invPanel" aria-selected="true" data-side="front">Front <span class="num" id="cnt-front"></span></button>
+          <button type="button" role="tab" id="tab-tail" aria-controls="invPanel" aria-selected="false" data-side="tail">Tail <span class="num" id="cnt-tail"></span></button>
+        </div>
+        <div id="invPanel" role="tabpanel" aria-labelledby="tab-front" class="inv-list"></div>
+        <button type="button" class="btn small ghost" id="addRes" style="justify-self:start">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Add resistor
+        </button>
+        <span class="hint" id="invHint"></span>
+      </fieldset>
+
+
+    </form>
+
+    <!-- ======================= RESULTS ======================= -->
+    <main class="results" id="results" aria-live="polite">
+      <div id="banners" style="display:grid;gap:12px"></div>
+
+      <section class="card" id="sec-settings" aria-labelledby="h-settings">
+        <div class="case-top">
+          <h2 id="h-settings">Recommended settings</h2>
+          <div class="cases" id="caseSel" role="group" aria-label="Select case"></div>
+        </div>
+        <div class="case-title">
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><h3 id="caseTitle"></h3><span id="casePill"></span></div>
+          <p class="muted small" id="caseWhy"></p>
+        </div>
+        <div class="settings" id="settingsRow"></div>
+      </section>
+
+      <div class="nets" id="sec-nets">
+        <section class="card" aria-labelledby="h-front"><div class="card-head"><h2 id="h-front">Front resistor network</h2><span class="sub" id="frontSub"></span></div><div id="net-front"></div></section>
+        <section class="card" aria-labelledby="h-tail"><div class="card-head"><h2 id="h-tail">Tail resistor network</h2><span class="sub" id="tailSub"></span></div><div id="net-tail"></div></section>
+      </div>
+
+      <div class="wave-row" id="sec-wave">
+        <section class="card" aria-labelledby="h-wave">
+          <div class="card-head"><h2 id="h-wave">Waveform comparison</h2><span class="sub" id="waveSub"></span></div>
+          <div class="toolbar">
+            <div class="seg" role="group" aria-label="Plot range" id="viewSeg">
+              <button type="button" data-view="full" aria-pressed="true">Full impulse</button>
+              <button type="button" data-view="front" aria-pressed="false">Front detail</button>
+            </div>
+            <div class="zoom">
+              <button type="button" class="btn small" id="zoomIn" aria-label="Zoom in">Zoom in</button>
+              <button type="button" class="btn small" id="zoomOut" aria-label="Zoom out">Zoom out</button>
+              <button type="button" class="btn small" id="zoomReset">Reset</button>
+            </div>
+          </div>
+          <div class="legend" id="legend"></div>
+          <div class="plot" id="plot"></div>
+          <p class="plot-note" id="plotNote"></p>
+        </section>
+        <section class="card" aria-labelledby="h-perf">
+          <div class="card-head"><h2 id="h-perf">Performance metrics</h2><span id="perfPill"></span></div>
+          <div class="metrics" id="metrics"></div>
+          <div class="defs" id="defs"></div>
+        </section>
+      </div>
+
+      <section class="card" id="sec-table" aria-labelledby="h-table">
+        <div class="card-head"><h2 id="h-table">Candidate comparison</h2><span class="sub" id="tableSub"></span></div>
+        <div class="tablewrap"><table id="candTable" class="cmp"></table></div>
+        <p class="table-foot" id="rankNote"></p>
+      </section>
+
+      <section class="card" id="sec-summary" aria-labelledby="h-summary">
+        <div class="card-head"><h2 id="h-summary">Decision summary</h2><span class="sub" id="summarySub"></span></div>
+        <div class="summary" id="summary"></div>
+      </section>
+
+      <section class="card" id="sec-empty" hidden aria-labelledby="h-empty">
+        <div class="empty">
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><h2 id="h-empty">No feasible setting</h2><span class="pill bad">Outside limits</span></div>
+          <p class="muted">No stage count and resistor network satisfies the generator limits for these inputs. What blocked it:</p>
+          <ul id="emptyList"></ul>
+          <p class="muted small">Try more stages, a higher charging-voltage limit, more resistor values or a larger combination limit.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<dialog id="reportDlg" aria-labelledby="dlgTitle">
+  <div class="dlg-head"><h2 id="dlgTitle">Report</h2><button type="button" class="btn small" id="dlgClose">Close</button></div>
+  <textarea id="reportText" readonly aria-label="Report text"></textarea>
+  <div class="dlg-foot"><span class="muted small" id="copyMsg">Copy the report and paste it into your notes or a document.</span><button type="button" class="btn primary small" id="copyBtn">Copy report</button></div>
+</dialog>
+<script>
+/* Impulse generator physics engine — browser port of the Python package `physics`.
+ * Same modules, same formulas, same search. All internal values are SI.
+ * A: inputs/targets   B: inverse   C: snap   D: forward + IEC extraction   E: scoring   F: search
+ */
+const Engine = (() => {
+  "use strict";
+
+  // ------------------------------------------------------------------ A: standards
+  const TARGETS = {
+    lightning: { impulse: "lightning", front: 1.2e-6, tail: 50e-6, frontLabel: "T1" },
+    switching: { impulse: "switching", front: 250e-6, tail: 2500e-6, frontLabel: "Tp" },
+  };
+  const TOLERANCES = {
+    calculator: {
+      lightning: { front: 0.30, tail: 0.20, crest: 0.03 },
+      switching: { front: 0.20, tail: 0.20, crest: 0.03 },
+    },
+    iec: {
+      lightning: { front: 0.30, tail: 0.20, crest: 0.03 },
+      switching: { front: 0.20, tail: 0.60, crest: 0.03 },
+    },
+  };
+  const OVERSHOOT_LIMIT = 0.10;
+  const K_A = 2.42, K_B = 3.08e-3, K_C = 1.51e-4; // switching K factor (times in µs)
+  const EPS = 2.220446049250313e-16;
+
+  // ------------------------------------------------------------------ numerics
+  const cx = (re, im = 0) => ({ re, im });
+  const cadd = (a, b) => cx(a.re + b.re, a.im + b.im);
+  const cmul = (a, b) => cx(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re);
+  const cdiv = (a, b) => {
+    const d = b.re * b.re + b.im * b.im;
+    return cx((a.re * b.re + a.im * b.im) / d, (a.im * b.re - a.re * b.im) / d);
+  };
+  const cabs = (a) => Math.hypot(a.re, a.im);
+
+  function polyEval(coef, z) {          // coef descending, complex z
+    let acc = cx(coef[0]);
+    for (let i = 1; i < coef.length; i++) acc = cadd(cmul(acc, z), cx(coef[i]));
+    return acc;
+  }
+  function polyDeriv(coef) {
+    const n = coef.length - 1;
+    return coef.slice(0, -1).map((c, i) => c * (n - i));
+  }
+  function quadRoots(b, c) {             // s^2 + b s + c
+    const disc = b * b - 4 * c;
+    if (disc >= 0) {
+      const q = -0.5 * (b + Math.sign(b || 1) * Math.sqrt(disc));
+      return [cx(q), cx(c / q)];
+    }
+    const im = Math.sqrt(-disc) / 2;
+    return [cx(-b / 2, im), cx(-b / 2, -im)];
+  }
+  function polishRoot(coef, z) {
+    const d = polyDeriv(coef);
+    for (let i = 0; i < 50; i++) {
+      const f = polyEval(coef, z), fp = polyEval(d, z);
+      if (cabs(fp) === 0) break;
+      const step = cdiv(f, fp);
+      z = cx(z.re - step.re, z.im - step.im);
+      if (cabs(step) <= 1e-15 * cabs(z)) break;
+    }
+    return z;
+  }
+  function polyRoots(coef) {             // degree 2 or 3, real coefficients
+    const a = coef[0];
+    const m = coef.map((c) => c / a);
+    if (m.length === 3) return quadRoots(m[1], m[2]).map((z) => polishRoot(m, z));
+    const [, b2, b1, b0] = m;
+    const f = (s) => ((s + b2) * s + b1) * s + b0;
+    const bound = 2 * Math.max(Math.abs(b2), Math.sqrt(Math.abs(b1)), Math.cbrt(Math.abs(b0) / 2));
+    let lo = -bound, hi = 0;
+    if (f(lo) > 0) lo = -2 * bound;
+    for (let i = 0; i < 400 && hi - lo > 1e-15 * Math.abs(lo); i++) {
+      const mid = 0.5 * (lo + hi);
+      if (f(mid) > 0) hi = mid; else lo = mid;
+    }
+    const r = polishRoot(m, cx(0.5 * (lo + hi))).re;
+    const c1 = b2 + r, c0 = b1 + r * c1;
+    return [cx(r), ...quadRoots(c1, c0).map((z) => polishRoot(m, z))];
+  }
+
+  function brent(f, a, b, tol = 1e-16) {
+    let fa = f(a), fb = f(b);
+    if (fa === 0) return a;
+    if (fb === 0) return b;
+    if (fa * fb > 0) throw new Error("root not bracketed");
+    let c = a, fc = fa, d = b - a, e = d;
+    for (let it = 0; it < 300; it++) {
+      if (fb * fc > 0) { c = a; fc = fa; d = b - a; e = d; }
+      if (Math.abs(fc) < Math.abs(fb)) { a = b; b = c; c = a; fa = fb; fb = fc; fc = fa; }
+      const tol1 = 2 * EPS * Math.abs(b) + 0.5 * tol;
+      const xm = 0.5 * (c - b);
+      if (Math.abs(xm) <= tol1 || fb === 0) return b;
+      if (Math.abs(e) >= tol1 && Math.abs(fa) > Math.abs(fb)) {
+        const s = fb / fa;
+        let p, q;
+        if (a === c) { p = 2 * xm * s; q = 1 - s; }
+        else {
+          const qq = fa / fc, r = fb / fc;
+          p = s * (2 * xm * qq * (qq - r) - (b - a) * (r - 1));
+          q = (qq - 1) * (r - 1) * (s - 1);
+        }
+        if (p > 0) q = -q;
+        p = Math.abs(p);
+        if (2 * p < Math.min(3 * xm * q - Math.abs(tol1 * q), Math.abs(e * q))) { e = d; d = p / q; }
+        else { d = xm; e = d; }
+      } else { d = xm; e = d; }
+      a = b; fa = fb;
+      b += Math.abs(d) > tol1 ? d : (xm > 0 ? tol1 : -tol1);
+      fb = f(b);
+    }
+    return b;
+  }
+
+  // ------------------------------------------------------------------ D: forward
+  function calculatorWave(c, etaInput, k) {
+    return {
+      tFront: k.kFront * Math.sqrt((c.r1 * c.c2) ** 2 + k.kLc * c.l * c.c2),
+      tTail: k.kTail * c.r2 * (c.c1 + c.c2),
+      vCrest: c.v0 * etaInput,
+      eta: etaInput, overshoot: 0, tPeak: null, details: {},
+    };
+  }
+
+  /* Exact response of the circuit
+   *   C1 v1' = -v1/R2 - i,  L i' = v1 - R1 i - v2,  C2 v2' = i,  v1(0)=V0
+   * Laplace: V2(s) = C1 R2 V0 / D(s),
+   *   D(s) = (L C2 s^2 + R1 C2 s + 1)(R2 C1 s + 1) + R2 C2 s
+   * so v2(t) = sum_k N / D'(p_k) e^{p_k t} over the poles p_k (same solution as the
+   * Python eigen-decomposition; for L = 0 it is the double exponential). */
+  function response(c) {
+    const N = c.c1 * c.r2 * c.v0;
+    const coef = c.l > 0
+      ? [c.l * c.c2 * c.r2 * c.c1, c.l * c.c2 + c.r1 * c.c2 * c.r2 * c.c1,
+         c.r1 * c.c2 + c.r2 * c.c1 + c.r2 * c.c2, 1]
+      : [c.r1 * c.c2 * c.r2 * c.c1, c.r1 * c.c2 + c.r2 * c.c1 + c.r2 * c.c2, 1];
+    const poles = polyRoots(coef);
+    const dcoef = polyDeriv(coef);
+    const res = poles.map((p) => cdiv(cx(N), polyEval(dcoef, p)));
+    const nP = poles.length;
+    const pr = poles.map((p) => p.re), pi = poles.map((p) => p.im);
+    const rr = res.map((r) => r.re), ri = res.map((r) => r.im);
+    function v2(t) {
+      let s = 0;
+      for (let k = 0; k < nP; k++) {
+        const e = Math.exp(pr[k] * t), ang = pi[k] * t;
+        s += e * (rr[k] * Math.cos(ang) - ri[k] * Math.sin(ang));
+      }
+      return s;
+    }
+    function dv2(t) {
+      let s = 0;
+      for (let k = 0; k < nP; k++) {
+        const a = rr[k] * pr[k] - ri[k] * pi[k], b = rr[k] * pi[k] + ri[k] * pr[k];
+        const e = Math.exp(pr[k] * t), ang = pi[k] * t;
+        s += e * (a * Math.cos(ang) - b * Math.sin(ang));
+      }
+      return s;
+    }
+    const taus = poles.filter((p) => p.re !== 0).map((p) => 1 / Math.abs(p.re));
+    const oscillatory = poles.some((p) => Math.abs(p.im) > 1e-9 * Math.abs(p.re));
+    return { v2, dv2, taus, oscillatory, poles };
+  }
+
+  function makeGrid(tauFast, tEnd, nGeo = 3000, nLin = 2000) {
+    const pts = [0];
+    const a = Math.log(tauFast * 1e-3), b = Math.log(tEnd);
+    for (let i = 0; i < nGeo; i++) pts.push(Math.exp(a + (b - a) * i / (nGeo - 1)));
+    for (let i = 0; i < nLin; i++) pts.push(tEnd * i / (nLin - 1));
+    pts.sort((x, y) => x - y);
+    const out = [];
+    for (const p of pts) if (!out.length || p !== out[out.length - 1]) out.push(p);
+    return out;
+  }
+
+  function extract(resp, impulse) {
+    let tEnd = 3 * Math.max(...resp.taus);
+    let t, v, k;
+    let ok = false;
+    for (let attempt = 0; attempt < 6; attempt++) {
+      t = makeGrid(Math.min(...resp.taus), tEnd);
+      v = t.map(resp.v2);
+      k = 0;
+      for (let i = 1; i < v.length; i++) if (v[i] > v[k]) k = i;
+      if (v[v.length - 1] < 0.4 * v[k] && k < t.length - 1) { ok = true; break; }
+      tEnd *= 2;
+    }
+    if (!ok) throw new Error("tail never fell below 50 % of the peak");
+
+    const lo = t[Math.max(k - 1, 0)], hi = t[Math.min(k + 1, t.length - 1)];
+    const tPeak = (resp.dv2(lo) > 0 && resp.dv2(hi) < 0) ? brent(resp.dv2, lo, hi) : t[k];
+    const vPeak = resp.v2(tPeak);
+    const rising = (level) => {
+      let i = 0;
+      while (i <= k && v[i] < level) i++;
+      return brent((x) => resp.v2(x) - level, t[i - 1], t[i]);
+    };
+    const falling = (level) => {
+      let i = k;
+      while (i < v.length && v[i] > level) i++;
+      return brent((x) => resp.v2(x) - level, t[i - 1], t[i]);
+    };
+    const t30 = rising(0.3 * vPeak), t90 = rising(0.9 * vPeak), t50 = falling(0.5 * vPeak);
+    const details = { t30, t90, t50 };
+    let tFront, tTail;
+    if (impulse === "lightning") {
+      tFront = 1.67 * (t90 - t30);
+      const o1 = t30 - 0.3 * tFront;
+      tTail = t50 - o1;
+      details.virtualOrigin = o1;
+    } else {
+      const tab = t90 - t30;
+      tTail = t50;
+      const K = K_A - K_B * (tab * 1e6) + K_C * (tTail * 1e6);
+      tFront = K * tab;
+      details.TAB = tab; details.K = K;
+    }
+    return { tFront, tTail, vPeak, tPeak, details };
+  }
+
+  function exactWave(c, impulse) {
+    const resp = response(c);
+    const p = extract(resp, impulse);
+    let overshoot = 0;
+    if (c.l > 0 && resp.oscillatory) {
+      const base = extract(response({ ...c, l: 0 }), impulse);
+      overshoot = Math.max(0, p.vPeak / base.vPeak - 1);
+    }
+    return {
+      tFront: p.tFront, tTail: p.tTail, vCrest: p.vPeak, eta: p.vPeak / c.v0,
+      overshoot, tPeak: p.tPeak, details: { ...p.details, oscillatory: resp.oscillatory },
+    };
+  }
+
+  function evaluate(c, impulse, mode, k, etaInput) {
+    return mode === "calculator" ? calculatorWave(c, etaInput, k) : exactWave(c, impulse);
+  }
+
+  // ------------------------------------------------------------------ B: inverse
+  function c2Of(setup, gen) {
+    return setup.cLoad + setup.cDiv + setup.cStray + (gen.includeCbo ? gen.cBo : 0);
+  }
+
+  function idealCalculator(setup, gen, target, n) {
+    const k = gen.constants;
+    const c2 = c2Of(setup, gen), c1 = gen.cStage / n;
+    const u0 = setup.vTest / (n * setup.eta);
+    const flags = [];
+    if (u0 > gen.uMax) flags.push("overvoltage");
+    const D = (target.front / k.kFront) ** 2 - k.kLc * setup.lStray * c2;
+    let r1 = 0;
+    if (D <= 0) flags.push("inductance_limited_front"); else r1 = Math.sqrt(D) / c2;
+    const r2 = target.tail / (k.kTail * (c1 + c2));
+    return { n, c1, c2, u0, eta: setup.eta, r1Total: r1, r2Total: r2, flags, iterations: 0,
+             calc: { D, a: (target.front / k.kFront) ** 2, b: k.kLc * setup.lStray * c2 } };
+  }
+
+  function brentLog(f, a, b) {
+    return Math.exp(brent((s) => f(Math.exp(s)), Math.log(a), Math.log(b), 1e-12));
+  }
+  function solveLog(f, x0, step = 1.5, maxFactor = 1e3) {
+    const f0 = f(x0);
+    if (f0 === 0) return { root: x0, fLo: f0, fHi: f0 };
+    let loX = x0, loF = f0, hiX = x0, hiF = f0;
+    while (loX > x0 / maxFactor || hiX < x0 * maxFactor) {
+      if (loX > x0 / maxFactor) {
+        const x = loX / step, fx = f(x);
+        if (fx * loF < 0) return { root: brentLog(f, x, loX), fLo: fx, fHi: hiF };
+        loX = x; loF = fx;
+      }
+      if (hiX < x0 * maxFactor) {
+        const x = hiX * step, fx = f(x);
+        if (fx * hiF < 0) return { root: brentLog(f, hiX, x), fLo: loF, fHi: fx };
+        hiX = x; hiF = fx;
+      }
+    }
+    return { root: null, fLo: loF, fHi: hiF };
+  }
+
+  function idealExact(setup, gen, target, n, tol = 1e-10, maxIter = 100) {
+    const start = idealCalculator(setup, gen, target, n);
+    const { c1, c2 } = start, L = setup.lStray;
+    let r1 = start.r1Total > 0 ? start.r1Total : 1, r2 = start.r2Total;
+    const v0 = n;
+    const wave = (a, b) => exactWave({ n, c1, c2, r1: a, r2: b, l: L, v0 }, target.impulse);
+    const flags = [];
+    let it = 0, converged = false;
+    for (it = 1; it <= maxIter; it++) {
+      const s1 = solveLog((x) => wave(x, r2).tFront - target.front, r1);
+      if (s1.root === null) { flags.push(s1.fLo > 0 ? "inductance_limited_front" : "front_unreachable"); break; }
+      const s2 = solveLog((x) => wave(s1.root, x).tTail - target.tail, r2);
+      if (s2.root === null) { flags.push("tail_unreachable"); break; }
+      const done = Math.abs(s1.root / r1 - 1) < tol && Math.abs(s2.root / r2 - 1) < tol;
+      r1 = s1.root; r2 = s2.root;
+      if (done) { converged = true; break; }
+    }
+    if (!flags.length && !converged) flags.push("inverse_not_converged");
+    const eta = flags.length ? NaN : wave(r1, r2).eta;
+    const u0 = flags.length ? NaN : setup.vTest / (n * eta);
+    if (!flags.length && u0 > gen.uMax) flags.push("overvoltage");
+    return { n, c1, c2, u0, eta, r1Total: r1, r2Total: r2, flags, iterations: Math.min(it, maxIter) };
+  }
+
+  // ------------------------------------------------------------------ C: snap
+  const fmtG = (r) => String(Number(r.toPrecision(6)));
+  function* combosWithReplacement(arr, k, start = 0, prefix = []) {
+    if (prefix.length === k) { yield prefix.slice(); return; }
+    for (let i = start; i < arr.length; i++) {
+      prefix.push(arr[i]);
+      yield* combosWithReplacement(arr, k, i, prefix);
+      prefix.pop();
+    }
+  }
+  function counts(list) {
+    const m = new Map();
+    for (const x of list) m.set(x, (m.get(x) || 0) + 1);
+    return m;
+  }
+  function buildAchievable(inventory, maxUnits) {   // inventory: Map ohm -> units
+    const values = [...inventory.keys()].sort((a, b) => a - b);
+    const best = new Map();
+    const offer = (value, recipe, used, topo) => {
+      for (const [r, u] of used) if (u > inventory.get(r)) return;
+      const key = Math.round(value * 1000) / 1000;
+      const units = [...used.values()].reduce((a, b) => a + b, 0);
+      const cur = best.get(key);
+      if (!cur || units < cur.units || (units === cur.units && recipe.length < cur.recipe.length)) {
+        best.set(key, { value, recipe, units, inInventory: true, topo });
+      }
+    };
+    for (let k = 1; k <= maxUnits; k++) {
+      for (const combo of combosWithReplacement(values, k)) {
+        const used = counts(combo);
+        if (k === 1) { offer(combo[0], fmtG(combo[0]), used, { kind: "single", parts: [combo[0]] }); continue; }
+        offer(combo.reduce((a, b) => a + b, 0), combo.map(fmtG).join(" + "), used, { kind: "series", parts: combo.slice() });
+        offer(1 / combo.reduce((a, b) => a + 1 / b, 0), combo.map(fmtG).join(" ∥ "), used, { kind: "parallel", parts: combo.slice() });
+      }
+    }
+    if (maxUnits >= 3) {
+      for (const a of values) for (const [b, c] of combosWithReplacement(values, 2)) {
+        offer(a + b * c / (b + c), `${fmtG(a)} + (${fmtG(b)} ∥ ${fmtG(c)})`, counts([a, b, c]),
+              { kind: "mixed", series: a, parallel: [b, c] });
+      }
+    }
+    return [...best.values()].sort((x, y) => x.value - y.value);
+  }
+  function nearest(ideal, achievable, k) {
+    let i = 0;
+    while (i < achievable.length && achievable[i].value < ideal) i++;   // bisect_left
+    const window = achievable.slice(Math.max(0, i - k), i + k);
+    const byDist = (x, y) => Math.abs(x.value - ideal) - Math.abs(y.value - ideal);
+    const picked = window.slice().sort(byDist).slice(0, k);
+    for (const j of [i - 1, i]) {
+      if (j >= 0 && j < achievable.length && !picked.includes(achievable[j])) picked.push(achievable[j]);
+    }
+    return picked.sort(byDist);
+  }
+  function makeSnapper(mode, frontInv, tailInv, maxUnits, step, k) {
+    const units = mode === "single" ? 1 : maxUnits;
+    const built = mode === "single" || mode === "combo";
+    const frontSet = built ? buildAchievable(frontInv, units) : null;
+    const tailSet = built ? buildAchievable(tailInv, units) : null;
+    const snap = (ideal, set) => {
+      if (mode === "ideal") return [{ value: ideal, recipe: "ideal (continuous)", units: 1, inInventory: false, ideal: true }];
+      if (mode === "round5") {
+        const value = Math.round(ideal / step) * step;
+        return [{ value, recipe: `${fmtG(value)} (rounded)`, units: 1, inInventory: false }];
+      }
+      return nearest(ideal, set, k);
+    };
+    return { front: (x) => snap(x, frontSet), tail: (x) => snap(x, tailSet), frontSet, tailSet };
+  }
+
+  // ------------------------------------------------------------------ E: scoring
+  function assess(gen, target, tol, vTest, n, u0, front, tail, wave) {
+    const reasons = [];
+    if (n < gen.nMin || n > gen.nMax) reasons.push("stages_out_of_range");
+    if (u0 > gen.uMax) reasons.push("overvoltage");
+    const eStage = 0.5 * gen.cStage * u0 * u0, eTotal = n * eStage;
+    if (gen.wStageMax != null && eStage > gen.wStageMax) reasons.push("energy_exceeded");
+    if (gen.wTotalMax != null && eTotal > gen.wTotalMax) reasons.push("total_energy_exceeded");
+    if (front.units > gen.maxUnits || tail.units > gen.maxUnits) reasons.push("inventory_exceeded");
+    if (target.impulse === "lightning" && wave.overshoot > OVERSHOOT_LIMIT) reasons.push("overshoot_exceeded");
+    const pred = { front: wave.tFront, tail: wave.tTail, crest: wave.vCrest };
+    const goal = { front: target.front, tail: target.tail, crest: vTest };
+    const deviation = {}, normalised = {};
+    for (const p of ["front", "tail", "crest"]) {
+      deviation[p] = (pred[p] - goal[p]) / goal[p];
+      normalised[p] = Math.abs(deviation[p]) / tol[p];
+    }
+    const worst = Math.max(...Object.values(normalised));
+    const w = gen.weights;
+    const breakdown = {
+      worst: worst,
+      units: w.units * (front.units + tail.units),
+      stages: w.stages * n,
+      voltage: w.voltage * u0 / gen.uMax,
+    };
+    return {
+      feasible: reasons.length === 0, reasons, deviation, normalised, compliant: worst <= 1,
+      score: breakdown.worst + breakdown.units + breakdown.stages + breakdown.voltage,
+      stageEnergy: eStage, totalEnergy: eTotal, breakdown,
+    };
+  }
+
+  // ------------------------------------------------------------------ F: search
+  function nStart(setup, gen) {
+    return Math.max(gen.nMin, Math.ceil(setup.vTest / (gen.uMax * setup.eta)));
+  }
+
+  function validate(setup, gen) {
+    const e = [];
+    if (!(gen.cStage > 0)) e.push("Stage capacitance must be greater than 0.");
+    if (!(gen.nMin >= 1 && gen.nMin <= gen.nMax)) e.push("Minimum stages must be at least 1 and no more than maximum stages.");
+    if (!(gen.uMax > 0)) e.push("Maximum stage voltage must be greater than 0.");
+    if (!(setup.vTest >= gen.vTestMin && setup.vTest <= gen.vTestMax))
+      e.push(`Test voltage must be between ${gen.vTestMin / 1e3} and ${gen.vTestMax / 1e3} kV.`);
+    if ([setup.cLoad, setup.cDiv, setup.cStray, setup.lStray].some((x) => !(x >= 0)))
+      e.push("Capacitances and inductance cannot be negative.");
+    if (!(setup.cLoad + setup.cDiv + setup.cStray > 0)) e.push("Total load capacitance must be greater than 0.");
+    if (!(setup.eta > 0 && setup.eta <= 1)) e.push("Efficiency must be between 0 and 1.");
+    const fi = gen.frontInventory[setup.impulse], ti = gen.tailInventory[setup.impulse];
+    if (!fi || !fi.size) e.push("Front resistor list is empty.");
+    if (!ti || !ti.size) e.push("Tail resistor list is empty.");
+    if (!(gen.maxUnits >= 1)) e.push("Units per stage must be at least 1.");
+    return e;
+  }
+
+  function recommend(setup, gen, opts) {
+    const { mode = "calculator", snapMode = "combo", nPolicy = "sweep", k = 4 } = opts;
+    const errors = validate(setup, gen);
+    if (errors.length) return { errors };
+    const target = { ...TARGETS[setup.impulse], ...(opts.target || {}) };
+    const tolSet = opts.toleranceSet || (mode === "calculator" ? "calculator" : "iec");
+    const tol = opts.tol || TOLERANCES[tolSet][setup.impulse];
+    const snapper = makeSnapper(snapMode, gen.frontInventory[setup.impulse],
+      gen.tailInventory[setup.impulse], gen.maxUnits, gen.roundStep, k);
+    const first = mode === "calculator" ? nStart(setup, gen) : gen.nMin;
+    const nValues = nPolicy === "workbook" ? [nStart(setup, gen)] :
+      Array.from({ length: Math.max(0, gen.nMax - first + 1) }, (_, i) => first + i);
+
+    const run = { setup, gen, target, tol, tolSet, mode, snapMode, nPolicy,
+                  candidates: [], rejected: [], ideals: [], rejections: new Map() };
+    const reject = (key) => run.rejections.set(key, (run.rejections.get(key) || 0) + 1);
+
+    for (const n of nValues) {
+      const ideal = mode === "calculator" ? idealCalculator(setup, gen, target, n)
+                                          : idealExact(setup, gen, target, n);
+      run.ideals.push(ideal);
+      if (ideal.flags.length) { ideal.flags.forEach((f) => reject(`n=${n}: ${f}`)); continue; }
+      for (const front of snapper.front(ideal.r1Total / n)) {
+        for (const tail of snapper.tail(ideal.r2Total / n)) {
+          const v0 = mode === "calculator" ? n * ideal.u0 : n;
+          const circ = { n, c1: ideal.c1, c2: ideal.c2, r1: front.value * n, r2: tail.value * n,
+                         l: setup.lStray, v0 };
+          const wave = evaluate(circ, setup.impulse, mode, gen.constants, setup.eta);
+          let u0 = ideal.u0;
+          if (mode === "exact") { u0 = setup.vTest / (n * wave.eta); wave.vCrest = wave.eta * n * u0; }
+          const verdict = assess(gen, target, tol, setup.vTest, n, u0, front, tail, wave);
+          const cand = { n, u0, ideal, front, tail, wave, verdict };
+          if (verdict.feasible) run.candidates.push(cand);
+          else { run.rejected.push(cand); verdict.reasons.forEach(reject); }
+        }
+      }
+    }
+    run.candidates.sort((a, b) => a.verdict.score - b.verdict.score);
+    run.candidates.forEach((c, i) => { c.rank = i + 1; });
+    run.best = run.candidates[0] || null;
+    run.nStart = nStart(setup, gen);
+    return run;
+  }
+
+  /** Voltage samples of a candidate's exact circuit response, for plotting. */
+  function waveformSamples(cand, setup, tMax, nPts = 600) {
+    const resp = response({ n: cand.n, c1: cand.ideal.c1, c2: cand.ideal.c2, r1: cand.front.value * cand.n,
+                            r2: cand.tail.value * cand.n, l: setup.lStray, v0: cand.n * cand.u0 });
+    const out = [];
+    for (let i = 0; i < nPts; i++) { const t = tMax * i / (nPts - 1); out.push([t, resp.v2(t)]); }
+    return out;
+  }
+
+  return { TARGETS, TOLERANCES, recommend, waveformSamples, response, extract, exactWave,
+           calculatorWave, buildAchievable, nStart, c2Of };
+})();
+
+</script>
+<script>
+/* Calculation adapter: the ONLY place the dashboard talks to the physics engine.
+ *   Calc.validate(form)  -> { errors: {field: message}, list: [message] }
+ *   Calc.run(form)       -> view model (display-ready, SI values plus helpers)
+ *   Calc.curves(vm, c)   -> { predicted(t), target(t), markers }
+ * To connect a different engine, re-implement these three functions; the UI does not change.
+ */
+const Calc = (() => {
+  "use strict";
+
+  const PROFILES = {
+    iec: { name: "IEC 60060-1", lightning: { front: 30, tail: 20, crest: 3 }, switching: { front: 20, tail: 60, crest: 3 } },
+    workbook: { name: "Workbook sheet", lightning: { front: 30, tail: 20, crest: 3 }, switching: { front: 20, tail: 20, crest: 3 } },
+  };
+  const RANKING = {
+    balanced: { name: "Balanced", w: { units: 0.002, stages: 0.001, voltage: 0.01 },
+      text: "worst deviation first, then fewer resistors, fewer stages and lower charging voltage as tie-breakers" },
+    accuracy: { name: "Accuracy only", w: { units: 0, stages: 0, voltage: 0 }, text: "worst deviation only" },
+    components: { name: "Fewest resistors", w: { units: 0.05, stages: 0.001, voltage: 0.01 }, text: "worst deviation, with a strong preference for fewer resistors per stage" },
+    stages: { name: "Fewest stages", w: { units: 0.002, stages: 0.05, voltage: 0.01 }, text: "worst deviation, with a strong preference for fewer stages" },
+    margin: { name: "Voltage margin", w: { units: 0.002, stages: 0.001, voltage: 0.3 }, text: "worst deviation, with a strong preference for low charging voltage per stage" },
+  };
+  const DEFAULT_TARGETS = { lightning: { front: 1.2, tail: 50 }, switching: { front: 250, tail: 2500 } };
+
+  // ---------------------------------------------------------------- validation
+  function validate(f) {
+    const e = {};
+    const need = (k, cond, msg) => { if (!cond) e[k] = msg; };
+    const pos = (k, label) => need(k, Number.isFinite(f[k]) && f[k] > 0, `${label} must be greater than 0.`);
+    const nonneg = (k, label) => need(k, Number.isFinite(f[k]) && f[k] >= 0, `${label} cannot be negative.`);
+    need("vTest", Number.isFinite(f.vTest) && f.vTest >= 50 && f.vTest <= 2400, "Enter 50–2400 kV.");
+    pos("cLoad", "Test-object capacitance");
+    nonneg("cDiv", "Divider capacitance");
+    nonneg("cStray", "Stray capacitance");
+    nonneg("lStray", "Loop inductance");
+    need("eta", Number.isFinite(f.eta) && f.eta > 0 && f.eta <= 1, "Enter a value above 0 and up to 1.");
+    need("nMax", Number.isInteger(f.nMax) && f.nMax >= 2 && f.nMax <= 40, "Enter a whole number from 2 to 40.");
+    pos("uMax", "Maximum charging voltage");
+    pos("cStage", "Stage capacitance");
+    if (f.wStage !== null) need("wStage", Number.isFinite(f.wStage) && f.wStage > 0, "Leave blank for no limit, or enter a value above 0.");
+    pos("tFront", "Target front time");
+    pos("tTail", "Target tail time");
+    need("tTail", !(f.tTail > 0 && f.tFront > 0) || f.tTail > 3 * f.tFront, "Tail time must be well above the front time.");
+    for (const k of ["tolCrest", "tolFront", "tolTail"]) need(k, Number.isFinite(f[k]) && f[k] > 0 && f[k] <= 100, "Enter 0–100 %.");
+    need("maxUnits", Number.isInteger(f.maxUnits) && f.maxUnits >= 1 && f.maxUnits <= 6, "Enter a whole number from 1 to 6.");
+    for (const side of ["front", "tail"]) {
+      const rows = f.inventory[side];
+      if (!rows.length) e[`inv-${side}`] = `Add at least one ${side} resistor.`;
+      rows.forEach((r, i) => {
+        if (!(Number.isFinite(r.ohm) && r.ohm > 0)) e[`inv-${side}-${i}-ohm`] = "Value must be above 0 Ω.";
+        if (!(Number.isInteger(r.qty) && r.qty >= 1)) e[`inv-${side}-${i}-qty`] = "Quantity must be 1 or more.";
+      });
+    }
+    return { errors: e, list: Object.values(e) };
+  }
+
+  // ---------------------------------------------------------------- run
+  function toInventory(rows) {
+    const m = new Map();
+    for (const r of rows) m.set(r.ohm, (m.get(r.ohm) || 0) + r.qty);
+    return m;
+  }
+
+  function run(f) {
+    const v = validate(f);
+    if (v.list.length) return { status: "invalid", errors: v.errors, list: v.list };
+
+    const setup = { impulse: f.impulse, vTest: f.vTest * 1e3, cLoad: f.cLoad * 1e-12, cDiv: f.cDiv * 1e-12,
+                    cStray: f.cStray * 1e-12, lStray: f.lStray * 1e-6, eta: f.eta };
+    const front = toInventory(f.inventory.front), tail = toInventory(f.inventory.tail);
+    const rank = RANKING[f.ranking] || RANKING.balanced;
+    const gen = {
+      cStage: f.cStage * 1e-6, nMin: 2, nMax: f.nMax, uMax: f.uMax * 1e3,
+      wStageMax: f.wStage === null ? null : f.wStage * 1e3, wTotalMax: null,
+      cBo: (f.cBo || 0) * 1e-12, includeCbo: !!f.includeCbo,
+      frontInventory: { lightning: front, switching: front }, tailInventory: { lightning: tail, switching: tail },
+      maxUnits: f.selection === "single" ? 1 : f.maxUnits, roundStep: 5,
+      vTestMin: 50e3, vTestMax: 2400e3,
+      constants: { kFront: 1.67, kLc: 2.5, kTail: 0.693 }, weights: rank.w,
+    };
+    const target = { front: f.tFront * 1e-6, tail: f.tTail * 1e-6 };
+    const tol = { front: f.tolFront / 100, tail: f.tolTail / 100, crest: f.tolCrest / 100 };
+    const t0 = performance.now();
+    const raw = Engine.recommend(setup, gen, {
+      mode: f.mode, snapMode: f.selection === "single" ? "single" : "combo", nPolicy: "sweep", k: 4, target, tol,
+    });
+    const ms = performance.now() - t0;
+    if (raw.errors) return { status: "invalid", errors: {}, list: raw.errors };
+
+    const tgt = raw.target;
+    const refShape = targetShape(f.impulse, tgt.front, tgt.tail);
+    const cases = raw.candidates.map((c) => toCase(c, raw, setup, gen, refShape));
+    const vm = {
+      status: cases.length ? "ok" : "no_feasible",
+      form: JSON.parse(JSON.stringify(f)), setup, gen, raw, target: tgt, tol, refShape,
+      profileName: f.tolProfile === "custom" ? "Custom" : PROFILES[f.tolProfile].name,
+      ranking: rank, cases, ms, frontLabel: tgt.frontLabel,
+      frontName: f.impulse === "lightning" ? "Front time T1" : "Time to peak Tp",
+      rejections: [...raw.rejections.entries()],
+      ideals: raw.ideals,
+      achievable: { front: rangeOf(Engine.buildAchievable(front, gen.maxUnits)), tail: rangeOf(Engine.buildAchievable(tail, gen.maxUnits)) },
+    };
+    vm.explain = explainProblems(vm);
+    return vm;
+  }
+
+  function rangeOf(list) { return list.length ? { min: list[0].value, max: list[list.length - 1].value } : { min: NaN, max: NaN }; }
+
+  function network(r, ideal, n, prefix, inventory) {
+    const topo = r.topo || { kind: "single", parts: [r.value] };
+    const flat = topo.kind === "mixed" ? [topo.series, ...topo.parallel] : topo.parts;
+    const ids = flat.map((_, i) => `${prefix}${i + 1}`);
+    const usage = new Map();
+    flat.forEach((x) => usage.set(x, (usage.get(x) || 0) + 1));
+    const bom = [...usage.entries()].sort((a, b) => a[0] - b[0]).map(([ohm, perStage]) => ({
+      ohm, perStage, total: perStage * n, stockPerStage: inventory.get(ohm) || 0, ok: perStage <= (inventory.get(ohm) || 0),
+    }));
+    return { value: r.value, total: r.value * n, ideal, idealTotal: ideal * n, dev: r.value / ideal - 1,
+             units: r.units, recipe: r.recipe, topo, ids, parts: flat, bom };
+  }
+
+  function toCase(c, raw, setup, gen, refShape) {
+    const v = c.verdict, w = c.wave, n = c.n;
+    const circ = { n, c1: c.ideal.c1, c2: c.ideal.c2, r1: c.front.value * n, r2: c.tail.value * n, l: setup.lStray, v0: n * c.u0 };
+    const exact = raw.mode === "exact" ? w : Engine.exactWave(circ, setup.impulse);   // markers always from the exact curve
+    const resp = Engine.response(circ);
+    const fit = fitError(resp, refShape, raw.target.tail, setup.vTest);
+    const metric = (key, pred, target) => ({ pred, target, dev: v.deviation[key], tol: raw.tol[key], ok: v.normalised[key] <= 1, norm: v.normalised[key] });
+    return {
+      rank: c.rank, n, u0: c.u0, v0: n * c.u0, c1: c.ideal.c1, c2: c.ideal.c2,
+      energyStage: v.stageEnergy, energyTotal: v.totalEnergy, score: v.score, breakdown: v.breakdown,
+      compliant: v.compliant,
+      front: network(c.front, c.ideal.r1Total / n, n, "Rf", gen.frontInventory[setup.impulse]),
+      tail: network(c.tail, c.ideal.r2Total / n, n, "Rt", gen.tailInventory[setup.impulse]),
+      metrics: {
+        crest: metric("crest", w.vCrest, setup.vTest),
+        front: metric("front", w.tFront, raw.target.front),
+        tail: metric("tail", w.tTail, raw.target.tail),
+      },
+      eta: raw.mode === "exact" ? w.eta : setup.eta, etaExact: exact.eta,
+      tPeak: exact.tPeak, overshoot: exact.overshoot, fit,
+      markers: { ...exact.details, tPeak: exact.tPeak, vPeak: exact.vCrest * 1, tFront: exact.tFront, tTail: exact.tTail },
+      resp,
+    };
+  }
+
+  /** Reference waveform: a double exponential e^{-t/τ1} − e^{-t/τ2} whose IEC parameters equal the targets. */
+  function targetShape(impulse, front, tail) {
+    const mk = (t1, t2) => ({
+      v2: (t) => Math.exp(-t / t1) - Math.exp(-t / t2),
+      dv2: (t) => -Math.exp(-t / t1) / t1 + Math.exp(-t / t2) / t2,
+      taus: [t1, t2], oscillatory: false,
+    });
+    let tau1 = tail / 0.73, tau2 = front / 3.0;
+    const solve = (f, x0) => {        // log-space secant/bisection hybrid on a bracket grown from x0
+      let lo = x0, hi = x0, flo = f(lo), fhi = flo;
+      for (let i = 0; i < 60 && flo * fhi > 0; i++) { lo /= 1.3; hi *= 1.3; flo = f(lo); fhi = f(hi); }
+      if (flo * fhi > 0) return x0;
+      for (let i = 0; i < 80; i++) {
+        const mid = Math.sqrt(lo * hi), fm = f(mid);
+        if (fm * flo <= 0) { hi = mid; fhi = fm; } else { lo = mid; flo = fm; }
+        if (hi / lo - 1 < 1e-10) break;
+      }
+      return Math.sqrt(lo * hi);
+    };
+    for (let it = 0; it < 30; it++) {
+      const t2n = solve((x) => Engine.extract(mk(tau1, x), impulse).tFront - front, tau2);
+      const t1n = solve((x) => Engine.extract(mk(x, t2n), impulse).tTail - tail, tau1);
+      const done = Math.abs(t1n / tau1 - 1) < 1e-9 && Math.abs(t2n / tau2 - 1) < 1e-9;
+      tau1 = t1n; tau2 = t2n;
+      if (done) break;
+    }
+    const shape = mk(tau1, tau2);
+    const p = Engine.extract(shape, impulse);
+    return { tau1, tau2, peak: p.vPeak, at: (t, crest) => crest * shape.v2(t) / p.vPeak, params: p };
+  }
+
+  function fitError(resp, ref, tail, crest) {
+    const N = 600, T = 2.5 * tail;
+    let s = 0;
+    for (let i = 0; i < N; i++) {
+      const t = T * i / (N - 1);
+      const d = (resp.v2(t) - ref.at(t, crest)) / crest;
+      s += d * d;
+    }
+    return Math.sqrt(s / N);
+  }
+
+  // ---------------------------------------------------------------- explanations
+  const REASON = {
+    overvoltage: "charging voltage per stage would exceed the limit",
+    inductance_limited_front: "loop inductance alone makes the front slower than the target",
+    front_unreachable: "no front resistance reaches the target front time",
+    tail_unreachable: "no tail resistance reaches the target tail time",
+    inverse_not_converged: "the resistance solver did not converge",
+    energy_exceeded: "stored energy per stage would exceed the limit",
+    total_energy_exceeded: "total stored energy would exceed the limit",
+    inventory_exceeded: "the network would need more resistors than allowed",
+    overshoot_exceeded: "overshoot would exceed 10 %",
+    stages_out_of_range: "stage count outside the allowed range",
+  };
+  const reasonText = (r) => REASON[r] || r;
+
+  function explainProblems(vm) {
+    const out = [];
+    const byReason = new Map();
+    for (const i of vm.ideals) for (const fl of i.flags) {
+      if (!byReason.has(fl)) byReason.set(fl, []);
+      byReason.get(fl).push(i.n);
+    }
+    for (const [fl, ns] of byReason) out.push(`${ns.length === 1 ? "Stage count" : "Stage counts"} ${compactRange(ns)}: ${reasonText(fl)}.`);
+    const candRejects = vm.rejections.filter(([k]) => !k.startsWith("n="));
+    for (const [k, count] of candRejects) out.push(`${count} resistor combination${count > 1 ? "s" : ""} rejected: ${reasonText(k)}.`);
+    const ok = vm.ideals.filter((i) => !i.flags.length);
+    if (ok.length) {
+      for (const [side, key, label] of [["front", "r1Total", "Front"], ["tail", "r2Total", "Tail"]]) {
+        const need = ok.map((i) => i[key] / i.n), lo = Math.min(...need), hi = Math.max(...need);
+        const a = vm.achievable[side];
+        if (lo > a.max * 1.2 || hi < a.min / 1.2) {
+          out.push(`${label} resistance needed is ${fmtOhm(lo)}–${fmtOhm(hi)} per stage, but the inventory can only build ${fmtOhm(a.min)}–${fmtOhm(a.max)}.`);
+        }
+      }
+    }
+    if (vm.cases.length && !vm.cases[0].compliant) {
+      const c = vm.cases[0];
+      const names = { front: vm.frontLabel === "T1" ? "front time T1" : "time to peak Tp", tail: "tail time T2", crest: "crest voltage" };
+      const bad = Object.entries(c.metrics).filter(([, m]) => !m.ok).map(([k, m]) => `${names[k]} is off by ${pct(m.dev)} (allowed ±${(m.tol * 100).toFixed(0)} %)`);
+      out.unshift(`No setting meets every limit. In the best case, ${bad.join("; ")}.`);
+    }
+    return out;
+  }
+  function compactRange(ns) {
+    const s = [...ns].sort((a, b) => a - b), parts = [];
+    for (let i = 0; i < s.length; i++) {
+      let j = i;
+      while (j + 1 < s.length && s[j + 1] === s[j] + 1) j++;
+      parts.push(i === j ? `${s[i]}` : `${s[i]}–${s[j]}`);
+      i = j;
+    }
+    return parts.join(", ");
+  }
+
+  // ---------------------------------------------------------------- formatting shared with the UI
+  function sig(x, s = 4) { return Number.isFinite(x) ? String(Number(x.toPrecision(s))) : "–"; }
+  function fmtOhm(x, s = 4) { return !Number.isFinite(x) ? "–" : x >= 1e4 ? `${sig(x / 1e3, s)} kΩ` : `${sig(x, s)} Ω`; }
+  function pct(x, d = 1) {
+    const r = Number((x * 100).toFixed(d));
+    return `${r > 0 ? "+" : r < 0 ? "−" : "±"}${Math.abs(r).toFixed(d)} %`;
+  }
+
+  function curves(vm, c) {
+    return {
+      predicted: (t) => c.resp.v2(t),
+      target: (t) => vm.refShape.at(t, vm.setup.vTest),
+      markers: c.markers,
+    };
+  }
+
+  return { PROFILES, RANKING, DEFAULT_TARGETS, validate, run, curves, sig, fmtOhm, pct, reasonText, compactRange };
+})();
+
+</script>
+<script>
+/* Presentation layer. Reads the form, calls Calc (adapter), renders the view model. No physics here. */
+(() => {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const { sig, fmtOhm, pct } = Calc;
+
+  // ---------------------------------------------------------------- presets
+  const inv = (vals, q) => vals.map((ohm) => ({ ohm, qty: q }));
+  const WB_FRONT = [10, 20, 30, 50, 75, 100, 150, 200, 300, 500], WB_TAIL = [5, 10, 15, 20, 25, 30, 40, 50, 75, 100, 150, 200];
+  const PROFILES = {
+    workbook: {
+      gen: { nMax: 15, uMax: 200, cStage: 3, wStage: null, cBo: 0, includeCbo: false },
+      inventories: { lightning: { front: inv(WB_FRONT, 4), tail: inv(WB_TAIL, 4) }, switching: { front: inv(WB_FRONT, 4), tail: inv(WB_TAIL, 4) } },
+      selection: "combo", maxUnits: 4,
+    },
+    haefely: {
+      gen: { nMax: 12, uMax: 200, cStage: 0.125, wStage: 2.5, cBo: 545, includeCbo: true },
+      inventories: { lightning: { front: inv([30, 465, 3700], 1), tail: inv([520], 1) }, switching: { front: inv([30, 465, 3700], 1), tail: inv([22000], 1) } },
+      selection: "single", maxUnits: 1,
+    },
+  };
+  const GEN_FIELDS = ["nMax", "uMax", "cStage", "wStage", "cBo", "includeCbo"];
+  const DEFAULT_V = { lightning: 1425, switching: 1050 };
+  const clone = (x) => JSON.parse(JSON.stringify(x));
+
+  const S = {
+    form: {
+      impulse: "lightning", vTest: 1425, cLoad: 850, cDiv: 500, cStray: 150, lStray: 18.5, eta: 0.82,
+      ...PROFILES.workbook.gen, mode: "exact", tFront: 1.2, tTail: 50, tolProfile: "iec", tolCrest: 3, tolFront: 30, tolTail: 20,
+      selection: "combo", maxUnits: 4, ranking: "balanced",
+    },
+    profile: "workbook",
+    inventories: clone(PROFILES.workbook.inventories),
+    invSide: "front",
+    vm: null, stale: false, busy: false, showErrors: false, selected: 1,
+    chart: { view: "full", domain: null },
+  };
+  const formWithInventory = () => ({ ...S.form, inventory: S.inventories[S.form.impulse] });
+
+  // ---------------------------------------------------------------- form <-> state
+  function fillForm() {
+    document.querySelectorAll("[data-field]").forEach((el) => {
+      const v = S.form[el.dataset.field];
+      if (el.type === "checkbox") el.checked = !!v;
+      else el.value = v === null || v === undefined || Number.isNaN(v) ? "" : v;
+    });
+    $("profile").value = S.profile;
+    $("tolProfile").value = S.form.tolProfile;
+    setPressed("impulseSeg", "impulse", S.form.impulse);
+    setPressed("modeSeg", "mode", S.form.mode);
+    setPressed("selSeg", "sel", S.form.selection);
+    const li = S.form.impulse === "lightning";
+    $("tFrontLbl").textContent = li ? "Target front time T1" : "Target time to peak Tp";
+    $("tolFrontLbl").textContent = li ? "T1 ±" : "Tp ±";
+    $("maxUnits").disabled = S.form.selection === "single";
+    $("etaHint").textContent = S.form.mode === "calculator" ? "Used by Calculator mode to set the charging voltage." : "Not used in Exact mode, which computes η from the circuit.";
+    renderInventory();
+  }
+  function setPressed(groupId, key, value) {
+    document.querySelectorAll(`#${groupId} [data-${key}]`).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset[key] === value)));
+  }
+  function applyTolProfile() {
+    if (S.form.tolProfile === "custom") return;
+    const t = Calc.PROFILES[S.form.tolProfile][S.form.impulse];
+    Object.assign(S.form, { tolCrest: t.crest, tolFront: t.front, tolTail: t.tail });
+  }
+
+  function onFieldInput(el) {
+    const k = el.dataset.field;
+    let v;
+    if (el.type === "checkbox") v = el.checked;
+    else if (el.tagName === "SELECT") v = el.value;
+    else if (el.value.trim() === "") v = el.dataset.optional ? null : NaN;
+    else v = Number(el.value);
+    S.form[k] = v;
+    if (GEN_FIELDS.includes(k) && S.profile !== "custom") { S.profile = "custom"; $("profile").value = "custom"; }
+    if (el.dataset.tol && S.form.tolProfile !== "custom") { S.form.tolProfile = "custom"; $("tolProfile").value = "custom"; }
+    changed();
+  }
+
+  function changed() {
+    if (S.vm) S.stale = true;
+    validateLive();
+    renderBanners();
+  }
+
+  // ---------------------------------------------------------------- validation display
+  function validateLive() {
+    const { errors, list } = Calc.validate(formWithInventory());
+    document.querySelectorAll(".field[data-for]").forEach((f) => {
+      const k = f.dataset.for, msg = errors[k];
+      f.classList.toggle("invalid", !!msg);
+      let e = f.querySelector(".err");
+      if (msg) {
+        if (!e) { e = document.createElement("span"); e.className = "err"; e.id = `err-${k}`; f.appendChild(e); }
+        e.textContent = msg;
+        f.querySelector("input,select")?.setAttribute("aria-describedby", e.id);
+        f.querySelector("input")?.setAttribute("aria-invalid", "true");
+      } else if (e) {
+        e.remove(); f.querySelector("input")?.removeAttribute("aria-invalid");
+      }
+    });
+    // inventory errors
+    document.querySelectorAll("#invPanel [data-err]").forEach((e) => {
+      const msg = errors[e.dataset.err];
+      e.textContent = msg || ""; e.hidden = !msg;
+    });
+    const invErr = errors[`inv-${S.invSide}`];
+    $("invHint").textContent = invErr || `Inventory for ${S.form.impulse} tests. Quantities are available units per stage.`;
+    $("invHint").style.color = invErr ? "var(--bad)" : "";
+    const otherSide = S.invSide === "front" ? "tail" : "front";
+    const otherBad = Object.keys(errors).some((k) => k.startsWith(`inv-${otherSide}`));
+    $(`tab-${otherSide}`).style.color = otherBad ? "var(--bad)" : "";
+    $(`tab-${S.invSide}`).style.color = "";
+    $("calcBtn").disabled = S.busy;
+    if (!S.busy) $("calcStatus").textContent = list.length ? `${list.length} input${list.length > 1 ? "s need" : " needs"} fixing before calculating.` : (S.stale ? "Inputs changed. Calculate to update the results." : $("calcStatus").textContent);
+    return list;
+  }
+
+  // ---------------------------------------------------------------- inventory editor
+  function renderInventory() {
+    const rows = S.inventories[S.form.impulse][S.invSide];
+    const panel = $("invPanel");
+    panel.setAttribute("aria-labelledby", `tab-${S.invSide}`);
+    let h = `<div class="inv-head"><span>Value (Ω)</span><span>Qty per stage</span><span class="sr-only">Remove</span></div>`;
+    rows.forEach((r, i) => {
+      const id = `inv-${S.invSide}-${i}`;
+      h += `<div class="inv-row">
+        <div class="field"><label class="sr-only" for="${id}-ohm">Resistance ${i + 1} in ohms</label>
+          <div class="ctl"><input id="${id}-ohm" data-inv="${i}" data-k="ohm" type="number" inputmode="decimal" step="any" value="${Number.isFinite(r.ohm) ? r.ohm : ""}"><span class="unit">Ω</span></div>
+          <span class="err" data-err="${id}-ohm" hidden></span></div>
+        <div class="field"><label class="sr-only" for="${id}-qty">Quantity ${i + 1}</label>
+          <div class="ctl"><input id="${id}-qty" data-inv="${i}" data-k="qty" type="number" inputmode="numeric" step="1" min="1" value="${Number.isFinite(r.qty) ? r.qty : ""}"></div>
+          <span class="err" data-err="${id}-qty" hidden></span></div>
+        <button type="button" class="iconbtn" data-remove="${i}" aria-label="Remove ${Number.isFinite(r.ohm) ? esc(fmtOhm(r.ohm)) : "this"} resistor">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      </div>`;
+    });
+    panel.innerHTML = h;
+    for (const side of ["front", "tail"]) {
+      $(`tab-${side}`).setAttribute("aria-selected", String(side === S.invSide));
+      $(`tab-${side}`).tabIndex = side === S.invSide ? 0 : -1;
+      $(`cnt-${side}`).textContent = `(${S.inventories[S.form.impulse][side].length})`;
+    }
+  }
+  $("invPanel").addEventListener("input", (e) => {
+    const el = e.target; if (!el.dataset.inv) return;
+    const row = S.inventories[S.form.impulse][S.invSide][Number(el.dataset.inv)];
+    row[el.dataset.k] = el.value.trim() === "" ? NaN : Number(el.value);
+    if (S.profile !== "custom") { S.profile = "custom"; $("profile").value = "custom"; }
+    changed();
+  });
+  $("invPanel").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-remove]"); if (!b) return;
+    S.inventories[S.form.impulse][S.invSide].splice(Number(b.dataset.remove), 1);
+    if (S.profile !== "custom") { S.profile = "custom"; $("profile").value = "custom"; }
+    renderInventory(); changed();
+  });
+  $("addRes").addEventListener("click", () => {
+    const rows = S.inventories[S.form.impulse][S.invSide];
+    rows.push({ ohm: NaN, qty: 1 });
+    if (S.profile !== "custom") { S.profile = "custom"; $("profile").value = "custom"; }
+    renderInventory(); changed();
+    $(`inv-${S.invSide}-${rows.length - 1}-ohm`).focus();
+  });
+  document.querySelectorAll(".tabs [data-side]").forEach((b) => {
+    b.addEventListener("click", () => { S.invSide = b.dataset.side; renderInventory(); validateLive(); });
+    b.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      S.invSide = S.invSide === "front" ? "tail" : "front"; renderInventory(); validateLive(); $(`tab-${S.invSide}`).focus();
+    });
+  });
+
+  // ---------------------------------------------------------------- control wiring
+  $("rail").addEventListener("input", (e) => { if (e.target.dataset.field) onFieldInput(e.target); });
+  $("rail").addEventListener("change", (e) => { if (e.target.dataset.field && (e.target.type === "checkbox" || e.target.tagName === "SELECT")) onFieldInput(e.target); });
+  $("impulseSeg").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-impulse]"); if (!b || b.dataset.impulse === S.form.impulse) return;
+    const old = S.form.impulse, nu = b.dataset.impulse;
+    S.form.impulse = nu;
+    const d = Calc.DEFAULT_TARGETS;
+    if (S.form.tFront === d[old].front) S.form.tFront = d[nu].front;
+    if (S.form.tTail === d[old].tail) S.form.tTail = d[nu].tail;
+    if (S.form.vTest === DEFAULT_V[old]) S.form.vTest = DEFAULT_V[nu];
+    applyTolProfile();
+    fillForm(); changed();
+  });
+  $("modeSeg").addEventListener("click", (e) => { const b = e.target.closest("[data-mode]"); if (!b) return; S.form.mode = b.dataset.mode; fillForm(); changed(); });
+  $("selSeg").addEventListener("click", (e) => { const b = e.target.closest("[data-sel]"); if (!b) return; S.form.selection = b.dataset.sel; fillForm(); changed(); });
+  $("profile").addEventListener("change", () => {
+    const p = $("profile").value; S.profile = p;
+    if (p !== "custom") {
+      const pr = PROFILES[p];
+      Object.assign(S.form, clone(pr.gen), { selection: pr.selection, maxUnits: pr.maxUnits });
+      S.inventories = clone(pr.inventories);
+    }
+    fillForm(); changed();
+  });
+  $("tolProfile").addEventListener("change", () => { S.form.tolProfile = $("tolProfile").value; applyTolProfile(); fillForm(); changed(); });
+  $("rail").addEventListener("submit", (e) => { e.preventDefault(); calculate(); });
+
+  // ---------------------------------------------------------------- calculation
+  const CALC_LABEL = $("calcBtn").innerHTML;
+  function calculate() {
+    const errs = validateLive();
+    if (errs.length) { S.showErrors = true; renderBanners(); $("banners").scrollIntoView({ block: "nearest" }); return; }
+    S.showErrors = false; S.busy = true;
+    $("calcBtn").disabled = true; $("calcBtn").innerHTML = `<span class="spin" aria-hidden="true"></span>Calculating…`;
+    $("calcStatus").textContent = "Calculating…";
+    $("results").classList.add("busy"); $("results").setAttribute("aria-busy", "true");
+    renderBanners();
+    setTimeout(() => {
+      let vm;
+      try { vm = Calc.run(formWithInventory()); }
+      catch (err) { vm = { status: "invalid", list: [`The calculation stopped: ${err.message}. Check for extreme input values.`] }; }
+      S.busy = false;
+      $("calcBtn").disabled = false; $("calcBtn").innerHTML = CALC_LABEL;
+      $("results").classList.remove("busy"); $("results").removeAttribute("aria-busy");
+      if (vm.status === "invalid") { S.showErrors = true; S.runErrors = vm.list; renderBanners(); return; }
+      S.runErrors = null; S.vm = vm; S.stale = false; S.selected = 1; S.chart = { view: "full", domain: null };
+      $("calcStatus").textContent = vm.cases.length
+        ? `Calculated in ${(vm.ms / 1000).toFixed(1)} s · ${vm.cases.length} feasible setting${vm.cases.length > 1 ? "s" : ""}`
+        : `Calculated in ${(vm.ms / 1000).toFixed(1)} s · no feasible setting`;
+      setPressed("viewSeg", "view", "full");
+      render();
+    }, 40);
+  }
+
+  // ---------------------------------------------------------------- rendering helpers
+  const icon = {
+    ok: `<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    bad: `<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+    info: `<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 7.2v4M8 4.8v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+    warn: `<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2l6.5 11.5h-13z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.5v3.2M8 11.6v.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  };
+  const statusPill = (ok) => ok ? `<span class="pill good">${icon.ok}Within limits</span>` : `<span class="pill bad">${icon.bad}Outside limits</span>`;
+  const kv = (v, d = 1) => `${(v / 1e3).toFixed(d)}`;
+  const isLI = () => S.vm.form.impulse === "lightning";
+  function us(t, which) {
+    const x = t * 1e6, li = isLI();
+    if (!Number.isFinite(x)) return "–";
+    if (which === "front") return li ? x.toFixed(3) : x.toFixed(1);
+    if (which === "tail") return li ? x.toFixed(2) : x.toFixed(0);
+    return Math.abs(x) < 10 ? x.toFixed(3) : Math.abs(x) < 1000 ? x.toFixed(1) : x.toFixed(0);
+  }
+  const caseLabel = (k) => k === 1 ? "Best match" : k === 2 ? "Runner-up" : k === 3 ? "Third option" : "Alternative";
+  const selCase = () => S.vm.cases.find((c) => c.rank === S.selected) || S.vm.cases[0];
+  const metricName = (k) => k === "crest" ? "crest voltage" : k === "tail" ? "tail time T2" : (isLI() ? "front time T1" : "time to peak Tp");
+  function worst(c) {
+    let best = null;
+    for (const [k, m] of Object.entries(c.metrics)) if (!best || m.norm > best.m.norm) best = { k, m };
+    return best;
+  }
+
+  function render() {
+    renderBanners();
+    const vm = S.vm;
+    if (!vm) return;
+    const empty = vm.status === "no_feasible";
+    for (const id of ["sec-settings", "sec-nets", "sec-wave", "sec-table", "sec-summary"]) $(id).hidden = empty;
+    $("sec-empty").hidden = !empty;
+    if (empty) {
+      $("emptyList").innerHTML = (vm.explain.length ? vm.explain : ["No combination passed the hard limits."]).map((x) => `<li>${esc(x)}</li>`).join("");
+      return;
+    }
+    renderCase(); renderNets(); renderChart(); renderMetrics(); renderTable(); renderSummary();
+  }
+
+  function renderBanners() {
+    const b = [];
+    if (S.showErrors) {
+      const list = S.runErrors || Calc.validate(formWithInventory()).list;
+      if (list.length) b.push(`<div class="banner error" role="alert"><div><strong>Fix these inputs to calculate.</strong><ul>${list.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div></div>`);
+    }
+    if (S.stale && S.vm && !S.busy) b.push(`<div class="banner stale"><span><strong>Results are out of date.</strong> Inputs changed after the last calculation.</span><button type="button" class="btn small" data-recalc>Recalculate</button></div>`);
+    if (S.busy) b.push(`<div class="banner info"><span><strong>Calculating…</strong> Searching stage counts and resistor networks.</span></div>`);
+    if (S.vm && S.vm.status === "ok" && !S.vm.cases[0].compliant) {
+      b.push(`<div class="banner error"><div><strong>No candidate meets every limit.</strong> The best settings are shown, with the limits they miss.<ul>${S.vm.explain.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div></div>`);
+    }
+    $("banners").innerHTML = b.join("");
+    $("banners").hidden = !b.length;
+  }
+  $("banners").addEventListener("click", (e) => { if (e.target.closest("[data-recalc]")) calculate(); });
+
+  // ---------------------------------------------------------------- section 1
+  function renderCase() {
+    const vm = S.vm, c = selCase();
+    const top = vm.cases.slice(0, 3).map((x) => x.rank);
+    $("caseSel").innerHTML = top.map((r) => `<button type="button" data-case="${r}" aria-pressed="${r === c.rank}">Case #${r}</button>`).join("");
+    $("caseTitle").textContent = `Selected case: #${c.rank} · ${caseLabel(c.rank)}`;
+    $("casePill").innerHTML = statusPill(c.compliant);
+    const w = worst(c);
+    $("caseWhy").textContent = `Ranked ${c.rank} of ${vm.cases.length} feasible settings (${vm.ranking.name.toLowerCase()} priority). Its largest deviation is the ${metricName(w.k)}, at ${(w.m.norm * 100).toFixed(1)} % of the allowed band.`;
+    const g = vm.form;
+    const units = (net) => `${net.units} resistor${net.units > 1 ? "s" : ""} per stage`;
+    $("settingsRow").innerHTML = `
+      <div><span class="k">Generator stages</span><span class="big">${c.n}</span>
+        <span class="support">of ${g.nMax} available · C1 = ${sig(c.c1 * 1e6, 4)} µF</span></div>
+      <div><span class="k">Charging voltage</span><span class="big">${kv(c.u0, 2)}<small>kV/stage</small></span>
+        <span class="support">${Math.round(c.u0 / (g.uMax * 1e3) * 100)} % of the ${g.uMax} kV limit · ${sig(c.energyStage / 1e3, 3)} kJ per stage</span></div>
+      <div><span class="k">Front equivalent resistance</span><span class="big">${esc(sig(c.front.value, 5))}<small>Ω/stage</small></span>
+        <span class="support">${esc(fmtOhm(c.front.total, 5))} across ${c.n} stages · ${units(c.front)}</span></div>
+      <div><span class="k">Tail equivalent resistance</span><span class="big">${esc(sig(c.tail.value, 5))}<small>Ω/stage</small></span>
+        <span class="support">${esc(fmtOhm(c.tail.total, 5))} across ${c.n} stages · ${units(c.tail)}</span></div>`;
+  }
+  $("caseSel").addEventListener("click", (e) => { const b = e.target.closest("[data-case]"); if (b) select(Number(b.dataset.case)); });
+  function select(rank) {
+    if (rank === S.selected) return;
+    S.selected = rank; S.chart.domain = null;
+    renderCase(); renderNets(); renderChart(); renderMetrics(); renderTable(); renderSummary();
+  }
+
+  // ---------------------------------------------------------------- section 2: networks
+  function expression(net) {
+    const t = net.topo, f = (x) => sig(x, 4);
+    if (t.kind === "single") return `Req = ${f(t.parts[0])} Ω`;
+    if (t.kind === "series") return `Req = ${t.parts.map(f).join(" + ")} = ${f(net.value)} Ω`;
+    if (t.kind === "parallel") return `Req = 1 / (${t.parts.map((x) => `1/${f(x)}`).join(" + ")}) = ${f(net.value)} Ω`;
+    const [b, c] = t.parallel;
+    return `Req = ${f(t.series)} + (${f(b)} × ${f(c)}) / (${f(b)} + ${f(c)}) = ${f(net.value)} Ω`;
+  }
+
+  function schematic(net, title) {
+    const t = net.topo;
+    const blocks = t.kind === "series" ? t.parts.map((v) => ({ type: "r", v })) :
+      t.kind === "parallel" ? [{ type: "p", vs: t.parts }] :
+      t.kind === "mixed" ? [{ type: "r", v: t.series }, { type: "p", vs: t.parallel }] : [{ type: "r", v: t.parts[0] }];
+    const SP = 70;                              // branch spacing
+    const maxBr = Math.max(1, ...blocks.filter((b) => b.type === "p").map((b) => b.vs.length));
+    const H = Math.max(150, 120 + (maxBr - 1) * SP + 40);
+    const mid = H / 2 + 4;
+    const widths = blocks.map((b) => (b.type === "r" ? 112 : 186));
+    const total = widths.reduce((a, b) => a + b, 0);
+    const W = Math.max(440, total + 120);
+    const xA = 34, xB = W - 34;
+    let x = (W - total) / 2;
+    let id = 0;
+    const ink = "#23272b", soft = "#7d8389";
+    const resistor = (cx, y, v) => {
+      const label = net.ids[id++];
+      return `<line x1="${cx - 27}" x2="${cx + 27}" y1="${y}" y2="${y}" stroke="#fcfbf9" stroke-width="4"/>
+        <rect x="${cx - 27}" y="${y - 10}" width="54" height="20" rx="2" fill="#ffffff" stroke="${ink}" stroke-width="1.6"/>
+        <text x="${cx}" y="${y - 17}" text-anchor="middle" font-size="14" font-weight="600" fill="${ink}">${label}</text>
+        <text x="${cx}" y="${y + 30}" text-anchor="middle" font-size="13.5" fill="#4a5056" font-family="IBM Plex Mono, monospace">${esc(fmtOhm(v))}</text>`;
+    };
+    let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(title)}: ${esc(net.recipe)} ohms per stage">`;
+    s += `<line x1="${xA}" x2="${x}" y1="${mid}" y2="${mid}" stroke="${ink}" stroke-width="1.6"/>`;
+    blocks.forEach((b, i) => {
+      const w = widths[i];
+      if (b.type === "r") {
+        s += `<line x1="${x}" x2="${x + w}" y1="${mid}" y2="${mid}" stroke="${ink}" stroke-width="1.6"/>` + resistor(x + w / 2, mid, b.v);
+      } else {
+        const k = b.vs.length, xl = x + 24, xr = x + w - 24;
+        const ys = b.vs.map((_, j) => mid + (j - (k - 1) / 2) * SP);
+        s += `<rect x="${xl - 14}" y="${ys[0] - 56}" width="${xr - xl + 28}" height="${ys[k - 1] - ys[0] + 98}" rx="8" fill="#f1f6f5" stroke="#9dc4bf" stroke-dasharray="4 3"/>`;
+        s += `<text x="${xl - 4}" y="${ys[0] - 40}" font-size="11.5" fill="#2e7a74" font-weight="600" letter-spacing=".06em">PARALLEL</text>`;
+        s += `<line x1="${x}" x2="${xl}" y1="${mid}" y2="${mid}" stroke="${ink}" stroke-width="1.6"/><line x1="${xr}" x2="${x + w}" y1="${mid}" y2="${mid}" stroke="${ink}" stroke-width="1.6"/>`;
+        s += `<line x1="${xl}" x2="${xl}" y1="${ys[0]}" y2="${ys[k - 1]}" stroke="${ink}" stroke-width="1.6"/><line x1="${xr}" x2="${xr}" y1="${ys[0]}" y2="${ys[k - 1]}" stroke="${ink}" stroke-width="1.6"/>`;
+        ys.forEach((y, j) => { s += `<line x1="${xl}" x2="${xr}" y1="${y}" y2="${y}" stroke="${ink}" stroke-width="1.6"/>` + resistor((xl + xr) / 2, y, b.vs[j]); });
+        s += `<circle cx="${xl}" cy="${mid}" r="4" fill="${ink}"/><circle cx="${xr}" cy="${mid}" r="4" fill="${ink}"/>`;
+      }
+      x += w;
+    });
+    s += `<line x1="${x}" x2="${xB}" y1="${mid}" y2="${mid}" stroke="${ink}" stroke-width="1.6"/>`;
+    s += `<circle cx="${xA}" cy="${mid}" r="5.5" fill="#ffffff" stroke="${ink}" stroke-width="1.6"/><circle cx="${xB}" cy="${mid}" r="5.5" fill="#ffffff" stroke="${ink}" stroke-width="1.6"/>`;
+    s += `<text x="${xA}" y="${mid + 26}" text-anchor="middle" font-size="13" fill="${soft}">a</text><text x="${xB}" y="${mid + 26}" text-anchor="middle" font-size="13" fill="${soft}">b</text>`;
+    s += `</svg>`;
+    return s;
+  }
+
+  function renderNets() {
+    const c = selCase();
+    for (const side of ["front", "tail"]) {
+      const net = c[side], title = side === "front" ? "Front resistor network" : "Tail resistor network";
+      $(`${side}Sub`).textContent = `Case #${c.rank} · one stage of ${c.n}`;
+      const devCls = Math.abs(net.dev) < 0.005 ? "var(--good)" : Math.abs(net.dev) < 0.03 ? "var(--ink)" : "var(--warn)";
+      const chips = net.bom.map((b) => `<span class="chip ${b.ok ? "" : "bad"}">${b.ok ? icon.ok : icon.bad}${esc(fmtOhm(b.ohm))} · ${b.perStage} of ${b.stockPerStage} used</span>`).join("");
+      $(`net-${side}`).innerHTML = `
+        <div class="schem">${schematic(net, title)}</div>
+        <p class="hint" style="margin-top:8px">Terminals a–b of one stage. The same network is fitted in each of the ${c.n} stages.</p>
+        <dl class="facts">
+          <dt>Equivalent Req</dt><dd><b class="num">${esc(fmtOhm(net.value, 5))}</b> per stage · <span class="num">${esc(fmtOhm(net.total, 5))}</span> total</dd>
+          <dt>Expression</dt><dd class="num">${esc(expression(net))}</dd>
+          <dt>Components</dt><dd>${net.units} per stage · ${net.units * c.n} in total (${net.ids.join(", ")})</dd>
+          <dt>Ideal required</dt><dd><span class="num">${esc(fmtOhm(net.ideal, 5))}</span> per stage · deviation <b class="num" style="color:${devCls}">${esc(pct(net.dev, 2))}</b></dd>
+          <dt>Inventory</dt><dd><div class="chips">${chips}</div></dd>
+        </dl>`;
+    }
+  }
+
+  // ---------------------------------------------------------------- section 3: waveform
+  function niceTicks(lo, hi, count = 6) {
+    const span = hi - lo, raw = span / count, mag = 10 ** Math.floor(Math.log10(raw));
+    const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= raw);
+    const out = [];
+    for (let v = Math.ceil(lo / step) * step; v <= hi + step * 1e-9; v += step) out.push(+v.toPrecision(12));
+    return out;
+  }
+  function defaultDomain(view) {
+    const vm = S.vm, c = selCase(), m = c.markers;
+    if (view === "front") return [0, Math.max(4 * vm.target.front, 1.4 * (m.t90 || 0), 1.15 * (m.tPeak || 0))];
+    return [0, Math.max(2.5 * vm.target.tail, 1.3 * (m.t50 || 0))];
+  }
+
+  function renderChart() {
+    const vm = S.vm, c = selCase(), cv = Calc.curves(vm, c), m = cv.markers;
+    const host = $("plot");
+    const W = Math.max(300, Math.round(host.clientWidth || 700));
+    const H = window.innerWidth < 640 ? 300 : 330;
+    const ml = 62, mr = 22, mt = 58, mb = 48, pw = W - ml - mr, ph = H - mt - mb;
+    const [t0, t1] = S.chart.domain || defaultDomain(S.chart.view);
+    const vMax = 1.15 * Math.max(vm.setup.vTest, m.vPeak);
+    const X = (t) => ml + (t - t0) / (t1 - t0) * pw, Y = (v) => mt + ph - (v / vMax) * ph;
+    const N = Math.min(1200, Math.round(pw * 1.5));
+    const pathOf = (fn) => {
+      let d = "";
+      for (let i = 0; i < N; i++) { const t = t0 + (t1 - t0) * i / (N - 1); d += `${i ? "L" : "M"}${X(t).toFixed(1)} ${Y(Math.max(fn(t), 0)).toFixed(1)}`; }
+      return d;
+    };
+    const xt = niceTicks(t0 * 1e6, t1 * 1e6, W < 500 ? 4 : 7), yt = niceTicks(0, vMax / 1e3, 5);
+    const inX = (t) => t >= t0 && t <= t1;
+    let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Target and predicted impulse waveforms, voltage in kilovolts against time in microseconds">`;
+    s += `<defs><clipPath id="clipPlot"><rect x="${ml}" y="${mt - 2}" width="${pw}" height="${ph + 4}"/></clipPath></defs>`;
+    // recorder graticule: minor divisions (5 per major) under the major grid
+    const minor = (ticks) => { const st = ticks.length > 1 ? ticks[1] - ticks[0] : 0, out = []; if (!st) return out;
+      for (let v = ticks[0] - st; v <= ticks[ticks.length - 1] + st; v += st / 5) out.push(+v.toPrecision(12)); return out; };
+    for (const y of minor(yt)) if (y * 1e3 >= 0 && y * 1e3 <= vMax) s += `<line x1="${ml}" x2="${ml + pw}" y1="${Y(y * 1e3)}" y2="${Y(y * 1e3)}" stroke="var(--grid-minor)"/>`;
+    for (const x of minor(xt)) if (x / 1e6 >= t0 && x / 1e6 <= t1) s += `<line x1="${X(x / 1e6)}" x2="${X(x / 1e6)}" y1="${mt}" y2="${mt + ph}" stroke="var(--grid-minor)"/>`;
+    for (const y of yt) s += `<line x1="${ml}" x2="${ml + pw}" y1="${Y(y * 1e3)}" y2="${Y(y * 1e3)}" stroke="var(--grid)"/><text x="${ml - 10}" y="${Y(y * 1e3) + 4}" text-anchor="end" font-size="12" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">${y}</text>`;
+    for (const x of xt) s += `<line x1="${X(x / 1e6)}" x2="${X(x / 1e6)}" y1="${mt}" y2="${mt + ph}" stroke="var(--grid)"/><text x="${X(x / 1e6)}" y="${mt + ph + 18}" text-anchor="middle" font-size="12" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">${x}</text>`;
+    s += `<rect x="${ml}" y="${mt}" width="${pw}" height="${ph}" fill="none" stroke="var(--line-strong)"/>`;
+    s += `<text x="${ml + pw / 2}" y="${H - 8}" text-anchor="middle" font-size="13" font-weight="600" letter-spacing=".06em" fill="var(--ink-2)" font-family="Barlow Semi Condensed, Arial Narrow, sans-serif">TIME (µs)</text>`;
+    s += `<text transform="translate(16 ${mt + ph / 2}) rotate(-90)" text-anchor="middle" font-size="13" font-weight="600" letter-spacing=".06em" fill="var(--ink-2)" font-family="Barlow Semi Condensed, Arial Narrow, sans-serif">VOLTAGE (kV)</text>`;
+    // threshold levels of the predicted peak
+    const levels = [[0.9, "90 %"], [0.5, "50 %"], [0.3, "30 %"]];
+    for (const [f, lab] of levels) {
+      const y = Y(f * m.vPeak);
+      s += `<line x1="${ml}" x2="${ml + pw}" y1="${y}" y2="${y}" stroke="#b9bfc6" stroke-dasharray="2 4"/><text x="${ml + pw - 4}" y="${y - 5}" text-anchor="end" font-size="11" fill="var(--ink-3)">${lab}</text>`;
+    }
+    s += `<g clip-path="url(#clipPlot)">`;
+    s += `<path d="${pathOf(cv.predicted)}" fill="none" stroke="var(--pred)" stroke-width="2.5" stroke-linejoin="round"/>`;
+    s += `<path d="${pathOf(cv.target)}" fill="none" stroke="var(--target)" stroke-width="2" stroke-dasharray="7 6" stroke-linecap="round"/>`;
+    // vertical timing markers
+    const verts = [];
+    if (m.t30 !== undefined) verts.push({ t: m.t30, lab: "t30" }, { t: m.t90, lab: "t90" });
+    if (isLI() && m.virtualOrigin !== undefined) verts.push({ t: m.virtualOrigin, lab: "O1" });
+    if (m.t50 !== undefined) verts.push({ t: m.t50, lab: "t50" });
+    verts.push({ t: m.tPeak, lab: isLI() ? "peak" : "peak (Tp ref.)" });
+    for (const v of verts) if (inX(v.t)) s += `<line x1="${X(v.t)}" x2="${X(v.t)}" y1="${mt}" y2="${mt + ph}" stroke="#9aa3ad" stroke-dasharray="3 3"/>`;
+    s += `</g>`;
+    // crest marker
+    if (inX(m.tPeak)) {
+      const px = X(m.tPeak), py = Y(m.vPeak);
+      const right = px + 150 < ml + pw;
+      s += `<circle cx="${px}" cy="${py}" r="5" fill="var(--pred)" stroke="#fff" stroke-width="2"/>`;
+      s += `<text x="${right ? px + 10 : px - 10}" y="${py - 9}" text-anchor="${right ? "start" : "end"}" font-size="12" font-weight="600" fill="var(--ink)">Crest ${kv(m.vPeak, 1)} kV</text>`;
+    }
+    // label band above the plot, rows assigned so labels never overlap
+    const rows = [[], [], []];
+    const placed = [];
+    for (const v of verts.filter((v) => inX(v.t)).sort((a, b) => a.t - b.t)) {
+      const w = v.lab.length * 6.6 + 10, cx = Math.min(Math.max(X(v.t), ml + w / 2), ml + pw - w / 2);
+      let r = rows.findIndex((row) => row.every(([a, b]) => cx - w / 2 > b + 4 || cx + w / 2 < a - 4));
+      if (r < 0) continue;
+      rows[r].push([cx - w / 2, cx + w / 2]);
+      placed.push({ ...v, cx, r });
+    }
+    for (const p of placed) s += `<text x="${p.cx}" y="${mt - 38 + p.r * 14}" text-anchor="middle" font-size="11.5" fill="var(--ink-2)" font-family="IBM Plex Mono, monospace">${p.lab}</text>`;
+    // hover + zoom layers
+    s += `<g class="hov" visibility="hidden"><line class="xh" y1="${mt}" y2="${mt + ph}" stroke="var(--ink-3)"/><circle class="dp" r="4.5" fill="var(--pred)" stroke="#fff" stroke-width="2"/><circle class="dt" r="4" fill="var(--target)" stroke="#fff" stroke-width="2"/></g>`;
+    s += `<rect class="selbox" y="${mt}" height="${ph}" fill="rgba(46,122,116,.12)" stroke="var(--teal)" visibility="hidden"/>`;
+    s += `<rect class="hit" x="${ml}" y="${mt}" width="${pw}" height="${ph}" fill="transparent"/>`;
+    s += `</svg>`;
+    host.innerHTML = s + `<div class="tip" hidden></div>`;
+
+    const svg = host.querySelector("svg"), hov = svg.querySelector(".hov"), tip = host.querySelector(".tip"), box = svg.querySelector(".selbox");
+    const toT = (clientX) => { const r = svg.getBoundingClientRect(); const sx = (clientX - r.left) / r.width * W; return t0 + Math.max(0, Math.min(1, (sx - ml) / pw)) * (t1 - t0); };
+    let drag = null;
+    svg.addEventListener("pointerdown", (e) => { if (e.button !== 0) return; drag = { t: toT(e.clientX) }; svg.setPointerCapture(e.pointerId); });
+    svg.addEventListener("pointermove", (e) => {
+      const t = toT(e.clientX), vp = cv.predicted(t), vt = cv.target(t);
+      hov.setAttribute("visibility", "visible");
+      hov.querySelector(".xh").setAttribute("x1", X(t)); hov.querySelector(".xh").setAttribute("x2", X(t));
+      const dp = hov.querySelector(".dp"), dt = hov.querySelector(".dt");
+      dp.setAttribute("cx", X(t)); dp.setAttribute("cy", Y(Math.max(vp, 0)));
+      dt.setAttribute("cx", X(t)); dt.setAttribute("cy", Y(Math.max(vt, 0)));
+      tip.innerHTML = `<div class="t">t = ${esc(us(t))} µs</div>
+        <div class="r"><svg width="18" height="4" aria-hidden="true"><line x1="0" x2="18" y1="2" y2="2" stroke="#a9c1e4" stroke-width="2.5"/></svg><b>${kv(vp, 1)} kV</b><span>Predicted</span></div>
+        <div class="r"><svg width="18" height="4" aria-hidden="true"><line x1="0" x2="18" y1="2" y2="2" stroke="#f0b27a" stroke-width="2" stroke-dasharray="5 3"/></svg><b>${kv(vt, 1)} kV</b><span>Target</span></div>
+        <div class="r"><span style="width:18px"></span><b>${(vp - vt) >= 0 ? "+" : "−"}${kv(Math.abs(vp - vt), 1)} kV</b><span>Difference</span></div>`;
+      tip.hidden = false;
+      const hr = host.getBoundingClientRect();
+      let left = e.clientX - hr.left + 16;
+      if (left + tip.offsetWidth > hr.width) left = e.clientX - hr.left - tip.offsetWidth - 16;
+      tip.style.left = `${Math.max(0, left)}px`; tip.style.top = `${Math.max(0, e.clientY - hr.top - tip.offsetHeight - 12)}px`;
+      if (drag) {
+        const a = Math.min(X(drag.t), X(t)), b = Math.max(X(drag.t), X(t));
+        box.setAttribute("x", a); box.setAttribute("width", b - a); box.setAttribute("visibility", "visible");
+      }
+    });
+    svg.addEventListener("pointerup", (e) => {
+      if (!drag) return;
+      const t = toT(e.clientX), a = Math.min(drag.t, t), b = Math.max(drag.t, t);
+      drag = null; box.setAttribute("visibility", "hidden");
+      if ((b - a) / (t1 - t0) > 0.02) { S.chart.domain = [a, b]; renderChart(); }
+    });
+    svg.addEventListener("pointerleave", () => { if (!drag) { hov.setAttribute("visibility", "hidden"); tip.hidden = true; } });
+
+    $("legend").innerHTML = `<span><span class="ln target"></span>Target · ${isLI() ? "1.2/50" : "250/2500"} µs reference${Math.abs(vm.target.front * 1e6 / (isLI() ? 1.2 : 250) - 1) > 1e-9 || Math.abs(vm.target.tail * 1e6 / (isLI() ? 50 : 2500) - 1) > 1e-9 ? " (custom times)" : ""}, ${kv(vm.setup.vTest, 0)} kV</span><span><span class="ln"></span>Predicted · Case #${c.rank}</span>`;
+    $("waveSub").textContent = `Case #${c.rank} · ${S.chart.domain ? "zoomed" : S.chart.view === "front" ? "front detail" : "full impulse"}`;
+    const mk = [`t30 ${us(m.t30)} µs`, `t90 ${us(m.t90)} µs`];
+    if (isLI()) mk.push(`O1 ${us(m.virtualOrigin)} µs`);
+    mk.push(`t50 ${us(m.t50)} µs`, `peak ${us(m.tPeak)} µs`);
+    $("plotNote").innerHTML = `Markers on the predicted curve: ${esc(mk.join(" · "))}. Drag across the plot to zoom.` +
+      (vm.form.mode === "calculator" ? `<br><strong style="color:var(--warn)">Calculator mode:</strong> the curve and markers are the exact circuit response. The metric values use closed-form formulas and can differ from the curve.` : "");
+  }
+  $("viewSeg").addEventListener("click", (e) => { const b = e.target.closest("[data-view]"); if (!b || !S.vm) return; S.chart = { view: b.dataset.view, domain: null }; setPressed("viewSeg", "view", b.dataset.view); renderChart(); });
+  const zoomBy = (f) => {
+    if (!S.vm) return;
+    const [a, b] = S.chart.domain || defaultDomain(S.chart.view), mid = (a + b) / 2, half = (b - a) / 2 * f;
+    S.chart.domain = [Math.max(0, mid - half), Math.max(0, mid - half) + 2 * half]; renderChart();
+  };
+  $("zoomIn").addEventListener("click", () => zoomBy(0.5));
+  $("zoomOut").addEventListener("click", () => zoomBy(2));
+  $("zoomReset").addEventListener("click", () => { if (!S.vm) return; S.chart.domain = null; renderChart(); });
+
+  // ---------------------------------------------------------------- section 3: metrics
+  function renderMetrics() {
+    const vm = S.vm, c = selCase(), li = isLI();
+    $("perfPill").innerHTML = statusPill(c.compliant);
+    const row = (name, val, detail, chip) => `<div class="metric"><div class="row"><span class="name">${name}</span>${chip}</div><div class="val">${val}</div><div class="detail">${detail}</div></div>`;
+    const comp = (key, name, valTxt, tgtTxt) => {
+      const mm = c.metrics[key];
+      const chip = mm.ok ? `<span class="status-chip good">${icon.ok}Within</span>` : `<span class="status-chip bad">${icon.bad}Outside</span>`;
+      return row(name, valTxt, `Target <b>${tgtTxt}</b> · deviation <b>${esc(pct(mm.dev, 2))}</b> · allowed <b>±${(mm.tol * 100).toFixed(0)} %</b>`, chip);
+    };
+    const info = `<span class="status-chip info">${icon.info}Info</span>`;
+    let h = comp("crest", "Predicted crest voltage", `${kv(c.metrics.crest.pred, 1)} kV`, `${kv(vm.setup.vTest, 1)} kV`);
+    h += comp("front", li ? "Front time T1" : "Time to peak Tp", `${us(c.metrics.front.pred, "front")} µs`, `${us(vm.target.front, "front")} µs`);
+    if (li) h += row("Peak time (time of maximum)", `${us(c.tPeak)} µs`, "Informational; not a compliance limit for lightning impulses.", info);
+    else h += row("Time of maximum", `${us(c.tPeak)} µs`, "True time of the voltage maximum. IEC Tp above is K × (t90 − t30).", info);
+    h += comp("tail", "Tail time T2", `${us(c.metrics.tail.pred, "tail")} µs`, `${us(vm.target.tail, "tail")} µs`);
+    h += row(`Predicted efficiency <span class="nc">η</span>`, `${c.etaExact.toFixed(3)}`, vm.form.mode === "calculator" ? `Circuit value. Calculator mode assumed η = ${vm.form.eta} to set the charging voltage.` : "Crest voltage ÷ total charging voltage (n × U0).", info);
+    h += row("Waveform fit error", `${(c.fit * 100).toFixed(2)} %`, `RMS difference from the target waveform over 0–${us(2.5 * vm.target.tail)} µs, as a share of crest voltage.`, info);
+    if (li) h += row("Overshoot", `${(c.overshoot * 100).toFixed(1)} %`, "Limit 10 %. Measured against the same circuit without inductance.", c.overshoot <= 0.1 ? `<span class="status-chip good">${icon.ok}Within</span>` : `<span class="status-chip bad">${icon.bad}Outside</span>`);
+    $("metrics").innerHTML = h;
+    $("defs").innerHTML = (li
+      ? `<span>T1 = 1.67 × (t90 − t30). T2 is measured from the virtual origin O1 to the 50 % point on the tail (IEC 60060-1).</span>`
+      : `<span>Tp = K × (t90 − t30) with the IEC 60060-1 K factor. T2 is measured from the true origin to the 50 % point on the tail.</span>`) +
+      `<span>Tolerance profile: ${esc(vm.profileName)} (crest ±${vm.form.tolCrest} %, ${li ? "T1" : "Tp"} ±${vm.form.tolFront} %, T2 ±${vm.form.tolTail} %). Mode: ${vm.form.mode === "exact" ? "Exact" : "Calculator"}.</span>`;
+  }
+
+  // ---------------------------------------------------------------- section 4: comparison (top 3)
+  function renderTable() {
+    const vm = S.vm, li = isLI(), fl = li ? "T1" : "Tp";
+    const top = vm.cases.slice(0, 3);
+    const cls = (c) => (c.rank === S.selected ? "sel" : "");
+    const head = `<thead><tr><th class="l rowhead"><span class="sr-only">Metric</span></th>${top.map((c) =>
+      `<th class="${cls(c)}" scope="col"><button type="button" class="colbtn" data-rank="${c.rank}" aria-pressed="${c.rank === S.selected}">
+        <span class="cname">Case #${c.rank}</span><span class="ctag">${caseLabel(c.rank)}</span></button></th>`).join("")}</tr></thead>`;
+    const devTxt = (m) => `<span class="dev ${m.ok ? "" : "out"}">${esc(pct(m.dev))}</span>`;
+    const group = (title) => `<tr class="grp"><th class="l" colspan="${top.length + 1}" scope="colgroup">${title}</th></tr>`;
+    const row = (label, fn) => `<tr><th class="l rowhead" scope="row">${label}</th>${top.map((c) => `<td class="${cls(c)}" data-rank="${c.rank}">${fn(c)}</td>`).join("")}</tr>`;
+    const body = [
+      group("Settings"),
+      row("Generator stages", (c) => `${c.n}`),
+      row("Charging voltage", (c) => `${kv(c.u0, 2)} <span class="u">kV/stage</span>`),
+      row("Front Req", (c) => `${esc(sig(c.front.value, 5))} <span class="u">Ω/stage</span>`),
+      row("Tail Req", (c) => `${esc(sig(c.tail.value, 5))} <span class="u">Ω/stage</span>`),
+      row("Resistors per stage", (c) => `${c.front.units} + ${c.tail.units}`),
+      group("Predicted waveform"),
+      row(li ? "Front time T1" : "Time to peak Tp", (c) => `${us(c.metrics.front.pred, "front")} <span class="u">µs</span>${devTxt(c.metrics.front)}`),
+      row("Tail time T2", (c) => `${us(c.metrics.tail.pred, "tail")} <span class="u">µs</span>${devTxt(c.metrics.tail)}`),
+      row("Crest voltage", (c) => `${kv(c.metrics.crest.pred, 1)} <span class="u">kV</span>${devTxt(c.metrics.crest)}`),
+      group("Result"),
+      row("Status", (c) => c.compliant ? `<span class="status-chip good">${icon.ok}Within limits</span>` : `<span class="status-chip bad">${icon.bad}Outside limits</span>`),
+      row("Score", (c) => `${c.score.toFixed(4)}`),
+    ].join("");
+    $("candTable").innerHTML = `<caption class="sr-only">Top ${top.length} candidate settings, one column per case</caption>${head}<tbody>${body}</tbody>`;
+    $("tableSub").textContent = `Top ${top.length} of ${vm.cases.length} feasible settings`;
+    $("rankNote").textContent = `Ranked by ${vm.ranking.text}. Score = largest |deviation| ÷ allowed band, plus small tie-breakers. Deviations are against the targets for ${fl}, T2 and crest.`;
+  }
+  $("candTable").addEventListener("click", (e) => { const el = e.target.closest("[data-rank]"); if (el) select(Number(el.dataset.rank)); });
+
+  // ---------------------------------------------------------------- section 5: decision summary (brief)
+  const COMP = [
+    { k: "worst", name: "Accuracy" },
+    { k: "units", name: "Resistor count" },
+    { k: "stages", name: "Stage count" },
+    { k: "voltage", name: "Voltage use" },
+  ];
+  const f4 = (x) => x.toFixed(4);
+  const sgn4 = (x) => `${x > 0 ? "+" : x < 0 ? "−" : "±"}${Math.abs(x).toFixed(4)}`;
+
+  function whyLower(o, base) {
+    const parts = COMP.map((p) => ({ name: p.name.toLowerCase(), d: o.breakdown[p.k] - base.breakdown[p.k] })).filter((x) => Math.abs(x.d) >= 5e-5);
+    const worse = parts.filter((x) => x.d > 0).sort((a, b) => b.d - a.d), better = parts.filter((x) => x.d < 0);
+    const w = worse.map((x) => `${x.name} <span class="num up">${sgn4(x.d)}</span>`).join(", ");
+    const b = better.map((x) => `${x.name} <span class="num down">${sgn4(x.d)}</span>`).join(", ");
+    return `<li><b>Case #${o.rank}</b> <span class="num">${sgn4(o.score - base.score)}</span> — worse on ${w || "nothing"}${b ? `; better on ${b}` : ""}.</li>`;
+  }
+
+  function renderSummary() {
+    const vm = S.vm, c = selCase(), g = vm.form, M = c.metrics, wts = vm.ranking.w;
+    const top = vm.cases.slice(0, 3), best = top[0];
+    $("summarySub").textContent = `Recommended: Case #${best.rank}`;
+    const maxBand = Math.max(...top.map((x) => x.breakdown.worst)) * 100;
+    const allIn = top.every((x) => x.compliant);
+
+    let lead = `<p class="lead"><b>Case #${best.rank}</b> is recommended: lowest score (${f4(best.score)}).`;
+    if (top.length > 1) lead += allIn && maxBand < 10 ? ` All top ${top.length} are within ${maxBand.toFixed(2)} % of their tolerance bands, so the differences are marginal.`
+      : allIn ? ` Accuracy decides the ranking.` : ` No case meets every limit; this one comes closest.`;
+    lead += `</p>`;
+
+    const cell = (x, v, strong) => `<td class="${x.rank === c.rank ? "sel" : ""}">${strong ? `<b>${f4(v)}</b>` : f4(v)}</td>`;
+    const table = `
+      <div class="tablewrap"><table class="score-tbl">
+        <thead><tr><th class="l">Score part</th>${top.map((x) => `<th class="${x.rank === c.rank ? "sel" : ""}">#${x.rank}</th>`).join("")}</tr></thead>
+        <tbody>${COMP.map((p) => `<tr><th class="l" scope="row">${p.name}</th>${top.map((x) => cell(x, x.breakdown[p.k])).join("")}</tr>`).join("")}
+        <tr class="total"><th class="l" scope="row">Total</th>${top.map((x) => cell(x, x.score, true)).join("")}</tr></tbody>
+      </table></div>
+      <p class="formula-line">Score = largest |deviation| ÷ band + ${wts.units}·resistors + ${wts.stages}·stages + ${wts.voltage}·U0/U<sub>max</sub>. Lower is better.</p>`;
+
+    const why = top.length > 1 ? `<ul class="why">${top.slice(1).map((o) => whyLower(o, best)).join("")}</ul>` : "";
+
+    // only what needs attention
+    const attn = [];
+    const failing = Object.entries(M).filter(([, m]) => !m.ok);
+    if (failing.length) attn.push(`<li class="bad">${esc(failing.map(([k, m]) => `${metricName(k)} ${pct(m.dev)} (allowed ±${(m.tol * 100).toFixed(0)} %)`).join("; "))}</li>`);
+    if (c.u0 > g.uMax * 1e3) attn.push(`<li class="bad">Charging voltage above the limit.</li>`);
+    const short = [...c.front.bom, ...c.tail.bom].filter((b) => !b.ok);
+    if (short.length) attn.push(`<li class="bad">Short of ${esc(short.map((b) => fmtOhm(b.ohm)).join(", "))} resistors.</li>`);
+    if (g.selection === "combo" && Math.max(c.front.units, c.tail.units) > 1) attn.push(`<li class="warn">Uses up to ${Math.max(c.front.units, c.tail.units)} resistors per stage network; confirm combining is allowed.</li>`);
+    if (g.mode === "calculator") attn.push(`<li class="warn">Calculator mode: timing values are approximate.</li>`);
+
+    $("summary").innerHTML = `${lead}
+      <div class="rep-row">
+        <section class="rep-sec"><h3>Score breakdown</h3>${table}</section>
+        <section class="rep-sec"><h3>Why the others rank lower</h3>${why || `<p class="muted">Only one feasible setting.</p>`}
+          ${attn.length ? `<h3 style="margin-top:6px">Needs attention</h3><ul class="attn">${attn.join("")}</ul>` : ""}</section>
+      </div>`;
+  }
+
+  // ---------------------------------------------------------------- export
+  function reportText() {
+    const vm = S.vm;
+    if (!vm) return "No results yet. Calculate recommendations first.";
+    const g = vm.form, li = g.impulse === "lightning";
+    const L = [];
+    L.push(`# Impulse Physics Engine report`, ``, `Model output from the deterministic physics engine. Not validated against laboratory measurements.`, ``);
+    L.push(`## Inputs`, `- Impulse: ${li ? "Lightning" : "Switching"}, target ${g.tFront}/${g.tTail} µs, crest ${g.vTest} kV`);
+    L.push(`- Test object ${g.cLoad} pF, divider ${g.cDiv} pF, stray ${g.cStray} pF, loop inductance ${g.lStray} µH${g.mode === "calculator" ? `, η ${g.eta}` : ""}`);
+    L.push(`- Generator: ${g.nMax} stages, ${g.cStage} µF per stage, max ${g.uMax} kV per stage${g.wStage !== null ? `, ${g.wStage} kJ per stage` : ""}${g.includeCbo ? `, C_bo ${g.cBo} pF` : ""}`);
+    L.push(`- Mode: ${g.mode}; tolerances (${vm.profileName}): crest ±${g.tolCrest} %, ${li ? "T1" : "Tp"} ±${g.tolFront} %, T2 ±${g.tolTail} %`);
+    L.push(`- Resistor selection: ${g.selection === "single" ? "single resistor" : `series–parallel, up to ${g.maxUnits} per stage`}; ranking: ${vm.ranking.name}`, ``);
+    if (!vm.cases.length) { L.push(`## Result`, `No feasible setting.`, ...vm.explain.map((x) => `- ${x}`)); return L.join("\n"); }
+    const c = selCase(), M = c.metrics;
+    L.push(`## Selected case #${c.rank} (${c.compliant ? "within limits" : "outside limits"})`);
+    L.push(`- Stages: ${c.n}`, `- Charging voltage: ${kv(c.u0, 2)} kV per stage (total ${kv(c.v0, 1)} kV)`);
+    L.push(`- Front: ${c.front.recipe} Ω = ${sig(c.front.value, 5)} Ω per stage (ideal ${sig(c.front.ideal, 5)} Ω, ${pct(c.front.dev, 2)})`);
+    L.push(`- Tail: ${c.tail.recipe} Ω = ${sig(c.tail.value, 5)} Ω per stage (ideal ${sig(c.tail.ideal, 5)} Ω, ${pct(c.tail.dev, 2)})`);
+    L.push(`- Crest ${kv(M.crest.pred, 1)} kV (${pct(M.crest.dev, 2)}), ${li ? "T1" : "Tp"} ${us(M.front.pred, "front")} µs (${pct(M.front.dev, 2)}), T2 ${us(M.tail.pred, "tail")} µs (${pct(M.tail.dev, 2)})`);
+    L.push(`- Efficiency ${c.etaExact.toFixed(3)}, fit error ${(c.fit * 100).toFixed(2)} % RMS`, ``);
+    L.push(`## Top candidates`, `| Rank | Stages | U0 kV | Front Ω | Tail Ω | ${li ? "T1" : "Tp"} µs | T2 µs | Status |`, `|---|---|---|---|---|---|---|---|`);
+    for (const x of vm.cases.slice(0, 5)) L.push(`| ${x.rank} | ${x.n} | ${kv(x.u0, 2)} | ${sig(x.front.value, 5)} | ${sig(x.tail.value, 5)} | ${us(x.metrics.front.pred, "front")} | ${us(x.metrics.tail.pred, "tail")} | ${x.compliant ? "within" : "outside"} |`);
+    return L.join("\n");
+  }
+  $("exportBtn").addEventListener("click", () => {
+    $("reportText").value = reportText();
+    $("copyMsg").textContent = "Copy the report and paste it into your notes or a document.";
+    const d = $("reportDlg");
+    if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open", "");
+  });
+  $("dlgClose").addEventListener("click", () => { const d = $("reportDlg"); if (d.close) d.close(); else d.removeAttribute("open"); });
+  $("copyBtn").addEventListener("click", () => {
+    const ta = $("reportText");
+    const fallback = () => { ta.focus(); ta.select(); $("copyMsg").textContent = "Text selected. Press Ctrl+C (or ⌘C) to copy."; };
+    try { navigator.clipboard.writeText(ta.value).then(() => { $("copyMsg").textContent = "Copied to the clipboard."; }, fallback); }
+    catch { fallback(); }
+  });
+
+  // ---------------------------------------------------------------- layout helpers
+  function updateSticky() {
+    const rail = $("rail");
+    rail.classList.toggle("sticky", window.innerWidth > 1100 && rail.offsetHeight + 32 <= window.innerHeight);
+  }
+  let rz = null;
+  window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { updateSticky(); if (S.vm && S.vm.cases.length) renderChart(); }, 150); });
+
+  // ---------------------------------------------------------------- start
+  fillForm();
+  validateLive();
+  updateSticky();
+  calculate();
+})();
+
+</script>
+
+</body></html>

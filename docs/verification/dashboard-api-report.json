@@ -1,0 +1,28 @@
+{
+  "bootstrap": {
+    "front_types": 10,
+    "tail_types": 12,
+    "gemini": {
+      "model": "gemini-flash-latest",
+      "configured": true
+    }
+  },
+  "run_id": "37f47a72517e4a9198fb212abe9a23b0",
+  "status": "passed",
+  "diagnostic_candidate_eligible": false,
+  "production_record_unchanged": true,
+  "corrected_metrics": {
+    "front_s": 1.2028890462263543e-06,
+    "tail_s": 5.2131505802373116e-05,
+    "crest_V": 1459429.4040353827
+  },
+  "model_support": {
+    "status": "supported_diagnostic",
+    "reasons": [],
+    "joint_domain_validated": false,
+    "lab_validated": false
+  },
+  "reconstructed_curve_origin": "ml_parameter_reconstruction",
+  "decision_summary_status": "provider_error",
+  "actual_gemini_generated": false
+}

@@ -1,0 +1,133 @@
+{
+  "request": {
+    "schema_version": "1.0",
+    "purpose": "diagnostic",
+    "equipment_profile_id": "workbook_benchmark_v1",
+    "equipment_inputs": {
+      "N_max": 15,
+      "U_stage_max_V": 200000.0,
+      "C_stage_F": 3e-06
+    },
+    "inventory": {
+      "source": "inline",
+      "front": [
+        {
+          "type_id": "fixture_front",
+          "nominal_ohm": 10510.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        }
+      ],
+      "tail": [
+        {
+          "type_id": "fixture_tail",
+          "nominal_ohm": 1195.0,
+          "available_quantity": 4,
+          "quantity_scope": "per_stage",
+          "tolerance_fraction": 0.0,
+          "approved": false,
+          "ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null,
+            "R_theta_K_per_W": null,
+            "C_theta_J_per_K": null,
+            "evidence_id": null
+          }
+        }
+      ]
+    },
+    "impulse_type": null,
+    "impulse_profile_id": "switching_workbook_legacy_v1",
+    "system_max_voltage_V": 400000.0,
+    "target": {
+      "crest_V": 1084586.723265238,
+      "front_s": null,
+      "tail_s": null,
+      "tolerances": null
+    },
+    "load": {
+      "model_id": "capacitive_v1",
+      "C_F": 1.0374641543370671e-09,
+      "R_ohm": null,
+      "L_H": null,
+      "topology": "shunt_at_test_terminals",
+      "terminal_connections": {}
+    },
+    "setup": {
+      "basic_C_F": 0.0,
+      "shot_rate_per_minute": null,
+      "divider_C_F": 6.730412855744362e-10,
+      "stray_C_F": 3.2393623595824464e-10,
+      "stray_L_H": 9.951434354297816e-06,
+      "basic_capacitance_inclusion": "benchmark_omitted",
+      "external_front_series_ohm": null,
+      "auxiliary_states": {},
+      "circuit_evidence_id": null,
+      "leads": {},
+      "return_path": {},
+      "geometry": {}
+    },
+    "environment": {
+      "availability": "not_recorded",
+      "values": {}
+    },
+    "expected_voltage_efficiency": 0.804197536741849,
+    "minimum_voltage_efficiency": null,
+    "charging_policy": {
+      "kind": "fixed",
+      "U_charge_V": 192665.30098338184
+    },
+    "dp_tolerances": {
+      "front_relative": 0.005,
+      "tail_relative": 0.005
+    },
+    "search": {
+      "max_proposals": 4,
+      "max_forward_evaluations": 100,
+      "max_ml_evaluations": 100,
+      "dp_max_parts": 1,
+      "dp_max_states": 100000,
+      "dp_seconds": 10.0,
+      "cp_sat_seconds": 2.0,
+      "cp_pair_retries": 5,
+      "repeat_window": 10,
+      "archive_stagnation_window": 20,
+      "wall_time_seconds": 300.0
+    },
+    "objective": {
+      "policy": "worst_normalised_then_weighted",
+      "weights": {
+        "front": 1.0,
+        "tail": 1.0,
+        "crest": 1.0
+      },
+      "secondary_preference": "balanced"
+    },
+    "physics_mode": "calculator",
+    "model_version": "residual-tabpfn-v2-diagnostic-v1",
+    "ml_domain_policy": "strict",
+    "seed": 42
+  },
+  "proposal": {
+    "N": 7,
+    "Rf_required_ohm": 10510.0,
+    "Rt_required_ohm": 1195.0,
+    "proposal_index": 0,
+    "source": "manual"
+  }
+}
