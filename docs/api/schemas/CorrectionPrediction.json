@@ -355,6 +355,11 @@
       "title": "Environment Effects",
       "type": "object"
     },
+    "normalisation": {
+      "additionalProperties": true,
+      "title": "Normalisation",
+      "type": "object"
+    },
     "performance": {
       "anyOf": [
         {

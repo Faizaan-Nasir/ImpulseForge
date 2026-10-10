@@ -13,6 +13,7 @@ from pydantic import AwareDatetime, Field, model_validator
 from powernext.assembly.cp_sat import AssemblyEngine
 from powernext.config import Settings
 from powernext.contracts.models import (
+    MODEL_VERSION,
     Candidate,
     CorrectionPrediction,
     DomainError,
@@ -330,7 +331,7 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
 
     @app.get("/v1/models/{version}")
     def model_report(version):
-        if version != "residual-tabpfn-v2-diagnostic-v1":
+        if version != MODEL_VERSION:
             raise DomainError("unknown_model_version", version, "correction")
         return residual.report()
 

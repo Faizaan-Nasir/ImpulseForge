@@ -31,6 +31,21 @@ def test_real_v2_residual_models(category):
     )
     assert model.manifests[category]["checkpoint_filename"] == "tabpfn-v2-regressor.ckpt"
     assert not model.manifests[category]["hidden_test_evaluated"]
+    from powernext.correction.features import workbook_data
+
+    frame, X, Y = workbook_data()
+    train = (frame.Impulse_Type == category) & (frame.Split == "Train")
+    stats = model.manifests[category]["standardisation"]
+    assert stats["fit_count"] == 700 and stats["fit_split"] == "Train"
+    for name, p in stats["features"].items():
+        assert p["mean"] == pytest.approx(X.loc[train, name].mean(), abs=1e-20)
+        assert p["scale"] == pytest.approx(X.loc[train, name].std(ddof=0), abs=1e-20)
+    for name, p in stats["targets"].items():
+        assert p["mean"] == pytest.approx(Y.loc[train, name].mean(), abs=1e-20)
+        assert result["residuals"][name] == pytest.approx(
+            result["normalisation"]["standardised_residuals"][name] * p["scale"] + p["mean"],
+            abs=1e-20,
+        )
 
 
 @pytest.mark.model

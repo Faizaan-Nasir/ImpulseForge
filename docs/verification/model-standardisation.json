@@ -1,0 +1,187 @@
+{
+  "model_version": "residual-tabpfn-v2-standardised-v1",
+  "fit_split": "Train",
+  "train_per_category": 700,
+  "validation_per_category": 150,
+  "hidden_test_evaluated": false,
+  "categories": {
+    "Lightning": {
+      "previous": {
+        "residual_front_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 6.513955473413656e-09,
+          "validation_RMSE": 7.407555187557085e-09,
+          "validation_bias": 5.07431277513896e-10,
+          "validation_MAE_over_train_residual_std": 0.6650287981681047,
+          "physics_only_MAE": 8.240545740843459e-09,
+          "mean_residual_baseline_MAE": 8.207405713891005e-09,
+          "linear_residual_baseline_MAE": 6.518917806856653e-09
+        },
+        "residual_tail_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 5.831505458801432e-07,
+          "validation_RMSE": 6.692771396372145e-07,
+          "validation_bias": -1.750495252191678e-08,
+          "validation_MAE_over_train_residual_std": 0.7245254708983543,
+          "physics_only_MAE": 6.87652498761937e-07,
+          "mean_residual_baseline_MAE": 6.870463165712267e-07,
+          "linear_residual_baseline_MAE": 5.802299220732198e-07
+        },
+        "residual_crest_V": {
+          "unit": "V",
+          "validation_count": 150,
+          "validation_MAE": 4485.187180661017,
+          "validation_RMSE": 5193.163604605983,
+          "validation_bias": -366.26550849785013,
+          "validation_MAE_over_train_residual_std": 0.4114703557722134,
+          "physics_only_MAE": 9749.734449355396,
+          "mean_residual_baseline_MAE": 9735.026793715737,
+          "linear_residual_baseline_MAE": 4745.46329735606
+        }
+      },
+      "standardised": {
+        "residual_front_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 6.47321811638569e-09,
+          "validation_RMSE": 7.3422227226725585e-09,
+          "validation_bias": 4.384367788367769e-10,
+          "validation_MAE_over_train_residual_std": 0.6608698020411852,
+          "physics_only_MAE": 8.240545740843459e-09,
+          "mean_residual_baseline_MAE": 8.207405713891005e-09,
+          "linear_residual_baseline_MAE": 6.518917806856653e-09
+        },
+        "residual_tail_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 5.833343884952594e-07,
+          "validation_RMSE": 6.710124218551536e-07,
+          "validation_bias": -9.705599628959645e-09,
+          "validation_MAE_over_train_residual_std": 0.7247538830266277,
+          "physics_only_MAE": 6.87652498761937e-07,
+          "mean_residual_baseline_MAE": 6.870463165712267e-07,
+          "linear_residual_baseline_MAE": 5.802299220732198e-07
+        },
+        "residual_crest_V": {
+          "unit": "V",
+          "validation_count": 150,
+          "validation_MAE": 4472.448275739699,
+          "validation_RMSE": 5193.545486613155,
+          "validation_bias": -333.9059549477483,
+          "validation_MAE_over_train_residual_std": 0.410301690668843,
+          "physics_only_MAE": 9749.734449355396,
+          "mean_residual_baseline_MAE": 9735.026793715737,
+          "linear_residual_baseline_MAE": 4745.46329735606
+        }
+      },
+      "target_scalers": {
+        "residual_front_s": {
+          "mean": 1.6940448439043489e-09,
+          "scale": 9.794997587107606e-09,
+          "unit": "s"
+        },
+        "residual_tail_s": {
+          "mean": 7.904635846349509e-08,
+          "scale": 8.048723879328668e-07,
+          "unit": "s"
+        },
+        "residual_crest_V": {
+          "mean": -2453.1236480408456,
+          "scale": 10900.38958515879,
+          "unit": "V"
+        }
+      }
+    },
+    "Switching": {
+      "previous": {
+        "residual_front_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 1.6063153452190028e-06,
+          "validation_RMSE": 1.8279643577304699e-06,
+          "validation_bias": -1.0726242223898998e-07,
+          "validation_MAE_over_train_residual_std": 0.6741504481572254,
+          "physics_only_MAE": 2.0134694993384835e-06,
+          "mean_residual_baseline_MAE": 1.908414013515629e-06,
+          "linear_residual_baseline_MAE": 1.5804247094179118e-06
+        },
+        "residual_tail_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 2.2427951527125597e-05,
+          "validation_RMSE": 2.5914292148648314e-05,
+          "validation_bias": 2.226792489144754e-06,
+          "validation_MAE_over_train_residual_std": 0.6948733520446078,
+          "physics_only_MAE": 2.4757276996259968e-05,
+          "mean_residual_baseline_MAE": 2.4652469182858916e-05,
+          "linear_residual_baseline_MAE": 2.209340208225149e-05
+        },
+        "residual_crest_V": {
+          "unit": "V",
+          "validation_count": 150,
+          "validation_MAE": 3147.4734984569177,
+          "validation_RMSE": 3709.31127047061,
+          "validation_bias": -11.444559688727313,
+          "validation_MAE_over_train_residual_std": 0.3915231771408589,
+          "physics_only_MAE": 6788.953234656058,
+          "mean_residual_baseline_MAE": 6827.020558317406,
+          "linear_residual_baseline_MAE": 3330.509622721135
+        }
+      },
+      "standardised": {
+        "residual_front_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 1.6104155005532281e-06,
+          "validation_RMSE": 1.829044716437225e-06,
+          "validation_bias": -1.1506897218264922e-07,
+          "validation_MAE_over_train_residual_std": 0.6758712320396114,
+          "physics_only_MAE": 2.0134694993384835e-06,
+          "mean_residual_baseline_MAE": 1.908414013515629e-06,
+          "linear_residual_baseline_MAE": 1.5804247094179118e-06
+        },
+        "residual_tail_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 2.2426301997699663e-05,
+          "validation_RMSE": 2.583572680151241e-05,
+          "validation_bias": 1.953099511162647e-06,
+          "validation_MAE_over_train_residual_std": 0.6948222455474269,
+          "physics_only_MAE": 2.4757276996259968e-05,
+          "mean_residual_baseline_MAE": 2.4652469182858916e-05,
+          "linear_residual_baseline_MAE": 2.209340208225149e-05
+        },
+        "residual_crest_V": {
+          "unit": "V",
+          "validation_count": 150,
+          "validation_MAE": 3130.558659209935,
+          "validation_RMSE": 3691.78895143421,
+          "validation_bias": -60.248409059830664,
+          "validation_MAE_over_train_residual_std": 0.38941909219588555,
+          "physics_only_MAE": 6788.953234656058,
+          "mean_residual_baseline_MAE": 6827.020558317406,
+          "linear_residual_baseline_MAE": 3330.509622721135
+        }
+      },
+      "target_scalers": {
+        "residual_front_s": {
+          "mean": 3.6972149601342254e-07,
+          "scale": 2.382725324309772e-06,
+          "unit": "s"
+        },
+        "residual_tail_s": {
+          "mean": 2.788911662500495e-06,
+          "scale": 3.227631547696165e-05,
+          "unit": "s"
+        },
+        "residual_crest_V": {
+          "mean": -1302.206554311315,
+          "scale": 8039.047704510598,
+          "unit": "V"
+        }
+      }
+    }
+  }
+}

@@ -114,7 +114,7 @@ def test_single_setup_api_and_module_timing(request_data, tmp_path):
             "/v1/physics/evaluate", json={"request": request_data, "candidate": candidate}
         )
         assert response.json()["performance"]["physics"]["metrics"] == response.json()["metrics"]
-        quality = client.get("/v1/models/residual-tabpfn-v2-diagnostic-v1/performance").json()
+        quality = client.get("/v1/models/residual-tabpfn-v2-standardised-v1/performance").json()
         assert set(quality["categories"]) == {"Lightning", "Switching"}
         assert not quality["epochs_applicable"]
 

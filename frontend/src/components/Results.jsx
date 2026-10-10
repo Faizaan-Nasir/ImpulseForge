@@ -161,6 +161,17 @@ export function PhysicsBaseline({
         the same actual stage count, charge and resistor networks. ML values
         include the learned residual and may differ from observed labels.
       </p>
+      {record.correction?.normalisation?.status === "applied" && (
+        <details className="trace-detail">
+          <summary>ML scaling · fitted on training rows only</summary>
+          <p className="hint">
+            Inputs and residual targets are standardised before inference.
+            Displayed predictions are converted back to physical units before
+            tolerance checks.
+          </p>
+          <pre>{JSON.stringify(record.correction.normalisation, null, 2)}</pre>
+        </details>
+      )}
       <div className="table-wrap">
         <table aria-label="Physics baseline and ML correction">
           <thead>

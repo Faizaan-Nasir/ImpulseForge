@@ -119,7 +119,7 @@
       "secondary_preference": "balanced"
     },
     "physics_mode": "calculator",
-    "model_version": "residual-tabpfn-v2-diagnostic-v1",
+    "model_version": "residual-tabpfn-v2-standardised-v1",
     "ml_domain_policy": "strict",
     "seed": 42
   },

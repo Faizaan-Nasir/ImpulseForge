@@ -2,7 +2,7 @@
   "checked_at": "2026-10-11",
   "software_tests": {
     "status": "passed",
-    "passed": 107,
+    "passed": 111,
     "skipped": 0,
     "report": "verification/tests.txt"
   },
@@ -29,7 +29,8 @@
     "train_per_category": 700,
     "validation_per_category": 150,
     "hidden_test_evaluated": false,
-    "report": "model_fit_report.json"
+    "report": "model_fit_report.json",
+    "model_version": "residual-tabpfn-v2-standardised-v1"
   },
   "shap_additivity": {
     "status": "passed",
@@ -64,7 +65,7 @@
   "frontend": {
     "status": "implemented",
     "stack": "React 19 / Tailwind 4 / Vite 7",
-    "tests_passed": 10,
+    "tests_passed": 11,
     "build": "passed",
     "audit_vulnerabilities": 0,
     "tests_report": "verification/frontend-tests.txt",
@@ -174,5 +175,18 @@
     "eligible_recommendations": 0,
     "firefox_report": "verification/firefox-ml-required-loop.json",
     "screenshot": "verification/firefox-ml-required-loop.jpg"
+  },
+  "model_standardisation": {
+    "status": "verified_fit_validation_live_api_and_shap",
+    "model_version": "residual-tabpfn-v2-standardised-v1",
+    "method": "training-only per-category feature and per-target residual z-score",
+    "train_per_category": 700,
+    "hidden_test_evaluated": false,
+    "validation_comparison": "verification/model-standardisation.json",
+    "live_api": "verification/standardised-model-api.json",
+    "shap_report": "verification/standardised-model-shap.json",
+    "physical_units_restored": true,
+    "waveform_tolerances_unchanged": true,
+    "shap_additivity": "passed three SI residual outputs; dimensionless attribution avoids tiny-unit cutoffs"
   }
 }

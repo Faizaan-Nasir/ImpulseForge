@@ -1857,6 +1857,11 @@
             "type": "object",
             "title": "Environment Effects"
           },
+          "normalisation": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Normalisation"
+          },
           "performance": {
             "anyOf": [
               {
@@ -3073,7 +3078,7 @@
           "model_version": {
             "type": "string",
             "title": "Model Version",
-            "default": "residual-tabpfn-v2-diagnostic-v1"
+            "default": "residual-tabpfn-v2-standardised-v1"
           },
           "ml_domain_policy": {
             "type": "string",

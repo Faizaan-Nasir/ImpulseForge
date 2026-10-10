@@ -49,7 +49,8 @@ def validation_report(frame, X, Y, category, selected, models):
 
 
 def artifact_metadata(directory, category, models, manifest):
-    checkpoint = Path(models[0].model_path)
+    estimator = models[0].regressor_.named_steps["regressor"]
+    checkpoint = Path(estimator.model_path)
     return {
         "checkpoint_version": "v2",
         "checkpoint_filename": checkpoint.name,
@@ -58,7 +59,11 @@ def artifact_metadata(directory, category, models, manifest):
         "background_sha256": file_hash(directory / f"{category}_background.npy"),
         "dataset_sha256": file_hash(DOCS / "Hybrid_Physics_ML_Impulse_Generator_Optimiser.xlsx"),
         "feature_manifest_hash": digest(
-            {"features": manifest["selected_features"], "units": manifest["target_units"]}
+            {
+                "features": manifest["selected_features"],
+                "units": manifest["target_units"],
+                "standardisation": manifest["standardisation"],
+            }
         ),
         "baseline_profile_hash": digest(equipment("workbook_benchmark_v1")),
         "package_versions": {

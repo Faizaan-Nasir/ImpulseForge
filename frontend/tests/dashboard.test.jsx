@@ -121,3 +121,34 @@ it("shows source physics values separately from residual-corrected predictions",
   expect(table.getByText("-0.019879299")).toBeInTheDocument();
   expect(table.getByText("52.184683190")).toBeInTheDocument();
 });
+it("exposes training-only scaling while displaying predictions in physical units", () => {
+  render(
+    <PhysicsBaseline
+      record={{
+        physics: {
+          metrics: { front_s: 1.2e-6, tail_s: 50e-6, crest_V: 1425000 },
+        },
+        correction: {
+          corrected_metrics: {
+            front_s: 1.21e-6,
+            tail_s: 51e-6,
+            crest_V: 1426000,
+          },
+          normalisation: {
+            status: "applied",
+            fit_split: "Train",
+            fit_count: 700,
+          },
+        },
+      }}
+    />,
+  );
+  expect(
+    screen.getByText("ML scaling · fitted on training rows only"),
+  ).toBeInTheDocument();
+  const table = within(
+    screen.getByRole("table", { name: "Physics baseline and ML correction" }),
+  );
+  expect(table.getByText("1.210000000")).toBeInTheDocument();
+  expect(table.getByText("1,426.000000000")).toBeInTheDocument();
+});

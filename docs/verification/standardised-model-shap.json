@@ -1,0 +1,1651 @@
+{
+  "status": "complete",
+  "outputs": [
+    {
+      "output_name": "residual_front_s",
+      "reference_residual": 2.1724677064620873e-10,
+      "feature_contributions": [
+        {
+          "feature": "N",
+          "value": 9.0,
+          "standardised_value": -0.3377383256131326,
+          "contribution": 4.3687292693319643e-10
+        },
+        {
+          "feature": "U_charge_V",
+          "value": 198825.0163101914,
+          "standardised_value": 1.6077599069557784,
+          "contribution": 1.027788362158778e-10
+        },
+        {
+          "feature": "Rf_stage_actual_ohm",
+          "value": 40.0,
+          "standardised_value": -0.5384691202110765,
+          "contribution": -3.4065638161624355e-10
+        },
+        {
+          "feature": "C_object_F",
+          "value": 8.88302159041632e-10,
+          "standardised_value": -0.20352578349701408,
+          "contribution": -1.7538744177379951e-09
+        },
+        {
+          "feature": "C_divider_F",
+          "value": 5.990602798759937e-10,
+          "standardised_value": 0.45251438596075133,
+          "contribution": 1.0297333123672705e-09
+        },
+        {
+          "feature": "C_stray_F",
+          "value": 3.0299236099934205e-10,
+          "standardised_value": 1.3381318812311327,
+          "contribution": -5.7257850902165205e-11
+        },
+        {
+          "feature": "L_effective_H",
+          "value": 2.284642922785133e-05,
+          "standardised_value": 0.5832044479871856,
+          "contribution": -3.5283959185962794e-09
+        },
+        {
+          "feature": "C_generator_F",
+          "value": 3.3333333333333335e-07,
+          "standardised_value": 0.30801731766806567,
+          "contribution": 8.733975150850208e-12
+        },
+        {
+          "feature": "C_load_effective_F",
+          "value": 1.7903547999169678e-09,
+          "standardised_value": 0.4595777163807082,
+          "contribution": 2.5481924511621933e-09
+        },
+        {
+          "feature": "R_front_effective_ohm",
+          "value": 360.0,
+          "standardised_value": -0.6274679807264817,
+          "contribution": 6.197238037527416e-10
+        },
+        {
+          "feature": "R_tail_effective_ohm",
+          "value": 225.0,
+          "standardised_value": -0.3377383256131312,
+          "contribution": -1.3345112445559916e-09
+        },
+        {
+          "feature": "physics_front_s",
+          "value": 1.2015577788181402e-06,
+          "standardised_value": 0.03044281438599529,
+          "contribution": 2.1995688643954398e-10
+        },
+        {
+          "feature": "physics_tail_s",
+          "value": 5.225416107217705e-05,
+          "standardised_value": 0.3311615888035647,
+          "contribution": 1.721087649974312e-09
+        },
+        {
+          "feature": "physics_crest_V",
+          "value": 1469466.0825887697,
+          "standardised_value": 1.0010103774620231,
+          "contribution": 1.679692308983921e-10
+        },
+        {
+          "feature": "expected_voltage_efficiency",
+          "value": 0.8211944965808653,
+          "standardised_value": -0.2170049288467375,
+          "contribution": 5.044975019440125e-10
+        }
+      ],
+      "additivity_error": 7.754818242684634e-25,
+      "method": "Kernel SHAP",
+      "masking_space": "training-standardised features",
+      "attribution_space": "standardised residual; contributions inverse-scaled to SI",
+      "contribution_unit": "s",
+      "nsamples": 32,
+      "unsupported_effects": [
+        "exact wiring",
+        "generator topology measurement",
+        "overshoot",
+        "environment",
+        "per-resistor heat"
+      ],
+      "causal_claim": false
+    },
+    {
+      "output_name": "residual_tail_s",
+      "reference_residual": 6.80263703435444e-08,
+      "feature_contributions": [
+        {
+          "feature": "N",
+          "value": 9.0,
+          "standardised_value": -0.3377383256131326,
+          "contribution": -1.0760285690867741e-08
+        },
+        {
+          "feature": "U_charge_V",
+          "value": 198825.0163101914,
+          "standardised_value": 1.6077599069557784,
+          "contribution": -1.4256070336397736e-09
+        },
+        {
+          "feature": "Rf_stage_actual_ohm",
+          "value": 40.0,
+          "standardised_value": -0.5384691202110765,
+          "contribution": -1.226166341129103e-08
+        },
+        {
+          "feature": "C_object_F",
+          "value": 8.88302159041632e-10,
+          "standardised_value": -0.20352578349701408,
+          "contribution": -1.2391326602213e-07
+        },
+        {
+          "feature": "C_divider_F",
+          "value": 5.990602798759937e-10,
+          "standardised_value": 0.45251438596075133,
+          "contribution": 3.2500477280336453e-09
+        },
+        {
+          "feature": "C_stray_F",
+          "value": 3.0299236099934205e-10,
+          "standardised_value": 1.3381318812311327,
+          "contribution": 5.571882773462343e-09
+        },
+        {
+          "feature": "L_effective_H",
+          "value": 2.284642922785133e-05,
+          "standardised_value": 0.5832044479871856,
+          "contribution": 1.4371682999070305e-09
+        },
+        {
+          "feature": "C_generator_F",
+          "value": 3.3333333333333335e-07,
+          "standardised_value": 0.30801731766806567,
+          "contribution": 1.1758578212043544e-08
+        },
+        {
+          "feature": "C_load_effective_F",
+          "value": 1.7903547999169678e-09,
+          "standardised_value": 0.4595777163807082,
+          "contribution": 7.0487216833274036e-09
+        },
+        {
+          "feature": "R_front_effective_ohm",
+          "value": 360.0,
+          "standardised_value": -0.6274679807264817,
+          "contribution": -1.2075304769221316e-08
+        },
+        {
+          "feature": "R_tail_effective_ohm",
+          "value": 225.0,
+          "standardised_value": -0.3377383256131312,
+          "contribution": -1.969691209934568e-09
+        },
+        {
+          "feature": "physics_front_s",
+          "value": 1.2015577788181402e-06,
+          "standardised_value": 0.03044281438599529,
+          "contribution": 1.212296756986924e-10
+        },
+        {
+          "feature": "physics_tail_s",
+          "value": 5.225416107217705e-05,
+          "standardised_value": 0.3311615888035647,
+          "contribution": 1.0341060108591213e-08
+        },
+        {
+          "feature": "physics_crest_V",
+          "value": 1469466.0825887697,
+          "standardised_value": 1.0010103774620231,
+          "contribution": -1.2404185023232601e-08
+        },
+        {
+          "feature": "expected_voltage_efficiency",
+          "value": 0.8211944965808653,
+          "standardised_value": -0.2170049288467375,
+          "contribution": 1.3315691963427083e-09
+        }
+      ],
+      "additivity_error": 0.0,
+      "method": "Kernel SHAP",
+      "masking_space": "training-standardised features",
+      "attribution_space": "standardised residual; contributions inverse-scaled to SI",
+      "contribution_unit": "s",
+      "nsamples": 32,
+      "unsupported_effects": [
+        "exact wiring",
+        "generator topology measurement",
+        "overshoot",
+        "environment",
+        "per-resistor heat"
+      ],
+      "causal_claim": false
+    },
+    {
+      "output_name": "residual_crest_V",
+      "reference_residual": -423.60859920926237,
+      "feature_contributions": [
+        {
+          "feature": "N",
+          "value": 9.0,
+          "standardised_value": -0.3377383256131326,
+          "contribution": 17.508670108111374
+        },
+        {
+          "feature": "U_charge_V",
+          "value": 198825.0163101914,
+          "standardised_value": 1.6077599069557784,
+          "contribution": -162.65646610357274
+        },
+        {
+          "feature": "Rf_stage_actual_ohm",
+          "value": 40.0,
+          "standardised_value": -0.5384691202110765,
+          "contribution": -114.73922731397806
+        },
+        {
+          "feature": "C_object_F",
+          "value": 8.88302159041632e-10,
+          "standardised_value": -0.20352578349701408,
+          "contribution": 44.00499580835369
+        },
+        {
+          "feature": "C_divider_F",
+          "value": 5.990602798759937e-10,
+          "standardised_value": 0.45251438596075133,
+          "contribution": -267.926804870646
+        },
+        {
+          "feature": "C_stray_F",
+          "value": 3.0299236099934205e-10,
+          "standardised_value": 1.3381318812311327,
+          "contribution": -27.974768421253096
+        },
+        {
+          "feature": "L_effective_H",
+          "value": 2.284642922785133e-05,
+          "standardised_value": 0.5832044479871856,
+          "contribution": -3980.448932734226
+        },
+        {
+          "feature": "C_generator_F",
+          "value": 3.3333333333333335e-07,
+          "standardised_value": 0.30801731766806567,
+          "contribution": -58.94451877193196
+        },
+        {
+          "feature": "C_load_effective_F",
+          "value": 1.7903547999169678e-09,
+          "standardised_value": 0.4595777163807082,
+          "contribution": -3353.4585948971057
+        },
+        {
+          "feature": "R_front_effective_ohm",
+          "value": 360.0,
+          "standardised_value": -0.6274679807264817,
+          "contribution": -1082.040892502688
+        },
+        {
+          "feature": "R_tail_effective_ohm",
+          "value": 225.0,
+          "standardised_value": -0.3377383256131312,
+          "contribution": -36.51051856834096
+        },
+        {
+          "feature": "physics_front_s",
+          "value": 1.2015577788181402e-06,
+          "standardised_value": 0.03044281438599529,
+          "contribution": -65.46040488624539
+        },
+        {
+          "feature": "physics_tail_s",
+          "value": 5.225416107217705e-05,
+          "standardised_value": 0.3311615888035647,
+          "contribution": -505.54579974319915
+        },
+        {
+          "feature": "physics_crest_V",
+          "value": 1469466.0825887697,
+          "standardised_value": 1.0010103774620231,
+          "contribution": -22.580706815352823
+        },
+        {
+          "feature": "expected_voltage_efficiency",
+          "value": 0.8211944965808653,
+          "standardised_value": -0.2170049288467375,
+          "contribution": 108.19554474940333
+        }
+      ],
+      "additivity_error": 0.0,
+      "method": "Kernel SHAP",
+      "masking_space": "training-standardised features",
+      "attribution_space": "standardised residual; contributions inverse-scaled to SI",
+      "contribution_unit": "V",
+      "nsamples": 32,
+      "unsupported_effects": [
+        "exact wiring",
+        "generator topology measurement",
+        "overshoot",
+        "environment",
+        "per-resistor heat"
+      ],
+      "causal_claim": false
+    }
+  ],
+  "physical_evidence": [
+    {
+      "component_id": "stage_01/front/fixture_front-1",
+      "generator_stage_index": 1,
+      "role": "front",
+      "type_id": "fixture_front",
+      "nominal_ohm": 40.0,
+      "node_a": "stage_01/front/in",
+      "node_b": "stage_01/front/out",
+      "resistance_interval_ohm": [
+        40.0,
+        40.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_02/front/fixture_front-1",
+      "generator_stage_index": 2,
+      "role": "front",
+      "type_id": "fixture_front",
+      "nominal_ohm": 40.0,
+      "node_a": "stage_02/front/in",
+      "node_b": "stage_02/front/out",
+      "resistance_interval_ohm": [
+        40.0,
+        40.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_03/front/fixture_front-1",
+      "generator_stage_index": 3,
+      "role": "front",
+      "type_id": "fixture_front",
+      "nominal_ohm": 40.0,
+      "node_a": "stage_03/front/in",
+      "node_b": "stage_03/front/out",
+      "resistance_interval_ohm": [
+        40.0,
+        40.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_04/front/fixture_front-1",
+      "generator_stage_index": 4,
+      "role": "front",
+      "type_id": "fixture_front",
+      "nominal_ohm": 40.0,
+      "node_a": "stage_04/front/in",
+      "node_b": "stage_04/front/out",
+      "resistance_interval_ohm": [
+        40.0,
+        40.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_05/front/fixture_front-1",
+      "generator_stage_index": 5,
+      "role": "front",
+      "type_id": "fixture_front",
+      "nominal_ohm": 40.0,
+      "node_a": "stage_05/front/in",
+      "node_b": "stage_05/front/out",
+      "resistance_interval_ohm": [
+        40.0,
+        40.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_06/front/fixture_front-1",
+      "generator_stage_index": 6,
+      "role": "front",
+      "type_id": "fixture_front",
+      "nominal_ohm": 40.0,
+      "node_a": "stage_06/front/in",
+      "node_b": "stage_06/front/out",
+      "resistance_interval_ohm": [
+        40.0,
+        40.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_07/front/fixture_front-1",
+      "generator_stage_index": 7,
+      "role": "front",
+      "type_id": "fixture_front",
+      "nominal_ohm": 40.0,
+      "node_a": "stage_07/front/in",
+      "node_b": "stage_07/front/out",
+      "resistance_interval_ohm": [
+        40.0,
+        40.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_08/front/fixture_front-1",
+      "generator_stage_index": 8,
+      "role": "front",
+      "type_id": "fixture_front",
+      "nominal_ohm": 40.0,
+      "node_a": "stage_08/front/in",
+      "node_b": "stage_08/front/out",
+      "resistance_interval_ohm": [
+        40.0,
+        40.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_09/front/fixture_front-1",
+      "generator_stage_index": 9,
+      "role": "front",
+      "type_id": "fixture_front",
+      "nominal_ohm": 40.0,
+      "node_a": "stage_09/front/in",
+      "node_b": "stage_09/front/out",
+      "resistance_interval_ohm": [
+        40.0,
+        40.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_01/tail/fixture_tail-1",
+      "generator_stage_index": 1,
+      "role": "tail",
+      "type_id": "fixture_tail",
+      "nominal_ohm": 25.0,
+      "node_a": "stage_01/tail/in",
+      "node_b": "stage_01/tail/out",
+      "resistance_interval_ohm": [
+        25.0,
+        25.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_02/tail/fixture_tail-1",
+      "generator_stage_index": 2,
+      "role": "tail",
+      "type_id": "fixture_tail",
+      "nominal_ohm": 25.0,
+      "node_a": "stage_02/tail/in",
+      "node_b": "stage_02/tail/out",
+      "resistance_interval_ohm": [
+        25.0,
+        25.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_03/tail/fixture_tail-1",
+      "generator_stage_index": 3,
+      "role": "tail",
+      "type_id": "fixture_tail",
+      "nominal_ohm": 25.0,
+      "node_a": "stage_03/tail/in",
+      "node_b": "stage_03/tail/out",
+      "resistance_interval_ohm": [
+        25.0,
+        25.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_04/tail/fixture_tail-1",
+      "generator_stage_index": 4,
+      "role": "tail",
+      "type_id": "fixture_tail",
+      "nominal_ohm": 25.0,
+      "node_a": "stage_04/tail/in",
+      "node_b": "stage_04/tail/out",
+      "resistance_interval_ohm": [
+        25.0,
+        25.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_05/tail/fixture_tail-1",
+      "generator_stage_index": 5,
+      "role": "tail",
+      "type_id": "fixture_tail",
+      "nominal_ohm": 25.0,
+      "node_a": "stage_05/tail/in",
+      "node_b": "stage_05/tail/out",
+      "resistance_interval_ohm": [
+        25.0,
+        25.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_06/tail/fixture_tail-1",
+      "generator_stage_index": 6,
+      "role": "tail",
+      "type_id": "fixture_tail",
+      "nominal_ohm": 25.0,
+      "node_a": "stage_06/tail/in",
+      "node_b": "stage_06/tail/out",
+      "resistance_interval_ohm": [
+        25.0,
+        25.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_07/tail/fixture_tail-1",
+      "generator_stage_index": 7,
+      "role": "tail",
+      "type_id": "fixture_tail",
+      "nominal_ohm": 25.0,
+      "node_a": "stage_07/tail/in",
+      "node_b": "stage_07/tail/out",
+      "resistance_interval_ohm": [
+        25.0,
+        25.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_08/tail/fixture_tail-1",
+      "generator_stage_index": 8,
+      "role": "tail",
+      "type_id": "fixture_tail",
+      "nominal_ohm": 25.0,
+      "node_a": "stage_08/tail/in",
+      "node_b": "stage_08/tail/out",
+      "resistance_interval_ohm": [
+        25.0,
+        25.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    },
+    {
+      "component_id": "stage_09/tail/fixture_tail-1",
+      "generator_stage_index": 9,
+      "role": "tail",
+      "type_id": "fixture_tail",
+      "nominal_ohm": 25.0,
+      "node_a": "stage_09/tail/in",
+      "node_b": "stage_09/tail/out",
+      "resistance_interval_ohm": [
+        25.0,
+        25.0
+      ],
+      "peak_voltage_V": null,
+      "peak_current_A": null,
+      "peak_power_W": null,
+      "pulse_energy_J": null,
+      "average_power_W": null,
+      "initial_temperature_K": null,
+      "estimated_peak_temperature_K": null,
+      "thermal_status": "unknown",
+      "thermal_details": null,
+      "ratings_status": "unknown",
+      "rating_limits": {
+        "pulse_voltage_limit_V": null,
+        "pulse_current_limit_A": null,
+        "pulse_energy_limit_J": null,
+        "average_power_limit_W": null,
+        "temperature_limit_K": null
+      },
+      "rating_checks": [
+        {
+          "rating": "pulse_voltage_limit_V",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_current_limit_A",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "pulse_energy_limit_J",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "average_power_limit_W",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        },
+        {
+          "rating": "temperature_limit_K",
+          "observed": null,
+          "limit": null,
+          "status": "unknown",
+          "margin": null
+        }
+      ],
+      "equal_sharing_assumed": true,
+      "assumptions": [
+        "nominal constant resistance",
+        "identical stage sharing",
+        "trace horizon bounds energy integration"
+      ]
+    }
+  ]
+}

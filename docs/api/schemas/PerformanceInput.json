@@ -792,7 +792,7 @@
           "type": "string"
         },
         "model_version": {
-          "default": "residual-tabpfn-v2-diagnostic-v1",
+          "default": "residual-tabpfn-v2-standardised-v1",
           "title": "Model Version",
           "type": "string"
         },

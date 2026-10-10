@@ -37,8 +37,8 @@
     },
     {
       "name": "Marx_Generator_Technical_Implementation_Specification.md",
-      "sha256": "117d81334de021b8c46a927def817aa246d62185fcb72b9e0699328bae64a5c2",
-      "size_bytes": 150946
+      "sha256": "14d9ee44d7caaca6c83ccd7e0def8466f63d9b187337ba325b7f5e7fd0246ad2",
+      "size_bytes": 154707
     },
     {
       "name": "Marx_Generator_Technical_Implementation_Specification.pdf",
@@ -52,8 +52,8 @@
     },
     {
       "name": "backend_implementation_status.md",
-      "sha256": "b077a31fa4e0bbb74c8b5775a86c51b8523a747645d7618dbf97ff757ac2a49d",
-      "size_bytes": 12320
+      "sha256": "db38f5b79c2b993dbda5422943b531b95d730484d4b7c3462d3e7aa37e061b26",
+      "size_bytes": 12864
     },
     {
       "name": "frontend_environment_report.json",
@@ -62,8 +62,8 @@
     },
     {
       "name": "model_performance_report.json",
-      "sha256": "af95b954e70abb9b44a11843a117f7dd5ca64385f07e4ca5e3508d3d28a337b7",
-      "size_bytes": 4292
+      "sha256": "6e5a025af7e0ec1df5b3112531c62c11bc81c83224cb5296b77617d849c72978",
+      "size_bytes": 4295
     },
     {
       "name": "resistor_inventory_front.json",
@@ -87,8 +87,8 @@
     },
     {
       "name": "verification_report.json",
-      "sha256": "82820af8f8a6342c71fb0db9964e4251602cfe2c9354ce73eac027d4f1db3441",
-      "size_bytes": 6190
+      "sha256": "0476211fb785f30705ca20b91a63ae0866df6677e394928a917e8545dc0ea7a1",
+      "size_bytes": 6938
     },
     {
       "name": "~$Hybrid_Physics_ML_Impulse_Generator_Optimiser.xlsx",

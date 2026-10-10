@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 Positive = Annotated[float, Field(gt=0)]
 Nonnegative = Annotated[float, Field(ge=0)]
+MODEL_VERSION = "residual-tabpfn-v2-standardised-v1"
 
 
 class Record(BaseModel):
@@ -217,7 +218,7 @@ class RunRequest(Record):
     search: Search = Field(default_factory=Search)
     objective: ObjectiveConfig = Field(default_factory=ObjectiveConfig)
     physics_mode: Literal["calculator", "exact"] = "exact"
-    model_version: str = "residual-tabpfn-v2-diagnostic-v1"
+    model_version: str = MODEL_VERSION
     ml_domain_policy: Literal["strict", "diagnostic_extrapolation"] = "strict"
     seed: int = Field(default=42, ge=0, le=2147483647)
 
@@ -362,6 +363,7 @@ class CorrectionPrediction(Record):
     lab_validated: bool
     explanation_status: str | None = None
     environment_effects: dict[str, Any] = Field(default_factory=dict)
+    normalisation: dict[str, Any] = Field(default_factory=dict)
     performance: PerformanceReport | None = None
 
 

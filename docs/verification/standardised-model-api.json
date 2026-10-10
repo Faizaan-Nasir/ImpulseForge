@@ -1,0 +1,488 @@
+{
+  "model_version": "residual-tabpfn-v2-standardised-v1",
+  "support": {
+    "status": "supported_diagnostic",
+    "reasons": [],
+    "joint_domain_validated": false,
+    "lab_validated": false
+  },
+  "features": {
+    "N": 9.0,
+    "U_charge_V": 198825.0163101914,
+    "Rf_stage_actual_ohm": 40.0,
+    "Rt_stage_actual_ohm": 25.0,
+    "C_object_F": 8.88302159041632e-10,
+    "C_divider_F": 5.990602798759937e-10,
+    "C_stray_F": 3.0299236099934205e-10,
+    "L_effective_H": 2.284642922785133e-05,
+    "C_generator_F": 3.3333333333333335e-07,
+    "C_load_effective_F": 1.7903547999169678e-09,
+    "R_front_effective_ohm": 360.0,
+    "R_tail_effective_ohm": 225.0,
+    "physics_front_s": 1.2015577788181402e-06,
+    "physics_tail_s": 5.225416107217705e-05,
+    "physics_crest_V": 1469466.0825887697,
+    "expected_voltage_efficiency": 0.8211944965808653
+  },
+  "input_effects_not_modelled": [
+    "exact wiring",
+    "generator topology measurement",
+    "overshoot",
+    "environment",
+    "per-resistor heat"
+  ],
+  "hardware_feasible": false,
+  "physics_constraints": [
+    {
+      "constraint_id": "HW_STAGES",
+      "origin": "frontend_input",
+      "kind": "hard",
+      "enforced_by": [
+        "assembly",
+        "physics"
+      ],
+      "rule": "N_min <= active stages <= N_max",
+      "observed_value": 9,
+      "limit_value": [
+        1,
+        15
+      ],
+      "unit": null,
+      "margin": null,
+      "status": "pass",
+      "reason_code": null
+    },
+    {
+      "constraint_id": "HW_STAGE_CHARGE",
+      "origin": "frontend_input",
+      "kind": "hard",
+      "enforced_by": [
+        "physics"
+      ],
+      "rule": "value <= 200000.0",
+      "observed_value": 198825.0163101914,
+      "limit_value": 200000.0,
+      "unit": "V",
+      "margin": 1174.9836898086069,
+      "status": "pass",
+      "reason_code": null
+    },
+    {
+      "constraint_id": "HW_STAGE_ENERGY",
+      "origin": "problem_statement_fallback",
+      "kind": "hard",
+      "enforced_by": [
+        "physics"
+      ],
+      "rule": "value <= 2500",
+      "observed_value": 59297.08066612181,
+      "limit_value": 2500,
+      "unit": "J",
+      "margin": -56797.08066612181,
+      "status": "fail",
+      "reason_code": null
+    },
+    {
+      "constraint_id": "HW_TOTAL_ENERGY",
+      "origin": "problem_statement_fallback",
+      "kind": "hard",
+      "enforced_by": [
+        "physics"
+      ],
+      "rule": "value <= 30000",
+      "observed_value": 533673.7259950963,
+      "limit_value": 30000,
+      "unit": "J",
+      "margin": -503673.72599509626,
+      "status": "fail",
+      "reason_code": null
+    },
+    {
+      "constraint_id": "STOCK_front_fixture_front",
+      "origin": "request_inventory",
+      "kind": "hard",
+      "enforced_by": [
+        "assembly",
+        "physics"
+      ],
+      "rule": "Independent role per-type per-stage/global quantity cap",
+      "observed_value": 1,
+      "limit_value": 4,
+      "unit": null,
+      "margin": 3.0,
+      "status": "pass",
+      "reason_code": null
+    },
+    {
+      "constraint_id": "STOCK_tail_fixture_tail",
+      "origin": "request_inventory",
+      "kind": "hard",
+      "enforced_by": [
+        "assembly",
+        "physics"
+      ],
+      "rule": "Independent role per-type per-stage/global quantity cap",
+      "observed_value": 1,
+      "limit_value": 4,
+      "unit": null,
+      "margin": 3.0,
+      "status": "pass",
+      "reason_code": null
+    },
+    {
+      "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+      "origin": "equipment_evidence",
+      "kind": "hard",
+      "enforced_by": [
+        "physics"
+      ],
+      "rule": "Registered topology/branch states have equipment evidence",
+      "observed_value": null,
+      "limit_value": null,
+      "unit": null,
+      "margin": null,
+      "status": "unknown",
+      "reason_code": "unresolved_circuit_evidence"
+    },
+    {
+      "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+      "origin": "equipment_evidence",
+      "kind": "hard",
+      "enforced_by": [
+        "physics"
+      ],
+      "rule": "Internal transient/reversal rating verified",
+      "observed_value": null,
+      "limit_value": null,
+      "unit": null,
+      "margin": null,
+      "status": "unknown",
+      "reason_code": "lumped_model_cannot_certify_internal_stresses"
+    },
+    {
+      "constraint_id": "RESISTOR_front_fixture_front_1",
+      "origin": "component_rating_evidence",
+      "kind": "hard",
+      "enforced_by": [
+        "physics"
+      ],
+      "rule": "All applicable per-component ratings verified",
+      "observed_value": null,
+      "limit_value": null,
+      "unit": null,
+      "margin": null,
+      "status": "unknown",
+      "reason_code": "unresolved_component_rating"
+    },
+    {
+      "constraint_id": "RESISTOR_tail_fixture_tail_1",
+      "origin": "component_rating_evidence",
+      "kind": "hard",
+      "enforced_by": [
+        "physics"
+      ],
+      "rule": "All applicable per-component ratings verified",
+      "observed_value": null,
+      "limit_value": null,
+      "unit": null,
+      "margin": null,
+      "status": "unknown",
+      "reason_code": "unresolved_component_rating"
+    }
+  ],
+  "corrected_constraint_checks": [],
+  "residuals": {
+    "residual_front_s": 5.620975320759248e-10,
+    "residual_tail_s": -6.592337513936607e-08,
+    "residual_crest_V": -9932.187024171933
+  },
+  "corrected_metrics": {
+    "front_s": 1.2021198763502161e-06,
+    "tail_s": 5.218823769703769e-05,
+    "crest_V": 1459533.8955645978
+  },
+  "status": "predicted_diagnostic",
+  "lab_validated": false,
+  "explanation_status": "available_on_request",
+  "environment_effects": {
+    "status": "not_modelled",
+    "requested_conditions": {},
+    "reason": "Current synthetic training data has no environmental measurements or labels"
+  },
+  "normalisation": {
+    "status": "applied",
+    "method": "z_score",
+    "fit_split": "Train",
+    "fit_count": 700,
+    "standardised_features": {
+      "N": -0.3377383256131326,
+      "U_charge_V": 1.6077599069557784,
+      "Rf_stage_actual_ohm": -0.5384691202110765,
+      "C_object_F": -0.20352578349701408,
+      "C_divider_F": 0.45251438596075133,
+      "C_stray_F": 1.3381318812311327,
+      "L_effective_H": 0.5832044479871856,
+      "C_generator_F": 0.30801731766806567,
+      "C_load_effective_F": 0.4595777163807082,
+      "R_front_effective_ohm": -0.6274679807264817,
+      "R_tail_effective_ohm": -0.3377383256131312,
+      "physics_front_s": 0.03044281438599529,
+      "physics_tail_s": 0.3311615888035647,
+      "physics_crest_V": 1.0010103774620231,
+      "expected_voltage_efficiency": -0.2170049288467375
+    },
+    "target_parameters": {
+      "residual_front_s": {
+        "mean": 1.6940448439043489e-09,
+        "scale": 9.794997587107606e-09,
+        "unit": "s"
+      },
+      "residual_tail_s": {
+        "mean": 7.904635846349509e-08,
+        "scale": 8.048723879328668e-07,
+        "unit": "s"
+      },
+      "residual_crest_V": {
+        "mean": -2453.1236480408456,
+        "scale": 10900.38958515879,
+        "unit": "V"
+      }
+    },
+    "prediction_units": "SI; inverse target transformation applied before physics addition",
+    "standardised_residuals": {
+      "residual_front_s": -0.1155638173222542,
+      "residual_tail_s": -0.18011517822742462,
+      "residual_crest_V": -0.6861280798912048
+    }
+  },
+  "performance": {
+    "schema_version": "1.0",
+    "candidate_id": "779bdc3d30510d2d1bae1a978fab53d3",
+    "context_hash": "bc785ae722ad777d26a27fe0d513aff61959572bc820886cd5c25c339ca679c0",
+    "target": {
+      "front_s": 1.2e-06,
+      "tail_s": 5e-05,
+      "crest_V": 1469466.0825887695
+    },
+    "physics": {
+      "metrics": {
+        "front_s": 1.2015577788181402e-06,
+        "tail_s": 5.225416107217705e-05,
+        "crest_V": 1469466.0825887697
+      },
+      "errors": {
+        "front": {
+          "unit": "s",
+          "target": 1.2e-06,
+          "predicted": 1.2015577788181402e-06,
+          "signed_delta": 1.5577788181402913e-09,
+          "absolute_delta": 1.5577788181402913e-09,
+          "percentage_delta": 0.12981490151169095,
+          "absolute_percentage_delta": 0.12981490151169095,
+          "allowed_delta": 3.6e-07,
+          "lower_limit": 8.4e-07,
+          "upper_limit": 1.5599999999999999e-06,
+          "normalised_error": 0.004327163383723031,
+          "within_tolerance": true
+        },
+        "tail": {
+          "unit": "s",
+          "target": 5e-05,
+          "predicted": 5.225416107217705e-05,
+          "signed_delta": 2.254161072177049e-06,
+          "absolute_delta": 2.254161072177049e-06,
+          "percentage_delta": 4.508322144354098,
+          "absolute_percentage_delta": 4.508322144354098,
+          "allowed_delta": 1e-05,
+          "lower_limit": 4e-05,
+          "upper_limit": 6e-05,
+          "normalised_error": 0.2254161072177049,
+          "within_tolerance": true
+        },
+        "crest": {
+          "unit": "V",
+          "target": 1469466.0825887695,
+          "predicted": 1469466.0825887697,
+          "signed_delta": 2.3283064365386963e-10,
+          "absolute_delta": 2.3283064365386963e-10,
+          "percentage_delta": 1.584457419008203e-14,
+          "absolute_percentage_delta": 1.584457419008203e-14,
+          "allowed_delta": 44083.982477663085,
+          "lower_limit": 1425382.1001111064,
+          "upper_limit": 1513550.0650664326,
+          "normalised_error": 5.2815247300273425e-15,
+          "within_tolerance": true
+        }
+      },
+      "S": 0.2254161072177049,
+      "J": 0.07658109020047774,
+      "cost": 0.18395066450490022,
+      "waveform_within_tolerance": true
+    },
+    "corrected": {
+      "metrics": {
+        "front_s": 1.2021198763502161e-06,
+        "tail_s": 5.218823769703769e-05,
+        "crest_V": 1459533.8955645978
+      },
+      "errors": {
+        "front": {
+          "unit": "s",
+          "target": 1.2e-06,
+          "predicted": 1.2021198763502161e-06,
+          "signed_delta": 2.1198763502161965e-09,
+          "absolute_delta": 2.1198763502161965e-09,
+          "percentage_delta": 0.1766563625180164,
+          "absolute_percentage_delta": 0.1766563625180164,
+          "allowed_delta": 3.6e-07,
+          "lower_limit": 8.4e-07,
+          "upper_limit": 1.5599999999999999e-06,
+          "normalised_error": 0.005888545417267212,
+          "within_tolerance": true
+        },
+        "tail": {
+          "unit": "s",
+          "target": 5e-05,
+          "predicted": 5.218823769703769e-05,
+          "signed_delta": 2.188237697037685e-06,
+          "absolute_delta": 2.188237697037685e-06,
+          "percentage_delta": 4.37647539407537,
+          "absolute_percentage_delta": 4.37647539407537,
+          "allowed_delta": 1e-05,
+          "lower_limit": 4e-05,
+          "upper_limit": 6e-05,
+          "normalised_error": 0.21882376970376846,
+          "within_tolerance": true
+        },
+        "crest": {
+          "unit": "V",
+          "target": 1469466.0825887695,
+          "predicted": 1459533.8955645978,
+          "signed_delta": -9932.187024171697,
+          "absolute_delta": 9932.187024171697,
+          "percentage_delta": -0.6759044759082896,
+          "absolute_percentage_delta": 0.6759044759082896,
+          "allowed_delta": 44083.982477663085,
+          "lower_limit": 1425382.1001111064,
+          "upper_limit": 1513550.0650664326,
+          "normalised_error": 0.2253014919694299,
+          "within_tolerance": true
+        }
+      },
+      "S": 0.2253014919694299,
+      "J": 0.15000460236348853,
+      "cost": 0.1838743308859457,
+      "waveform_within_tolerance": true
+    },
+    "correction_status": "predicted_diagnostic",
+    "efficiency": {
+      "definition": "crest_V / (N * U_charge_V); voltage transfer, not energy efficiency",
+      "initial_erected_voltage_V": 1789425.1467917226,
+      "expected": 0.8211944965808653,
+      "requested_minimum": null,
+      "physics_voltage_transfer": 0.8211944965808653,
+      "corrected_voltage_transfer": 0.8156440062225626,
+      "stage_voltage_utilisation": 0.9941250815509569
+    },
+    "stored_energy": {
+      "stage_J": 59297.08066612181,
+      "stage_limit_J": 2500,
+      "stage_utilisation": 23.71883226644872,
+      "total_J": 533673.7259950963,
+      "total_limit_J": 30000,
+      "total_utilisation": 17.789124199836543
+    },
+    "hardware": {
+      "feasible": false,
+      "constraint_counts": {
+        "pass": 4,
+        "fail": 2,
+        "unknown": 4,
+        "not_applicable": 0
+      },
+      "failed_constraint_ids": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ],
+      "unknown_constraint_ids": [
+        "CIRCUIT_TOPOLOGY_VERIFIED",
+        "CAPACITOR_TRANSIENT_RATING",
+        "RESISTOR_front_fixture_front_1",
+        "RESISTOR_tail_fixture_tail_1"
+      ],
+      "corrected_constraint_counts": {
+        "pass": 0,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0
+      }
+    },
+    "model_quality": {
+      "status": "available",
+      "model_version": "residual-tabpfn-v2-standardised-v1",
+      "bundle_hash": "b7d1a992302dd72194e1dce3758c582d68cb86815d3f4029e4817281efbc057b",
+      "category": "Lightning",
+      "split": "Validation",
+      "dataset_origin": "synthetic_workbook",
+      "train_count": 700,
+      "validation_count": 150,
+      "hidden_test_evaluated": false,
+      "lab_validated": false,
+      "metrics": {
+        "residual_front_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 6.47321811638569e-09,
+          "validation_RMSE": 7.3422227226725585e-09,
+          "validation_bias": 4.384367788367769e-10,
+          "validation_MAE_over_train_residual_std": 0.6608698020411852,
+          "physics_only_MAE": 8.240545740843459e-09,
+          "mean_residual_baseline_MAE": 8.207405713891005e-09,
+          "linear_residual_baseline_MAE": 6.518917806856653e-09
+        },
+        "residual_tail_s": {
+          "unit": "s",
+          "validation_count": 150,
+          "validation_MAE": 5.833343884952594e-07,
+          "validation_RMSE": 6.710124218551536e-07,
+          "validation_bias": -9.705599628959645e-09,
+          "validation_MAE_over_train_residual_std": 0.7247538830266277,
+          "physics_only_MAE": 6.87652498761937e-07,
+          "mean_residual_baseline_MAE": 6.870463165712267e-07,
+          "linear_residual_baseline_MAE": 5.802299220732198e-07
+        },
+        "residual_crest_V": {
+          "unit": "V",
+          "validation_count": 150,
+          "validation_MAE": 4472.448275739699,
+          "validation_RMSE": 5193.545486613155,
+          "validation_bias": -333.9059549477483,
+          "validation_MAE_over_train_residual_std": 0.410301690668843,
+          "physics_only_MAE": 9749.734449355396,
+          "mean_residual_baseline_MAE": 9735.026793715737,
+          "linear_residual_baseline_MAE": 4745.46329735606
+        }
+      },
+      "error_definition": "prediction_minus_observation",
+      "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+    },
+    "observed_accuracy": {
+      "status": "unavailable",
+      "reason": "A matched measured result is required to assess this input's accuracy",
+      "errors": null,
+      "provenance": null
+    },
+    "runtime": {
+      "clock": "monotonic_wall_clock",
+      "scope": "physics_and_correction",
+      "stage_seconds": {
+        "physics": 0.002351249917410314,
+        "correction": 5.671511291991919
+      },
+      "total_seconds": 5.6738629169994965,
+      "cache_hit": false,
+      "transport_time_included": false
+    },
+    "interpretation": "Computed values are predictions. Target mismatch is not model accuracy; dataset validation does not establish this setup's measured result."
+  }
+}

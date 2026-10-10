@@ -1,7 +1,7 @@
 {
-  "model_version": "residual-tabpfn-v2-diagnostic-v1",
+  "model_version": "residual-tabpfn-v2-standardised-v1",
   "checkpoint_version": "v2",
-  "bundle_hash": "ce83366bf5f1fe7573f087af3a06a7a4c83979c8d998dd68982ba68de0e1b71c",
+  "bundle_hash": "b7d1a992302dd72194e1dce3758c582d68cb86815d3f4029e4817281efbc057b",
   "status": "fitted",
   "categories": {
     "Lightning": {
@@ -153,14 +153,106 @@
       "epochs_applicable": false,
       "epochs": null,
       "downstream_gradient_updates": 0,
+      "standardisation": {
+        "method": "z_score",
+        "formula": "z = (value - training_mean) / training_scale",
+        "inverse_formula": "value = z * training_scale + training_mean",
+        "fit_split": "Train",
+        "fit_count": 700,
+        "std_ddof": 0,
+        "constant_scale": 1,
+        "clip": false,
+        "features": {
+          "N": {
+            "mean": 9.14,
+            "scale": 0.414522100048443
+          },
+          "U_charge_V": {
+            "mean": 189157.35314661032,
+            "scale": 6013.126165016993
+          },
+          "Rf_stage_actual_ohm": {
+            "mean": 44.1,
+            "scale": 7.614178503667634
+          },
+          "C_object_F": {
+            "mean": 9.267785946751746e-10,
+            "scale": 1.8904944116875037e-10
+          },
+          "C_divider_F": {
+            "mean": 5.462831771834089e-10,
+            "scale": 1.1663077314223217e-10
+          },
+          "C_stray_F": {
+            "mean": 2.0691953740664758e-10,
+            "scale": 7.179622946006173e-11
+          },
+          "L_effective_H": {
+            "mean": 1.9083368093535036e-05,
+            "scale": 6.45238757575281e-06
+          },
+          "C_generator_F": {
+            "mean": 3.2888095238095236e-07,
+            "scale": 1.4454969564987569e-08
+          },
+          "C_load_effective_F": {
+            "mean": 1.6799813092652308e-09,
+            "scale": 2.401628423609317e-10
+          },
+          "R_front_effective_ohm": {
+            "mean": 402.35,
+            "scale": 67.49348381246043
+          },
+          "R_tail_effective_ohm": {
+            "mean": 228.5,
+            "scale": 10.363052501211076
+          },
+          "physics_front_s": {
+            "mean": 1.2005360793166784e-06,
+            "scale": 3.3561269615461433e-08
+          },
+          "physics_tail_s": {
+            "mean": 5.224100556747164e-05,
+            "scale": 3.97253339463148e-08
+          },
+          "physics_crest_V": {
+            "mean": 1425543.0443263946,
+            "scale": 43878.704208580035
+          },
+          "expected_voltage_efficiency": {
+            "mean": 0.8256480489462149,
+            "scale": 0.020522816643003483
+          }
+        },
+        "targets": {
+          "residual_front_s": {
+            "mean": 1.6940448439043489e-09,
+            "scale": 9.794997587107606e-09,
+            "unit": "s"
+          },
+          "residual_tail_s": {
+            "mean": 7.904635846349509e-08,
+            "scale": 8.048723879328668e-07,
+            "unit": "s"
+          },
+          "residual_crest_V": {
+            "mean": -2453.1236480408456,
+            "scale": 10900.38958515879,
+            "unit": "V"
+          }
+        },
+        "prediction_units": "SI; inverse target transformation applied before physics addition",
+        "tabpfn_internal_preprocessing": "Retained; independent of this explicit outer transform"
+      },
+      "model_version": "residual-tabpfn-v2-standardised-v1",
       "validation_metrics": {
         "residual_front_s": {
           "unit": "s",
           "validation_count": 150,
-          "validation_MAE": 6.513955473413656e-09,
-          "validation_RMSE": 7.407555187557085e-09,
-          "validation_bias": 5.07431277513896e-10,
-          "validation_MAE_over_train_residual_std": 0.6650287981681047,
+          "validation_MAE": 6.47321811638569e-09,
+          "validation_RMSE": 7.3422227226725585e-09,
+          "validation_bias": 4.384367788367769e-10,
+          "validation_MAE_over_train_residual_std": 0.6608698020411852,
           "physics_only_MAE": 8.240545740843459e-09,
           "mean_residual_baseline_MAE": 8.207405713891005e-09,
           "linear_residual_baseline_MAE": 6.518917806856653e-09
@@ -168,10 +260,10 @@
         "residual_tail_s": {
           "unit": "s",
           "validation_count": 150,
-          "validation_MAE": 5.831505458801432e-07,
-          "validation_RMSE": 6.692771396372145e-07,
-          "validation_bias": -1.750495252191678e-08,
-          "validation_MAE_over_train_residual_std": 0.7245254708983543,
+          "validation_MAE": 5.833343884952594e-07,
+          "validation_RMSE": 6.710124218551536e-07,
+          "validation_bias": -9.705599628959645e-09,
+          "validation_MAE_over_train_residual_std": 0.7247538830266277,
           "physics_only_MAE": 6.87652498761937e-07,
           "mean_residual_baseline_MAE": 6.870463165712267e-07,
           "linear_residual_baseline_MAE": 5.802299220732198e-07
@@ -179,10 +271,10 @@
         "residual_crest_V": {
           "unit": "V",
           "validation_count": 150,
-          "validation_MAE": 4485.187180661017,
-          "validation_RMSE": 5193.163604605983,
-          "validation_bias": -366.26550849785013,
-          "validation_MAE_over_train_residual_std": 0.4114703557722134,
+          "validation_MAE": 4472.448275739699,
+          "validation_RMSE": 5193.545486613155,
+          "validation_bias": -333.9059549477483,
+          "validation_MAE_over_train_residual_std": 0.410301690668843,
           "physics_only_MAE": 9749.734449355396,
           "mean_residual_baseline_MAE": 9735.026793715737,
           "linear_residual_baseline_MAE": 4745.46329735606
@@ -191,11 +283,11 @@
       "checkpoint_version": "v2",
       "checkpoint_filename": "tabpfn-v2-regressor.ckpt",
       "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
-      "artifact_sha256": "0d5cff8c80614bddb74bc45b29feea47a4744ce7078772812f7dfc6d13498a79",
+      "artifact_sha256": "707bfd74308a4aeb5e02452b2ee133f0c6878127b93781d86701b256c50c867f",
       "background_sha256": "1e454cad9471fe0b4bb7a5ba17919c41d685ae92ac0cbd7d6256cbbc5aaaba6e",
       "dataset_sha256": "b3662646519a4d73846d467e11c710f26c44ef0d1b542d0317c65bee15674de5",
-      "feature_manifest_hash": "08198e0a606b50efd66ff6dd955e0487fad442fcd961cc9c358a1fb7c2250b1d",
-      "baseline_profile_hash": "4e77c01eae40ff10613dc5928241e9ae4bea4198f2c5ef273793c7ef2c7d7700",
+      "feature_manifest_hash": "a6ccda2207d42b2ae8784c56b507adf15660fa2eeaa7675bbe2418955de0ddd8",
+      "baseline_profile_hash": "c1d6f94ff952e32cdab0a23c124e271f49739491023768280cb8cf3a6498f511",
       "package_versions": {
         "tabpfn": "9.1.0",
         "torch": "2.14.1",
@@ -357,14 +449,110 @@
       "epochs_applicable": false,
       "epochs": null,
       "downstream_gradient_updates": 0,
+      "standardisation": {
+        "method": "z_score",
+        "formula": "z = (value - training_mean) / training_scale",
+        "inverse_formula": "value = z * training_scale + training_mean",
+        "fit_split": "Train",
+        "fit_count": 700,
+        "std_ddof": 0,
+        "constant_scale": 1,
+        "clip": false,
+        "features": {
+          "N": {
+            "mean": 6.714285714285714,
+            "scale": 0.45175395145262565
+          },
+          "U_charge_V": {
+            "mean": 185277.13932134293,
+            "scale": 8268.342109220035
+          },
+          "Rf_stage_actual_ohm": {
+            "mean": 13578.328571428572,
+            "scale": 2182.066106249033
+          },
+          "Rt_stage_actual_ohm": {
+            "mean": 1198.8,
+            "scale": 2.1354156504062627
+          },
+          "C_object_F": {
+            "mean": 9.270320088680768e-10,
+            "scale": 1.914928371336104e-10
+          },
+          "C_divider_F": {
+            "mean": 5.511461295903261e-10,
+            "scale": 1.1463048926451414e-10
+          },
+          "C_stray_F": {
+            "mean": 2.041504184893399e-10,
+            "scale": 7.027461830533737e-11
+          },
+          "L_effective_H": {
+            "mean": 1.8911632058081616e-05,
+            "scale": 6.261337835479987e-06
+          },
+          "C_generator_F": {
+            "mean": 4.4897959183673465e-07,
+            "scale": 3.2268139389473256e-08
+          },
+          "C_load_effective_F": {
+            "mean": 1.6823285569477427e-09,
+            "scale": 2.301271908420484e-10
+          },
+          "R_front_effective_ohm": {
+            "mean": 90729.55,
+            "scale": 12955.555065202727
+          },
+          "R_tail_effective_ohm": {
+            "mean": 8048.814285714286,
+            "scale": 537.9731350928527
+          },
+          "physics_front_s": {
+            "mean": 0.0002500003024228964,
+            "scale": 2.7435200768567165e-08
+          },
+          "physics_tail_s": {
+            "mean": 0.0025016864530185176,
+            "scale": 3.5331914821669685e-06
+          },
+          "physics_crest_V": {
+            "mean": 1022006.6681752712,
+            "scale": 43457.77750965817
+          },
+          "expected_voltage_efficiency": {
+            "mean": 0.8238249163336586,
+            "scale": 0.020393355420900115
+          }
+        },
+        "targets": {
+          "residual_front_s": {
+            "mean": 3.6972149601342254e-07,
+            "scale": 2.382725324309772e-06,
+            "unit": "s"
+          },
+          "residual_tail_s": {
+            "mean": 2.788911662500495e-06,
+            "scale": 3.227631547696165e-05,
+            "unit": "s"
+          },
+          "residual_crest_V": {
+            "mean": -1302.206554311315,
+            "scale": 8039.047704510598,
+            "unit": "V"
+          }
+        },
+        "prediction_units": "SI; inverse target transformation applied before physics addition",
+        "tabpfn_internal_preprocessing": "Retained; independent of this explicit outer transform"
+      },
+      "model_version": "residual-tabpfn-v2-standardised-v1",
       "validation_metrics": {
         "residual_front_s": {
           "unit": "s",
           "validation_count": 150,
-          "validation_MAE": 1.6063153452190028e-06,
-          "validation_RMSE": 1.8279643577304699e-06,
-          "validation_bias": -1.0726242223898998e-07,
-          "validation_MAE_over_train_residual_std": 0.6741504481572254,
+          "validation_MAE": 1.6104155005532281e-06,
+          "validation_RMSE": 1.829044716437225e-06,
+          "validation_bias": -1.1506897218264922e-07,
+          "validation_MAE_over_train_residual_std": 0.6758712320396114,
           "physics_only_MAE": 2.0134694993384835e-06,
           "mean_residual_baseline_MAE": 1.908414013515629e-06,
           "linear_residual_baseline_MAE": 1.5804247094179118e-06
@@ -372,10 +560,10 @@
         "residual_tail_s": {
           "unit": "s",
           "validation_count": 150,
-          "validation_MAE": 2.2427951527125597e-05,
-          "validation_RMSE": 2.5914292148648314e-05,
-          "validation_bias": 2.226792489144754e-06,
-          "validation_MAE_over_train_residual_std": 0.6948733520446078,
+          "validation_MAE": 2.2426301997699663e-05,
+          "validation_RMSE": 2.583572680151241e-05,
+          "validation_bias": 1.953099511162647e-06,
+          "validation_MAE_over_train_residual_std": 0.6948222455474269,
           "physics_only_MAE": 2.4757276996259968e-05,
           "mean_residual_baseline_MAE": 2.4652469182858916e-05,
           "linear_residual_baseline_MAE": 2.209340208225149e-05
@@ -383,10 +571,10 @@
         "residual_crest_V": {
           "unit": "V",
           "validation_count": 150,
-          "validation_MAE": 3147.4734984569177,
-          "validation_RMSE": 3709.31127047061,
-          "validation_bias": -11.444559688727313,
-          "validation_MAE_over_train_residual_std": 0.3915231771408589,
+          "validation_MAE": 3130.558659209935,
+          "validation_RMSE": 3691.78895143421,
+          "validation_bias": -60.248409059830664,
+          "validation_MAE_over_train_residual_std": 0.38941909219588555,
           "physics_only_MAE": 6788.953234656058,
           "mean_residual_baseline_MAE": 6827.020558317406,
           "linear_residual_baseline_MAE": 3330.509622721135
@@ -395,11 +583,11 @@
       "checkpoint_version": "v2",
       "checkpoint_filename": "tabpfn-v2-regressor.ckpt",
       "checkpoint_sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
-      "artifact_sha256": "bd6256d5d3a18d9e8c53259698ea72e824cc030593de34ce553c23a6dc7d9b31",
+      "artifact_sha256": "595605c991f0319235bcac6bed2b51a71617d09dc31bc45483819af7e8f7c8be",
       "background_sha256": "ee1f95ad877c72cd083104f76571a3f14afc31ec1e87ccb482d8c4ea1c349898",
       "dataset_sha256": "b3662646519a4d73846d467e11c710f26c44ef0d1b542d0317c65bee15674de5",
-      "feature_manifest_hash": "f846e5c9a22dc3794d262922820895479084a3ed241b2780d33856b6321b0f89",
-      "baseline_profile_hash": "4e77c01eae40ff10613dc5928241e9ae4bea4198f2c5ef273793c7ef2c7d7700",
+      "feature_manifest_hash": "a34f97350f2386d1428c08a8a01cfe9a3d66d0fbe919a8a56e66ec192b306af4",
+      "baseline_profile_hash": "c1d6f94ff952e32cdab0a23c124e271f49739491023768280cb8cf3a6498f511",
       "package_versions": {
         "tabpfn": "9.1.0",
         "torch": "2.14.1",

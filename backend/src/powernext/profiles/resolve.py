@@ -1,7 +1,13 @@
 import json
 import math
 
-from powernext.contracts.models import DomainError, InlineInventory, Record, RunRequest
+from powernext.contracts.models import (
+    MODEL_VERSION,
+    DomainError,
+    InlineInventory,
+    Record,
+    RunRequest,
+)
 from powernext.profiles.registry import (
     WORKBOOK_INPUTS,
     digest,
@@ -61,7 +67,7 @@ def stock_bounds(inventory, N):
 
 
 def resolve(request: RunRequest, saved_inventories=None, model_bundle_hash=None) -> Context:
-    if request.model_version != "residual-tabpfn-v2-diagnostic-v1":
+    if request.model_version != MODEL_VERSION:
         raise DomainError("unknown_model_version", request.model_version, "correction")
     hw = equipment(request.equipment_profile_id)
     fallback_source = "problem_statement_fallback"

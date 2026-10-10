@@ -5,8 +5,9 @@ from typing import Any
 
 import numpy as np
 
-from powernext.contracts.models import Constraint, DomainError
+from powernext.contracts.models import MODEL_VERSION, Constraint, DomainError
 from powernext.correction.features import TARGETS, extract_features, manifest, workbook_data
+from powernext.correction.scaling import scaling_manifest, scaling_trace, standardised_regressor
 from powernext.correction.validation import artifact_metadata, file_hash, validation_report
 from powernext.profiles.registry import digest
 
@@ -27,7 +28,7 @@ class ResidualModel:
 
     def report(self):
         return {
-            "model_version": "residual-tabpfn-v2-diagnostic-v1",
+            "model_version": MODEL_VERSION,
             "checkpoint_version": "v2",
             "bundle_hash": self.fingerprint,
             "status": "fitted" if self.manifests else "not_fitted",
@@ -65,6 +66,12 @@ class ResidualModel:
 
     def _load(self, category):
         if category not in self.models:
+            if self.manifests[category].get("model_version") != MODEL_VERSION:
+                raise DomainError(
+                    "model_artifact_version_mismatch",
+                    "Refit the residual model for the current standardisation contract",
+                    "correction",
+                )
             import torch
 
             torch.set_num_threads(2)
@@ -122,6 +129,7 @@ class ResidualModel:
                 "status": "unsupported",
                 "lab_validated": False,
                 "environment_effects": environment_effects,
+                "normalisation": {"status": "not_invoked", "reason": "unsupported_model_domain"},
             }
         mf = self.manifests[category]
         models = self._load(category)
@@ -168,6 +176,7 @@ class ResidualModel:
             "lab_validated": False,
             "explanation_status": "available_on_request",
             "environment_effects": environment_effects,
+            "normalisation": scaling_trace(mf, features, residual),
         }
 
     def explain(self, context, candidate, baseline):
@@ -183,20 +192,39 @@ class ResidualModel:
         values = np.array([[correction["features"][f] for f in mf["selected_features"]]])
         explanations = []
         for name, model in zip(TARGETS, models):
-            explainer = shap.KernelExplainer(model.predict, background)
-            sv = np.asarray(explainer.shap_values(values, nsamples=32, silent=True, l1_reg=0))
-            ref = float(explainer.expected_value)
+            scaler = model.regressor_.named_steps["features"]
+            estimator = model.regressor_.named_steps["regressor"]
+            target_scaler = model.transformer_
+
+            # Dimensionless inputs/outputs avoid SHAP's absolute cutoffs for tiny SI quantities.
+            z_values = scaler.transform(values)
+            explainer = shap.KernelExplainer(estimator.predict, scaler.transform(background))
+            sv_z = np.asarray(explainer.shap_values(z_values, nsamples=32, silent=True, l1_reg=0))
+            sv = sv_z * target_scaler.scale_[0]
+            ref = float(
+                explainer.expected_value * target_scaler.scale_[0] + target_scaler.mean_[0]
+            )
             pred = float(model.predict(values)[0])
             explanations.append(
                 {
                     "output_name": name,
                     "reference_residual": ref,
                     "feature_contributions": [
-                        {"feature": f, "value": float(v), "contribution": float(c)}
-                        for f, v, c in zip(mf["selected_features"], values[0], sv[0])
+                        {
+                            "feature": f,
+                            "value": float(v),
+                            "standardised_value": float(z),
+                            "contribution": float(c),
+                        }
+                        for f, v, z, c in zip(
+                            mf["selected_features"], values[0], z_values[0], sv[0]
+                        )
                     ],
                     "additivity_error": abs(pred - ref - float(sv.sum())),
                     "method": "Kernel SHAP",
+                    "masking_space": "training-standardised features",
+                    "attribution_space": "standardised residual; contributions inverse-scaled to SI",
+                    "contribution_unit": "V" if name.endswith("V") else "s",
                     "nsamples": 32,
                     "unsupported_effects": mf["unavailable"],
                     "causal_claim": False,
@@ -226,8 +254,10 @@ def fit_workbook(directory, device="cpu"):
         models = []
         metrics = {}
         for target in TARGETS:
-            model = TabPFNRegressor.create_default_for_version(
-                ModelVersion.V2, device=device, n_estimators=2, random_state=42
+            model = standardised_regressor(
+                TabPFNRegressor.create_default_for_version(
+                    ModelVersion.V2, device=device, n_estimators=2, random_state=42
+                )
             )
             model.fit(
                 X.loc[train, mf["selected_features"]].to_numpy(), Y.loc[train, target].to_numpy()
@@ -241,6 +271,10 @@ def fit_workbook(directory, device="cpu"):
                 ),
             }
             models.append(model)
+        mf["standardisation"] = scaling_manifest(
+            models, mf["selected_features"], TARGETS, mf["train_count"]
+        )
+        mf["model_version"] = MODEL_VERSION
         mf["validation_metrics"] = validation_report(
             frame, X, Y, category, mf["selected_features"], models
         )

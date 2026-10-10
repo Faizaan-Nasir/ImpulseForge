@@ -54,7 +54,7 @@ The technical specification remains the architectural authority. Its Section 15 
 
 ## Recorded checks
 
-The full suite passed **107 tests**, including actual local TabPFN v2 inference tests, with no skips. It verifies all eleven frontend fields together, the three retained document values, removed voltage/shot-rate checks, single-stage input support and inspectable cached failures for stored-energy violations. Lint and static type checks passed. The locked environment resolved successfully; the real HTTP service and background worker smoke check passed. Three SHAP residual outputs passed additivity checks. SMAC emits deprecation warnings from its installed dependency; these are retained in the test report.
+The full suite passed **111 tests**, including actual local TabPFN v2 inference tests, with no skips. It verifies all eleven frontend fields together, the three retained document values, removed voltage/shot-rate checks, single-stage input support and inspectable cached failures for stored-energy violations. Lint and static type checks passed. The locked environment resolved successfully; the real HTTP service and background worker smoke check passed. Three SHAP residual outputs passed additivity checks. SMAC emits deprecation warnings from its installed dependency; these are retained in the test report.
 
 The completed four-part reference search retained 27,620 canonical front recipes and 55,028 tail recipes. That proves enumeration only within the declared four-part scope, not all assemblies allowed by four units of every type.
 
@@ -75,3 +75,5 @@ Workbook/dashboard reconciliation: independent `dashboard/baseline.py` and `POST
 
 
 Required ML-loop revision: every successful forward prediction invokes the correction engine for both diagnostic and recommendation purposes. No physics-only objective fallback or calibrated-case selection remains. Numeric diagnostic extrapolation is explicit; baseline/model incompatibilities remain blocked. Actual corrected triplets populate a separate three-prediction archive and determine tolerance stopping; hard constraints still govern a separate eligible archive. Environment input values are exposed as not modelled by the current synthetic dataset. Live loop verification is in `verification/ml-required-loop.json`.
+
+Explicit scaling revision: current artifacts use training-only feature/target StandardScaler wrappers, separately for Lightning and Switching. Each residual prediction is inverse-transformed to SI before physics addition and tolerance scoring. Scaler parameters, standardised inference values, data-split provenance and updated validation metrics are exposed. Check the scaling comparison at `verification/model-standardisation.json` and live inference at `verification/standardised-model-api.json`; no hidden-test predictions were evaluated.

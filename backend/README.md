@@ -51,14 +51,16 @@ Send a complete module-input example to `POST /v1/performance/evaluate`, with ei
 
 Every saved production candidate has the same `performance` report, accessible at `GET /v1/candidates/{id}/performance`; optimisation results include it for each returned recommendation and include run processing time, proposal throughput and cache-hit fraction. Reused candidates retain the original computation times; iteration events indicate cache reuse. Every HTTP response includes `X-Processing-Time-Seconds` for service processing through response preparation, excluding network delivery.
 
-`GET /v1/models/residual-tabpfn-v2-diagnostic-v1/performance` exposes actual validation MAE/RMSE/bias and physics/mean/linear baseline MAE, separately for Lightning and Switching. These are synthetic dataset aggregates, not exact error scores for an entered setup. Optional `observed_metrics` (`front_s`, `tail_s`, `crest_V`) and `observation_provenance` must be supplied together to compare predictions with an observation. Identity matching remains unverified in this diagnostic route; the calibration-label workflow performs setting/measurement identity validation. Values are returned in SI without display rounding. See technical specification Section 17.
+`GET /v1/models/residual-tabpfn-v2-standardised-v1/performance` exposes actual validation MAE/RMSE/bias and physics/mean/linear baseline MAE, separately for Lightning and Switching. These are synthetic dataset aggregates, not exact error scores for an entered setup. Optional `observed_metrics` (`front_s`, `tail_s`, `crest_V`) and `observation_provenance` must be supplied together to compare predictions with an observation. Identity matching remains unverified in this diagnostic route; the calibration-label workflow performs setting/measurement identity validation. Values are returned in SI without display rounding. See technical specification Section 17.
 
 ## Check
+
+The current `residual-tabpfn-v2-standardised-v1` artifact fits feature and residual-target `StandardScaler` transforms separately for each impulse category on its 700 Train rows only. Each of the three regressors is a `TransformedTargetRegressor` containing a feature-scaling `Pipeline` and the pretrained TabPFN v2 estimator. Inference reuses the frozen transforms and returns inverse-transformed residuals in seconds/volts before adding them to physics. Validation, support checks and SHAP retain physical units. `normalisation` exposes standardised inputs/residuals and training target means/scales; the model manifest stores all scaler parameters. TabPFN's own preprocessing remains enabled. This makes scaling explicit; it does not change waveform tolerances or supply missing training coverage. Older artifacts must be refitted with `uv run python -m powernext fit`.
 
 ```sh
 uv run pytest -q
 uv run ruff check src tests scripts
-uv run pyright
+uv run pyright --pythonpath .venv/bin/python
 uv run python scripts/export_contracts.py
 ```
 

@@ -1,6 +1,6 @@
 # Marx Generator: Technical Implementation Specification
 
-Version 1.10 · 11 October 2026 · Status: implementation contract; hardware and measured-data verification pending.
+Version 1.11 · 11 October 2026 · Status: implementation contract; hardware and measured-data verification pending.
 
 This document specifies a transparent backend for recommending the three best distinct evaluated Marx-generator setups. It combines the project's latest architecture decisions with the supplied physics formula book. The React/Tailwind dashboard is now implemented; Section 18 specifies its integration. Every implementation module below has explicit inputs, outputs, constraints, standalone fixtures and acceptance criteria, so an AI agent can implement it without waiting for adjacent modules.
 
@@ -608,6 +608,20 @@ Compare physics-only, a simple mean/linear residual baseline and residual TabPFN
 
 A model may provide calibrated prediction intervals only after appropriate held-out validation. Do not label ensemble spread or synthetic test error as guaranteed uncertainty for unseen transformer/environment conditions.
 
+### 7.3.0 Explicit training-only normalisation
+
+The active artifact is `residual-tabpfn-v2-standardised-v1`. Observed values are labels, never inference features: first compute observed minus physics in SI, then standardise each residual target independently. The model has three separate regressors per category, so crest magnitude does not dominate a shared multi-output training loss. TabPFN already performs internal target normalisation; the following explicit outer transforms make the application contract inspectable and independent of display units.
+
+For each selected numeric feature and each residual target, fit `z = (value - mean_train) / scale_train` using only that category's **700 Train rows**. `scale_train` is population standard deviation (`ddof=0`); a constant uses scale 1. Excluded constant features remain excluded. Use `sklearn.preprocessing.StandardScaler` inside `sklearn.pipeline.Pipeline` for inputs, and `sklearn.compose.TransformedTargetRegressor` with its own `StandardScaler` for each target. Keep TabPFN v2's internal preprocessing enabled. Do not fit or update scalers on validation, hidden test, live requests or optimisation candidates. Do not clip out-of-range values into the training envelope.
+
+Persist the fitted wrappers, ordered feature names, target units, training means/scales and training counts in the versioned artifact and manifest. At inference the same feature scaler runs before the estimator sees any values. The target wrapper applies `residual_SI = residual_z * scale_train + mean_train`; only then add the residual to physics. Return raw features, inverse-transformed residuals and corrected metrics in SI. The `normalisation` API block includes standardised feature/residual values and target scaler parameters; the dashboard provides an expandable scaling trace. Raw-unit support checks continue before inference. A changed artifact hash invalidates cached run contexts, and old artifacts cannot silently serve the new model version.
+
+Compute validation MAE/RMSE/bias after inverse transformation. SHAP masks features in training-standardised coordinates so its numerical comparison does not mistake tiny SI capacitances for constants. SHAP also explains standardised residual outputs to avoid its absolute cutoff zeroing small timing contributions. Convert its reference by multiplying by target scale and adding the target mean, and its contributions by multiplying by target scale only. Reports expose raw-unit feature values, standardised feature values and SI residual contributions, preserving additivity in physical units. Keep raw-unit training backgrounds on disk and transform them with the frozen input scaler when explaining. Hidden-test rows must not enter scaler fitting, model fitting, SHAP backgrounds or this verification run.
+
+Training standardisation and optimiser normalisation serve different purposes. The optimiser still uses `abs(prediction - target) / allowed_delta`, where `allowed_delta = fractional_tolerance * target`; standardising labels does not relax tolerance bands. Neither transformation guarantees accuracy, repairs missing environmental data, or makes extrapolated predictions validated.
+
+Deliverables: `correction/scaling.py`, fitted category wrappers, manifest `standardisation`, API `normalisation` field, exported schemas/model reports and a validation comparison with the previous artifact. Acceptance checks: unit conversions preserve the standardised learning problem; every saved mean/scale equals Train-only statistics; tiny time/capacitance scales are retained; constant targets stay finite; inverse-transformed predictions preserve physics-plus-residual arithmetic; serialisation, actual TabPFN inference, SHAP additivity and tolerance scoring pass.
+
 ### 7.3.1 Epochs, fitting and validation policy for 700 records
 
 The verified split is **700 training / 150 validation / 150 hidden-test records per category**. Fit all preprocessing and each category's residual regressors using only its 700 training rows. Use validation for feature/model selection and hidden test only for the final frozen-model assessment. Do not combine the hidden test with training while claiming the same held-out result.
@@ -1103,7 +1117,7 @@ The following is a complete software diagnostic fixture, not a verified physical
              "wall_time_seconds": 300},
   "objective": {"policy": "worst_normalised_then_weighted",
                 "weights": {"front": 1, "tail": 1, "crest": 1}},
-  "model_version": "residual-tabpfn-v2-diagnostic-v1",
+  "model_version": "residual-tabpfn-v2-standardised-v1",
   "seed": 42
 }
 ```
