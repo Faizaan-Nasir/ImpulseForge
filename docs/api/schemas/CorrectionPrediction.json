@@ -289,8 +289,15 @@
       "type": "array"
     },
     "hardware_feasible": {
-      "title": "Hardware Feasible",
-      "type": "boolean"
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Hardware Feasible"
     },
     "physics_constraints": {
       "items": {

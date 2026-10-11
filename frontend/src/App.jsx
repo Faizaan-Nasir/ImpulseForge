@@ -1,3 +1,4 @@
+import FeasibilityWindows from "./components/FeasibilityWindows.jsx";
 import { useEffect, useRef, useState } from "react";
 import { Download, Info, RefreshCw, X } from "lucide-react";
 import Configuration from "./components/Configuration.jsx";
@@ -33,6 +34,7 @@ export default function App() {
     [error, setError] = useState("");
   const [attempts, setAttempts] = useState(null),
     [historyError, setHistoryError] = useState("");
+  const [summaryPending, setSummaryPending] = useState(false);
   const [status, setStatus] = useState("Connecting to backend…"),
     [runId, setRunId] = useState(null),
     [summary, setSummary] = useState(null),
@@ -220,9 +222,10 @@ export default function App() {
       setSelected(0);
       setDirty(latest.current !== submitted);
       setStatus(
-        `Calculated in ${number(data.run.performance?.elapsed_seconds ?? data.run.elapsed_seconds, 2)} s · ${data.cases.length}/3 successful ML setups · ${data.run.ml_converged ? "All three meet waveform thresholds" : `stopped: ${data.run.stop_reason}`}`,
+        `Calculated in ${number(data.run.performance?.elapsed_seconds ?? data.run.elapsed_seconds, 2)} s · ${data.run.returned_successful_predictions ?? 0}/3 ML setups without known constraint failures · ${data.run.ml_converged ? "All three meet waveform thresholds and known constraints" : `stopped: ${data.run.stop_reason}`}`,
       );
       try {
+        setSummaryPending(true);
         setSummary(
           await post(
             `/v1/runs/${created.run_id}/decision-summary`,
@@ -233,6 +236,8 @@ export default function App() {
       } catch (e) {
         if (e.name !== "AbortError")
           setError(`Results ready. Decision summary: ${e.message}`);
+      } finally {
+        setSummaryPending(false);
       }
     } catch (e) {
       if (e.name !== "AbortError") {
@@ -381,7 +386,7 @@ export default function App() {
                 {dashboard.run.returned_recommendations ?? 0} of 3 eligible
                 recommendations returned.{" "}
                 {dashboard.run.ml_converged
-                  ? "Three ML-predicted setups meet the requested waveform tolerances."
+                  ? "Three ML-predicted setups meet waveform tolerances and have no known constraint failures."
                   : "ML calibration has not reached three matching setups."}
               </span>
             </div>
@@ -438,12 +443,14 @@ export default function App() {
             history={attempts}
             error={historyError}
           />
+          <FeasibilityWindows windows={dashboard?.run?.feasibility_windows} />
           <DecisionSummary
             runId={runId}
             summary={summary}
             onSummary={setSummary}
             gemini={bootstrap?.gemini}
             busy={busy}
+            pending={summaryPending}
             disabled={dirty}
           />
           {dashboard && (

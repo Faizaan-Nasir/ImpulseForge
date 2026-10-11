@@ -797,6 +797,42 @@
         }
       }
     },
+    "/v1/calibration/evaluate": {
+      "post": {
+        "summary": "Calibration Route",
+        "operationId": "calibration_route_v1_calibration_evaluate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModuleInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/objectives/evaluate": {
       "post": {
         "summary": "Objective Route",
@@ -1673,6 +1709,37 @@
         ],
         "title": "Candidate"
       },
+      "CandidateExplanation": {
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "title": "Candidate Id"
+          },
+          "explanation": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Explanation"
+          },
+          "evidence_refs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 4,
+            "minItems": 1,
+            "title": "Evidence Refs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "explanation",
+          "evidence_refs"
+        ],
+        "title": "CandidateExplanation"
+      },
       "CandidateReason": {
         "properties": {
           "candidate_id": {
@@ -1851,7 +1918,14 @@
             "title": "Input Effects Not Modelled"
           },
           "hardware_feasible": {
-            "type": "boolean",
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Hardware Feasible"
           },
           "physics_constraints": {
@@ -2035,6 +2109,54 @@
               }
             ],
             "title": "Reason"
+          },
+          "reason_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason Code"
+          },
+          "provider_http_status": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Provider Http Status"
+          },
+          "highest_ranked_candidate_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Highest Ranked Candidate Id"
+          },
+          "explanation_status": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "partial",
+              "unavailable"
+            ],
+            "title": "Explanation Status",
+            "default": "unavailable"
+          },
+          "analysis": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Analysis"
           },
           "authority": {
             "type": "string",
@@ -2675,13 +2797,30 @@
             "type": "array",
             "title": "Constraints"
           },
+          "constraint_owner": {
+            "type": "string",
+            "title": "Constraint Owner",
+            "default": "calibration_pending"
+          },
+          "feasibility_windows": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Feasibility Windows"
+          },
           "diagnostics": {
             "additionalProperties": true,
             "type": "object",
             "title": "Diagnostics"
           },
           "hardware_feasible": {
-            "type": "boolean",
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Hardware Feasible"
           },
           "performance": {
@@ -3428,6 +3567,26 @@
             "maxItems": 4,
             "minItems": 1,
             "title": "Evidence Refs"
+          },
+          "physics_explanation": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Physics Explanation",
+            "default": ""
+          },
+          "why_first_ranked": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Why First Ranked",
+            "default": ""
+          },
+          "ml_explanations": {
+            "items": {
+              "$ref": "#/components/schemas/CandidateExplanation"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Ml Explanations"
           }
         },
         "additionalProperties": false,
@@ -3580,6 +3739,11 @@
               "reference_only"
             ],
             "title": "Status"
+          },
+          "feasibility_windows": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Feasibility Windows"
           },
           "settings": {
             "$ref": "#/components/schemas/WorkbookReferenceSettings"

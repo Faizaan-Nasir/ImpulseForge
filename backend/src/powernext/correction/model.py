@@ -5,7 +5,7 @@ from typing import Any
 
 import numpy as np
 
-from powernext.contracts.models import MODEL_VERSION, Constraint, DomainError
+from powernext.contracts.models import MODEL_VERSION, DomainError
 from powernext.correction.features import TARGETS, extract_features, manifest, workbook_data
 from powernext.correction.scaling import scaling_manifest, scaling_trace, standardised_regressor
 from powernext.correction.validation import artifact_metadata, file_hash, validation_report
@@ -122,8 +122,8 @@ class ResidualModel:
                 "input_effects_not_modelled": self.manifests.get(category, {}).get(
                     "unavailable", ["model not fitted"]
                 ),
-                "hardware_feasible": baseline.get("hardware_feasible", False),
-                "physics_constraints": baseline.get("constraints", []),
+                "hardware_feasible": None,
+                "physics_constraints": [],
                 "residuals": None,
                 "corrected_metrics": None,
                 "status": "unsupported",
@@ -144,30 +144,14 @@ class ResidualModel:
                 "Corrected values must be positive finite",
                 "correction",
             )
-        corrected_checks = []
-        if context.request.minimum_voltage_efficiency is not None:
-            eta = float(values[2]) / (candidate.N * candidate.U_charge_V)
-            minimum = context.request.minimum_voltage_efficiency
-            corrected_checks.append(
-                Constraint(
-                    constraint_id="ML_REQUEST_MIN_EFFICIENCY",
-                    origin="request",
-                    enforced_by=("correction",),
-                    rule="Corrected voltage transfer efficiency >= requested minimum",
-                    observed_value=eta,
-                    limit_value=minimum,
-                    margin=eta - minimum,
-                    status="pass" if eta >= minimum else "fail",
-                ).model_dump(mode="json")
-            )
         return {
-            "corrected_constraint_checks": corrected_checks,
+            "corrected_constraint_checks": [],
             "model_version": context.request.model_version,
             "support": support,
             "features": features,
             "input_effects_not_modelled": mf["unavailable"],
-            "hardware_feasible": baseline.get("hardware_feasible", False),
-            "physics_constraints": baseline.get("constraints", []),
+            "hardware_feasible": None,
+            "physics_constraints": [],
             "residuals": dict(zip(TARGETS, residual.tolist())),
             "corrected_metrics": dict(zip(("front_s", "tail_s", "crest_V"), values.tolist())),
             "status": "predicted_extrapolation"
@@ -201,9 +185,7 @@ class ResidualModel:
             explainer = shap.KernelExplainer(estimator.predict, scaler.transform(background))
             sv_z = np.asarray(explainer.shap_values(z_values, nsamples=32, silent=True, l1_reg=0))
             sv = sv_z * target_scaler.scale_[0]
-            ref = float(
-                explainer.expected_value * target_scaler.scale_[0] + target_scaler.mean_[0]
-            )
+            ref = float(explainer.expected_value * target_scaler.scale_[0] + target_scaler.mean_[0])
             pred = float(model.predict(values)[0])
             explanations.append(
                 {
@@ -233,6 +215,8 @@ class ResidualModel:
         return {
             "status": "complete",
             "outputs": explanations,
+            "background_count": len(background),
+            "background_source": "saved sample of training rows only",
             "physical_evidence": baseline["component_stresses"],
         }
 

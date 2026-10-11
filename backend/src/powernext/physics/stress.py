@@ -3,7 +3,6 @@ from collections import Counter
 import numpy as np
 
 from powernext.assembly.dp import equivalent
-from powernext.contracts.models import Constraint
 from powernext.physics.thermal import thermal_response
 
 
@@ -72,33 +71,6 @@ def component_stresses(context, candidate, time, loop_current, generator_voltage
                 "average_power_limit_W": t.ratings.average_power_limit_W,
                 "temperature_limit_K": t.ratings.temperature_limit_K,
             }
-            observed = [peak_v, peak_i, energy, avg, thermal]
-            verdicts = []
-            for (name, limit), value in zip(limits.items(), observed):
-                status = (
-                    "unknown"
-                    if value is None or limit is None or not t.ratings.evidence_id
-                    else "pass"
-                    if value <= limit
-                    else "fail"
-                )
-                verdicts.append(
-                    {
-                        "rating": name,
-                        "observed": value,
-                        "limit": limit,
-                        "status": status,
-                        "margin": None if value is None or limit is None else limit - value,
-                    }
-                )
-            approved = t.approved and bool(t.ratings.evidence_id)
-            status = (
-                "fail"
-                if any(x["status"] == "fail" for x in verdicts)
-                else "pass"
-                if approved and all(x["status"] == "pass" for x in verdicts)
-                else "unknown"
-            )
             for stage in range(1, candidate.N + 1):
                 local_id = f"{role}/{node.type_id}-{occurrences[node.type_id]}"
                 prefix = f"stage_{stage:02d}/{role}/"
@@ -126,9 +98,9 @@ def component_stresses(context, candidate, time, loop_current, generator_voltage
                         "estimated_peak_temperature_K": thermal,
                         "thermal_status": "unknown" if thermal is None else "periodic_RC_estimate",
                         "thermal_details": thermal_details,
-                        "ratings_status": status,
+                        "ratings_status": "not_assessed",
                         "rating_limits": limits,
-                        "rating_checks": verdicts,
+                        "rating_checks": [],
                         "equal_sharing_assumed": True,
                         "assumptions": [
                             "nominal constant resistance",
@@ -137,16 +109,6 @@ def component_stresses(context, candidate, time, loop_current, generator_voltage
                         ],
                     }
                 )
-            checks.append(
-                Constraint(
-                    constraint_id=f"RESISTOR_{role}_{node.type_id}_{occurrences[node.type_id]}",
-                    origin="component_rating_evidence",
-                    enforced_by=("physics",),
-                    rule="All applicable per-component ratings verified",
-                    status=status,
-                    reason_code="unresolved_component_rating" if status == "unknown" else None,
-                ).model_dump(mode="json")
-            )
 
         walk(assembly.recipe, voltage)
     return {"components": components, "constraints": checks}

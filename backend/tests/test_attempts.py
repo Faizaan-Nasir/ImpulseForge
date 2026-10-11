@@ -1,12 +1,13 @@
+import pytest
 from fastapi.testclient import TestClient
 from test_optimisation import MockProposer
 
 from powernext.api.app import create_app
-from powernext.contracts.models import Proposal
+from powernext.contracts.models import Proposal, RunRequest
 from powernext.dashboard.attempts import attempt_history
 from powernext.pipeline.runner import run
 from powernext.pipeline.storage import Store
-from powernext.profiles.resolve import Context
+from powernext.profiles.resolve import Context, resolve
 
 
 class LowCrestModel:
@@ -62,6 +63,8 @@ def test_cached_success_is_one_configuration_not_three(context, tmp_path):
 
 
 def test_attempt_endpoint_paginates_rejections_and_unavailable_ml(request_data, tmp_path):
+    request_data["equipment_inputs"]["C_stage_F"] = 0.125e-6
+
     class Proposer:
         def ask(self, i):
             return i, Proposal(
@@ -147,3 +150,10 @@ def test_multiple_ml_evaluations_in_one_attempt_keep_event_snapshots(context, tm
     assert [r["ml_evaluation_number"] for r in rows] == [1, 2]
     assert [r["waveform_within_tolerance"] for r in rows] == [False, True]
     assert [r["Rf_actual_ohm"] for r in rows] == [20, 40]
+
+
+@pytest.fixture
+def context(request_data):
+    # History/cache tests isolate waveform behaviour with energy-compatible equipment.
+    request_data["equipment_inputs"]["C_stage_F"] = 0.125e-6
+    return resolve(RunRequest.model_validate(request_data))

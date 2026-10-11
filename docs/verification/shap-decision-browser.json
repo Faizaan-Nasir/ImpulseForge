@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-11",
+  "status": "passed_live_dashboard",
+  "url": "http://127.0.0.1:5173/",
+  "summary_status": "generated",
+  "model": "gemini-3.5-flash-lite",
+  "cases": 3,
+  "real_shap_outputs": 9,
+  "saved_residual_additivity": "verified",
+  "checks": [
+    "calculate recommendations from default workbook inputs",
+    "all three successful ML waveform cases returned",
+    "Gemini physics, first-place and per-candidate narration rendered",
+    "case 2 and case 3 explanation switching",
+    "case 1 full contribution table expandable",
+    "\u00b5s and kV baseline + correction = predicted arithmetic",
+    "S determines rank before J and counts",
+    "hardware failures retained separately"
+  ],
+  "screenshots": [
+    "shap-decision-dashboard.jpg",
+    "shap-decision-ranking.jpg"
+  ],
+  "provider_probe": "HTTP 429 on small earlier requests; subsequent full live summary succeeded",
+  "limits": "SHAP explains synthetic model attribution, not measured physical causes; unlearned environmental/heat/wiring effects remain absent",
+  "existing_user_services": "left running unchanged"
+}

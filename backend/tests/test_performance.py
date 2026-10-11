@@ -16,6 +16,9 @@ def fixture_report(context, correction=None, observed=None):
         context, Proposal(N=9, Rf_required_ohm=50, Rt_required_ohm=25)
     )
     physics = evaluate(context, candidate)
+    from powernext.calibration.constraints import assess
+
+    assess(context, candidate, physics, correction)
     return build_report(
         context,
         candidate,
@@ -105,6 +108,7 @@ def test_single_setup_api_and_module_timing(request_data, tmp_path):
             "assembly",
             "physics",
             "correction",
+            "calibration",
         }
         assert (
             sum(report["runtime"]["stage_seconds"].values()) <= report["runtime"]["total_seconds"]
@@ -168,6 +172,16 @@ def test_each_of_three_candidates_keeps_its_own_report(request_data, tmp_path, m
 
     monkeypatch.setattr("powernext.pipeline.runner.evaluate", approved_fixture)
 
+    def approved_calibration(ctx, candidate, baseline, correction):
+        return {
+            "constraints": [],
+            "hardware_feasible": True,
+            "known_constraints_satisfied": True,
+            "feasibility_windows": {"fixed_charge_energy_infeasible": False},
+        }
+
+    monkeypatch.setattr("powernext.pipeline.runner.assess", approved_calibration)
+
     class Proposer:
         def ask(self, index):
             return index, Proposal(N=7 + index, Rf_required_ohm=50, Rt_required_ohm=25)
@@ -210,3 +224,35 @@ def test_each_of_three_candidates_keeps_its_own_report(request_data, tmp_path, m
         == 3
     )
     assert result["performance"]["cache_hit_fraction"] == 0
+
+
+def test_physics_and_ml_do_not_assess_physical_constraints_but_calibration_does(
+    request_data, tmp_path
+):
+    request_data["charging_policy"]["U_charge_V"] = 220000
+    with TestClient(create_app(tmp_path, False)) as client:
+        body = {
+            "request": request_data,
+            "proposal": {"N": 9, "Rf_required_ohm": 50, "Rt_required_ohm": 25},
+        }
+        assembled = client.post("/v1/assemblies/realise", json=body)
+        assert assembled.status_code == 200, assembled.text
+        module = {"request": request_data, "candidate": assembled.json()["candidate"]}
+        physics = client.post("/v1/physics/evaluate", json=module)
+        assert physics.status_code == 200, physics.text
+        assert physics.json()["constraints"] == []
+        assert physics.json()["hardware_feasible"] is None
+        assert physics.json()["constraint_owner"] == "calibration_pending"
+        prediction = client.post("/v1/corrections/predict", json=module)
+        assert prediction.status_code == 200, prediction.text
+        assert prediction.json()["physics_constraints"] == []
+        assert prediction.json()["corrected_constraint_checks"] == []
+        assert prediction.json()["hardware_feasible"] is None
+        calibrated = client.post("/v1/calibration/evaluate", json=module)
+        assert calibrated.status_code == 200, calibrated.text
+        checks = {c["constraint_id"]: c for c in calibrated.json()["calibration"]["constraints"]}
+        assert checks["HW_STAGE_CHARGE"]["status"] == "fail"
+        assert checks["HW_STAGE_ENERGY"]["status"] == "fail"
+        assert checks["HW_TOTAL_ENERGY"]["status"] == "fail"
+        assert all(c["enforced_by"] == ["calibration"] for c in checks.values())
+        assert not calibrated.json()["calibration"]["known_constraints_satisfied"]

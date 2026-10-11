@@ -1203,6 +1203,92 @@
   .summary .lead b {
     font-weight: 600;
   }
+  .decision-explanation {
+    display: grid;
+    gap: 24px;
+    line-height: 1.6;
+  }
+  .explanation-selected {
+    background: var(--teal);
+    color: white;
+  }
+  .ml-explanation {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    min-width: 0;
+  }
+  .ml-explanation h4 {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .ml-explanation table {
+    min-width: 580px;
+  }
+  .shap-equation {
+    padding: 10px 12px;
+    background: var(--sunken);
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .shap-equation strong {
+    display: block;
+  }
+  .shap-drivers {
+    display: grid;
+    gap: 8px;
+    list-style: none;
+  }
+  .shap-drivers li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 90px minmax(140px, auto);
+    gap: 12px;
+    align-items: center;
+    font-size: 13px;
+  }
+  .shap-drivers small {
+    color: var(--ink-3);
+  }
+  .shap-drivers b {
+    text-align: right;
+    font-family: var(--mono);
+  }
+  .shap-impact {
+    height: 10px;
+    background: var(--sunken);
+  }
+  .shap-impact i {
+    height: 100%;
+    display: block;
+  }
+  .shap-impact .raises {
+    background: var(--teal);
+  }
+  .shap-impact .lowers {
+    background: #b87920;
+  }
+  .explanation-detail summary {
+    cursor: pointer;
+    color: var(--teal);
+    font-size: 13px;
+  }
+  .explanation-detail pre {
+    max-height: 320px;
+    overflow: auto;
+    font-size: 12px;
+    padding: 12px;
+    background: var(--sunken);
+  }
+  @media (max-width: 680px) {
+    .shap-drivers li {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .shap-impact {
+      display: none;
+    }
+  }
   .rep-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

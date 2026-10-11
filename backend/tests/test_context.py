@@ -3,7 +3,7 @@ import copy
 import pytest
 from pydantic import ValidationError
 
-from powernext.contracts.models import DomainError, InlineInventory, RunRequest
+from powernext.contracts.models import InlineInventory, RunRequest
 from powernext.profiles.resolve import resolve, stock_bounds
 
 
@@ -84,8 +84,8 @@ def test_global_stock_and_independent_roles():
 
 def test_charge_limit(request_data):
     request_data["charging_policy"]["U_charge_V"] = 200001
-    with pytest.raises(DomainError, match="200 kV"):
-        resolve(RunRequest.model_validate(request_data))
+    ctx = resolve(RunRequest.model_validate(request_data))
+    assert ctx.charge == 200001  # final calibration owns the charge verdict
 
 
 def test_hidden_profile_override(request_data):
@@ -136,8 +136,8 @@ def test_partial_or_null_inputs_fall_back_individually(request_data):
 
 def test_supplied_voltage_limit_is_enforced(request_data):
     request_data["equipment_inputs"] = {"U_stage_max_V": 100000}
-    with pytest.raises(DomainError, match="100 kV"):
-        resolve(RunRequest.model_validate(request_data))
+    ctx = resolve(RunRequest.model_validate(request_data))
+    assert ctx.charge > ctx.hardware["U_stage_max_V"]
 
 
 @pytest.mark.parametrize(

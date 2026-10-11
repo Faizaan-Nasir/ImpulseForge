@@ -44,6 +44,11 @@
       "title": "Status",
       "type": "string"
     },
+    "feasibility_windows": {
+      "additionalProperties": true,
+      "title": "Feasibility Windows",
+      "type": "object"
+    },
     "settings": {
       "$ref": "#/$defs/WorkbookReferenceSettings"
     },

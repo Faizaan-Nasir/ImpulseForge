@@ -4,7 +4,7 @@
     {
       "id": "HW_STAGES",
       "unit": "stages",
-      "module": "contracts/models.py; profiles/resolve.py; assembly/cp_sat.py; physics/forward.py",
+      "module": "calibration/constraints.py; calibration/windows.py; pipeline/runner.py",
       "tests": "test_context.py; test_assembly.py",
       "fallback_value": [
         1,
@@ -12,33 +12,37 @@
       ],
       "value": "resolved frontend input; fallback only when omitted/null",
       "input_field": "equipment_inputs.N_max",
-      "source": "Frontend maximum or workbook default; positive-integer model domain"
+      "source": "Frontend maximum or workbook default; positive-integer model domain",
+      "verdict_owner": "calibration"
     },
     {
       "id": "HW_STAGE_CHARGE",
       "unit": "V",
-      "module": "contracts/models.py; profiles/resolve.py; profiles/resolve.py; physics/forward.py",
+      "module": "calibration/constraints.py; calibration/windows.py; pipeline/runner.py",
       "tests": "test_context.py",
       "fallback_value": 200000,
       "value": "resolved frontend input; fallback only when omitted/null",
       "input_field": "equipment_inputs.U_stage_max_V",
-      "source": "Frontend maximum or workbook default"
+      "source": "Frontend maximum or workbook default",
+      "verdict_owner": "calibration"
     },
     {
       "id": "HW_STAGE_ENERGY",
       "value": 2500,
       "unit": "J",
-      "module": "physics/forward.py",
+      "module": "calibration/constraints.py; calibration/windows.py; pipeline/runner.py",
       "tests": "test_physics.py",
-      "source": "Retained problem-statement energy constraint"
+      "source": "Retained problem-statement energy constraint",
+      "verdict_owner": "calibration"
     },
     {
       "id": "HW_TOTAL_ENERGY",
       "value": 30000,
       "unit": "J",
-      "module": "physics/forward.py",
+      "module": "calibration/constraints.py; calibration/windows.py; pipeline/runner.py",
       "tests": "test_physics.py",
-      "source": "Retained problem-statement energy constraint"
+      "source": "Retained problem-statement energy constraint",
+      "verdict_owner": "calibration"
     },
     {
       "id": "STAGE_CAPACITANCE",
@@ -54,15 +58,17 @@
       "id": "INDEPENDENT_STOCK_CAPS",
       "value": 4,
       "unit": "per type per role per stage",
-      "module": "contracts/models.py; assembly/validate.py; assembly/cp_sat.py",
-      "tests": "test_assembly.py; test_context.py"
+      "module": "calibration/constraints.py; calibration/windows.py; pipeline/runner.py",
+      "tests": "test_assembly.py; test_context.py",
+      "verdict_owner": "calibration"
     },
     {
       "id": "REQUEST_MIN_EFFICIENCY",
       "value": "optional request input",
       "unit": "fraction",
-      "module": "physics/forward.py",
-      "tests": "test_calibration.py"
+      "module": "calibration/constraints.py; calibration/windows.py; pipeline/runner.py",
+      "tests": "test_calibration.py",
+      "verdict_owner": "calibration"
     },
     {
       "id": "DP_SCOPE_AND_TOLERANCE",
@@ -82,19 +88,22 @@
   "unknown_blocks_physical_recommendations": [
     {
       "id": "CIRCUIT_TOPOLOGY_VERIFIED",
-      "module": "physics/forward.py",
-      "requires": "approved circuit evidence and resolved auxiliary branches"
+      "module": "calibration/constraints.py",
+      "requires": "approved circuit evidence and resolved auxiliary branches",
+      "verdict_owner": "calibration"
     },
     {
       "id": "CAPACITOR_TRANSIENT_RATING",
-      "module": "physics/forward.py",
+      "module": "calibration/constraints.py",
       "status": "always unknown in current lumped solver",
-      "requires": "internal stage transient/reversal model and ratings"
+      "requires": "internal stage transient/reversal model and ratings",
+      "verdict_owner": "calibration"
     },
     {
       "id": "RESISTOR_RATINGS",
-      "module": "physics/stress.py",
-      "requires": "approved types; ratings; thermal parameters and equipment evidence"
+      "module": "calibration/constraints.py",
+      "requires": "approved types; ratings; thermal parameters and equipment evidence",
+      "verdict_owner": "calibration"
     },
     {
       "id": "MODEL_LAB_VALIDATION",
@@ -134,5 +143,12 @@
     "shot rate",
     "auxiliary resistors",
     "sphere gap/installation metadata"
-  ]
+  ],
+  "physical_constraint_owner": "calibration",
+  "assessment_order": [
+    "physics_numerical_prediction",
+    "ml_residual_prediction",
+    "calibration_constraint_assessment"
+  ],
+  "constraint_policy": "calibration_after_prediction_v1"
 }

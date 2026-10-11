@@ -1,5 +1,36 @@
 {
   "$defs": {
+    "CandidateExplanation": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "explanation": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "explanation",
+        "evidence_refs"
+      ],
+      "title": "CandidateExplanation",
+      "type": "object"
+    },
     "CandidateReason": {
       "additionalProperties": false,
       "properties": {
@@ -63,6 +94,26 @@
       "maxItems": 4,
       "minItems": 1,
       "title": "Evidence Refs",
+      "type": "array"
+    },
+    "physics_explanation": {
+      "default": "",
+      "maxLength": 4000,
+      "title": "Physics Explanation",
+      "type": "string"
+    },
+    "why_first_ranked": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Why First Ranked",
+      "type": "string"
+    },
+    "ml_explanations": {
+      "items": {
+        "$ref": "#/$defs/CandidateExplanation"
+      },
+      "maxItems": 3,
+      "title": "Ml Explanations",
       "type": "array"
     }
   },

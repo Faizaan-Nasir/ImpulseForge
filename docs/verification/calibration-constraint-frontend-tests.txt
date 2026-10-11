@@ -1,0 +1,13 @@
+
+> powernext-dashboard@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.11 /Users/faizaan-nasir/Documents/GitHub/PowerNext AI/frontend
+
+
+ Test Files  5 passed (5)
+      Tests  24 passed (24)
+   Start at  11:40:36
+   Duration  943ms (transform 322ms, setup 522ms, import 490ms, tests 443ms, environment 1.74s)
+

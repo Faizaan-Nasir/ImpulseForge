@@ -20,7 +20,13 @@ def cases_for_run(store, run_id, context):
         ]
 
     eligible = passing(result.get("recommendations", []))
-    predicted = passing(result.get("predicted_setups", []))
+    predicted = passing(
+        [
+            e
+            for e in result.get("predicted_setups", [])
+            if e.get("calibration", {}).get("known_constraints_satisfied", True)
+        ]
+    )
     if eligible and (context.request.purpose != "diagnostic" or len(eligible) >= len(predicted)):
         return eligible, "eligible_recommendations"
     if predicted:
@@ -99,6 +105,18 @@ def evidence(context, run_record, cases, display_mode):
                 "Rt_actual_ohm": c["tail"]["equivalent_ohm"],
                 "resistors_per_stage": c["front"]["total_resistors"] + c["tail"]["total_resistors"],
                 "metrics": metrics,
+                "physics_metrics": physics["metrics"],
+                "physics_mode": context.request.physics_mode,
+                "physics_derived": physics.get("derived", {}),
+                "physics_constants": context.hardware.get("constants", {}),
+                "expected_voltage_efficiency": context.request.expected_voltage_efficiency,
+                "model_residuals": record.get("correction", {}).get("residuals"),
+                "model_unavailable_effects": record.get("correction", {}).get(
+                    "input_effects_not_modelled", []
+                ),
+                "model_status": record.get("correction", {}).get("status"),
+                "front_expression": c["front"].get("expression"),
+                "tail_expression": c["tail"].get("expression"),
                 "metrics_origin": "residual_corrected" if corrected else "physics_baseline",
                 "S": score["S"],
                 "J": score["J"],
@@ -129,6 +147,8 @@ def evidence(context, run_record, cases, display_mode):
             }
         )
     return {
+        "feasibility_windows": run_record.get("feasibility_windows"),
+        "constraint_owner": run_record.get("constraint_owner", "legacy"),
         "evidence_id": "run",
         "context_hash": context.context_hash,
         "display_mode": display_mode,
@@ -138,6 +158,7 @@ def evidence(context, run_record, cases, display_mode):
         "returned_predictions": run_record.get("returned_predictions", 0),
         "ml_converged": run_record.get("ml_converged", False),
         "calibration_basis": run_record.get("calibration_basis"),
+        "secondary_preference": context.request.objective.secondary_preference,
         "counters": run_record.get("counters", {}),
         "target": {
             "crest_V": context.request.target.crest_V,

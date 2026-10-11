@@ -1,6 +1,6 @@
 # Marx Generator Configuration Through Physics, Inventory Search, ML and Optimisation
 
-Working architecture document | Updated 11 October 2026 | Aligned with technical specification v1.12
+Working architecture document | Updated 11 October 2026 | Aligned with technical specification v1.13
 
 ## 1. Purpose and agreed design
 
@@ -15,7 +15,7 @@ The agreed design has three engines and one supporting solver:
 | Physics Engine | Propose an initial active stage count and required front/tail resistance per stage; predict a waveform for actual constructible settings |
 | Inventory DP + CP-SAT Solver | Generate exact series–parallel assemblies with bounded DP; select compatible front/tail assemblies and enforce representable discrete constraints using OR-Tools CP-SAT |
 | Residual ML Correction Engine | Hold realised settings fixed; use TabPFN v2 to estimate three corrections to physics, then add them back to obtain predicted front/peak, tail and crest |
-| SMAC3 Optimisation and Calibration Engine | Propose revised integer stage count and required per-stage resistances; score ML-corrected predictions, retain three distinct alternatives and manage bounded stopping |
+| SMAC3 Optimisation and Calibration Engine | Own all physical-constraint verdicts after physics and ML; propose revised integer stage count and required resistances, retain three matching alternatives without known failures and manage bounded stopping |
 
 The DP solver is a component-selection service used by the Physics Engine and the optimisation loop. It is not a fourth learning engine. A dashboard presents up to three distinct recommended configurations and the evidence supporting each.
 
@@ -392,9 +392,9 @@ An equivalent single generator capacitor and three predicted waveform outputs do
 
 ### 5.5 Where this constraint is enforced in the loop
 
-After DP realises the candidate, apply the charging policy and check capacitor/stage charging limits before accepting or evaluating it as a feasible setting. Forward physics then checks energy and any represented internal transient stresses. ML evaluates the resulting load waveform for that same actual operating point.
+After DP realises the candidate, physics calculates the waveform, initial stored energy and any supported numerical stresses without judging hardware limits. ML predicts the three residual corrections for that operating point. Calibration then checks all physical constraints, including charging voltage, energy and rating evidence, and feeds violations and waveform errors back to the optimiser.
 
-If ML predicts an inadequate crest, the optimiser may propose revised required resistances or a different `N`. It may request a different charge only through the declared charging policy. Every revised charge and stage count must pass the hard limits again. Feasibility is enforced by the hardware/physics checks, not learned as an optional preference by ML.
+If ML predicts an inadequate crest, the optimiser may propose revised required resistances or a different `N`. It may request a different charge only through the declared charging policy. Every revised charge and stage count must pass the hard limits again. Feasibility verdicts are owned by calibration; ML supplies predicted outputs only.
 
 The actual realised Rf/Rt values are fixed for a prediction; their effect on efficiency is a predicted response, not an independent voltage-setting mechanism.
 
@@ -628,7 +628,7 @@ J = (w_front*e_front + w_tail*e_tail + w_crest*e_crest) / sum(weights)
 
 Compare full-precision values without rounding or an epsilon. Preserve the actual ML output and residual, including negative residuals; a negative residual is acceptable if the corrected crest still reaches the requested voltage. Any shortfall exposes `crest_below_required`, `crest_shortfall_V`, `crest_minimum_satisfied=false` and `calibration_required=true` and prevents convergence. Raising N is permitted, but every candidate still has to pass the supplied voltage ceiling, stored-energy checks and inventory realisation.
 
-SMAC3 receives finite cost `S/(1+S)` for eligible predictions; diagnostic ineligible predictions receive `1 + S/(1+S)`. Missing ML or unresolved/unevaluable proposals receive cost 2. The diagnostic score provides feedback without waiving hardware constraints. Raw physics can be displayed and compared, but cannot replace missing correction as a calibration objective.
+SMAC3 receives finite waveform cost `S/(1+S)` when there are no known physical failures. Known failures receive `1+p/(1+p)+0.001*S/(1+S)`, where p sums clipped normalised calibration violations; minimum-efficiency failures use their shortfall. Missing ML or unresolved/unevaluable proposals receive cost 2. Unknown evidence is preserved and still blocks verified recommendations. The diagnostic score provides feedback without waiving hardware constraints. Raw physics can be displayed and compared, but cannot replace missing correction as a calibration objective.
 
 Within each archive, meeting the minimum crest takes priority, followed by S, J, declared secondary tie preferences and deterministic candidate identity. These comparisons order complete evaluated setups; they do not introduce a KNN ranking model.
 
@@ -891,7 +891,7 @@ flowchart LR
     E --> F
 ```
 
-The grounded Decision Summary uses backend evidence with Gemini. `GEMINI_MODEL` and `GEMINI_API_KEY` are backend environment variables; the key is never sent to the browser. Missing configuration is reported explicitly. Gemini explains saved numerical results and does not change candidate values or authorise hardware. See the technical document for route contracts and deliverables.
+The grounded Decision Summary uses backend evidence with Gemini. `GEMINI_MODEL` and `GEMINI_API_KEY` are backend environment variables; the key is never sent to the browser. Missing configuration and provider failures are reported explicitly. The computed physics, ML and SHAP explanation remains available independently of Gemini. Gemini narrates saved numerical results and does not change candidate values or authorise hardware. See the technical document for route contracts and deliverables.
 
 ## 14. Implementation sequence and checks
 
@@ -991,3 +991,47 @@ POWERNEXT_CALIBRATION_MAX_ATTEMPTS=24
 The attempt setting supplies omitted `max_proposals`, `max_forward_evaluations` and `max_ml_evaluations` fields. Wall time must be positive and finite; attempts must be an integer from 1 to 10,000. Invalid environment settings fail service configuration rather than silently disabling limits. Explicit request fields retain precedence. The request schema's numeric defaults are fallback values; runtime environment defaults are advertised by bootstrap and frozen in the persisted resolved context. A partial request receives environment defaults only for its omitted budget fields.
 
 Restart the backend after editing `.env`, then refresh the dashboard to load the new defaults. Existing queued/running/saved contexts and resumes keep their submitted budgets. Repetition, stagnation, evaluation, cancellation and waveform-success stopping rules still apply; the maximum attempt setting does not guarantee that all those attempts will be executed. These are search budgets, not TabPFN training epochs or model retraining counts.
+
+
+### Decision summary: explain the calculation and selection
+
+For each of the three successful waveform cases, the dashboard explains the physics baseline, the ML correction and the final predicted value, together with the target. It uses real SHAP attributions to show which **model input features** increased or decreased the correction relative to a training-background reference. The background plus all feature contributions reconstructs the saved ML correction; adding that correction to physics gives the displayed prediction. Times are shown in µs and voltage in kV. All contributions and reconstruction evidence can be expanded.
+
+The first case is chosen by the smallest worst tolerance-normalised deviation `S`, then weighted deviation `J` for a tie. Resistor/stage preferences apply only to objective ties. The explanation compares the actual cases, reports why the search stopped, and separates waveform success from hardware eligibility. Stored-energy failures show actual energy versus the retained limits; unknown ratings remain unknown.
+
+Gemini provides readable narration grounded in this computed evidence, including one explanation per candidate. If credentials, rate limits or response validation prevent narration, the physics, SHAP and selection explanation remains available. The provider status is shown without exposing credentials. Attributions are cached for the exact saved prediction and model, so refreshing prose need not rerun expensive SHAP computation.
+
+SHAP explains what the fitted model learned from synthetic data; it does not prove the physical cause of reality. Environmental conditions, per-resistor heat and exact wiring effects are not learned by the current model and receive no invented attribution. Correlated input features and approximate SHAP sampling limit how uniquely an effect can be allocated. See technical Section 18.1 for independent implementation contracts, cache validity and acceptance checks.
+
+
+## 15. Final responsibility: physics → ML → calibration
+
+Physics supplies calculations; ML supplies three residual corrections; calibration owns all physical-constraint verdicts. Physics and ML do not stop numerical predictions because energy or ratings fail. Calibration checks stored energy, stage voltage/count, stock, topology evidence, capacitor transient ratings, resistor ratings and optional minimum efficiency afterward. Its results determine optimiser feedback and which setups may count toward completion. Canonical inventory recipes and valid numerical/model inputs are still required to calculate meaningful results.
+
+```mermaid
+flowchart LR
+    Inputs[Inputs and inventory] --> PhysicsSeed[Physics initial proposal]
+    PhysicsSeed --> Assembly[Exact inventory assemblies]
+    Optimiser[SMAC changes N/Rf/Rt] --> Assembly
+    Assembly --> Physics[Physics calculates]
+    Physics --> ML[ML adds residual correction]
+    ML --> Calibration[Calibration checks all constraints and target errors]
+    Calibration -->|Can improve| Optimiser
+    Calibration -->|Three matches without known failures| Results[Top three with approval status]
+    Calibration -->|Fixed-input conflict| Windows[Explain feasible input and rating windows]
+```
+
+At fixed capacitance and charging voltage, each stage's initial energy is `0.5*C*U²`. Adding stages does not lower it and increases total energy. Reducing stages can repair a total-energy failure when individual stages already pass. Reducing required charge by adding stages requires deliberately changing the charging input; the current optimiser varies N/Rf/Rt only.
+
+For the case with 9 stages, 3 µF and 193.089430894 kV per stage, every stage stores 55.925 kJ and the generator stores 503.328 kJ. No N can fix that stage-energy failure at the same charge/capacitance. Calibration therefore provides these alternatives:
+
+- Keep 9 stages and charge: use capacitance no larger than **0.134107479 µF** per stage for the retained energy limits.
+- Keep 9 stages and 3 µF: charge no higher than **40.824829046 kV** per stage. This alone cannot reach the 1425 kV target.
+- Deliberately retune a 15-stage scenario: the 82% expected-efficiency estimate needs **115.853658537 kV** per stage and capacitance no larger than **0.298016620 µF**. The complete waveform and ML support need reevaluation.
+- Retain the original operating point on different equipment: verified energy capabilities need at least **55.925 kJ per stage** and **503.328 kJ total**. This does not override this generator's limits.
+
+These windows only establish necessary energy/voltage conditions. They do not promise that the resistor inventory, timing or corrected voltage will meet every requirement. Other capacitances are outside the present 3 µF training data. Missing topology/rating evidence cannot be repaired by an invented range: exact resistor stress data and manufacturer ratings, a verified circuit, and capacitor internal transient/reversal evidence are needed.
+
+Calibration does not count known-failing waveform matches toward the requested three successful setups. After the initial physics and ML evaluation it can report a proven fixed-input conflict rather than repeat a search that cannot repair it. If feasible N values exist, search continues within the environment/request budgets. Unknown hardware checks remain diagnostic; verified recommendations require all checks passed. Every attempt and its prediction remain available in history. The dashboard now displays constraint windows and a separate known-constraint status. Start a new calculation to apply the revised policy; older saved runs retain their original result.
+
+The exact API, formulas, Python stack, independent module fixtures and deliverables are specified in technical Section 19.

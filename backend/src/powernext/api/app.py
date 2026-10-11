@@ -11,6 +11,7 @@ from fastapi.responses import JSONResponse, Response
 from pydantic import AwareDatetime, Field, model_validator
 
 from powernext.assembly.cp_sat import AssemblyEngine
+from powernext.calibration.constraints import assess
 from powernext.config import Settings
 from powernext.contracts.models import (
     MODEL_VERSION,
@@ -29,6 +30,7 @@ from powernext.contracts.models import (
 from powernext.correction.model import ResidualModel
 from powernext.dashboard.attempts import attempt_history
 from powernext.dashboard.baseline import reference_request, workbook_baseline
+from powernext.dashboard.explanations import ExplanationService
 from powernext.dashboard.summary import DecisionSummary, SummaryRequest, generate_summary
 from powernext.dashboard.view import cases_for_run, evidence, plot_bundle
 from powernext.optimisation.objective import evaluate_objective
@@ -95,6 +97,7 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
     jobs = JobManager(database, artifacts)
     assembly = AssemblyEngine()
     residual = ResidualModel(artifacts / "models")
+    explanations = ExplanationService(store, residual)
 
     @asynccontextmanager
     async def lifespan(app):
@@ -249,7 +252,14 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
         state = get("run", identifier)
         ctx = Context.model_validate(get("context", state["context_id"]))
         cases, mode = cases_for_run(store, identifier, ctx)
-        return generate_summary(settings, evidence(ctx, state, cases, mode), store, body.refresh)
+        summary_evidence = evidence(ctx, state, cases, mode)
+        for row, record in zip(summary_evidence["cases"], cases):
+            row["shap"] = {
+                k: v
+                for k, v in explanations.explain(ctx, record).items()
+                if k != "physical_evidence"
+            }
+        return generate_summary(settings, summary_evidence, store, body.refresh)
 
     @app.post("/v1/candidates/{identifier}/diagnostic-evaluation")
     def diagnostic_candidate(identifier):
@@ -258,9 +268,11 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
         started = monotonic()
         baseline = original["physics"]
         correction = residual.correct(ctx, c, baseline)
+        calibration = assess(ctx, c, baseline, correction)
         record = {
             **original,
             "correction": correction,
+            "calibration": calibration,
             "objective": evaluate_objective(ctx, correction["corrected_metrics"])
             if correction.get("corrected_metrics")
             else None,
@@ -446,6 +458,9 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
         section = monotonic()
         prediction = residual.correct(ctx, candidate, baseline)
         timings["correction"] = monotonic() - section
+        section = monotonic()
+        assess(ctx, candidate, baseline, prediction)
+        timings["calibration"] = monotonic() - section
         return build_report(
             ctx,
             candidate,
@@ -460,6 +475,18 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
             body.observed_metrics.model_dump() if body.observed_metrics else None,
             body.observation_provenance,
         )
+
+    @app.post("/v1/calibration/evaluate")
+    def calibration_route(body: ModuleInput):
+        ctx = context(body.request)
+        candidate, baseline = real_baseline(body, ctx)
+        prediction = residual.correct(ctx, candidate, baseline)
+        return {
+            "candidate_id": candidate.candidate_id,
+            "physics": baseline,
+            "correction": prediction,
+            "calibration": assess(ctx, candidate, baseline, prediction),
+        }
 
     @app.post("/v1/objectives/evaluate")
     def objective_route(body: PlotInput):
@@ -608,7 +635,7 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
         ctx = next((x for x in contexts if x.context_hash == c.context_hash), None)
         if ctx is None:
             raise HTTPException(404, detail="Candidate context unavailable")
-        return residual.explain(ctx, c, e["physics"])
+        return explanations.explain(ctx, e)
 
     @app.get("/v1/candidates/{identifier}/waveforms/{kind}")
     def candidate_waveform(identifier, kind):

@@ -72,6 +72,10 @@ def test_fifteen_stage_project_bound_retains_only_energy_limits(
         ctx, Proposal(N=15, Rf_required_ohm=50, Rt_required_ohm=25)
     )
     result = evaluate(ctx, candidate)
+    from powernext.calibration.constraints import assess
+
+    assert result["constraints"] == [] and result["hardware_feasible"] is None
+    assess(ctx, candidate, result)
     checks = {item["constraint_id"]: item for item in result["constraints"]}
     assert checks["HW_STAGES"]["status"] == "pass"
     assert checks["HW_STAGES"]["limit_value"] == [1, 15]
@@ -107,6 +111,10 @@ def test_frontend_capacitance_reaches_physics_and_stored_energy(request_data):
     assert result["derived"]["C1_F"] == pytest.approx(3e-6 / 9)
     assert result["stage_energy_J"] == 1350
     assert result["total_energy_J"] == 12150
+    from powernext.calibration.constraints import assess
+
+    assert result["constraints"] == [] and result["hardware_feasible"] is None
+    assess(context, actual(context), result)
     checks = {item["constraint_id"]: item for item in result["constraints"]}
     assert checks["HW_STAGES"]["limit_value"] == [1, 10]
     assert checks["HW_STAGE_CHARGE"]["limit_value"] == 40000

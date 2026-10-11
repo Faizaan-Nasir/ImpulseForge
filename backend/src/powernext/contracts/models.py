@@ -362,8 +362,10 @@ class PhysicsEvaluation(Record):
     trace: PhysicsTrace | None
     component_stresses: list[dict[str, Any]]
     constraints: list[Constraint]
+    constraint_owner: str = "calibration_pending"
+    feasibility_windows: dict[str, Any] = Field(default_factory=dict)
     diagnostics: dict[str, Any]
-    hardware_feasible: bool
+    hardware_feasible: bool | None
     performance: PerformanceReport | None = None
 
 
@@ -372,7 +374,7 @@ class CorrectionPrediction(Record):
     support: dict[str, Any]
     features: dict[str, float]
     input_effects_not_modelled: list[str]
-    hardware_feasible: bool
+    hardware_feasible: bool | None
     physics_constraints: list[Constraint]
     corrected_constraint_checks: list[Constraint] = Field(default_factory=list)
     residuals: dict[str, float] | None
@@ -389,6 +391,7 @@ class CandidateEvaluation(Record):
     candidate_id: str
     candidate: Candidate
     physics: PhysicsEvaluation
+    calibration: dict[str, Any] = Field(default_factory=dict)
     correction: dict[str, Any]
     objective: dict[str, Any] | None
     eligible: bool
@@ -396,6 +399,7 @@ class CandidateEvaluation(Record):
     objective_origin: Literal["residual_corrected", "physics_baseline"] | None = None
     cost_basis: (
         Literal[
+            "calibration_constraints_then_ml_waveform",
             "eligible_waveform",
             "diagnostic_waveform_with_ineligibility_penalty",
             "hard_rejection",
@@ -415,6 +419,7 @@ class WorkbookReferenceSettings(Record):
 
 class WorkbookBaseline(Record):
     status: Literal["evaluated", "reference_only"]
+    feasibility_windows: dict[str, Any] = Field(default_factory=dict)
     settings: WorkbookReferenceSettings
     ideal: dict[str, Any]
     record: dict[str, Any]

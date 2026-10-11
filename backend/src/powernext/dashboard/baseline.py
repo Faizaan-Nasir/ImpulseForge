@@ -3,10 +3,12 @@
 import math
 from time import monotonic
 
+from powernext.calibration.constraints import assess
+from powernext.calibration.windows import feasibility_windows
 from powernext.contracts.models import DomainError, Proposal, RunRequest
 from powernext.optimisation.objective import evaluate_objective
 from powernext.performance.metrics import build_report
-from powernext.physics.forward import calculator_metrics, check_bound, evaluate, inverse, parameters
+from powernext.physics.forward import calculator_metrics, evaluate, inverse, parameters
 
 
 def reference_request(request):
@@ -39,23 +41,8 @@ def workbook_baseline(context, assembly, residual):
         "metrics": calculator_metrics(context, N, rf, rt).model_dump(mode="json"),
         "derived": parameters(context, N, rf, rt),
     }
-    E = 0.5 * context.hardware["C_stage_F"] * context.charge**2
-    physics["constraints"] = [
-        check_bound(
-            "HW_STAGE_ENERGY",
-            E,
-            context.hardware["stage_energy_max_J"],
-            "J",
-            "problem_statement_fallback",
-        ),
-        check_bound(
-            "HW_TOTAL_ENERGY",
-            N * E,
-            context.hardware["total_energy_max_J"],
-            "J",
-            "problem_statement_fallback",
-        ),
-    ]
+    physics["constraints"] = []
+    physics["hardware_feasible"] = None
     correction = {
         "status": "not_invoked",
         "corrected_metrics": None,
@@ -81,11 +68,14 @@ def workbook_baseline(context, assembly, residual):
             "record": record,
             "context": context.public(),
             "inventory_check": {"status": "unavailable", "reason": exc.code},
+            "feasibility_windows": feasibility_windows(context),
             "policy": "Calculator sizing, five-ohm rounding and one physical resistor per role; mathematical reference is not a recommendation",
         }
     physics = evaluate(context, candidate, include_trace=False)
     correction = residual.correct(context, candidate, physics)
+    calibration = assess(context, candidate, physics, correction)
     record.update(
+        calibration=calibration,
         candidate_id=candidate.candidate_id,
         candidate=candidate.model_dump(mode="json"),
         physics=physics,

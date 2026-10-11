@@ -203,7 +203,12 @@ def test_gemini_summary_is_grounded_cached_and_validated(context, tmp_path, monk
     )
     result = generate_summary(settings, data, store)
     assert result["status"] == "generated" and result["recommended_candidate_id"] is None
-    assert calls[0]["model"] == "configured-test-model" and json.loads(calls[0]["contents"]) == data
+    sent = json.loads(calls[0]["contents"])
+    assert calls[0]["model"] == "configured-test-model"
+    assert {
+        k: v for k, v in sent.items() if k not in ("decision_analysis", "allowed_evidence_refs")
+    } == data
+    assert sent["decision_analysis"] == result["analysis"]
     assert "test-placeholder" not in json.dumps(result)
     assert generate_summary(settings, data, store)["cached"] and len(calls) == 1
     narrative["evidence_refs"] = ["invented-case"]

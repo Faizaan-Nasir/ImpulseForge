@@ -158,17 +158,11 @@ def resolve(request: RunRequest, saved_inventories=None, model_bundle_hash=None)
     )
     charge = request.charging_policy.U_charge_V
     if request.charging_policy.kind == "seed_then_fixed":
-        if seed > hw["N_max"]:
-            raise DomainError(
-                "stage_sizing_infeasible", "Initial estimated stages exceed equipment"
-            )
         charge = request.target.crest_V / (seed * request.expected_voltage_efficiency)
-    if charge is None or charge > hw["U_stage_max_V"]:
-        raise DomainError(
-            "stage_charge_exceeded",
-            f"Charging voltage exceeds resolved {hw['U_stage_max_V'] / 1000:g} kV/stage",
-        )
+    if charge is None:
+        raise DomainError("missing_charging_voltage", "Charging voltage required")
     data = {
+        "constraint_policy": "calibration_after_prediction_v1",
         "objective_acceptance_policy": OBJECTIVE_POLICY,
         "request": request.model_dump(mode="json"),
         "model_bundle_hash": model_bundle_hash,

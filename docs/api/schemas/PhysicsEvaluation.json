@@ -384,14 +384,31 @@
       "title": "Constraints",
       "type": "array"
     },
+    "constraint_owner": {
+      "default": "calibration_pending",
+      "title": "Constraint Owner",
+      "type": "string"
+    },
+    "feasibility_windows": {
+      "additionalProperties": true,
+      "title": "Feasibility Windows",
+      "type": "object"
+    },
     "diagnostics": {
       "additionalProperties": true,
       "title": "Diagnostics",
       "type": "object"
     },
     "hardware_feasible": {
-      "title": "Hardware Feasible",
-      "type": "boolean"
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Hardware Feasible"
     },
     "performance": {
       "anyOf": [

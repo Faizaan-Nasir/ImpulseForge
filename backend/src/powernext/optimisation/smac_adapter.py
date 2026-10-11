@@ -42,7 +42,9 @@ class SmacAdapter:
             n_workers=1,
         )
         seeds = []
-        for n in sorted({context.data["seed_N"], min(hw["N_max"], context.data["seed_N"] + 1)}):
+        for n in sorted(
+            {min(hw["N_max"], context.data["seed_N"]), min(hw["N_max"], context.data["seed_N"] + 1)}
+        ):
             try:
                 seed_values = inverse(context, n)
                 values = {k: seed_values[k] for k in ("N", "Rf_required_ohm", "Rt_required_ohm")}

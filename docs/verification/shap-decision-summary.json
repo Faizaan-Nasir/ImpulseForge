@@ -1,0 +1,2789 @@
+{
+  "status": "generated",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "recommended_candidate_id": null,
+  "narrative": {
+    "lead": "This evaluation compares three Marx generator circuit configurations to match target high-voltage impulse metrics under diagnostic evaluation mode (run). There is no verified recommendation, and no evaluated case should be used without hardware verification. Case 1 ranks first because it achieves the smallest worst tolerance-normalised deviation S (0.160271), deciding the ranking before weighted deviation J or part counts are considered (case_1, case_2, case_3, run).",
+    "why_others_rank_lower": [
+      {
+        "candidate_id": "a516b51541151c976a94480bc86dacc0",
+        "reason": "Case 2 ranks lower because its worst tolerance-normalised deviation S is 0.201253, which is larger than Case 1's S of 0.160271. Because S differs, J and part counts did not decide this comparison.",
+        "evidence_refs": [
+          "case_1",
+          "case_2"
+        ]
+      },
+      {
+        "candidate_id": "974234c81bfcf2ef2cba80068d19acc6",
+        "reason": "Case 3 ranks lower because its worst tolerance-normalised deviation S is 0.226712, which is larger than Case 1's S of 0.160271. Because S differs, J and part counts did not decide this comparison.",
+        "evidence_refs": [
+          "case_1",
+          "case_3"
+        ]
+      }
+    ],
+    "needs_attention": [
+      "HW_STAGE_ENERGY constraint failed in 3 case checks",
+      "HW_TOTAL_ENERGY constraint failed in 3 case checks",
+      "CIRCUIT_TOPOLOGY_VERIFIED is unknown",
+      "CAPACITOR_TRANSIENT_RATING is unknown",
+      "RESISTOR_RATINGS are unknown across 18 checks",
+      "Model support is unverified extrapolation for cases 1 and 3"
+    ],
+    "evidence_refs": [
+      "case_1",
+      "case_2",
+      "case_3",
+      "run"
+    ],
+    "physics_explanation": "The Marx generator uses 9 stages charged at 193.089 kV each to establish the physics baseline through lumped-element circuit equations based on effective capacitances, loop inductances, and stage resistances. Actual circuit settings produce the baseline physics metrics. Residual ML changes each front, tail, and crest value. Stored energy limits fail because individual stages store 55.925 kJ and the total generator stores 503.328 kJ, exceeding the 2.5 kJ stage and 30 kJ total energy limits.",
+    "why_first_ranked": "Case 1 is ranked first because it achieves the lowest worst tolerance-normalised deviation S of 0.160271 (compared to 0.201253 for Case 2 and 0.226712 for Case 3). The decision rule prioritises the worst normalised deviation S first, so J and part counts did not decide these comparisons.",
+    "ml_explanations": [
+      {
+        "candidate_id": "527142feff71c13366fc2168f6edda11",
+        "explanation": "For Case 1, actual circuit settings established the physics baseline, and residual ML adjusted the front, tail, and crest values. For the front time, starting from a training background residual, the physics tail prediction contributed -0.002652 \u00b5s to decrease the front time, while effective loop inductance increased it by +0.000777 \u00b5s, yielding a corrected front time of 1.197309 \u00b5s. For the tail time, test-object capacitance strongly decreased the residual by -0.273146 \u00b5s, producing a corrected tail time of 49.749229 \u00b5s. For crest voltage, effective loop inductance increased the residual by +2.427643 kV and effective load capacitance increased it by +1.982723 kV relative to the background residual, yielding a corrected crest voltage of 1431.851581 kV. SHAP values represent model attribution relative to the training background rather than physical causation.",
+        "evidence_refs": [
+          "case_1",
+          "case_1_crest_V",
+          "case_1_front_s",
+          "case_1_tail_s"
+        ]
+      },
+      {
+        "candidate_id": "a516b51541151c976a94480bc86dacc0",
+        "explanation": "For Case 2, actual circuit settings established the physics baseline, and residual ML adjusted the outputs. For the front time, expected voltage efficiency increased the residual by +0.017280 \u00b5s while effective circuit tail resistance decreased it by -0.017335 \u00b5s, giving a corrected front time of 1.207198 \u00b5s. For the tail time, test-object capacitance decreased the residual by -0.261385 \u00b5s, resulting in a corrected tail time of 52.012527 \u00b5s. For crest voltage, effective loop inductance increased the residual by +2.633048 kV and effective load capacitance increased it by +2.036683 kV, yielding a corrected crest voltage of 1430.419299 kV. SHAP values reflect model attribution relative to the training background.",
+        "evidence_refs": [
+          "case_2",
+          "case_2_crest_V",
+          "case_2_front_s",
+          "case_2_tail_s"
+        ]
+      },
+      {
+        "candidate_id": "974234c81bfcf2ef2cba80068d19acc6",
+        "explanation": "For Case 3, actual circuit settings established the physics baseline, and residual ML adjusted the outputs. For the front time, physics tail prediction increased the residual by +0.004880 \u00b5s while effective load capacitance decreased it by -0.001670 \u00b5s, producing a corrected front time of 1.149530 \u00b5s. For the tail time, test-object capacitance decreased the residual by -0.271575 \u00b5s and physics tail prediction decreased it by -0.019668 \u00b5s, giving a corrected tail time of 52.267117 \u00b5s. For crest voltage, effective loop inductance increased the residual by +2.652857 kV and physics tail prediction decreased it by -2.224680 kV, yielding a corrected crest voltage of 1427.597569 kV. SHAP values represent fitted model attribution rather than measured reality.",
+        "evidence_refs": [
+          "case_3",
+          "case_3_crest_V",
+          "case_3_front_s",
+          "case_3_tail_s"
+        ]
+      }
+    ]
+  },
+  "score_breakdown": [
+    {
+      "candidate_id": "527142feff71c13366fc2168f6edda11",
+      "case_number": 1,
+      "S": 0.16027090218014559,
+      "J": 0.06427401962244346,
+      "resistors_per_stage": 8,
+      "N": 9,
+      "voltage_utilisation": 0.9654471544715448
+    },
+    {
+      "candidate_id": "a516b51541151c976a94480bc86dacc0",
+      "case_number": 2,
+      "S": 0.2012526523660616,
+      "J": 0.11600442442719466,
+      "resistors_per_stage": 2,
+      "N": 9,
+      "voltage_utilisation": 0.9654471544715448
+    },
+    {
+      "candidate_id": "974234c81bfcf2ef2cba80068d19acc6",
+      "case_number": 3,
+      "S": 0.22671165384427117,
+      "J": 0.14255572815368553,
+      "resistors_per_stage": 8,
+      "N": 9,
+      "voltage_utilisation": 0.9654471544715448
+    }
+  ],
+  "evidence_hash": "d21b948da1ab33bdf89e2dcff61f2cf1c83948a3fb8a42f79cf789ebcc030682",
+  "cached": false,
+  "generation_seconds": 6.347430791938677,
+  "reason": null,
+  "reason_code": null,
+  "provider_http_status": null,
+  "highest_ranked_candidate_id": "527142feff71c13366fc2168f6edda11",
+  "explanation_status": "complete",
+  "analysis": {
+    "status": "complete",
+    "selection_explanation": "Case #1 is the highest-ranked evaluated waveform match: S=0.160271 and J=0.064274. Its largest tolerance-normalised deviation is crest. The ordering minimises the worst normalised deviation first, the weighted deviation second, and uses the selected secondary preference only for ties.",
+    "highest_ranked_candidate_id": "527142feff71c13366fc2168f6edda11",
+    "comparison": [
+      {
+        "candidate_id": "a516b51541151c976a94480bc86dacc0",
+        "case_number": 2,
+        "criterion": "S",
+        "reason": "Case #1 has the smaller worst tolerance-normalised deviation: S=0.160271, compared with 0.201253 for Case #2. This decides the order before J or resistor counts are considered.",
+        "evidence_refs": [
+          "case_1",
+          "case_2"
+        ]
+      },
+      {
+        "candidate_id": "974234c81bfcf2ef2cba80068d19acc6",
+        "case_number": 3,
+        "criterion": "S",
+        "reason": "Case #1 has the smaller worst tolerance-normalised deviation: S=0.160271, compared with 0.226712 for Case #3. This decides the order before J or resistor counts are considered.",
+        "evidence_refs": [
+          "case_1",
+          "case_3"
+        ]
+      }
+    ],
+    "search_explanation": "The run made 7 proposals, completed 5 physics predictions and produced 5 fresh ML predictions. It stopped because: three_ml_waveforms_within_tolerance. Cached repeats are not new ML inference.",
+    "cases": [
+      {
+        "candidate_id": "527142feff71c13366fc2168f6edda11",
+        "case_number": 1,
+        "evidence_id": "case_1",
+        "eligible": false,
+        "physics_explanation": "Case #1 uses 9 charged stages at 193.089431 kV/stage. The actual front/tail resistances are 49.523810 \u03a9 and 23.943662 \u03a9 per stage. The workbook calculator derives timing from the effective circuit resistances, capacitances and loop inductance. Crest is the supplied efficiency (0.82) \u00d7 N \u00d7 charging voltage; it is an efficiency assumption, not an independent simulated loss prediction.",
+        "circuit_values": {
+          "C1_F": 3.3333333333333335e-07,
+          "C2_F": 1.5000000000000002e-09,
+          "L_effective_H": 1.85e-05,
+          "R1_ohm": 445.7142857142857,
+          "R2_ohm": 215.49295774647885,
+          "V0_V": 1737804.8780487806,
+          "N": 9,
+          "topology": "generator_side_tail_series_v1",
+          "external_front_assumed_zero": true
+        },
+        "physics_constants": {
+          "k_front": 1.67,
+          "k_LC": 2.5,
+          "k_tail": 0.693
+        },
+        "physics_mode": "calculator",
+        "outputs": [
+          {
+            "evidence_id": "case_1_front_s",
+            "output_key": "front_s",
+            "label": "Front / peak time",
+            "display_unit": "\u00b5s",
+            "display_scale": 1000000.0,
+            "physics_value": 1.2000350360318992e-06,
+            "ml_residual": -2.725707735794403e-09,
+            "corrected_value": 1.1973093282961048e-06,
+            "target_value": 1.2e-06,
+            "shap_status": "complete",
+            "shap_reason": null,
+            "contributions": [
+              {
+                "feature": "physics_tail_s",
+                "value": 5.000287816901408e-05,
+                "standardised_value": -56.3400524582671,
+                "contribution": -2.6515065595274256e-09,
+                "label": "Physics tail prediction",
+                "display_input_value": 50.00287816901408,
+                "input_unit": "\u00b5s",
+                "display_contribution": -0.0026515065595274258,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -7.876159594189413e-10,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.0007876159594189413,
+                "direction": "decreases"
+              },
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 7.774038193490897e-10,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 0.0007774038193490897,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -6.412108461384917e-10,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.0006412108461384918,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 215.49295774647885,
+                "standardised_value": -1.255136191966709,
+                "contribution": 6.202997401189129e-10,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 215.49295774647885,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.0006202997401189129,
+                "direction": "increases"
+              },
+              {
+                "feature": "N",
+                "value": 9.0,
+                "standardised_value": -0.3377383256131326,
+                "contribution": -5.581928676683194e-10,
+                "label": "Active stages",
+                "display_input_value": 9.0,
+                "input_unit": "stages",
+                "display_contribution": -0.0005581928676683194,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_generator_F",
+                "value": 3.3333333333333335e-07,
+                "standardised_value": 0.30801731766806567,
+                "contribution": 5.121676603545521e-10,
+                "label": "Erected generator capacitance",
+                "display_input_value": 0.33333333333333337,
+                "input_unit": "\u00b5F",
+                "display_contribution": 0.0005121676603545521,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_crest_V",
+                "value": 1425000.0,
+                "standardised_value": -0.012376033800204536,
+                "contribution": -2.3419265745375414e-10,
+                "label": "Physics crest prediction",
+                "display_input_value": 1425.0,
+                "input_unit": "kV",
+                "display_contribution": -0.00023419265745375413,
+                "direction": "decreases"
+              },
+              {
+                "feature": "Rf_stage_actual_ohm",
+                "value": 49.523809523809526,
+                "standardised_value": 0.7123302298727247,
+                "contribution": -9.424764642617105e-11,
+                "label": "Actual front resistance per stage",
+                "display_input_value": 49.523809523809526,
+                "input_unit": "\u03a9",
+                "display_contribution": -9.424764642617105e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 445.7142857142857,
+                "standardised_value": 0.6424958864885254,
+                "contribution": 9.10313625478673e-11,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 445.7142857142857,
+                "input_unit": "\u03a9",
+                "display_contribution": 9.10313625478673e-05,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": -2.2357529320360627e-11,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": -2.2357529320360627e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": 1.5195073793484088e-11,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": 1.5195073793484087e-05,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": 1.467577283540762e-11,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": 1.467577283540762e-05,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.2000350360318992e-06,
+                "standardised_value": -0.014929211275974186,
+                "contribution": 1.1120770550998893e-11,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.2000350360318992,
+                "input_unit": "\u00b5s",
+                "display_contribution": 1.1120770550998893e-05,
+                "direction": "increases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": 4.475359962572863e-12,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": 4.475359962572863e-06,
+                "direction": "increases"
+              }
+            ],
+            "explanation": "Physics gave 1.200035 \u00b5s. The ML correction decreased this by 0.002726 \u00b5s, producing 1.197309 \u00b5s.",
+            "reference_residual": 2.1724677064620873e-10,
+            "sum_contributions": -2.9429545064405782e-09,
+            "top_contributions": [
+              {
+                "feature": "physics_tail_s",
+                "value": 5.000287816901408e-05,
+                "standardised_value": -56.3400524582671,
+                "contribution": -2.6515065595274256e-09,
+                "label": "Physics tail prediction",
+                "display_input_value": 50.00287816901408,
+                "input_unit": "\u00b5s",
+                "display_contribution": -0.0026515065595274258,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -7.876159594189413e-10,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.0007876159594189413,
+                "direction": "decreases"
+              },
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 7.774038193490897e-10,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 0.0007774038193490897,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -6.412108461384917e-10,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.0006412108461384918,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 215.49295774647885,
+                "standardised_value": -1.255136191966709,
+                "contribution": 6.202997401189129e-10,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 215.49295774647885,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.0006202997401189129,
+                "direction": "increases"
+              }
+            ],
+            "other_contributions": -2.6032470082372236e-10,
+            "additivity_error": 3.350081480839762e-23,
+            "additivity_verified": true,
+            "method": "Kernel SHAP",
+            "nsamples": 32,
+            "background_count": 8,
+            "reference_meaning": "Expected residual prediction on the saved training-background sample; not the physics baseline or an observed measurement.",
+            "shap_explanation": "Relative to the background residual +0.000217 \u00b5s, Effective loop inductance at 18.5 \u00b5H increases the residual by +0.000777 \u00b5s; Physics tail prediction at 50.0029 \u00b5s decreases the residual by -0.002652 \u00b5s. All feature contributions sum to -0.002943 \u00b5s; adding the background reconstructs the ML correction."
+          },
+          {
+            "evidence_id": "case_1_tail_s",
+            "output_key": "tail_s",
+            "label": "Tail time",
+            "display_unit": "\u00b5s",
+            "display_scale": 1000000.0,
+            "physics_value": 5.000287816901408e-05,
+            "ml_residual": -2.536488552221821e-07,
+            "corrected_value": 4.97492293137919e-05,
+            "target_value": 4.9999999999999996e-05,
+            "shap_status": "complete",
+            "shap_reason": null,
+            "contributions": [
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -2.731464449824367e-07,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.27314644498243673,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.000287816901408e-05,
+                "standardised_value": -56.3400524582671,
+                "contribution": -4.6558413348973897e-08,
+                "label": "Physics tail prediction",
+                "display_input_value": 50.00287816901408,
+                "input_unit": "\u00b5s",
+                "display_contribution": -0.0465584133489739,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.2000350360318992e-06,
+                "standardised_value": -0.014929211275974186,
+                "contribution": 1.104556572873091e-08,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.2000350360318992,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.01104556572873091,
+                "direction": "increases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": 7.986734184734172e-09,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": 0.007986734184734171,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -7.064714268600703e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.007064714268600703,
+                "direction": "decreases"
+              },
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": -6.002485851650216e-09,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": -0.006002485851650216,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": -5.020022115177676e-09,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": -0.005020022115177675,
+                "direction": "decreases"
+              },
+              {
+                "feature": "N",
+                "value": 9.0,
+                "standardised_value": -0.3377383256131326,
+                "contribution": -2.3591243643585606e-09,
+                "label": "Active stages",
+                "display_input_value": 9.0,
+                "input_unit": "stages",
+                "display_contribution": -0.0023591243643585605,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_crest_V",
+                "value": 1425000.0,
+                "standardised_value": -0.012376033800204536,
+                "contribution": 1.006119087271848e-09,
+                "label": "Physics crest prediction",
+                "display_input_value": 1425.0,
+                "input_unit": "kV",
+                "display_contribution": 0.001006119087271848,
+                "direction": "increases"
+              },
+              {
+                "feature": "Rf_stage_actual_ohm",
+                "value": 49.523809523809526,
+                "standardised_value": 0.7123302298727247,
+                "contribution": -1.0042776190639729e-09,
+                "label": "Actual front resistance per stage",
+                "display_input_value": 49.523809523809526,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.0010042776190639729,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 445.7142857142857,
+                "standardised_value": 0.6424958864885254,
+                "contribution": -8.985854906570995e-10,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 445.7142857142857,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.0008985854906570995,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 215.49295774647885,
+                "standardised_value": -1.255136191966709,
+                "contribution": 5.896452074123664e-10,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 215.49295774647885,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.0005896452074123664,
+                "direction": "increases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": -4.1916967075718897e-10,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": -0.000419169670757189,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_generator_F",
+                "value": 3.3333333333333335e-07,
+                "standardised_value": 0.30801731766806567,
+                "contribution": 1.9779200230323462e-10,
+                "label": "Erected generator capacitance",
+                "display_input_value": 0.33333333333333337,
+                "input_unit": "\u00b5F",
+                "display_contribution": 0.0001977920023032346,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": -2.7844064504614416e-11,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": -2.7844064504614415e-05,
+                "direction": "decreases"
+              }
+            ],
+            "explanation": "Physics gave 50.002878 \u00b5s. The ML correction decreased this by 0.253649 \u00b5s, producing 49.749229 \u00b5s.",
+            "reference_residual": 6.80263703435444e-08,
+            "sum_contributions": -3.216752255657281e-07,
+            "top_contributions": [
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -2.731464449824367e-07,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.27314644498243673,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.000287816901408e-05,
+                "standardised_value": -56.3400524582671,
+                "contribution": -4.6558413348973897e-08,
+                "label": "Physics tail prediction",
+                "display_input_value": 50.00287816901408,
+                "input_unit": "\u00b5s",
+                "display_contribution": -0.0465584133489739,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.2000350360318992e-06,
+                "standardised_value": -0.014929211275974186,
+                "contribution": 1.104556572873091e-08,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.2000350360318992,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.01104556572873091,
+                "direction": "increases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": 7.986734184734172e-09,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": 0.007986734184734171,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -7.064714268600703e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.007064714268600703,
+                "direction": "decreases"
+              }
+            ],
+            "other_contributions": -1.393795287918188e-08,
+            "additivity_error": 1.5881867761018131e-21,
+            "additivity_verified": true,
+            "method": "Kernel SHAP",
+            "nsamples": 32,
+            "background_count": 8,
+            "reference_meaning": "Expected residual prediction on the saved training-background sample; not the physics baseline or an observed measurement.",
+            "shap_explanation": "Relative to the background residual +0.068026 \u00b5s, Physics front / peak prediction at 1.20004 \u00b5s increases the residual by +0.011046 \u00b5s; Test-object capacitance at 850 pF decreases the residual by -0.273146 \u00b5s. All feature contributions sum to -0.321675 \u00b5s; adding the background reconstructs the ML correction."
+          },
+          {
+            "evidence_id": "case_1_crest_V",
+            "output_key": "crest_V",
+            "label": "Crest voltage",
+            "display_unit": "kV",
+            "display_scale": 0.001,
+            "physics_value": 1425000.0,
+            "ml_residual": 6851.581068201223,
+            "corrected_value": 1431851.5810682012,
+            "target_value": 1425000.0,
+            "shap_status": "complete",
+            "shap_reason": null,
+            "contributions": [
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 2427.6425410773295,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 2.4276425410773297,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": 1982.723263009417,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": 1.9827232630094171,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.000287816901408e-05,
+                "standardised_value": -56.3400524582671,
+                "contribution": 1819.204076909115,
+                "label": "Physics tail prediction",
+                "display_input_value": 50.00287816901408,
+                "input_unit": "\u00b5s",
+                "display_contribution": 1.8192040769091151,
+                "direction": "increases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 445.7142857142857,
+                "standardised_value": 0.6424958864885254,
+                "contribution": 529.7828758110727,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 445.7142857142857,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.5297828758110728,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": 337.5244482937521,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": 0.33752444829375206,
+                "direction": "increases"
+              },
+              {
+                "feature": "Rf_stage_actual_ohm",
+                "value": 49.523809523809526,
+                "standardised_value": 0.7123302298727247,
+                "contribution": 236.34735223608106,
+                "label": "Actual front resistance per stage",
+                "display_input_value": 49.523809523809526,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.23634735223608108,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_crest_V",
+                "value": 1425000.0,
+                "standardised_value": -0.012376033800204536,
+                "contribution": 226.22171724879018,
+                "label": "Physics crest prediction",
+                "display_input_value": 1425.0,
+                "input_unit": "kV",
+                "display_contribution": 0.2262217172487902,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": -156.7444219332663,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": -0.1567444219332663,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 215.49295774647885,
+                "standardised_value": -1.255136191966709,
+                "contribution": -72.71532735635677,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 215.49295774647885,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.07271532735635677,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": -71.14536353577243,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": -0.07114536353577243,
+                "direction": "decreases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": -45.885102483059434,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": -0.04588510248305944,
+                "direction": "decreases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": 34.721189526467555,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": 0.03472118952646756,
+                "direction": "increases"
+              },
+              {
+                "feature": "N",
+                "value": 9.0,
+                "standardised_value": -0.3377383256131326,
+                "contribution": 24.663449489999294,
+                "label": "Active stages",
+                "display_input_value": 9.0,
+                "input_unit": "stages",
+                "display_contribution": 0.024663449489999295,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.2000350360318992e-06,
+                "standardised_value": -0.014929211275974186,
+                "contribution": 16.487465981730963,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.2000350360318992,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.016487465981730964,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_generator_F",
+                "value": 3.3333333333333335e-07,
+                "standardised_value": 0.30801731766806567,
+                "contribution": -13.638496864835831,
+                "label": "Erected generator capacitance",
+                "display_input_value": 0.33333333333333337,
+                "input_unit": "\u00b5F",
+                "display_contribution": -0.013638496864835831,
+                "direction": "decreases"
+              }
+            ],
+            "explanation": "Physics gave 1425.000000 kV. The ML correction increased this by 6.851581 kV, producing 1431.851581 kV.",
+            "reference_residual": -423.60859920926237,
+            "sum_contributions": 7275.189667410465,
+            "top_contributions": [
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 2427.6425410773295,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 2.4276425410773297,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": 1982.723263009417,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": 1.9827232630094171,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.000287816901408e-05,
+                "standardised_value": -56.3400524582671,
+                "contribution": 1819.204076909115,
+                "label": "Physics tail prediction",
+                "display_input_value": 50.00287816901408,
+                "input_unit": "\u00b5s",
+                "display_contribution": 1.8192040769091151,
+                "direction": "increases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 445.7142857142857,
+                "standardised_value": 0.6424958864885254,
+                "contribution": 529.7828758110727,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 445.7142857142857,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.5297828758110728,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": 337.5244482937521,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": 0.33752444829375206,
+                "direction": "increases"
+              }
+            ],
+            "other_contributions": 178.3124623097783,
+            "additivity_error": 2.091837814077735e-11,
+            "additivity_verified": true,
+            "method": "Kernel SHAP",
+            "nsamples": 32,
+            "background_count": 8,
+            "reference_meaning": "Expected residual prediction on the saved training-background sample; not the physics baseline or an observed measurement.",
+            "shap_explanation": "Relative to the background residual -0.423609 kV, Effective loop inductance at 18.5 \u00b5H increases the residual by +2.427643 kV; Divider capacitance at 500 pF decreases the residual by -0.156744 kV. All feature contributions sum to +7.275190 kV; adding the background reconstructs the ML correction."
+          }
+        ],
+        "model_support": {
+          "status": "extrapolated_diagnostic",
+          "reasons": [
+            "feature_outside_training_envelope:Rt_stage_actual_ohm",
+            "feature_outside_training_envelope:physics_tail_s"
+          ],
+          "joint_domain_validated": false,
+          "lab_validated": false,
+          "prediction_trusted": false
+        },
+        "model_status": "predicted_extrapolation",
+        "unmodelled_effects": [
+          "exact wiring",
+          "generator topology measurement",
+          "overshoot",
+          "environment",
+          "per-resistor heat"
+        ],
+        "shap_cached": true,
+        "shap_generation_seconds": 22.809915332938544
+      },
+      {
+        "candidate_id": "a516b51541151c976a94480bc86dacc0",
+        "case_number": 2,
+        "evidence_id": "case_2",
+        "eligible": false,
+        "physics_explanation": "Case #2 uses 9 charged stages at 193.089431 kV/stage. The actual front/tail resistances are 50.000000 \u03a9 and 25.000000 \u03a9 per stage. The workbook calculator derives timing from the effective circuit resistances, capacitances and loop inductance. Crest is the supplied efficiency (0.82) \u00d7 N \u00d7 charging voltage; it is an efficiency assumption, not an independent simulated loss prediction.",
+        "circuit_values": {
+          "C1_F": 3.3333333333333335e-07,
+          "C2_F": 1.5000000000000002e-09,
+          "L_effective_H": 1.85e-05,
+          "R1_ohm": 450.0,
+          "R2_ohm": 225.0,
+          "V0_V": 1737804.8780487806,
+          "N": 9,
+          "topology": "generator_side_tail_series_v1",
+          "external_front_assumed_zero": true
+        },
+        "physics_constants": {
+          "k_front": 1.67,
+          "k_LC": 2.5,
+          "k_tail": 0.693
+        },
+        "physics_mode": "calculator",
+        "outputs": [
+          {
+            "evidence_id": "case_2_front_s",
+            "output_key": "front_s",
+            "label": "Front / peak time",
+            "display_unit": "\u00b5s",
+            "display_scale": 1000000.0,
+            "physics_value": 1.2100299583068183e-06,
+            "ml_residual": -2.8323388390600283e-09,
+            "corrected_value": 1.2071976194677583e-06,
+            "target_value": 1.2e-06,
+            "shap_status": "complete",
+            "shap_reason": null,
+            "contributions": [
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 225.0,
+                "standardised_value": -0.3377383256131312,
+                "contribution": -1.7334856226728492e-08,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 225.0,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.017334856226728493,
+                "direction": "decreases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": 1.7279996128634197e-08,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": 0.017279996128634196,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -1.727736572921485e-08,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.01727736572921485,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 450.0,
+                "standardised_value": 0.7059940798492756,
+                "contribution": 1.707578996941236e-08,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 450.0,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.01707578996941236,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -1.9540484285463944e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.0019540484285463944,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2208887499999997e-05,
+                "standardised_value": -0.8085033977321833,
+                "contribution": -8.548788165544868e-10,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.208887499999996,
+                "input_unit": "\u00b5s",
+                "display_contribution": -0.0008548788165544868,
+                "direction": "decreases"
+              },
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 3.044639550384141e-10,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 0.0003044639550384141,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": -9.698751094236758e-11,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": -9.698751094236758e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.2100299583068183e-06,
+                "standardised_value": 0.28288199757991705,
+                "contribution": -6.060789734258991e-11,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.2100299583068184,
+                "input_unit": "\u00b5s",
+                "display_contribution": -6.060789734258991e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "Rf_stage_actual_ohm",
+                "value": 50.0,
+                "standardised_value": 0.7748701973769144,
+                "contribution": -5.402161358623948e-11,
+                "label": "Actual front resistance per stage",
+                "display_input_value": 50.0,
+                "input_unit": "\u03a9",
+                "display_contribution": -5.402161358623948e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": -4.230661801616506e-11,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": -4.230661801616506e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_generator_F",
+                "value": 3.3333333333333335e-07,
+                "standardised_value": 0.30801731766806567,
+                "contribution": -3.1973607315434103e-11,
+                "label": "Erected generator capacitance",
+                "display_input_value": 0.33333333333333337,
+                "input_unit": "\u00b5F",
+                "display_contribution": -3.19736073154341e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_crest_V",
+                "value": 1425000.0,
+                "standardised_value": -0.012376033800204536,
+                "contribution": -3.1274367548413676e-11,
+                "label": "Physics crest prediction",
+                "display_input_value": 1425.0,
+                "input_unit": "kV",
+                "display_contribution": -3.1274367548413673e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": 2.4801482277593694e-11,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": 2.4801482277593693e-05,
+                "direction": "increases"
+              },
+              {
+                "feature": "N",
+                "value": 9.0,
+                "standardised_value": -0.3377383256131326,
+                "contribution": 3.6836707266646556e-12,
+                "label": "Active stages",
+                "display_input_value": 9.0,
+                "input_unit": "stages",
+                "display_contribution": 3.6836707266646556e-06,
+                "direction": "increases"
+              }
+            ],
+            "explanation": "Physics gave 1.210030 \u00b5s. The ML correction decreased this by 0.002832 \u00b5s, producing 1.207198 \u00b5s.",
+            "reference_residual": 2.1724677064620873e-10,
+            "sum_contributions": -3.049585609706204e-09,
+            "top_contributions": [
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 225.0,
+                "standardised_value": -0.3377383256131312,
+                "contribution": -1.7334856226728492e-08,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 225.0,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.017334856226728493,
+                "direction": "decreases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": 1.7279996128634197e-08,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": 0.017279996128634196,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -1.727736572921485e-08,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.01727736572921485,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 450.0,
+                "standardised_value": 0.7059940798492756,
+                "contribution": 1.707578996941236e-08,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 450.0,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.01707578996941236,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -1.9540484285463944e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.0019540484285463944,
+                "direction": "decreases"
+              }
+            ],
+            "other_contributions": -8.391013232630241e-10,
+            "additivity_error": 3.2673634195844593e-23,
+            "additivity_verified": true,
+            "method": "Kernel SHAP",
+            "nsamples": 32,
+            "background_count": 8,
+            "reference_meaning": "Expected residual prediction on the saved training-background sample; not the physics baseline or an observed measurement.",
+            "shap_explanation": "Relative to the background residual +0.000217 \u00b5s, Expected voltage efficiency at 82 % increases the residual by +0.017280 \u00b5s; Effective circuit tail resistance at 225 \u03a9 decreases the residual by -0.017335 \u00b5s. All feature contributions sum to -0.003050 \u00b5s; adding the background reconstructs the ML correction."
+          },
+          {
+            "evidence_id": "case_2_tail_s",
+            "output_key": "tail_s",
+            "label": "Tail time",
+            "display_unit": "\u00b5s",
+            "display_scale": 1000000.0,
+            "physics_value": 5.2208887499999997e-05,
+            "ml_residual": -1.9636097633938518e-07,
+            "corrected_value": 5.201252652366061e-05,
+            "target_value": 4.9999999999999996e-05,
+            "shap_status": "complete",
+            "shap_reason": null,
+            "contributions": [
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -2.613849745880195e-07,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.2613849745880195,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 450.0,
+                "standardised_value": 0.7059940798492756,
+                "contribution": 1.3912796685283456e-08,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 450.0,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.013912796685283457,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -8.731753442150064e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.008731753442150065,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2208887499999997e-05,
+                "standardised_value": -0.8085033977321833,
+                "contribution": -6.905261467823531e-09,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.208887499999996,
+                "input_unit": "\u00b5s",
+                "display_contribution": -0.006905261467823531,
+                "direction": "decreases"
+              },
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": -6.614326127057387e-09,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": -0.0066143261270573865,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 225.0,
+                "standardised_value": -0.3377383256131312,
+                "contribution": -6.425442300492376e-09,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 225.0,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.006425442300492376,
+                "direction": "decreases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": 4.665626559141833e-09,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": 0.0046656265591418335,
+                "direction": "increases"
+              },
+              {
+                "feature": "Rf_stage_actual_ohm",
+                "value": 50.0,
+                "standardised_value": 0.7748701973769144,
+                "contribution": 4.425598993038871e-09,
+                "label": "Actual front resistance per stage",
+                "display_input_value": 50.0,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.004425598993038871,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_generator_F",
+                "value": 3.3333333333333335e-07,
+                "standardised_value": 0.30801731766806567,
+                "contribution": 2.076300385105517e-09,
+                "label": "Erected generator capacitance",
+                "display_input_value": 0.33333333333333337,
+                "input_unit": "\u00b5F",
+                "display_contribution": 0.002076300385105517,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.2100299583068183e-06,
+                "standardised_value": 0.28288199757991705,
+                "contribution": 1.9417503806456557e-09,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.2100299583068184,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.0019417503806456557,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": -1.1391176925600948e-09,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": -0.0011391176925600948,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_crest_V",
+                "value": 1425000.0,
+                "standardised_value": -0.012376033800204536,
+                "contribution": -4.5644310044670905e-10,
+                "label": "Physics crest prediction",
+                "display_input_value": 1425.0,
+                "input_unit": "kV",
+                "display_contribution": -0.00045644310044670906,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": 3.473220296675495e-10,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": 0.0003473220296675495,
+                "direction": "increases"
+              },
+              {
+                "feature": "N",
+                "value": 9.0,
+                "standardised_value": -0.3377383256131326,
+                "contribution": -1.7673990077846386e-10,
+                "label": "Active stages",
+                "display_input_value": 9.0,
+                "input_unit": "stages",
+                "display_contribution": -0.00017673990077846387,
+                "direction": "decreases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": 7.731690351515621e-11,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": 7.731690351515621e-05,
+                "direction": "increases"
+              }
+            ],
+            "explanation": "Physics gave 52.208887 \u00b5s. The ML correction decreased this by 0.196361 \u00b5s, producing 52.012527 \u00b5s.",
+            "reference_residual": 6.80263703435444e-08,
+            "sum_contributions": -2.643873466829301e-07,
+            "top_contributions": [
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -2.613849745880195e-07,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.2613849745880195,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 450.0,
+                "standardised_value": 0.7059940798492756,
+                "contribution": 1.3912796685283456e-08,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 450.0,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.013912796685283457,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -8.731753442150064e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.008731753442150065,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2208887499999997e-05,
+                "standardised_value": -0.8085033977321833,
+                "contribution": -6.905261467823531e-09,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.208887499999996,
+                "input_unit": "\u00b5s",
+                "display_contribution": -0.006905261467823531,
+                "direction": "decreases"
+              },
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": -6.614326127057387e-09,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": -0.0066143261270573865,
+                "direction": "decreases"
+              }
+            ],
+            "other_contributions": 5.33617225683694e-09,
+            "additivity_error": 5.293955920339377e-22,
+            "additivity_verified": true,
+            "method": "Kernel SHAP",
+            "nsamples": 32,
+            "background_count": 8,
+            "reference_meaning": "Expected residual prediction on the saved training-background sample; not the physics baseline or an observed measurement.",
+            "shap_explanation": "Relative to the background residual +0.068026 \u00b5s, Effective circuit front resistance at 450 \u03a9 increases the residual by +0.013913 \u00b5s; Test-object capacitance at 850 pF decreases the residual by -0.261385 \u00b5s. All feature contributions sum to -0.264387 \u00b5s; adding the background reconstructs the ML correction."
+          },
+          {
+            "evidence_id": "case_2_crest_V",
+            "output_key": "crest_V",
+            "label": "Crest voltage",
+            "display_unit": "kV",
+            "display_scale": 0.001,
+            "physics_value": 1425000.0,
+            "ml_residual": 5419.29923234228,
+            "corrected_value": 1430419.2992323423,
+            "target_value": 1425000.0,
+            "shap_status": "complete",
+            "shap_reason": null,
+            "contributions": [
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 2633.0484167793775,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 2.6330484167793777,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": 2036.682814268108,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": 2.036682814268108,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2208887499999997e-05,
+                "standardised_value": -0.8085033977321833,
+                "contribution": 537.0209906710406,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.208887499999996,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.5370209906710407,
+                "direction": "increases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 450.0,
+                "standardised_value": 0.7059940798492756,
+                "contribution": 378.99115461285777,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 450.0,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.37899115461285776,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": 114.19844002694803,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": 0.11419844002694804,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": 79.57568100048356,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": 0.07957568100048355,
+                "direction": "increases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": -50.27087255808098,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": -0.050270872558080985,
+                "direction": "decreases"
+              },
+              {
+                "feature": "N",
+                "value": 9.0,
+                "standardised_value": -0.3377383256131326,
+                "contribution": 41.828481745540294,
+                "label": "Active stages",
+                "display_input_value": 9.0,
+                "input_unit": "stages",
+                "display_contribution": 0.0418284817455403,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": -40.937976480038394,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": -0.04093797648003839,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_generator_F",
+                "value": 3.3333333333333335e-07,
+                "standardised_value": 0.30801731766806567,
+                "contribution": 36.80302233275012,
+                "label": "Erected generator capacitance",
+                "display_input_value": 0.33333333333333337,
+                "input_unit": "\u00b5F",
+                "display_contribution": 0.03680302233275012,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_crest_V",
+                "value": 1425000.0,
+                "standardised_value": -0.012376033800204536,
+                "contribution": 32.20439446776961,
+                "label": "Physics crest prediction",
+                "display_input_value": 1425.0,
+                "input_unit": "kV",
+                "display_contribution": 0.03220439446776961,
+                "direction": "increases"
+              },
+              {
+                "feature": "Rf_stage_actual_ohm",
+                "value": 50.0,
+                "standardised_value": 0.7748701973769144,
+                "contribution": 29.330592843734156,
+                "label": "Actual front resistance per stage",
+                "display_input_value": 50.0,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.029330592843734155,
+                "direction": "increases"
+              },
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 225.0,
+                "standardised_value": -0.3377383256131312,
+                "contribution": -19.325706400385002,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 225.0,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.019325706400385,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.2100299583068183e-06,
+                "standardised_value": 0.28288199757991705,
+                "contribution": 18.587611790609973,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.2100299583068184,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.018587611790609974,
+                "direction": "increases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": 15.170786450901655,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": 0.015170786450901655,
+                "direction": "increases"
+              }
+            ],
+            "explanation": "Physics gave 1425.000000 kV. The ML correction increased this by 5.419299 kV, producing 1430.419299 kV.",
+            "reference_residual": -423.60859920926237,
+            "sum_contributions": 5842.907831551617,
+            "top_contributions": [
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 2633.0484167793775,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 2.6330484167793777,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": 2036.682814268108,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": 2.036682814268108,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2208887499999997e-05,
+                "standardised_value": -0.8085033977321833,
+                "contribution": 537.0209906710406,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.208887499999996,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.5370209906710407,
+                "direction": "increases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 450.0,
+                "standardised_value": 0.7059940798492756,
+                "contribution": 378.99115461285777,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 450.0,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.37899115461285776,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": 114.19844002694803,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": 0.11419844002694804,
+                "direction": "increases"
+              }
+            ],
+            "other_contributions": 142.966015193285,
+            "additivity_error": 7.457856554538012e-11,
+            "additivity_verified": true,
+            "method": "Kernel SHAP",
+            "nsamples": 32,
+            "background_count": 8,
+            "reference_meaning": "Expected residual prediction on the saved training-background sample; not the physics baseline or an observed measurement.",
+            "shap_explanation": "Relative to the background residual -0.423609 kV, Effective loop inductance at 18.5 \u00b5H increases the residual by +2.633048 kV; Charging voltage per stage at 193.089 kV decreases the residual by -0.050271 kV. All feature contributions sum to +5.842908 kV; adding the background reconstructs the ML correction."
+          }
+        ],
+        "model_support": {
+          "status": "supported_diagnostic",
+          "reasons": [],
+          "joint_domain_validated": false,
+          "lab_validated": false
+        },
+        "model_status": "predicted_diagnostic",
+        "unmodelled_effects": [
+          "exact wiring",
+          "generator topology measurement",
+          "overshoot",
+          "environment",
+          "per-resistor heat"
+        ],
+        "shap_cached": true,
+        "shap_generation_seconds": 22.69351574999746
+      },
+      {
+        "candidate_id": "974234c81bfcf2ef2cba80068d19acc6",
+        "case_number": 3,
+        "evidence_id": "case_3",
+        "eligible": false,
+        "physics_explanation": "Case #3 uses 9 charged stages at 193.089431 kV/stage. The actual front/tail resistances are 47.045455 \u03a9 and 25.136612 \u03a9 per stage. The workbook calculator derives timing from the effective circuit resistances, capacitances and loop inductance. Crest is the supplied efficiency (0.82) \u00d7 N \u00d7 charging voltage; it is an efficiency assumption, not an independent simulated loss prediction.",
+        "circuit_values": {
+          "C1_F": 3.3333333333333335e-07,
+          "C2_F": 1.5000000000000002e-09,
+          "L_effective_H": 1.85e-05,
+          "R1_ohm": 423.40909090909093,
+          "R2_ohm": 226.22950819672133,
+          "V0_V": 1737804.8780487806,
+          "N": 9,
+          "topology": "generator_side_tail_series_v1",
+          "external_front_assumed_zero": true
+        },
+        "physics_constants": {
+          "k_front": 1.67,
+          "k_LC": 2.5,
+          "k_tail": 0.693
+        },
+        "physics_mode": "calculator",
+        "outputs": [
+          {
+            "evidence_id": "case_3_front_s",
+            "output_key": "front_s",
+            "label": "Front / peak time",
+            "display_unit": "\u00b5s",
+            "display_scale": 1000000.0,
+            "physics_value": 1.148231973510127e-06,
+            "ml_residual": 1.2982973275600896e-09,
+            "corrected_value": 1.149530270837687e-06,
+            "target_value": 1.2e-06,
+            "shap_status": "complete",
+            "shap_reason": null,
+            "contributions": [
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2494181967213124e-05,
+                "standardised_value": 6.373172345980298,
+                "contribution": 4.880385118953943e-09,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.49418196721312,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.004880385118953943,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -1.6696308974001308e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.0016696308974001308,
+                "direction": "decreases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": -1.4505594750327872e-09,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": -0.0014505594750327871,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": -1.1854095877248976e-09,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": -0.0011854095877248975,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 423.40909090909093,
+                "standardised_value": 0.31201665286098407,
+                "contribution": 9.827304314891365e-10,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 423.40909090909093,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.0009827304314891365,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -3.544282400462264e-10,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.00035442824004622644,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.148231973510127e-06,
+                "standardised_value": -1.558466244151124,
+                "contribution": 3.2679681164593267e-10,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.148231973510127,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.00032679681164593267,
+                "direction": "increases"
+              },
+              {
+                "feature": "Rf_stage_actual_ohm",
+                "value": 47.04545454545455,
+                "standardised_value": 0.3868381262713719,
+                "contribution": -1.9238901423809428e-10,
+                "label": "Actual front resistance per stage",
+                "display_input_value": 47.04545454545455,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.00019238901423809427,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_crest_V",
+                "value": 1425000.0,
+                "standardised_value": -0.012376033800204536,
+                "contribution": -9.1753654660067e-11,
+                "label": "Physics crest prediction",
+                "display_input_value": 1425.0,
+                "input_unit": "kV",
+                "display_contribution": -9.1753654660067e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": -7.840024900758317e-11,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": -7.840024900758317e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 226.22950819672133,
+                "standardised_value": -0.21909488570219374,
+                "contribution": -4.7735072012752055e-11,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 226.22950819672133,
+                "input_unit": "\u03a9",
+                "display_contribution": -4.7735072012752054e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_generator_F",
+                "value": 3.3333333333333335e-07,
+                "standardised_value": 0.30801731766806567,
+                "contribution": -3.3657005894690014e-11,
+                "label": "Erected generator capacitance",
+                "display_input_value": 0.33333333333333337,
+                "input_unit": "\u00b5F",
+                "display_contribution": -3.3657005894690016e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "N",
+                "value": 9.0,
+                "standardised_value": -0.3377383256131326,
+                "contribution": -2.9350300361441434e-11,
+                "label": "Active stages",
+                "display_input_value": 9.0,
+                "input_unit": "stages",
+                "display_contribution": -2.9350300361441433e-05,
+                "direction": "decreases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": 1.3542553294306057e-11,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": 1.3542553294306057e-05,
+                "direction": "increases"
+              },
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 1.0909137909285103e-11,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 1.0909137909285103e-05,
+                "direction": "increases"
+              }
+            ],
+            "explanation": "Physics gave 1.148232 \u00b5s. The ML correction increased this by 0.001298 \u00b5s, producing 1.149530 \u00b5s.",
+            "reference_residual": 2.1724677064620873e-10,
+            "sum_contributions": 1.0810505569139332e-09,
+            "top_contributions": [
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2494181967213124e-05,
+                "standardised_value": 6.373172345980298,
+                "contribution": 4.880385118953943e-09,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.49418196721312,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.004880385118953943,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -1.6696308974001308e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.0016696308974001308,
+                "direction": "decreases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": -1.4505594750327872e-09,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": -0.0014505594750327871,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": -1.1854095877248976e-09,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": -0.0011854095877248975,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 423.40909090909093,
+                "standardised_value": 0.31201665286098407,
+                "contribution": 9.827304314891365e-10,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 423.40909090909093,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.0009827304314891365,
+                "direction": "increases"
+              }
+            ],
+            "other_contributions": -4.764650333713305e-10,
+            "additivity_error": 5.2319173743979e-23,
+            "additivity_verified": true,
+            "method": "Kernel SHAP",
+            "nsamples": 32,
+            "background_count": 8,
+            "reference_meaning": "Expected residual prediction on the saved training-background sample; not the physics baseline or an observed measurement.",
+            "shap_explanation": "Relative to the background residual +0.000217 \u00b5s, Physics tail prediction at 52.4942 \u00b5s increases the residual by +0.004880 \u00b5s; Effective load capacitance at 1500 pF decreases the residual by -0.001670 \u00b5s. All feature contributions sum to +0.001081 \u00b5s; adding the background reconstructs the ML correction."
+          },
+          {
+            "evidence_id": "case_3_tail_s",
+            "output_key": "tail_s",
+            "label": "Tail time",
+            "display_unit": "\u00b5s",
+            "display_scale": 1000000.0,
+            "physics_value": 5.2494181967213124e-05,
+            "ml_residual": -2.2706542877041656e-07,
+            "corrected_value": 5.226711653844271e-05,
+            "target_value": 4.9999999999999996e-05,
+            "shap_status": "complete",
+            "shap_reason": null,
+            "contributions": [
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -2.715751954893988e-07,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.2715751954893988,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2494181967213124e-05,
+                "standardised_value": 6.373172345980298,
+                "contribution": -1.9668145555735317e-08,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.49418196721312,
+                "input_unit": "\u00b5s",
+                "display_contribution": -0.019668145555735317,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.148231973510127e-06,
+                "standardised_value": -1.558466244151124,
+                "contribution": 7.571526105407478e-09,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.148231973510127,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.007571526105407477,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -6.19717853618847e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.00619717853618847,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 423.40909090909093,
+                "standardised_value": 0.31201665286098407,
+                "contribution": -5.8486888038989274e-09,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 423.40909090909093,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.005848688803898928,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_crest_V",
+                "value": 1425000.0,
+                "standardised_value": -0.012376033800204536,
+                "contribution": 2.033156159603426e-09,
+                "label": "Physics crest prediction",
+                "display_input_value": 1425.0,
+                "input_unit": "kV",
+                "display_contribution": 0.002033156159603426,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": -1.6625733479304801e-09,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": -0.00166257334793048,
+                "direction": "decreases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": 1.6437189170331661e-09,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": 0.0016437189170331662,
+                "direction": "increases"
+              },
+              {
+                "feature": "N",
+                "value": 9.0,
+                "standardised_value": -0.3377383256131326,
+                "contribution": -1.354916679406558e-09,
+                "label": "Active stages",
+                "display_input_value": 9.0,
+                "input_unit": "stages",
+                "display_contribution": -0.0013549166794065582,
+                "direction": "decreases"
+              },
+              {
+                "feature": "Rf_stage_actual_ohm",
+                "value": 47.04545454545455,
+                "standardised_value": 0.3868381262713719,
+                "contribution": -1.3539166150140287e-09,
+                "label": "Actual front resistance per stage",
+                "display_input_value": 47.04545454545455,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.0013539166150140288,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": 8.859153584646784e-10,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": 0.0008859153584646784,
+                "direction": "increases"
+              },
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 226.22950819672133,
+                "standardised_value": -0.21909488570219374,
+                "contribution": -5.734687775533274e-10,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 226.22950819672133,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.0005734687775533273,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_generator_F",
+                "value": 3.3333333333333335e-07,
+                "standardised_value": 0.30801731766806567,
+                "contribution": 5.368799598673108e-10,
+                "label": "Erected generator capacitance",
+                "display_input_value": 0.33333333333333337,
+                "input_unit": "\u00b5F",
+                "display_contribution": 0.0005368799598673107,
+                "direction": "increases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": 3.5451515613160506e-10,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": 0.00035451515613160506,
+                "direction": "increases"
+              },
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 1.1657303465427226e-10,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 0.00011657303465427226,
+                "direction": "increases"
+              }
+            ],
+            "explanation": "Physics gave 52.494182 \u00b5s. The ML correction decreased this by 0.227065 \u00b5s, producing 52.267117 \u00b5s.",
+            "reference_residual": 6.80263703435444e-08,
+            "sum_contributions": -2.95091799113964e-07,
+            "top_contributions": [
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": -2.715751954893988e-07,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": -0.2715751954893988,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2494181967213124e-05,
+                "standardised_value": 6.373172345980298,
+                "contribution": -1.9668145555735317e-08,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.49418196721312,
+                "input_unit": "\u00b5s",
+                "display_contribution": -0.019668145555735317,
+                "direction": "decreases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.148231973510127e-06,
+                "standardised_value": -1.558466244151124,
+                "contribution": 7.571526105407478e-09,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.148231973510127,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.007571526105407477,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": -6.19717853618847e-09,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": -0.00619717853618847,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 423.40909090909093,
+                "standardised_value": 0.31201665286098407,
+                "contribution": -5.8486888038989274e-09,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 423.40909090909093,
+                "input_unit": "\u03a9",
+                "display_contribution": -0.005848688803898928,
+                "direction": "decreases"
+              }
+            ],
+            "other_contributions": 6.258831658500642e-10,
+            "additivity_error": 3.017554874593445e-21,
+            "additivity_verified": true,
+            "method": "Kernel SHAP",
+            "nsamples": 32,
+            "background_count": 8,
+            "reference_meaning": "Expected residual prediction on the saved training-background sample; not the physics baseline or an observed measurement.",
+            "shap_explanation": "Relative to the background residual +0.068026 \u00b5s, Physics front / peak prediction at 1.14823 \u00b5s increases the residual by +0.007572 \u00b5s; Test-object capacitance at 850 pF decreases the residual by -0.271575 \u00b5s. All feature contributions sum to -0.295092 \u00b5s; adding the background reconstructs the ML correction."
+          },
+          {
+            "evidence_id": "case_3_crest_V",
+            "output_key": "crest_V",
+            "label": "Crest voltage",
+            "display_unit": "kV",
+            "display_scale": 0.001,
+            "physics_value": 1425000.0,
+            "ml_residual": 2597.568595842924,
+            "corrected_value": 1427597.568595843,
+            "target_value": 1425000.0,
+            "shap_status": "complete",
+            "shap_reason": null,
+            "contributions": [
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 2652.8569601469544,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 2.6528569601469543,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": 2227.43551206831,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": 2.22743551206831,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2494181967213124e-05,
+                "standardised_value": 6.373172345980298,
+                "contribution": -2224.679611087885,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.49418196721312,
+                "input_unit": "\u00b5s",
+                "display_contribution": -2.224679611087885,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": 322.17915079701885,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": 0.32217915079701887,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.148231973510127e-06,
+                "standardised_value": -1.558466244151124,
+                "contribution": 199.25269340345568,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.148231973510127,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.1992526934034557,
+                "direction": "increases"
+              },
+              {
+                "feature": "R_front_effective_ohm",
+                "value": 423.40909090909093,
+                "standardised_value": 0.31201665286098407,
+                "contribution": 191.10358475015093,
+                "label": "Effective circuit front resistance",
+                "display_input_value": 423.40909090909093,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.19110358475015093,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_divider_F",
+                "value": 5e-10,
+                "standardised_value": -0.39683503707007173,
+                "contribution": -174.28483332761036,
+                "label": "Divider capacitance",
+                "display_input_value": 500.00000000000006,
+                "input_unit": "pF",
+                "display_contribution": -0.17428483332761036,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_generator_F",
+                "value": 3.3333333333333335e-07,
+                "standardised_value": 0.30801731766806567,
+                "contribution": -125.84875387071774,
+                "label": "Erected generator capacitance",
+                "display_input_value": 0.33333333333333337,
+                "input_unit": "\u00b5F",
+                "display_contribution": -0.12584875387071776,
+                "direction": "decreases"
+              },
+              {
+                "feature": "expected_voltage_efficiency",
+                "value": 0.82,
+                "standardised_value": -0.2752082740134238,
+                "contribution": -120.32021590611717,
+                "label": "Expected voltage efficiency",
+                "display_input_value": 82.0,
+                "input_unit": "%",
+                "display_contribution": -0.12032021590611718,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_object_F",
+                "value": 8.5e-10,
+                "standardised_value": -0.4061297097759738,
+                "contribution": 76.205679278236,
+                "label": "Test-object capacitance",
+                "display_input_value": 850.0,
+                "input_unit": "pF",
+                "display_contribution": 0.076205679278236,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_crest_V",
+                "value": 1425000.0,
+                "standardised_value": -0.012376033800204536,
+                "contribution": -28.68251479333598,
+                "label": "Physics crest prediction",
+                "display_input_value": 1425.0,
+                "input_unit": "kV",
+                "display_contribution": -0.02868251479333598,
+                "direction": "decreases"
+              },
+              {
+                "feature": "N",
+                "value": 9.0,
+                "standardised_value": -0.3377383256131326,
+                "contribution": 15.862804271949768,
+                "label": "Active stages",
+                "display_input_value": 9.0,
+                "input_unit": "stages",
+                "display_contribution": 0.01586280427194977,
+                "direction": "increases"
+              },
+              {
+                "feature": "Rf_stage_actual_ohm",
+                "value": 47.04545454545455,
+                "standardised_value": 0.3868381262713719,
+                "contribution": 13.48975753014324,
+                "label": "Actual front resistance per stage",
+                "display_input_value": 47.04545454545455,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.01348975753014324,
+                "direction": "increases"
+              },
+              {
+                "feature": "U_charge_V",
+                "value": 193089.43089430896,
+                "standardised_value": 0.6539157236670966,
+                "contribution": -4.403779027842957,
+                "label": "Charging voltage per stage",
+                "display_input_value": 193.08943089430895,
+                "input_unit": "kV",
+                "display_contribution": -0.004403779027842957,
+                "direction": "decreases"
+              },
+              {
+                "feature": "R_tail_effective_ohm",
+                "value": 226.22950819672133,
+                "standardised_value": -0.21909488570219374,
+                "contribution": 1.010760819401907,
+                "label": "Effective circuit tail resistance",
+                "display_input_value": 226.22950819672133,
+                "input_unit": "\u03a9",
+                "display_contribution": 0.001010760819401907,
+                "direction": "increases"
+              }
+            ],
+            "explanation": "Physics gave 1425.000000 kV. The ML correction increased this by 2.597569 kV, producing 1427.597569 kV.",
+            "reference_residual": -423.60859920926237,
+            "sum_contributions": 3021.1771950521115,
+            "top_contributions": [
+              {
+                "feature": "L_effective_H",
+                "value": 1.85e-05,
+                "standardised_value": -0.090411198441838,
+                "contribution": 2652.8569601469544,
+                "label": "Effective loop inductance",
+                "display_input_value": 18.5,
+                "input_unit": "\u00b5H",
+                "display_contribution": 2.6528569601469543,
+                "direction": "increases"
+              },
+              {
+                "feature": "C_load_effective_F",
+                "value": 1.5000000000000002e-09,
+                "standardised_value": -0.7494136374133327,
+                "contribution": 2227.43551206831,
+                "label": "Effective load capacitance",
+                "display_input_value": 1500.0000000000002,
+                "input_unit": "pF",
+                "display_contribution": 2.22743551206831,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_tail_s",
+                "value": 5.2494181967213124e-05,
+                "standardised_value": 6.373172345980298,
+                "contribution": -2224.679611087885,
+                "label": "Physics tail prediction",
+                "display_input_value": 52.49418196721312,
+                "input_unit": "\u00b5s",
+                "display_contribution": -2.224679611087885,
+                "direction": "decreases"
+              },
+              {
+                "feature": "C_stray_F",
+                "value": 1.5e-10,
+                "standardised_value": -0.7927928504700983,
+                "contribution": 322.17915079701885,
+                "label": "Stray capacitance",
+                "display_input_value": 150.0,
+                "input_unit": "pF",
+                "display_contribution": 0.32217915079701887,
+                "direction": "increases"
+              },
+              {
+                "feature": "physics_front_s",
+                "value": 1.148231973510127e-06,
+                "standardised_value": -1.558466244151124,
+                "contribution": 199.25269340345568,
+                "label": "Physics front / peak prediction",
+                "display_input_value": 1.148231973510127,
+                "input_unit": "\u00b5s",
+                "display_contribution": 0.1992526934034557,
+                "direction": "increases"
+              }
+            ],
+            "other_contributions": -155.86751027574235,
+            "additivity_error": 7.457856554538012e-11,
+            "additivity_verified": true,
+            "method": "Kernel SHAP",
+            "nsamples": 32,
+            "background_count": 8,
+            "reference_meaning": "Expected residual prediction on the saved training-background sample; not the physics baseline or an observed measurement.",
+            "shap_explanation": "Relative to the background residual -0.423609 kV, Effective loop inductance at 18.5 \u00b5H increases the residual by +2.652857 kV; Physics tail prediction at 52.4942 \u00b5s decreases the residual by -2.224680 kV. All feature contributions sum to +3.021177 kV; adding the background reconstructs the ML correction."
+          }
+        ],
+        "model_support": {
+          "status": "extrapolated_diagnostic",
+          "reasons": [
+            "feature_outside_training_envelope:Rt_stage_actual_ohm",
+            "feature_outside_training_envelope:physics_tail_s"
+          ],
+          "joint_domain_validated": false,
+          "lab_validated": false,
+          "prediction_trusted": false
+        },
+        "model_status": "predicted_extrapolation",
+        "unmodelled_effects": [
+          "exact wiring",
+          "generator topology measurement",
+          "overshoot",
+          "environment",
+          "per-resistor heat"
+        ],
+        "shap_cached": true,
+        "shap_generation_seconds": 22.627005000016652
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_group": "HW_STAGE_ENERGY",
+        "status": "fail",
+        "checks": [
+          {
+            "constraint_id": "HW_STAGE_ENERGY",
+            "status": "fail",
+            "observed_value": 55925.29248463217,
+            "limit_value": 2500,
+            "reason_code": null,
+            "case_number": 1
+          },
+          {
+            "constraint_id": "HW_STAGE_ENERGY",
+            "status": "fail",
+            "observed_value": 55925.29248463217,
+            "limit_value": 2500,
+            "reason_code": null,
+            "case_number": 2
+          },
+          {
+            "constraint_id": "HW_STAGE_ENERGY",
+            "status": "fail",
+            "observed_value": 55925.29248463217,
+            "limit_value": 2500,
+            "reason_code": null,
+            "case_number": 3
+          }
+        ],
+        "explanation": "Stored energy per stage fails in 3 case checks. Case #1 stores 55.925 kJ against the 2.500 kJ limit. Resistor adjustments cannot reduce the initial stored energy at fixed stage count, charging voltage and capacitance."
+      },
+      {
+        "constraint_group": "HW_TOTAL_ENERGY",
+        "status": "fail",
+        "checks": [
+          {
+            "constraint_id": "HW_TOTAL_ENERGY",
+            "status": "fail",
+            "observed_value": 503327.6323616895,
+            "limit_value": 30000,
+            "reason_code": null,
+            "case_number": 1
+          },
+          {
+            "constraint_id": "HW_TOTAL_ENERGY",
+            "status": "fail",
+            "observed_value": 503327.6323616895,
+            "limit_value": 30000,
+            "reason_code": null,
+            "case_number": 2
+          },
+          {
+            "constraint_id": "HW_TOTAL_ENERGY",
+            "status": "fail",
+            "observed_value": 503327.6323616895,
+            "limit_value": 30000,
+            "reason_code": null,
+            "case_number": 3
+          }
+        ],
+        "explanation": "Stored energy for the whole generator fails in 3 case checks. Case #1 stores 503.328 kJ against the 30.000 kJ limit. Resistor adjustments cannot reduce the initial stored energy at fixed stage count, charging voltage and capacitance."
+      },
+      {
+        "constraint_group": "CIRCUIT_TOPOLOGY_VERIFIED",
+        "status": "unknown",
+        "checks": [
+          {
+            "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_circuit_evidence",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_circuit_evidence",
+            "case_number": 2
+          },
+          {
+            "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_circuit_evidence",
+            "case_number": 3
+          }
+        ],
+        "explanation": "Circuit topology approval: unknown in 3 checks across the returned alternatives; this does not establish hardware eligibility."
+      },
+      {
+        "constraint_group": "CAPACITOR_TRANSIENT_RATING",
+        "status": "unknown",
+        "checks": [
+          {
+            "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "lumped_model_cannot_certify_internal_stresses",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "lumped_model_cannot_certify_internal_stresses",
+            "case_number": 2
+          },
+          {
+            "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "lumped_model_cannot_certify_internal_stresses",
+            "case_number": 3
+          }
+        ],
+        "explanation": "Capacitor transient rating: unknown in 3 checks across the returned alternatives; this does not establish hardware eligibility."
+      },
+      {
+        "constraint_group": "RESISTOR_RATINGS",
+        "status": "unknown",
+        "checks": [
+          {
+            "constraint_id": "RESISTOR_front_front_100_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "RESISTOR_front_front_30_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "RESISTOR_front_front_30_2",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "RESISTOR_front_front_50_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "RESISTOR_tail_tail_200_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "RESISTOR_tail_tail_40_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "RESISTOR_tail_tail_10_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "RESISTOR_tail_tail_75_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 1
+          },
+          {
+            "constraint_id": "RESISTOR_front_front_50_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 2
+          },
+          {
+            "constraint_id": "RESISTOR_tail_tail_25_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 2
+          },
+          {
+            "constraint_id": "RESISTOR_front_front_150_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 3
+          },
+          {
+            "constraint_id": "RESISTOR_front_front_20_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 3
+          },
+          {
+            "constraint_id": "RESISTOR_front_front_500_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 3
+          },
+          {
+            "constraint_id": "RESISTOR_front_front_30_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 3
+          },
+          {
+            "constraint_id": "RESISTOR_tail_tail_200_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 3
+          },
+          {
+            "constraint_id": "RESISTOR_tail_tail_15_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 3
+          },
+          {
+            "constraint_id": "RESISTOR_tail_tail_5_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 3
+          },
+          {
+            "constraint_id": "RESISTOR_tail_tail_25_1",
+            "status": "unknown",
+            "observed_value": null,
+            "limit_value": null,
+            "reason_code": "unresolved_component_rating",
+            "case_number": 3
+          }
+        ],
+        "explanation": "Resistor voltage/current/energy ratings: unknown in 18 checks across the returned alternatives; this does not establish hardware eligibility."
+      }
+    ],
+    "interpretation": "SHAP explains how this fitted model allocates its residual prediction relative to a training-background sample. It does not establish physical causation or measured reality. Correlated and derived features share information; independent masking can create combinations that are not physical circuit configurations.",
+    "scope": "The present model uses synthetic workbook data. Environmental conditions, per-resistor heat and exact wiring effects were not learned; no SHAP contribution or causal explanation is invented for them. Extrapolated estimates remain marked as extrapolated.",
+    "eligibility_note": "Waveform ranking is separate from physical eligibility. Failed/unknown hardware checks and absent laboratory validation are retained."
+  },
+  "authority": "Explanation only; backend metrics and constraint verdicts remain authoritative"
+}

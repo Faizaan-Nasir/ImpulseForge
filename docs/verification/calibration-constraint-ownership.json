@@ -1,0 +1,892 @@
+{
+  "checked_at": "2026-10-11",
+  "status": "passed",
+  "module_request": {
+    "request": {
+      "equipment_profile_id": "workbook_benchmark_v1",
+      "equipment_inputs": {
+        "N_max": 15,
+        "U_stage_max_V": 200000,
+        "C_stage_F": 3e-06
+      },
+      "physics_mode": "calculator",
+      "inventory": {
+        "source": "inline",
+        "front": [
+          {
+            "type_id": "f50",
+            "nominal_ohm": 50,
+            "available_quantity": 4
+          }
+        ],
+        "tail": [
+          {
+            "type_id": "t25",
+            "nominal_ohm": 25,
+            "available_quantity": 4
+          }
+        ]
+      },
+      "target": {
+        "crest_V": 1425000
+      },
+      "load": {
+        "C_F": 8.5e-10
+      },
+      "setup": {
+        "divider_C_F": 5e-10,
+        "stray_C_F": 1.5e-10,
+        "stray_L_H": 1.85e-05,
+        "basic_capacitance_inclusion": "benchmark_omitted"
+      },
+      "charging_policy": {
+        "kind": "fixed",
+        "U_charge_V": 193089.43089430896
+      },
+      "search": {
+        "max_proposals": 8,
+        "dp_max_parts": 1,
+        "archive_stagnation_window": 10
+      },
+      "dp_tolerances": {
+        "front_relative": 0.02,
+        "tail_relative": 0.1
+      },
+      "ml_domain_policy": "diagnostic_extrapolation"
+    },
+    "candidate": {
+      "candidate_id": "23e1eab4f330c95a3e91fd02bb31acfe",
+      "context_hash": "5947cbedee5b1a82eec285fe89070bc923f74d8f16c22c172f4f5cb9ba83ed0f",
+      "proposal": {
+        "N": 9,
+        "Rf_required_ohm": 50.0,
+        "Rt_required_ohm": 25.0,
+        "proposal_index": 0,
+        "source": "manual"
+      },
+      "N": 9,
+      "U_charge_V": 193089.43089430896,
+      "front": {
+        "assembly_id": "8892b06ef6192e13cab5aa63",
+        "role": "front",
+        "equivalent_ohm": 50.0,
+        "nominal_fraction": {
+          "numerator": 50,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "f50",
+          "ohm": 50.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "front/f50-1",
+            "type_id": "f50",
+            "nominal_ohm": 50.0,
+            "node_a": "in",
+            "node_b": "out"
+          }
+        ],
+        "type_counts": {
+          "f50": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      },
+      "tail": {
+        "assembly_id": "3c7de9a4bcbd5333957af7cf",
+        "role": "tail",
+        "equivalent_ohm": 25.0,
+        "nominal_fraction": {
+          "numerator": 25,
+          "denominator": 1
+        },
+        "recipe": {
+          "op": "resistor",
+          "type_id": "t25",
+          "ohm": 25.0,
+          "children": []
+        },
+        "netlist": [
+          {
+            "component_id": "tail/t25-1",
+            "type_id": "t25",
+            "nominal_ohm": 25.0,
+            "node_a": "in",
+            "node_b": "out"
+          }
+        ],
+        "type_counts": {
+          "t25": 1
+        },
+        "total_resistors": 1,
+        "ratings_status": "unknown",
+        "search_guarantee": "All canonical recipes within completed bounded search"
+      }
+    }
+  },
+  "physics_unassessed": {
+    "constraints": [],
+    "hardware_feasible": null,
+    "metrics": {
+      "front_s": 1.2100299583068183e-06,
+      "tail_s": 5.2208887499999997e-05,
+      "crest_V": 1425000.0
+    }
+  },
+  "ml_unassessed": {
+    "constraints": [],
+    "hardware_feasible": null,
+    "corrected_metrics": {
+      "front_s": 1.2071976194677583e-06,
+      "tail_s": 5.201252652366061e-05,
+      "crest_V": 1430419.2992323423
+    }
+  },
+  "calibration": {
+    "owner": "calibration",
+    "evaluated_after": "physics_and_ml",
+    "constraints": [
+      {
+        "constraint_id": "HW_STAGES",
+        "origin": "frontend_input",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "N_min <= active stages <= N_max",
+        "observed_value": 9,
+        "limit_value": [
+          1,
+          15
+        ],
+        "unit": null,
+        "margin": null,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "HW_STAGE_CHARGE",
+        "origin": "frontend_input",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "value <= 200000.0",
+        "observed_value": 193089.43089430896,
+        "limit_value": 200000.0,
+        "unit": "V",
+        "margin": 6910.569105691044,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "HW_STAGE_ENERGY",
+        "origin": "problem_statement_fallback",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "value <= 2500",
+        "observed_value": 55925.29248463217,
+        "limit_value": 2500,
+        "unit": "J",
+        "margin": -53425.29248463217,
+        "status": "fail",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "HW_TOTAL_ENERGY",
+        "origin": "problem_statement_fallback",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "value <= 30000",
+        "observed_value": 503327.6323616895,
+        "limit_value": 30000,
+        "unit": "J",
+        "margin": -473327.6323616895,
+        "status": "fail",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "STOCK_front_f50",
+        "origin": "request_inventory",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "Independent role per-type per-stage/global quantity cap",
+        "observed_value": 1,
+        "limit_value": 4,
+        "unit": null,
+        "margin": 3.0,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "STOCK_tail_t25",
+        "origin": "request_inventory",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "Independent role per-type per-stage/global quantity cap",
+        "observed_value": 1,
+        "limit_value": 4,
+        "unit": null,
+        "margin": 3.0,
+        "status": "pass",
+        "reason_code": null
+      },
+      {
+        "constraint_id": "CIRCUIT_TOPOLOGY_VERIFIED",
+        "origin": "equipment_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "Registered topology/branch states have equipment evidence",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "unresolved_circuit_evidence"
+      },
+      {
+        "constraint_id": "CAPACITOR_TRANSIENT_RATING",
+        "origin": "equipment_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "Internal transient/reversal rating verified",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "lumped_model_cannot_certify_internal_stresses"
+      },
+      {
+        "constraint_id": "RESISTOR_front_f50_1",
+        "origin": "component_rating_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "All applicable per-component ratings verified",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "unresolved_component_rating"
+      },
+      {
+        "constraint_id": "RESISTOR_tail_t25_1",
+        "origin": "component_rating_evidence",
+        "kind": "hard",
+        "enforced_by": [
+          "calibration"
+        ],
+        "rule": "All applicable per-component ratings verified",
+        "observed_value": null,
+        "limit_value": null,
+        "unit": null,
+        "margin": null,
+        "status": "unknown",
+        "reason_code": "unresolved_component_rating"
+      }
+    ],
+    "hardware_feasible": false,
+    "known_constraints_satisfied": false,
+    "feasibility_windows": {
+      "owner": "calibration",
+      "scope": "necessary_analytical_energy_and_voltage_conditions_only",
+      "waveform_or_ml_feasibility_guaranteed": false,
+      "charge_policy": "fixed_during_this_search",
+      "actual_stage_count": 9,
+      "stage_capacitance_F": 3e-06,
+      "actual_charge_V": 193089.43089430896,
+      "fixed_charge_energy_feasible_stage_counts": [],
+      "fixed_charge_energy_infeasible": true,
+      "current_stage_capacitance_upper_F": 1.341074792243767e-07,
+      "current_stage_charge_upper_V": 40824.8290463863,
+      "required_current_stage_energy_rating_J": 55925.29248463217,
+      "required_current_total_energy_rating_J": 503327.6323616895,
+      "stage_options_with_charge_retuning": [
+        {
+          "N": 1,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 1737804.8780487806,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 2,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 868902.4390243903,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 3,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 579268.2926829269,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 4,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 434451.21951219515,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 5,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 347560.97560975613,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 6,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 289634.14634146343,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 7,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 248257.8397212544,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 8,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 217225.60975609758,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 9,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 193089.43089430896,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 10,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 173780.48780487807,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 11,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 157982.26164079824,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 12,
+          "charge_upper_V": 40824.8290463863,
+          "charge_required_from_expected_efficiency_V": 144817.07317073172,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 13,
+          "charge_upper_V": 39223.22702763681,
+          "charge_required_from_expected_efficiency_V": 133677.29831144464,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 14,
+          "charge_upper_V": 37796.44730092272,
+          "charge_required_from_expected_efficiency_V": 124128.9198606272,
+          "necessary_target_energy_window_exists": false
+        },
+        {
+          "N": 15,
+          "charge_upper_V": 36514.83716701107,
+          "charge_required_from_expected_efficiency_V": 115853.65853658538,
+          "necessary_target_energy_window_exists": false
+        }
+      ],
+      "expected_efficiency_crest_upper_at_N_max_V": 449132.49715423613,
+      "conditional_target_charge_at_N_max_V": 115853.65853658538,
+      "conditional_target_capacitance_upper_at_N_max_F": 2.980166204986149e-07,
+      "expected_efficiency_assumption": 0.82,
+      "suggestions": [
+        "At N=9 and fixed charge 193.089431 kV/stage, stage capacitance must be >0 and <= 0.134107 \u00b5F to satisfy both stored-energy limits. Retest timing and ML after changing capacitance.",
+        "At N=9 and 3.000000 \u00b5F/stage, charge must be >0 and <= 40.824829 kV/stage for energy/charging limits. This alone does not meet the requested crest.",
+        "If charge is deliberately retuned at N=15, the expected-efficiency formula requires 115.853659 kV/stage; capacitance must be <= 0.298017 \u00b5F, and the stage-voltage rating must also permit that charge.",
+        "To operate the current N=9 configuration unchanged, different equipment would need at least 55.925 kJ/stage and 503.328 kJ total stored-energy capability. These are required capabilities, not permission to change the retained limits.",
+        "Topology has no numerical safe window until its circuit/branch arrangement is verified and recorded; provide circuit evidence and external-front resistance.",
+        "Capacitor transient/reversal rating needs internal capacitor stress evidence and manufacturer ratings. Per-stage charging voltage is not a verified transient rating.",
+        "Resistor ratings require manufacturer/equipment evidence plus voltage, current, pulse energy, average power and temperature limits. Calculator mode supplies no current/voltage traces, so it cannot establish these rating windows; an exact, supported circuit evaluation or measurement is required."
+      ],
+      "component_required_ratings": [
+        {
+          "component_id": "stage_01/front/f50-1",
+          "role": "front",
+          "type_id": "f50",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_02/front/f50-1",
+          "role": "front",
+          "type_id": "f50",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_03/front/f50-1",
+          "role": "front",
+          "type_id": "f50",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_04/front/f50-1",
+          "role": "front",
+          "type_id": "f50",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_05/front/f50-1",
+          "role": "front",
+          "type_id": "f50",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_06/front/f50-1",
+          "role": "front",
+          "type_id": "f50",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_07/front/f50-1",
+          "role": "front",
+          "type_id": "f50",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_08/front/f50-1",
+          "role": "front",
+          "type_id": "f50",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_09/front/f50-1",
+          "role": "front",
+          "type_id": "f50",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_01/tail/t25-1",
+          "role": "tail",
+          "type_id": "t25",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_02/tail/t25-1",
+          "role": "tail",
+          "type_id": "t25",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_03/tail/t25-1",
+          "role": "tail",
+          "type_id": "t25",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_04/tail/t25-1",
+          "role": "tail",
+          "type_id": "t25",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_05/tail/t25-1",
+          "role": "tail",
+          "type_id": "t25",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_06/tail/t25-1",
+          "role": "tail",
+          "type_id": "t25",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_07/tail/t25-1",
+          "role": "tail",
+          "type_id": "t25",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_08/tail/t25-1",
+          "role": "tail",
+          "type_id": "t25",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        },
+        {
+          "component_id": "stage_09/tail/t25-1",
+          "role": "tail",
+          "type_id": "t25",
+          "minimum_required_ratings": {
+            "pulse_voltage_limit_V": null,
+            "pulse_current_limit_A": null,
+            "pulse_energy_limit_J": null,
+            "average_power_limit_W": null,
+            "temperature_limit_K": null
+          },
+          "status": "required_capability_only_not_equipment_approval"
+        }
+      ]
+    }
+  },
+  "run_id": "be180e0d698c4ebd900b7fd6b23b2bbb",
+  "event_order": [
+    "context",
+    "proposal",
+    "rejection",
+    "proposal",
+    "rejection",
+    "proposal",
+    "assembly",
+    "physics",
+    "correction",
+    "calibration",
+    "evaluation",
+    "complete"
+  ],
+  "stop_reason": "fixed_charge_energy_infeasible",
+  "ml_converged": false,
+  "counters": {
+    "proposals": 3,
+    "physics_evaluations": 1,
+    "ml_evaluations": 1,
+    "physics_predictions": 1,
+    "ml_predictions": 1,
+    "cache_hits": 0,
+    "unique_realised": 1
+  },
+  "returned_successful_predictions": 0,
+  "attempts": {
+    "run_id": "be180e0d698c4ebd900b7fd6b23b2bbb",
+    "total": 3,
+    "proposal_count": 3,
+    "offset": 0,
+    "limit": 100,
+    "ordering": "proposal then ML evaluation, from first to last; repeated proposals retained",
+    "items": [
+      {
+        "event_sequence": 2618,
+        "candidate_id": null,
+        "N": null,
+        "U_charge_V": null,
+        "Rf_actual_ohm": null,
+        "Rt_actual_ohm": null,
+        "front_recipe": null,
+        "tail_recipe": null,
+        "ml_metrics": null,
+        "ml_evaluation_number": null,
+        "prediction_source": "not_invoked",
+        "correction_status": "not_invoked",
+        "model_version": null,
+        "model_support": null,
+        "objective": null,
+        "waveform_within_tolerance": false,
+        "hardware_feasible": null,
+        "failed_hardware_constraints": [],
+        "eligible": null,
+        "reason_codes": [
+          "resistance_tolerance_unmet"
+        ],
+        "status": "ml_unavailable",
+        "attempt_number": 1,
+        "evaluation_in_attempt": 1,
+        "proposal": {
+          "N": 12,
+          "Rf_required_ohm": 14.70399960212,
+          "Rt_required_ohm": 98.3475147150122,
+          "proposal_index": 0,
+          "source": "SMAC3"
+        },
+        "attempt_status": "rejected"
+      },
+      {
+        "event_sequence": 2620,
+        "candidate_id": null,
+        "N": null,
+        "U_charge_V": null,
+        "Rf_actual_ohm": null,
+        "Rt_actual_ohm": null,
+        "front_recipe": null,
+        "tail_recipe": null,
+        "ml_metrics": null,
+        "ml_evaluation_number": null,
+        "prediction_source": "not_invoked",
+        "correction_status": "not_invoked",
+        "model_version": null,
+        "model_support": null,
+        "objective": null,
+        "waveform_within_tolerance": false,
+        "hardware_feasible": null,
+        "failed_hardware_constraints": [],
+        "eligible": null,
+        "reason_codes": [
+          "resistance_tolerance_unmet"
+        ],
+        "status": "ml_unavailable",
+        "attempt_number": 2,
+        "evaluation_in_attempt": 1,
+        "proposal": {
+          "N": 7,
+          "Rf_required_ohm": 187.1060063072384,
+          "Rt_required_ohm": 9.8185042554855,
+          "proposal_index": 1,
+          "source": "SMAC3"
+        },
+        "attempt_status": "rejected"
+      },
+      {
+        "event_sequence": 2625,
+        "candidate_id": "23e1eab4f330c95a3e91fd02bb31acfe",
+        "N": 9,
+        "U_charge_V": 193089.43089430896,
+        "Rf_actual_ohm": 50.0,
+        "Rt_actual_ohm": 25.0,
+        "front_recipe": {
+          "op": "resistor",
+          "type_id": "f50",
+          "ohm": 50.0,
+          "children": []
+        },
+        "tail_recipe": {
+          "op": "resistor",
+          "type_id": "t25",
+          "ohm": 25.0,
+          "children": []
+        },
+        "ml_metrics": {
+          "front_s": 1.2071976194677583e-06,
+          "tail_s": 5.201252652366061e-05,
+          "crest_V": 1430419.2992323423
+        },
+        "ml_evaluation_number": 1,
+        "prediction_source": "fresh_ml",
+        "correction_status": "predicted_diagnostic",
+        "model_version": "residual-tabpfn-v2-standardised-v1",
+        "model_support": {
+          "status": "supported_diagnostic",
+          "reasons": [],
+          "joint_domain_validated": false,
+          "lab_validated": false
+        },
+        "objective": {
+          "acceptance_policy": "crest_no_shortfall_v1",
+          "errors": {
+            "front": {
+              "unit": "s",
+              "target": 1.2e-06,
+              "predicted": 1.2071976194677583e-06,
+              "signed_delta": 7.1976194677583316e-09,
+              "absolute_delta": 7.1976194677583316e-09,
+              "percentage_delta": 0.5998016223131943,
+              "absolute_percentage_delta": 0.5998016223131943,
+              "allowed_delta": 3.6e-07,
+              "lower_limit": 8.4e-07,
+              "upper_limit": 1.5599999999999999e-06,
+              "allowed_negative_delta": 3.6e-07,
+              "allowed_positive_delta": 3.6e-07,
+              "normalised_error": 0.019993387410439812,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "tail": {
+              "unit": "s",
+              "target": 5e-05,
+              "predicted": 5.201252652366061e-05,
+              "signed_delta": 2.012526523660609e-06,
+              "absolute_delta": 2.012526523660609e-06,
+              "percentage_delta": 4.025053047321218,
+              "absolute_percentage_delta": 4.025053047321218,
+              "allowed_delta": 1e-05,
+              "lower_limit": 4e-05,
+              "upper_limit": 6e-05,
+              "allowed_negative_delta": 1e-05,
+              "allowed_positive_delta": 1e-05,
+              "normalised_error": 0.20125265236606088,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "crest": {
+              "unit": "V",
+              "target": 1425000.0,
+              "predicted": 1430419.2992323423,
+              "signed_delta": 5419.29923234228,
+              "absolute_delta": 5419.29923234228,
+              "percentage_delta": 0.38030170051524775,
+              "absolute_percentage_delta": 0.38030170051524775,
+              "allowed_delta": 42750.0,
+              "lower_limit": 1425000.0,
+              "upper_limit": 1467750.0,
+              "allowed_negative_delta": 0,
+              "allowed_positive_delta": 42750.0,
+              "normalised_error": 0.1267672335050826,
+              "within_tolerance": true,
+              "reason_code": null
+            }
+          },
+          "S": 0.20125265236606088,
+          "J": 0.11600442442719443,
+          "cost": 0.16753565702407508,
+          "crest_minimum_satisfied": true,
+          "crest_shortfall_V": 0,
+          "calibration_required": false,
+          "waveform_within_tolerance": true
+        },
+        "waveform_within_tolerance": true,
+        "hardware_feasible": false,
+        "failed_hardware_constraints": [
+          "HW_STAGE_ENERGY",
+          "HW_TOTAL_ENERGY"
+        ],
+        "eligible": false,
+        "reason_codes": [],
+        "status": "thresholds_met",
+        "known_constraints_satisfied": false,
+        "constraint_owner": "calibration",
+        "attempt_number": 3,
+        "evaluation_in_attempt": 1,
+        "proposal": {
+          "N": 9,
+          "Rf_required_ohm": 50.0,
+          "Rt_required_ohm": 25.0,
+          "proposal_index": 2,
+          "source": "SMAC3"
+        },
+        "attempt_status": "evaluated"
+      }
+    ]
+  }
+}

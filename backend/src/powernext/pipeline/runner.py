@@ -3,6 +3,8 @@ from datetime import UTC, datetime
 from time import monotonic
 
 from powernext.assembly.cp_sat import AssemblyEngine
+from powernext.calibration.constraints import assess
+from powernext.calibration.windows import feasibility_windows
 from powernext.contracts.models import DomainError
 from powernext.correction.model import ResidualModel
 from powernext.optimisation.objective import Archive, evaluate_objective, objective_order
@@ -14,6 +16,7 @@ from powernext.physics.plot_reconstruction import bundle
 
 def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluator=None):
     req = context.request
+    run_windows = feasibility_windows(context)
     start = monotonic()
     epoch_started_at = datetime.now(UTC).isoformat()
     archive = Archive(req.objective.secondary_preference, require_waveform=True)
@@ -56,7 +59,8 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
                 cache[record["candidate_id"]] = cached
                 archive.add(cached)
                 prediction_archive.add(cached)
-                successful_archive.add(cached)
+                if cached.get("calibration", {}).get("known_constraints_satisfied", True):
+                    successful_archive.add(cached)
         if record["pipeline_stage_name"] in ("evaluation", "rejection") and hasattr(
             proposer, "replay"
         ):
@@ -178,7 +182,7 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
                     event(
                         "physics",
                         candidate_id=identity,
-                        constraints=baseline["constraints"],
+                        constraints=[],
                         output=baseline,
                         duration_seconds=physics_duration,
                     )
@@ -208,8 +212,17 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
                         retry=retry,
                         duration_seconds=correction_duration,
                     )
+                    calibration_started = monotonic()
+                    calibration = assess(context, candidate, baseline, correction)
+                    candidate_timings["calibration"] = timed_stage(
+                        "calibration", calibration_started
+                    )
+                    run_windows = calibration["feasibility_windows"]
+                    event("calibration", candidate_id=identity, output=calibration)
                     failed_checks = {
-                        c["constraint_id"] for c in baseline["constraints"] if c["status"] == "fail"
+                        c["constraint_id"]
+                        for c in calibration["constraints"]
+                        if c["status"] == "fail"
                     }
                     # Stored energy depends on frozen N/charge/capacitance, not the resistor pair.
                     # Retain the failed evaluation so its settings/checks remain inspectable.
@@ -250,6 +263,7 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
                         "candidate_id": identity,
                         "candidate": candidate.model_dump(mode="json"),
                         "physics": baseline,
+                        "calibration": calibration,
                         "correction": correction,
                         "objective": objective,
                         "eligible": eligible,
@@ -281,6 +295,36 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
                             },
                         ),
                     }
+                    if objective is not None:
+                        # Constraint violations feed the optimiser even in diagnostic
+                        # mode; unknown evidence is reported, never converted to pass.
+                        violations = [
+                            c for c in calibration["constraints"] if c["status"] == "fail"
+                        ]
+                        penalty = 0.0
+                        for check in violations:
+                            observed, limit = check.get("observed_value"), check.get("limit_value")
+                            penalty += (
+                                min(
+                                    1.0,
+                                    max(
+                                        0.0,
+                                        (1 - observed / limit)
+                                        if check["constraint_id"] == "REQUEST_MIN_EFFICIENCY"
+                                        else (observed / limit - 1),
+                                    ),
+                                )
+                                if isinstance(observed, (int, float))
+                                and isinstance(limit, (int, float))
+                                and limit > 0
+                                else 1.0
+                            )
+                        evaluation["cost"] = (
+                            1 + penalty / (1 + penalty) + 0.001 * objective["cost"]
+                            if violations
+                            else objective["cost"]
+                        )
+                        evaluation["cost_basis"] = "calibration_constraints_then_ml_waveform"
                     if objective is None:
                         rejections["ml_prediction_unavailable"] += 1
                     cache[identity] = evaluation
@@ -295,7 +339,8 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
             )
             improved = archive.add(evaluation)
             improved = prediction_archive.add(evaluation) or improved
-            improved = successful_archive.add(evaluation) or improved
+            if evaluation.get("calibration", {}).get("known_constraints_satisfied", True):
+                improved = successful_archive.add(evaluation) or improved
             if req.purpose == "diagnostic" and evaluation.get("objective"):
                 key = list(objective_order(evaluation["objective"]))
                 if diagnostic_best_key is None or key < diagnostic_best_key:
@@ -322,6 +367,13 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
             break
         if req.purpose == "diagnostic" and len(successful_archive.best()) == 3:
             stop = "three_ml_waveforms_within_tolerance"
+            break
+        if (
+            evaluator is None
+            and counters["ml_evaluations"]
+            and run_windows["fixed_charge_energy_infeasible"]
+        ):
+            stop = "fixed_charge_energy_infeasible"
             break
         if repeated >= req.search.repeat_window:
             stop = "repeated_candidates"
@@ -356,9 +408,11 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
         "returned_predictions": len(predicted),
         "prediction_shortfall_reason": None
         if len(predicted) == 3
-        else "fewer_than_three_distinct_successful_ml_predictions",
+        else "fewer_than_three_distinct_ml_matches_without_known_constraint_failures",
         "ml_converged": len(predicted) == 3
         and all(e["objective"]["waveform_within_tolerance"] for e in predicted),
+        "feasibility_windows": run_windows,
+        "constraint_owner": "calibration",
         "calibration_basis": "ML corrected metrics only; no physics-only objective fallback",
         "loop_policy": "ml_correction_required_v1",
         "counters": counters,

@@ -46,7 +46,7 @@ def test_one_match_plus_failures_returns_one_success_with_shortfall(context, tmp
     assert len(result["evaluated_setups"]) == 3
     assert (
         result["prediction_shortfall_reason"]
-        == "fewer_than_three_distinct_successful_ml_predictions"
+        == "fewer_than_three_distinct_ml_matches_without_known_constraint_failures"
     )
 
 
@@ -121,19 +121,21 @@ def test_hardware_verdict_does_not_skip_ml(request_data, tmp_path, charge):
     assert result["returned_recommendations"] == 0
     assert result["counters"]["ml_evaluations"] == 1
     assert result["counters"]["physics_evaluations"] == 1
-    assert result["counters"]["cache_hits"] == 3
+    assert result["counters"]["cache_hits"] == (0 if charge == 190000 else 3)
     candidates = store.list("candidate")
     assert len(candidates) == 1
     performance = candidates[0][1]["performance"]
     assert performance["correction_status"] == "predicted_diagnostic"
     assert performance["corrected"] is not None
     assert performance["runtime"]["stage_seconds"]["physics"] > 0
-    assert result["performance"]["cache_hit_fraction"] == 0.75
+    assert result["performance"]["cache_hit_fraction"] == (0 if charge == 190000 else 0.75)
     assert result["performance"]["elapsed_seconds"] > 0
     evaluation_events = [
         e for e in store.event_page(ident, 0, 100) if e["pipeline_stage_name"] == "evaluation"
     ]
-    assert [e["cache_hit"] for e in evaluation_events] == [False, True, True, True]
+    assert [e["cache_hit"] for e in evaluation_events] == (
+        [False] if charge == 190000 else [False, True, True, True]
+    )
     checks = {c["constraint_id"]: c for c in candidates[0][1]["physics"]["constraints"]}
     assert checks["HW_STAGE_ENERGY"]["status"] == ("fail" if charge == 190000 else "pass")
 
@@ -202,6 +204,7 @@ def test_missing_ml_prediction_never_uses_physics_as_calibration_objective(conte
 
 
 def test_loop_continues_after_three_undervoltage_ml_predictions(request_data, tmp_path):
+    request_data["equipment_inputs"]["C_stage_F"] = 0.125e-6
     from powernext.contracts.models import Proposal
 
     request_data["search"]["max_proposals"] = 6
@@ -265,6 +268,7 @@ def test_undervoltage_budget_stop_is_not_convergence(context, tmp_path):
 
 
 def test_loop_uses_corrected_metrics_and_stops_at_three_ml_matches(request_data, tmp_path):
+    request_data["equipment_inputs"]["C_stage_F"] = 0.125e-6
     from powernext.contracts.models import Proposal
 
     request_data["inventory"]["front"] = [
@@ -305,7 +309,7 @@ def test_loop_uses_corrected_metrics_and_stops_at_three_ml_matches(request_data,
     assert result["stop_reason"] == "three_ml_waveforms_within_tolerance"
     assert result["ml_converged"] and result["returned_predictions"] == 3
     assert result["returned_recommendations"] == 0
-    assert proposer.costs == [1, 1, 1]
+    assert proposer.costs == [0, 0, 0]
     assert result["counters"]["physics_predictions"] == result["counters"]["ml_predictions"] == 3
     for e in result["predicted_setups"]:
         assert e["objective_origin"] == "residual_corrected" and e["objective"]["S"] == 0

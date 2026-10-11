@@ -1,6 +1,6 @@
 # Marx Generator: Technical Implementation Specification
 
-Version 1.12 · 11 October 2026 · Status: implementation contract; hardware and measured-data verification pending.
+Version 1.13 · 11 October 2026 · Status: implementation contract; hardware and measured-data verification pending.
 
 This document specifies a transparent backend for recommending the three best distinct evaluated Marx-generator setups. It combines the project's latest architecture decisions with the supplied physics formula book. The React/Tailwind dashboard is now implemented; Section 18 specifies its integration. Every implementation module below has explicit inputs, outputs, constraints, standalone fixtures and acceptance criteria, so an AI agent can implement it without waiting for adjacent modules.
 
@@ -70,7 +70,7 @@ Every serialisable record includes `schema_version`, `record_id`, creation time,
 | `Proposal` | `N`, `Rf_required_ohm`, `Rt_required_ohm`, proposal source, proposal index, SMAC trial metadata |
 | `Assembly` | Role, exact nominal resistance, topology tree, explicit netlist, leaf IDs, per-type quantities, assembly counts, approvals, ratings metadata and search guarantee |
 | `RealisedCandidate` | Proposal, actual front/tail assemblies, `U_charge_V`, `N`, stage topology, per-stage replication manifest, canonical identity |
-| `PhysicsEvaluation` | Effective circuit parameters; waveform metrics/trace; efficiency; stage energies; component stresses; assumptions; numerical diagnostics; constraint report |
+| `PhysicsEvaluation` | Effective circuit parameters; waveform metrics/trace; efficiency; stage energies; component stresses; assumptions; numerical diagnostics; numerical diagnostics; no physical verdict before calibration |
 | `CorrectionEvaluation` | Baseline ID/hash; feature values/provenance; three residuals; corrected outputs; model support; validated uncertainty if available; explanation records |
 | `ObjectiveEvaluation` | Signed/absolute/percentage/normalised errors; worst error; weighted mean; optimiser cost; archive key; tolerance flags |
 | `CandidateEvaluation` | Full nested realised/physics/correction/objective records; eligibility; all constraints; durations; rejection reasons |
@@ -88,7 +88,7 @@ Use the same structure at every module boundary:
   "source_value": 2500,
   "unit": "J",
   "kind": "hard",
-  "enforced_by": ["physics", "final_eligibility"],
+  "enforced_by": ["calibration"],
   "rule": "stage_energy_J <= 2500",
   "observed_value": 625,
   "limit_value": 2500,
@@ -275,7 +275,7 @@ Freeze a deep immutable context and hash it. No component can mutate the resolve
 Charging policy:
 
 1. `fixed`: use a supplied validated `U_charge_V` throughout optimisation. This is the default integration policy.
-2. `seed_then_fixed`: derive initial charge from the initial physics stage estimate and expected efficiency, validate it and freeze it before SMAC starts. Persist the derivation and frozen value.
+2. `seed_then_fixed`: derive initial charge from the initial physics stage estimate and expected efficiency, validate its numeric domain and freeze it before SMAC starts. Calibration evaluates its physical limits after ML. Persist the derivation and frozen value.
 3. Other deterministic recomputation policies require a registered implementation and version. They still do not add a free SMAC control. Expose the resulting charge for every proposal.
 
 Avoid recomputing exact-model charge simply to force physics crest to the target on every candidate unless that is explicitly the desired operating policy: it changes the optimisation problem and can make the baseline crest objective constant by construction.
@@ -537,7 +537,7 @@ adiabatic single-pulse rise estimate: delta_T = E_pulse / C_theta
 
 Use a validated thermal model and initial thermal state for repeated heating. Without thermal constants or a temperature sensor, return `temperature_estimate_K=null`, `thermal_status=unknown`. Do not translate pulse energy into a fabricated temperature. Preserve charging versus discharge branch phases; charging resistor heat is not identical to impulse front-resistor heat.
 
-Stress/rating checks remain hardware constraints and must not be delegated to ML. If temperature-dependent resistance is implemented, declare an electrothermal solve/update policy and physics version; the constant-R formulas no longer capture that feedback automatically.
+Physics calculates numerical stresses only. Calibration applies stress/rating verdicts after physics and ML; they must not be delegated to ML. If temperature-dependent resistance is implemented, declare an electrothermal solve/update policy and physics version; the constant-R formulas no longer capture that feedback automatically.
 
 ### 7.2 Residual-only ML contract
 
@@ -712,20 +712,23 @@ These tolerances are not taken from the PDF's last-page hardware table. Store ex
 Default SMAC minimises a finite scalar prioritising the worst output:
 
 ```text
-For hardware-feasible, ML-supported, valid predictions:
-    cost = S / (1 + S)                   # in [0,1)
-For recommendation runs with hardware-failed/unknown or unsupported predictions,
-or for DP-unresolved/invalid/unevaluable proposals:
-    cost = 2                            # infeasible/unevaluable penalty
-For diagnostic runs with a valid forward evaluation but ineligible hardware/model evidence:
-    cost = 1 + S / (1 + S)               # in [1,2), never preferable to eligible [0,1)
+With valid ML predictions and no known physical failure:
+    cost = S / (1 + S)
+With valid ML predictions and known physical failures:
+    p = sum(min(1, normalised_violation) for each failed calibration check)
+    cost = 1 + p / (1 + p) + 0.001 * S / (1 + S)
+Missing ML or unresolved/invalid/unevaluable proposals:
+    cost = 2
+normalised_violation = max(0, value / upper_limit - 1)
+For minimum efficiency: max(0, 1 - value / minimum)
+Nonnumeric failed constraints contribute 1.
 ```
 
 Every completed forward-physics prediction must be followed by the correction engine, regardless of hardware feasibility and run purpose. The calibration objective is calculated **only** from ML-corrected metrics. If ML cannot produce a valid prediction, record `objective=null`, `objective_origin=null`, `cost_basis=ml_prediction_unavailable`, and cost 2. Never fall back to raw physics to claim ML convergence or select calibrated alternatives. Keep raw physics available for inspection and comparison.
 
 The frontend defaults to `ml_domain_policy=diagnostic_extrapolation`, with an explicit checkbox to select strict-domain inference. For diagnostic runs, numeric values outside the training envelope or an unseen stage capacitance may still invoke the fitted model, with `status=predicted_extrapolation`, `support.status=extrapolated_diagnostic`, original reason codes, and `prediction_trusted=false`. This does not validate extrapolation. Missing model artifacts, a mismatched baseline mode/profile, and unsupported load models still prevent an incompatible prediction. Strict policy and recommendation-mode inference retain the training-range rejection. No synthetic data currently teaches environmental corrections: expose `environment_effects.status=not_modelled` and the requested conditions; do not claim a learned response to temperature, humidity or pressure. Changing the request/environment changes the context hash and invalidates candidate reuse.
 
-This bounded monotone transform preserves `S` ordering and ensures a hardware violation cannot appear preferable to an eligible candidate. Keep individual failure codes and uncertainty; penalty cost is not a predicted waveform. The archive uses lexicographic ordering:
+This scalar separates known physical failures from candidates without known failures and preserves waveform feedback. Unknown evidence stays unknown; it does not create equipment approval. Recommendation eligibility still requires all hard checks to pass, supported inference and laboratory validation. Keep individual failure codes and uncertainty; penalty cost is not a predicted waveform. The archive uses lexicographic ordering:
 
 ```text
 (not crest_minimum_satisfied, S, J, total_parts_per_stage, N, U_charge/U_stage_max, canonical_candidate_id)
@@ -1058,7 +1061,7 @@ For the target fixture, the fitted rates are approximately `alpha=14657.59300368
 | `POST /v1/requests/validate` | `RunRequest` | Resolved context and full validation/constraint manifest |
 | `POST /v1/physics/inverse` | Context plus stage count | Ideal proposal, charge derivation, flags |
 | `POST /v1/assemblies/realise` | Context plus proposal | Exact actual wiring and DP/CP-SAT reports |
-| `POST /v1/physics/evaluate` | Context plus realised candidate | Baseline, trace references, component stresses and constraints |
+| `POST /v1/physics/evaluate` | Context plus realised candidate | Baseline, trace references and numerical component stresses; constraints empty, hardware verdict null |
 | `POST /v1/corrections/predict` | Context, realised candidate, matching baseline | Residuals, corrected values, support and explanation reference |
 | `POST /v1/objectives/evaluate` | Context plus corrected candidate | All deviations, score, eligibility and ordering key |
 | `POST /v1/runs` | `RunRequest`, idempotency key | `202` with run ID, resolved-context reference and status URL |
@@ -1072,6 +1075,7 @@ For the target fixture, the fitted rates are approximately `alpha=14657.59300368
 | `GET /v1/candidates/{id}` | Candidate ID | All nested input/output/constraint records |
 | `GET /v1/candidates/{id}/performance` | Candidate ID | Saved candidate performance report; explicit unavailable status for older records or minimal fixtures |
 | `GET /v1/candidates/{id}/generator-stages` | Candidate ID | Stage-indexed capacitor and resistor manifests |
+| `POST /v1/calibration/evaluate` | Request plus exact realised candidate | Physics → ML → calibration report, physical verdicts and feasible input/rating windows |
 | `GET /v1/candidates/{id}/explanations` | Candidate ID | Per-output attributions and physical heat evidence |
 | `GET /v1/candidates/{id}/waveforms/{kind}` | `ml_parameter_reconstruction`, `physics` or `measured` | Numeric SI samples, curve origin, fit/extraction metadata and availability |
 | `POST /v1/runs/{id}/cancel` | Run ID | Cancellation acknowledgement and preserved archive |
@@ -1293,7 +1297,7 @@ Paths below are **required future implementation deliverables**, not files claim
 | 4 / A: Resolve context | `pydantic`, standard `hashlib`/`json` | `src/powernext/profiles/registry.py`, `resolve.py`, `inventory.py`; SI validation, frozen context/hash, derived stock/bounds and full constraint manifest; `tests/test_context.py` |
 | 5 / B: Physics | `numpy`, `scipy` | `src/powernext/physics/inverse.py`, `forward.py`, `waveform.py`, `topology.py`; calculator and analytic/ODE adapters; extracted feature/provenance manifest; waveform/energy diagnostics; `tests/test_physics.py` and benchmark/reference fixtures |
 | 6 / C: Assemblies | Standard `fractions`/`itertools`; `ortools` | `src/powernext/assembly/dp.py`, `canonical.py`, `netlist.py`, `cp_sat.py`; exact tree/netlist reconstruction, stock-aware option pools, solver reports; `tests/test_assembly.py`, bounded enumeration comparisons and arbitrary-inventory fixtures |
-| 7.1 / D: Electrical/thermal stress | `numpy`, `scipy` | `src/powernext/physics/stress.py`, `thermal.py`; per-resistor/per-stage voltage/current/power/energy, thermal states, rating verdicts and unknown-data reports; `tests/test_stress.py` |
+| 7.1 / D: Electrical/thermal stress | `numpy`, `scipy` | `src/powernext/physics/stress.py`, `thermal.py`; per-resistor/per-stage numerical voltage/current/power/energy and thermal states; rating verdicts belong to calibration; `tests/test_stress.py` |
 | 7.2–7.3 / D: Residual fitting | `pandas`, `openpyxl`, `scikit-learn`, `tabpfn`, `torch` | `src/powernext/correction/data.py`, `features.py`, `targets.py`, `model.py`, `support.py`; six category/output regressors; feature/target/baseline manifests; `ModelFitReport`; validation/test metrics and leakage/unit tests; fitted artefacts with model hashes |
 | 7.3.1: Optional TabM experiment | `tabm`, `torch`, `scikit-learn` | Separate experiment config; epoch/validation curves, best checkpoint, selected/stopped epoch and seed reports; comparable held-out metrics; no automatic replacement of the primary model |
 | 7.4 / D: Explanations | `shap`, `numpy` | `src/powernext/correction/explain.py`; per-output contributions/reference/background metadata; additivity checks; links to physical heat evidence; missing-feature/unknown-temperature fixtures |
@@ -1339,7 +1343,7 @@ Optional fields are `observed_metrics: {front_s, tail_s, crest_V}` and `observat
 ```mermaid
 flowchart TD
     Input[Complete scenario plus candidate or proposal] --> Realise[Validate exact inventory wiring]
-    Realise --> Physics[Physics baseline and constraints]
+    Realise --> Physics[Physics numerical baseline]
     Physics --> ML[Supported residual correction or explicit unavailable outcome]
     Physics --> Report[Performance report for this candidate]
     ML --> Report
@@ -1459,7 +1463,7 @@ The supplied Claude artifact is the visual reference for the implemented React d
 
 **Gemini stack/environment:** `google-genai` (2.29.0 in the current lock) and Pydantic structured output. `GEMINI_MODEL` and secret `GEMINI_API_KEY` are read from backend environment/ignored `backend/.env`, with an example file delivered. A bounded provider timeout and configured local CORS origins are service settings. No frontend key field or client-side Gemini call exists. Bootstrap exposes only provider configured status and model name.
 
-Gemini receives compact persisted backend evidence: targets/tolerances, actual N/charge/resistances/counts, S/J/deviations, constraints, support provenance and recommendation shortfall. The backend fixes recommendation ID and numerical score rows. Gemini provides explanatory narrative with validated candidate/evidence references and never authorises hardware or changes the optimisation result. Successful explanations are cached by evidence/model/prompt hash. Missing credentials, invalid structured output and expected provider errors return explicit statuses with deterministic evidence; provider error details and keys are not exposed. Generated prose is explanatory and recorded metrics remain authoritative. Live generation cannot be claimed before a configured-key call succeeds.
+Gemini receives compact persisted backend evidence: targets/tolerances, actual N/charge/resistances/counts, S/J/deviations, constraints, support provenance and recommendation shortfall. The backend fixes recommendation ID and numerical score rows. Gemini provides explanatory narrative with validated candidate/evidence references and never authorises hardware or changes the optimisation result. Successful explanations are cached by evidence/model/prompt hash. Missing credentials, invalid structured output and expected provider errors return explicit statuses with the full computed physics/ML/SHAP explanation; safe reason codes and HTTP status are exposed, while raw provider errors and keys are suppressed. Generated prose is explanatory and recorded metrics remain authoritative. Live generation cannot be claimed before a configured-key call succeeds.
 
 **Deliverables/standalone checks:** `frontend/src/` components/API bindings, environment examples, both dependency locks, root `npm run dev` launcher, `backend/src/powernext/dashboard/`, generated schemas/OpenAPI, `backend/tests/test_dashboard.py`, frontend tests/build/audit, live HTTP/dashboard browser evidence and saved preview. Run the frontend tests without backend services; summary tests use evidence fixtures/mocked Gemini. See [Dashboard Implementation](Dashboard_Implementation.md) for acceptance criteria. Physical equipment and model-validation gaps continue to produce explicit shortfalls, independent of the dashboard's presentation.
 
@@ -1470,7 +1474,7 @@ The dashboard initial mode and Workbook generator preset use **Calculator**, mat
 
 Before the optimisation results, display a separate input-driven **Workbook baseline · before optimisation** card. `POST /v1/dashboard/workbook-baseline` accepts `{request: RunRequest}` and returns `WorkbookBaseline`: resolved context, derived continuous resistances, stage/charge/resistor settings, inventory verdict, physical and corrected metrics, exact buildable single-resistor recipes, constraint checks and diagnostic performance. It explicitly applies worksheet stage sizing, charge sizing and positive Excel five-ohm rounding. It does not read the cached outputs or hardcode 50/25 ohms or 1425 kV. The current eleven default inputs produce N=9, charge=193.089430894 kV/stage, Rf=50 ohms/stage, Rt=25 ohms/stage and baseline 1.210029958 microseconds / 52.208887500 microseconds / 1425.000000000 kV.
 
-Only claim a buildable reference if those exact single resistors can be supplied from the input inventory at the selected N. Otherwise return a mathematical reference with `status=reference_only`, no fictional recipe and no ML inference. Frontend energy checks remain visible and locked. Each reference is diagnostic and never enters the eligible optimisation archive. In Calculator search, seed SMAC with the rounded physics proposal before continuous and fallback stock proposals when the values fit declared search bounds. Diagnostic evaluation invokes supported ML within the worker loop; post-run diagnostic inspection remains compatible with older persisted records.
+Only claim a buildable reference if those exact single resistors can be supplied from the input inventory at the selected N. Otherwise return a mathematical reference with `status=reference_only`, no fictional recipe and no ML inference. Calibration energy verdicts remain visible; the retained energy-limit inputs remain read-only. Each reference is diagnostic and never enters the eligible optimisation archive. In Calculator search, seed SMAC with the rounded physics proposal before continuous and fallback stock proposals when the values fit declared search bounds. Diagnostic evaluation invokes supported ML within the worker loop; post-run diagnostic inspection remains compatible with older persisted records.
 
 `npm run dev` now starts the local API with source reload so API edits reach the running dashboard. Model artifacts, stored contexts and historical runs are preserved.
 
@@ -1479,7 +1483,7 @@ Only claim a buildable reference if those exact single resistors can be supplied
 
 `physics_predictions` counts successfully completed forward predictions; `ml_evaluations` counts correction calls and domain checks; `ml_predictions` counts actual valid corrected triplets. Failed numerical forward attempts remain separately counted by `physics_evaluations`. Fresh valid predictions are followed immediately by correction. Duplicate realised configurations in the same immutable context reuse their complete physics/ML evaluation; cache hits are not fresh inference.
 
-Maintain three archives. `predicted_setups` contains up to three distinct configurations whose actual ML-corrected metrics pass every waveform threshold, with exact inventory recipes and original hard-constraint/domain verdicts. `recommendations` contains only waveform matches that are separately eligible. `evaluated_setups` retains the best three evaluated ML predictions for diagnostic search progress, including failed waveform matches; those do not fill successful dashboard slots. Calibration/stagnation progress comes from ML objectives, not raw physics. In diagnostic mode, stop with `stop_reason=three_ml_waveforms_within_tolerance` when three distinct successful setups exist. Set `ml_converged=true` for that prediction criterion only. Recommendation mode still requires the eligible archive criterion. Keep all deterministic iteration/evaluation/time/duplicate/stagnation limits; budget stopping with fewer than three matches is not convergence. `returned_predictions`, `returned_successful_predictions`, `prediction_shortfall_reason`, `calibration_basis` and the existing recommendation shortfall expose the distinction. Exact equality is not promised. Plotted ML waveforms remain parameter reconstructions from these three targets, not learned pointwise traces.
+Maintain three archives. `predicted_setups` contains up to three distinct configurations whose actual ML-corrected metrics pass every waveform threshold and have no known physical-constraint failures, with exact inventory recipes and calibration/domain verdicts. `recommendations` contains only waveform matches that are separately eligible. `evaluated_setups` retains the best three evaluated ML predictions for diagnostic search progress, including failed waveform matches; those do not fill successful dashboard slots. Calibration/stagnation progress comes from ML objectives, not raw physics. In diagnostic mode, stop with `stop_reason=three_ml_waveforms_within_tolerance` when three distinct successful setups exist. Set `ml_converged=true` only for three distinct waveform matches without known physical failures. Unknown ratings remain diagnostic and prevent verified hardware recommendations. Recommendation mode still requires the eligible archive criterion. Keep all deterministic iteration/evaluation/time/duplicate/stagnation limits; budget stopping with fewer than three matches is not convergence. `returned_predictions`, `returned_successful_predictions`, `prediction_shortfall_reason`, `calibration_basis` and the existing recommendation shortfall expose the distinction. Exact equality is not promised. Plotted ML waveforms remain parameter reconstructions from these three targets, not learned pointwise traces.
 
 Environmental correction remains a data-dependent work item. When environmental measurements and matched outputs become available, extend the feature/training contract, fit and validate a new residual artifact, and version its support envelope. Accepting environment fields or calculating component stress does not make the present synthetic residual model environment-aware.
 
@@ -1526,7 +1530,7 @@ Restart the backend after editing `.env`, then refresh the dashboard to load the
 
 **Definition of success:** use full-precision corrected ML outputs to evaluate the request's front/peak and tail bands and the crest interval `[required crest, required crest + upper allowance]`. Only distinct realised configurations passing all three can populate `predicted_setups` and the dashboard's **Top three successful configurations** comparison. One passing setup is insufficient. The archive orders qualifying setups by the existing objective and deterministic tie preferences; this is the best three found before stopping, not a global-optimality guarantee. A repeated cached configuration cannot fill another slot.
 
-Keep waveform success separate from hardware/model eligibility. A diagnostic waveform match may fail energy checks or lack laboratory validation; preserve those original verdicts. `recommendations` additionally requires eligibility. Never relax constraints, duplicate a configuration or display a failed waveform prediction as a successful alternative to reach three. If a budget, cancellation, stagnation or exhausted search stops the run with fewer than three matches, expose the available count, `ml_converged=false`, the actual stop reason and `prediction_shortfall_reason=fewer_than_three_distinct_successful_ml_predictions`.
+Keep waveform success separate from hardware/model eligibility. A failed-energy waveform match remains a diagnostic attempt and never counts toward convergence. A match with unknown rating evidence or absent laboratory validation remains diagnostic; preserve those verdicts. `recommendations` additionally requires eligibility. Never relax constraints, duplicate a configuration or display a failed waveform prediction as a successful alternative to reach three. If a budget, cancellation, stagnation or exhausted search stops the run with fewer than three matches, expose the available count, `ml_converged=false`, the actual stop reason and `prediction_shortfall_reason=fewer_than_three_distinct_ml_matches_without_known_constraint_failures`.
 
 **Backend deliverables and independent checks:** Python/FastAPI, existing SQLite/SQLAlchemy event storage and the existing objective evaluator. `optimisation/objective.py` provides a waveform-filtered archive; `pipeline/runner.py` keeps successful, eligible and diagnostic progress archives. Persist `returned_successful_predictions` and `top_three_successful_ids` during execution; final results include `predicted_setups`, `evaluated_setups`, `returned_predictions`, `returned_successful_predictions` and `attempts_url`. `dashboard/view.py` filters unsuccessful records out of both current and legacy dashboard case lists. Test these with mocked proposals/evaluations independently of trained ML, SMAC or the frontend: one match followed by failures must continue; three distinct matches stop; repeated passing identities count once; budget exhaustion leaves empty slots.
 
@@ -1536,4 +1540,124 @@ Each row exposes `candidate_id`, N, charging voltage in volts, requested Rf/Rt v
 
 **Frontend deliverables and independent checks:** React and existing Tailwind/CSS table styles. `components/Results.jsx` places all three successful cases side by side before wiring/plots and includes an all-waveform-thresholds verdict; selecting a case controls the detailed panels. `components/AttemptHistory.jsx` renders the separate chronological table with N, charge in kV/stage, requested/realised Rf/Rt, ML front/peak and tail in µs, crest in kV, per-output pass/fail, prediction source, hardware checks and reasons. Display six decimals for history predictions while retaining full-precision SI values in JSON. `lib/api.js::allAttempts` retrieves all API pages; render 50 rows per page with First/Previous/Next/Last navigation. Export all retrieved rows under `attempt_history`. A failed history request shows an explicit error without discarding the top-three results. `frontend/tests/attempts.test.jsx` checks units, nulls, duplicates, navigation, multi-page retrieval and incomplete-history errors independently of backend services.
 
-**Integration evidence:** `docs/verification/three-successful-configurations.json` records a real SMAC3 → DP/CP-SAT → physics → trained TabPFN v2 residual run, including exact recipes and every attempt. At the 1425 kV, 1.2/50 µs scenario, it found three passing ML waveform configurations after 7 proposals and 5 fresh ML calls. Two proposals were rejected before inference and remain visible with null predictions. All three retained configurations fail the original stage/total energy limits for the 3 µF setup; none is claimed as an eligible physical recommendation. Run this integration check separately from fixture tests; it requires the already-fitted six residual regressors, while each deliverable above can be implemented and tested independently.
+**Integration evidence:** `docs/verification/three-successful-configurations.json` records a real SMAC3 → DP/CP-SAT → physics → trained TabPFN v2 residual run, including exact recipes and every attempt. At the 1425 kV, 1.2/50 µs scenario, it found three passing ML waveform configurations after 7 proposals and 5 fresh ML calls. Two proposals were rejected before inference and remain visible with null predictions. This historical verification predates calibration-only constraint ownership: its three matches fail stage/total energy limits for 3 µF. Under the current policy they remain diagnostic attempts and cannot count as converged setups. New verification is recorded in `verification/calibration-constraint-ownership.json`. Run this integration check separately from fixture tests; it requires the already-fitted six residual regressors, while each deliverable above can be implemented and tested independently.
+
+
+### 18.1 Decision explanation: independent implementation contract
+
+**Purpose:** explain the saved physics baseline, how the fitted residual model changed each output, and why the first of the three evaluated waveform matches ranks ahead of the others. Explain the best evaluated case rather than claim a global optimum or equipment approval. The explanation service does not retrain, optimise, alter predictions or relax constraints.
+
+**Exact stack:** Python `shap.KernelExplainer`, NumPy and the existing frozen, standardised TabPFN v2 estimators; Pydantic/FastAPI response validation; SQLite-backed artifact storage; `google-genai` structured narration; React 19, Tailwind CSS 4 and project CSS for the UI. No new ML model or dependency is introduced.
+
+Each section below can be developed independently using recorded JSON or explicit mocks. Mock attributions must be labelled and must never be returned as real SHAP evidence in production.
+
+| Component / deliverable | Standalone inputs | Outputs and checks |
+|---|---|---|
+| `dashboard/explanations.py` / `ExplanationService` | Resolved context, saved candidate/physics/correction record, model interface and store interface | Cached real SHAP evidence for three residual outputs; verify contributions against saved residuals; reject mismatches and context changes |
+| `dashboard/reasoning.py` / `build_reasoning` | Compact run evidence plus real, verified attributions or explicit unavailable status | Structured `analysis`, human feature labels, signed effects, units, objective comparison and grouped constraint explanations; fixture tests require no model |
+| `dashboard/summary.py` | Compact evidence/analysis, settings and mocked or real Gemini client | Validated optional prose for physics, first-place selection and each of the three candidates; strict evidence references; provider failure must preserve computed analysis |
+| `api/app.py` routes | Store/model service fixtures | Run summary and candidate explanation share the same SHAP cache; expanded OpenAPI and response schemas; no credential exposure |
+| `frontend/src/components/DecisionExplanation.jsx` plus `Results.jsx` | Summary JSON fixture and generate callback | Case selection, baseline/correction/prediction/target tables, signed SHAP bars, all contributions, ranking reasons, constraints and clear provider status; React tests require no backend |
+
+#### SHAP computation and evidence validity
+
+For each candidate and output `front_s`, `tail_s`, `crest_V`:
+
+```text
+saved_residual = saved_corrected_value - saved_physics_value
+saved_residual ≈ training_background_reference_residual + Σ SHAP_feature_contribution
+saved_corrected_value = saved_physics_value + saved_residual
+```
+
+The existing explainer uses 8 saved Train-only background rows and 32 approximate Kernel-SHAP coalition samples per output. It masks standardised inputs, explains standardised residual outputs and inverse-scales the reference/contributions into seconds or volts. The display converts timing to µs and crest to kV. The SHAP reference is an expected residual over the saved background sample, not the physics baseline, a target, or an observed measurement. All contributions remain available even when only the strongest signed effects are displayed.
+
+Require finite values and validate reconstruction against the **already saved** residual, with tolerance `max(absolute_floor, 1e-6 × max(|residual|, |reference|, Σ|contributions|))`; the absolute floor is `1e-18 s` for timing and `1e-7 V` for crest. A mismatching current model/prediction yields `shap_saved_prediction_mismatch` and no fabricated explanation. Do not update the saved outputs to make an explanation pass.
+
+Cache only completed verified evidence. Its identity includes policy `saved-residual-shap-v1`, context hash, candidate ID, model fingerprint, saved corrected outputs and saved physics outputs. Return the original computation duration, provenance, `cached`, additivity tolerance/error and verification flag. A lock prevents duplicate concurrent computation in this service. Failed explanations remain explicitly unavailable and can be retried. The run summary covers up to three candidates, hence nine residual-output explanations. Actual first-time calculation took roughly 23 seconds per candidate on this machine (about 68 seconds for all three); this is a measured example, not a latency guarantee. Later requests reuse the verified attribution cache even when Gemini narration is refreshed.
+
+#### Summary API and transparent failure handling
+
+`POST /v1/runs/{run_id}/decision-summary` with `{ "refresh": false }` returns `DecisionSummary`. Additional fields are `highest_ranked_candidate_id`, `explanation_status`, `analysis`, `reason_code` and `provider_http_status`. The `analysis` contains `selection_explanation`, `comparison`, `search_explanation`, per-case physics explanation/circuit constants/support, per-output arithmetic/full SHAP contributions, grouped hardware checks, scope and interpretation. Native numerical values remain SI; `display_scale`, `display_unit` and display feature values support the dashboard.
+
+`GET /v1/candidates/{candidate_id}/explanations` uses the same cached evidence service. A previous corrected prediction is required; missing predictions and unsupported explanation failures return a reason rather than invented numbers.
+
+Gemini structured narration includes `physics_explanation`, `why_first_ranked` and `ml_explanations` (one candidate ID, explanation and evidence references for each returned case), alongside the existing overview fields. When SHAP evidence is complete, require all these sections and exactly one explanation per candidate. The response schema restricts references to the actual run/candidate/output IDs, such as `case_1_front_s`. Unknown references or malformed/incomplete narratives return `invalid_response` while preserving analysis. Prompt policy is `decision-shap-v3`; successful narration cache identity ignores volatile SHAP cache flags and durations.
+
+Keep `GEMINI_MODEL`, `GEMINI_API_KEY` and provider timeout on the backend. HTTP 429 maps to `gemini_quota_or_rate_limit`; 402 billing, 404 model availability, authentication/access and transport errors each have safe distinguishable reasons. Do not expose raw provider messages or keys. The dashboard disables duplicate generation, reports pending SHAP work, and shows computed reasoning when narration fails. Generation remains retryable; an intermittent provider limit must not erase the explanation.
+
+#### How to explain first place and physical scope
+
+Explain the exact decisive comparison: minimise worst tolerance-normalised deviation `S`, then weighted deviation `J` when `S` ties, then the configured secondary count/stage/charge preference for exact objective ties, and finally deterministic identity. Never claim that fewer resistors decided the order when `S` already differed. Report the search stop reason and fresh versus cached ML counts. Waveform success and hardware eligibility remain distinct.
+
+Explain each case as physics baseline → signed ML correction → corrected output → target comparison. Identify the strongest positive and negative SHAP allocations relative to the background, then expose every contribution and verified reconstruction. In calculator mode, explicitly identify supplied efficiency as an assumption in `crest = efficiency × N × charge`, not independently simulated losses. Show the effective circuit values and timing formulas. Group missing resistor ratings while retaining individual constraint records, and explain energy failures with actual values versus limits.
+
+SHAP allocates the fitted model's prediction; it does not establish physical causation or measured reality. The present workbook model has no learned environmental, per-resistor heat or exact wiring effects. Do not attribute corrections to these absent features. Correlated and derived features share information; independent feature masking can produce combinations that are not physical circuits. Approximate 32-sample attribution and extrapolation limitations must remain visible. Lab validation remains outstanding.
+
+**Acceptance:** all nine real output explanations reconstruct the saved residuals; display arithmetic preserves units; a model/prediction mismatch yields unavailable evidence; candidate/output references validate; all candidates receive narration when evidence is complete; HTTP 429 retains analysis; repeated requests reuse verified evidence; case switching shows the matching candidate; ranking and hardware flags remain unchanged. Deliver test fixtures, backend/React tests, refreshed API schemas and live summary/browser evidence under `docs/verification/`.
+
+
+## 19. Physical constraints owned by calibration
+
+**Policy `calibration_after_prediction_v1` (11 October 2026).** The order for every fresh buildable candidate is numerical physics → residual ML → calibration assessment → objective feedback to SMAC. Neither physics nor ML makes a physical-constraint verdict. The calibration engine alone applies stored-energy, stage charging, stage count, stock, topology evidence, capacitor transient, resistor ratings and optional minimum-efficiency checks. Input/schema integrity, canonical recipe identity, finite/positive formula domains and supported-model checks remain necessary to calculate valid numbers; these are not an equipment approval decision. The inventory solver still constructs buildable networks from actual stock.
+
+```mermaid
+flowchart TD
+    Input[Frontend inputs and inventory] --> Seed[Physics inverse formulas]
+    Seed --> DP[DP and CP-SAT: exact assemblies]
+    Search[SMAC proposes N and required Rf/Rt] --> DP
+    DP --> Physics[Physics: waveform and numerical stresses]
+    Physics --> ML[ML: residual corrections and predicted metrics]
+    ML --> Cal[Calibration: all physical checks and waveform objective]
+    Cal -->|Known violation or waveform mismatch| Search
+    Cal -->|Three distinct matches and no known failures| Result[Diagnostic top three or verified recommendations]
+    Cal -->|Necessary fixed-input infeasibility or budget| Window[Shortfall plus input and rating windows]
+```
+
+### 19.1 Independent implementation contracts and deliverables
+
+| Section/module | Independent inputs | Outputs/deliverables | Stack and independent checks |
+| --- | --- | --- | --- |
+| Physics | Resolved context and exact candidate fixture | `physics/forward.py`, `physics/stress.py`: metrics, energies, numerical stress records; `constraints=[]`, `hardware_feasible=null`, `constraint_owner=calibration_pending` | NumPy/SciPy/Pydantic; numerical fixtures without ML or calibration |
+| ML | Context, candidate and supplied numerical physics fixture | `correction/model.py`: three residuals and corrected outputs; empty physical checks and null hardware verdict | TabPFN v2, scikit-learn scaling, NumPy, PyTorch; model support and residual addition checks without optimiser |
+| Constraint assessment | Context, candidate, numerical baseline and supplied ML prediction fixture | `calibration/constraints.py:assess`: owner, checks, `known_constraints_satisfied`, `hardware_feasible` and `feasibility_windows`; optional efficiency uses corrected crest | Pydantic and ordinary Python; energy, voltage, unknown evidence and ownership tests without fitted ML |
+| Feasible windows | Context plus optional candidate/baseline/check fixtures | `calibration/windows.py:feasibility_windows`: fixed-charge allowed N list, per-N conditional charge bounds, capacitance bounds, required equipment/component ratings and explanatory suggestions | Python `math`; hand-calculated energy-bound fixtures, no optimiser/model dependencies |
+| Loop | Above interface adapters or test doubles | `pipeline/runner.py`: physical-failure cost to SMAC, archives, ordered physics/correction/calibration events, counts and stop reason | SMAC3/ConfigSpace, existing DP/OR-Tools and SQLAlchemy; test 15→12→11→10 stages with mock ML and exact energy arithmetic |
+| API | ModuleInput fixture containing request plus realised candidate | `POST /v1/calibration/evaluate`: physics, correction and calibration records; unchanged standalone physics/correction routes return unassessed hardware status | FastAPI/Pydantic; endpoint contract tests without model artifacts |
+| Dashboard | Saved result/window JSON fixtures | `FeasibilityWindows.jsx`, known-constraint comparison row and successful-count status; display µF/kV/kJ and every attempt | React/Tailwind, Vitest/Testing Library; failed-stage-only and energy-compatible N fixtures without backend |
+
+For compatibility, calibration projects its final verdicts into the stored `physics.constraints`, `physics.hardware_feasible` and per-component rating-check fields. This projection is produced by calibration and labelled `constraint_owner=calibration`; it does not mean physics checked the constraints. Standalone physics and ML responses and their pre-calibration events stay unassessed. Consumers should read `CandidateEvaluation.calibration` for the owning report. No correction values are clamped or changed by assessment.
+
+### 19.2 Energy windows and required ratings
+
+Let C be per-stage capacitance, U the frozen per-stage charge, n an integer active stage count, Es=2500 J and Et=30000 J. Calibration evaluates:
+
+```text
+E_stage = 0.5 C U²; E_total = n E_stage
+At fixed U and n: 0 < C <= min(2 Es/U², 2 Et/(n U²))
+At fixed C and n: 0 < U <= min(U_stage_max, sqrt(2 Es/C), sqrt(2 Et/(n C)))
+At fixed C and U: allowed n requires E_stage <= Es and n E_stage <= Et,
+                 U <= U_stage_max and N_min <= n <= N_max
+```
+
+Changing Rf/Rt cannot change initial stored energy. Increasing N at fixed C/U increases total energy and leaves stage energy unchanged. N can repair a total-energy violation by decreasing it, if waveform feasibility permits. Increasing N can reduce the charging voltage needed for a target **only if charge is deliberately retuned**; this implementation optimises N/Rf/Rt, so charge and capacitance are not silently modified. Conditional alternatives require new frontend inputs and a new run.
+
+For the reported N=9, C=3 µF, U=193.089430894 kV, target=1425 kV and expected efficiency=0.82:
+
+| Conditional requirement | Calculated window or minimum capability |
+| --- | --- |
+| Actual energy | 55.925292485 kJ/stage and 503.327632362 kJ total |
+| Retain N=9 and charge | Stage capacitance >0 and <=0.134107479 µF |
+| Retain N=9 and 3 µF | Charge >0 and <=40.824829046 kV/stage; alone insufficient for the target crest |
+| Retain 3 µF with at most 15 stages and retune charge | Maximum expected-efficiency crest approximately 449.132497154 kV under energy limits |
+| Conditional N=15 target retuning | U≈115.853658537 kV/stage and C<=0.298016620 µF; stage voltage rating must permit U |
+| Keep present C/U/N unchanged using different equipment | Verified stored-energy capabilities of at least 55.925292485 kJ/stage and 503.327632362 kJ total |
+
+These are **necessary analytical energy/voltage conditions**, not guaranteed waveform, ML or inventory solutions. Changing capacitance changes timing and model support, so a new physics/ML/calibration evaluation is required. The current model was fitted at 3 µF; other capacitances are unseen and diagnostic extrapolation remains explicitly untrusted.
+
+`component_required_ratings` exposes exact component IDs and numerical minimum voltage/current/pulse-energy/average-power/temperature capabilities when their stress calculations exist. Missing numerical evidence stays null; manufacturer derating and required engineering margins still need explicit evidence. Calculator mode does not supply reliable component traces. Topology approval needs circuit evidence and resolved branches, not a numeric range. Capacitor transient/reversal approval requires internal capacitor stress and ratings; charge alone is insufficient. Calibration retains these checks as unknown until suitable evidence exists.
+
+### 19.3 Stopping, constraints and historical runs
+
+After at least one physics prediction and ML invocation, calibration can stop with `fixed_charge_energy_infeasible` when necessary analytical bounds prove that no allowed N satisfies energy/charging limits at the supplied fixed C/U. This is an input conflict, not convergence or a failure to search sufficiently long. If at least one N is compatible, the optimiser continues and receives physical-failure penalties rather than stopping after the first waveform match. Three known-failing waveform matches cannot satisfy convergence. Unknown evidence blocks verified hardware recommendations even when three diagnostic matches have no known failures.
+
+Every proposed or rejected attempt remains in history. `predicted_setups` excludes known physical failures, `evaluated_setups` retains diagnostics, and `recommendations` additionally requires all hard checks passed and validated model support. The dashboard can show failed diagnostic attempts for inspection but labels their known constraints as Fail and reports the successful count from `returned_successful_predictions`, not the number of visible cases. `constraint_policy` is part of the context hash; start a new run to apply this policy. Historical results are not rewritten.

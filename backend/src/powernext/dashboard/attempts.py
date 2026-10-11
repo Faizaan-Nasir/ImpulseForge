@@ -85,6 +85,17 @@ def attempt_history(store, run_id, context):
                 )
                 current["rows"].append(item)
                 cached_predictions[identity] = item
+            elif stage == "calibration":
+                identity = event["candidate_id"]
+                report = event["output"]
+                item = cached_predictions.get(identity)
+                if item is not None:
+                    item["hardware_feasible"] = report["hardware_feasible"]
+                    item["known_constraints_satisfied"] = report["known_constraints_satisfied"]
+                    item["constraint_owner"] = "calibration"
+                    item["failed_hardware_constraints"] = [
+                        c["constraint_id"] for c in report["constraints"] if c["status"] == "fail"
+                    ]
             elif stage == "evaluation":
                 identity = event["candidate_id"]
                 evaluation = store.get("candidate", identity) or {}

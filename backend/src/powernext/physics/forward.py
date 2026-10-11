@@ -7,15 +7,17 @@ import numpy as np
 from scipy.integrate import solve_ivp
 
 from powernext.assembly.validate import validate_candidate
-from powernext.contracts.models import Candidate, Constraint, DomainError, Metrics
+from powernext.contracts.models import Candidate, DomainError, Metrics
 from powernext.physics.waveform import double_exponential, extract
 
 
 def parameters(context, N, rf, rt):
     req = context.request
     hw = context.hardware
-    if not hw["N_min"] <= N <= hw["N_max"]:
-        raise DomainError("stages_out_of_range", "Invalid active stages", "physics")
+    if N < 1:
+        raise DomainError(
+            "invalid_stage_count", "Positive stage count required for formulas", "physics"
+        )
     basic = hw["C_basic_F"] if req.setup.basic_capacitance_inclusion == "add_separately" else 0
     C2 = req.load.C_F + req.setup.divider_C_F + req.setup.stray_C_F + basic
     return {
@@ -72,21 +74,6 @@ def calculator_metrics(context, N, rf, rt):
     )
 
 
-def check_bound(name, value, limit, unit, origin="equipment_profile"):
-    return Constraint(
-        constraint_id=name,
-        origin=origin,
-        enforced_by=("physics",),
-        rule=f"value <= {limit}",
-        observed_value=value,
-        limit_value=limit,
-        unit=unit,
-        margin=limit - value if limit is not None else None,
-        status=("unknown" if limit is None else "pass" if value <= limit else "fail"),
-        reason_code="missing_rating" if limit is None else None,
-    ).model_dump(mode="json")
-
-
 def evaluate(context, candidate: Candidate, include_trace=True, deadline=None) -> dict[str, Any]:
     deadline = (
         deadline
@@ -105,77 +92,6 @@ def evaluate(context, candidate: Candidate, include_trace=True, deadline=None) -
         p[k] for k in ["C1_F", "C2_F", "R1_ohm", "R2_ohm", "L_effective_H", "V0_V"]
     )
     E = 0.5 * hw["C_stage_F"] * candidate.U_charge_V**2
-    value_sources = context.data.get("value_sources", {})
-    fallback_source = (
-        "workbook_benchmark_profile"
-        if hw["profile_id"] == "workbook_benchmark_v1"
-        else "problem_statement_fallback"
-    )
-    checks = [
-        Constraint(
-            constraint_id="HW_STAGES",
-            origin=value_sources.get("N_max", {}).get("source", fallback_source),
-            enforced_by=("assembly", "physics"),
-            rule="N_min <= active stages <= N_max",
-            observed_value=N,
-            limit_value=[hw["N_min"], hw["N_max"]],
-            status="pass",
-        ).model_dump(mode="json"),
-        check_bound(
-            "HW_STAGE_CHARGE",
-            candidate.U_charge_V,
-            hw["U_stage_max_V"],
-            "V",
-            value_sources.get("U_stage_max_V", {}).get("source", fallback_source),
-        ),
-        check_bound(
-            "HW_STAGE_ENERGY", E, hw["stage_energy_max_J"], "J", "problem_statement_fallback"
-        ),
-        check_bound(
-            "HW_TOTAL_ENERGY", N * E, hw["total_energy_max_J"], "J", "problem_statement_fallback"
-        ),
-    ]
-    for role in ("front", "tail"):
-        assembly = getattr(candidate, role)
-        for resistor in getattr(context.inventory, role):
-            observed = assembly.type_counts.get(resistor.type_id, 0)
-            checks.append(
-                Constraint(
-                    constraint_id=f"STOCK_{role}_{resistor.type_id}",
-                    origin="request_inventory",
-                    enforced_by=("assembly", "physics"),
-                    rule="Independent role per-type per-stage/global quantity cap",
-                    observed_value=observed,
-                    limit_value=resistor.capacity(N),
-                    margin=resistor.capacity(N) - observed,
-                    status="pass",
-                ).model_dump(mode="json")
-            )
-    verified = (
-        hw["physical_verified"]
-        and bool(req.setup.circuit_evidence_id)
-        and req.setup.external_front_series_ohm is not None
-    )
-    checks.append(
-        Constraint(
-            constraint_id="CIRCUIT_TOPOLOGY_VERIFIED",
-            origin="equipment_evidence",
-            enforced_by=("physics",),
-            rule="Registered topology/branch states have equipment evidence",
-            status="pass" if verified else "unknown",
-            reason_code=None if verified else "unresolved_circuit_evidence",
-        ).model_dump(mode="json")
-    )
-    checks.append(
-        Constraint(
-            constraint_id="CAPACITOR_TRANSIENT_RATING",
-            origin="equipment_evidence",
-            enforced_by=("physics",),
-            rule="Internal transient/reversal rating verified",
-            status="unknown",
-            reason_code="lumped_model_cannot_certify_internal_stresses",
-        ).model_dump(mode="json")
-    )
     landmarks = {}
     rates = {}
     v1_values = None
@@ -311,22 +227,7 @@ def evaluate(context, candidate: Candidate, include_trace=True, deadline=None) -
         }
     from powernext.physics.stress import component_stresses
 
-    if req.minimum_voltage_efficiency is not None:
-        eta = metrics.crest_V / V0
-        checks.append(
-            Constraint(
-                constraint_id="REQUEST_MIN_EFFICIENCY",
-                origin="request",
-                enforced_by=("physics", "correction"),
-                rule="Voltage transfer efficiency >= requested minimum",
-                observed_value=eta,
-                limit_value=req.minimum_voltage_efficiency,
-                margin=eta - req.minimum_voltage_efficiency,
-                status="pass" if eta >= req.minimum_voltage_efficiency else "fail",
-            ).model_dump(mode="json")
-        )
     stress = component_stresses(context, candidate, time, i_values, v1_values)
-    checks.extend(stress["constraints"])
     return {
         "candidate_id": candidate.candidate_id,
         "context_hash": context.context_hash,
@@ -348,7 +249,8 @@ def evaluate(context, candidate: Candidate, include_trace=True, deadline=None) -
         if time is not None and include_trace
         else None,
         "component_stresses": stress["components"],
-        "constraints": checks,
+        "constraints": [],
+        "constraint_owner": "calibration_pending",
         "diagnostics": diagnostics,
-        "hardware_feasible": all(c["status"] == "pass" for c in checks if c["kind"] == "hard"),
+        "hardware_feasible": None,
     }

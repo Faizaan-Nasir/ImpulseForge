@@ -1,3 +1,4 @@
+import DecisionExplanation from "./DecisionExplanation.jsx";
 import { useState } from "react";
 import { Check, AlertTriangle, Sparkles } from "lucide-react";
 import {
@@ -458,6 +459,15 @@ export function Comparison({ cases, selected, onSelect, mode }) {
     ["Crest voltage", (r) => `${number(shownMetrics(r).crest_V / 1000, 1)} kV`],
     ["Status", (r) => (r.eligible ? "Eligible" : "Diagnostic")],
     [
+      "Known physical constraints",
+      (r) =>
+        r.calibration?.known_constraints_satisfied === false
+          ? "Fail"
+          : r.calibration?.known_constraints_satisfied === true
+            ? "No known failures"
+            : "Unassessed",
+    ],
+    [
       "All waveform thresholds",
       (r) => (shownObjective(r)?.waveform_within_tolerance ? "Pass" : "Fail"),
     ],
@@ -476,12 +486,12 @@ export function Comparison({ cases, selected, onSelect, mode }) {
   return (
     <section className="card" aria-label="Candidate comparison">
       <div className="card-head">
-        <h2>Top three successful configurations</h2>
+        <h2>Top three evaluated configurations</h2>
         <span className="sub">
           {cases.length}{" "}
           {mode === "eligible_recommendations"
             ? "eligible settings"
-            : "ML waveform matches out of 3"}
+            : "diagnostic cases out of 3"}
         </span>
       </div>
       <div className="table-wrap">
@@ -533,11 +543,12 @@ export function Comparison({ cases, selected, onSelect, mode }) {
         </table>
       </div>
       <p className="table-foot">
-        Only distinct setups passing every ML waveform threshold fill these
-        slots. Required crest minimum first, then worst normalised deviation S
-        and weighted deviation J. Secondary preferences affect ties only.
-        Diagnostic cases have failed, unknown or unverified eligibility and are
-        not recommended for physical use.
+        Only distinct ML waveform matches without known physical failures count
+        toward convergence. Failed diagnostic cases remain inspectable here and
+        in the attempt history. Required crest minimum first, then worst
+        normalised deviation S and weighted deviation J. Secondary preferences
+        affect ties only. Diagnostic cases have failed, unknown or unverified
+        eligibility and are not recommended for physical use.
       </p>
     </section>
   );
@@ -548,6 +559,7 @@ export function DecisionSummary({
   onSummary,
   gemini,
   busy,
+  pending = false,
   disabled = false,
 }) {
   const [error, setError] = useState(""),
@@ -571,99 +583,38 @@ export function DecisionSummary({
         <span className="sub">
           {summary?.status === "generated"
             ? `Gemini · ${summary.model}`
-            : "Grounded in backend evidence"}
+            : summary?.explanation_status === "complete"
+              ? "Computed SHAP + recorded physics/ML"
+              : "Grounded in backend evidence"}
         </span>
       </div>
       <div className="summary">
-        <p className="lead">
-          {summary?.narrative?.lead ||
-            "Calculate a scenario to receive a decision summary grounded in the evaluated settings, waveform errors and constraint reports."}
-        </p>
-        <div className="rep-row">
-          <div className="rep-sec">
-            <h3>Score breakdown</h3>
-            <div className="table-wrap">
-              <table className="score-tbl">
-                <thead>
-                  <tr>
-                    <th className="l">Score part</th>
-                    {[1, 2, 3].map((i) => (
-                      <th key={i}>#{i}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ["Worst deviation S", "S"],
-                    ["Weighted deviation J", "J"],
-                    ["Resistors / stage", "resistors_per_stage"],
-                    ["Stage count", "N"],
-                    ["Voltage use", "voltage_utilisation"],
-                  ].map(([label, key]) => (
-                    <tr key={key}>
-                      <th className="l">{label}</th>
-                      {[0, 1, 2].map((i) => (
-                        <td key={i}>
-                          {number(
-                            summary?.score_breakdown?.[i]?.[key],
-                            key === "N" || key === "resistors_per_stage"
-                              ? 0
-                              : 4,
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="formula-line">
-              S = largest |prediction − target| ÷ allowed band. J is the
-              weighted mean. Counts are separate tie-breakers.
-            </p>
-          </div>
-          <div className="rep-sec">
-            <h3>Why the others rank lower</h3>
-            <ul className="why">
-              {summary?.narrative?.why_others_rank_lower?.length ? (
-                summary.narrative.why_others_rank_lower.map((r) => (
-                  <li key={r.candidate_id}>
-                    {r.reason}
-                    <span className="hint block">
-                      Evidence: {r.evidence_refs.join(", ")}
-                    </span>
-                  </li>
-                ))
-              ) : (
-                <li>
-                  Comparison narrative becomes available after Gemini generates
-                  the explanation.
-                </li>
-              )}
-            </ul>
-            <h3>Needs attention</h3>
-            <ul className="attn">
-              {summary?.narrative?.needs_attention?.map((text, i) => (
-                <li key={i}>{text}</li>
-              )) || (
-                <li>
-                  Review hardware constraints and correction-model coverage.
-                </li>
-              )}
-            </ul>
-          </div>
-        </div>
-        {summary?.reason && <p className="hint">{summary.reason}</p>}
+        {(pending || loading) && (
+          <p className="hint" role="status">
+            Computing SHAP contributions and preparing the explanation.
+            First-time attributions take longer; subsequent requests reuse
+            verified evidence.
+          </p>
+        )}
+        <DecisionExplanation summary={summary} />
+        {summary?.reason && (
+          <p className="inline-message" role="status">
+            {summary.reason}{" "}
+            {summary.analysis?.cases?.length
+              ? "The computed physics, ML and ranking explanation above remains available."
+              : ""}
+          </p>
+        )}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <button
             className="btn small"
             type="button"
-            disabled={!runId || busy || loading || disabled}
+            disabled={!runId || busy || loading || pending || disabled}
             onClick={() => generate(summary?.status === "generated")}
           >
             <Sparkles size={14} />
-            {loading
-              ? "Generating…"
+            {loading || pending
+              ? "Preparing explanation…"
               : summary?.status === "generated"
                 ? "Regenerate summary"
                 : "Generate decision summary"}

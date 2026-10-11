@@ -1,5 +1,36 @@
 {
   "$defs": {
+    "CandidateExplanation": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "explanation": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "explanation",
+        "evidence_refs"
+      ],
+      "title": "CandidateExplanation",
+      "type": "object"
+    },
     "CandidateReason": {
       "additionalProperties": false,
       "properties": {
@@ -63,6 +94,26 @@
           "maxItems": 4,
           "minItems": 1,
           "title": "Evidence Refs",
+          "type": "array"
+        },
+        "physics_explanation": {
+          "default": "",
+          "maxLength": 4000,
+          "title": "Physics Explanation",
+          "type": "string"
+        },
+        "why_first_ranked": {
+          "default": "",
+          "maxLength": 2000,
+          "title": "Why First Ranked",
+          "type": "string"
+        },
+        "ml_explanations": {
+          "items": {
+            "$ref": "#/$defs/CandidateExplanation"
+          },
+          "maxItems": 3,
+          "title": "Ml Explanations",
           "type": "array"
         }
       },
@@ -145,6 +196,57 @@
       ],
       "default": null,
       "title": "Reason"
+    },
+    "reason_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason Code"
+    },
+    "provider_http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provider Http Status"
+    },
+    "highest_ranked_candidate_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Highest Ranked Candidate Id"
+    },
+    "explanation_status": {
+      "default": "unavailable",
+      "enum": [
+        "complete",
+        "partial",
+        "unavailable"
+      ],
+      "title": "Explanation Status",
+      "type": "string"
+    },
+    "analysis": {
+      "additionalProperties": true,
+      "title": "Analysis",
+      "type": "object"
     },
     "authority": {
       "default": "Explanation only; backend metrics and constraint verdicts remain authoritative",
