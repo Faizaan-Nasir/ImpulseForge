@@ -163,3 +163,25 @@ def test_frontend_target_is_not_replaced_or_clamped_to_document_example(request_
     context = resolve(RunRequest.model_validate(request_data))
     assert context.request.target.crest_V == 10000
     assert context.data["input_sources"]["target.crest_V"]["source"] == "frontend_input"
+
+
+@pytest.mark.parametrize("value", [None, 60000.0])
+def test_editable_stage_energy_limit_and_provenance(request_data, value):
+    original = resolve(RunRequest.model_validate(request_data))
+    request_data["equipment_inputs"]["stage_energy_max_J"] = value
+    ctx = resolve(RunRequest.model_validate(request_data))
+    assert ctx.hardware["stage_energy_max_J"] == (2500 if value is None else value)
+    source = ctx.data["value_sources"]["stage_energy_max_J"]
+    assert source["source"] == ("problem_statement_fallback" if value is None else "frontend_input")
+    assert source["workbook_cell"] is None
+    assert source["fallback_applied"] is (value is None)
+    assert ctx.hardware["total_energy_max_J"] == 30000
+    if value is not None:
+        assert ctx.context_hash != original.context_hash
+
+
+@pytest.mark.parametrize("value", [0, -1, float("inf")])
+def test_invalid_stage_energy_limit(request_data, value):
+    request_data["equipment_inputs"]["stage_energy_max_J"] = value
+    with pytest.raises(ValidationError):
+        RunRequest.model_validate(request_data)

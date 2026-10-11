@@ -103,7 +103,9 @@ export default function App() {
           includeCbo: false,
           mode: value === "workbook" ? "calculator" : next.mode,
         };
-      if (["nMax", "uMax", "cStage", "cBo", "includeCbo"].includes(key))
+      if (
+        ["nMax", "uMax", "cStage", "wStage", "cBo", "includeCbo"].includes(key)
+      )
         next.profile = "custom";
       if (["tFront", "tTail", "tolCrest", "tolFront", "tolTail"].includes(key))
         next.tolProfile = "custom";

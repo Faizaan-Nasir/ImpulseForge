@@ -7,7 +7,12 @@ from powernext.calibration.constraints import assess
 from powernext.calibration.windows import feasibility_windows
 from powernext.contracts.models import DomainError
 from powernext.correction.model import ResidualModel
-from powernext.optimisation.objective import Archive, evaluate_objective, objective_order
+from powernext.optimisation.objective import (
+    Archive,
+    calibration_cost,
+    evaluate_objective,
+    objective_order,
+)
 from powernext.optimisation.smac_adapter import SmacAdapter
 from powernext.performance.metrics import build_report, model_quality
 from powernext.physics.forward import evaluate
@@ -298,32 +303,10 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
                     if objective is not None:
                         # Constraint violations feed the optimiser even in diagnostic
                         # mode; unknown evidence is reported, never converted to pass.
-                        violations = [
-                            c for c in calibration["constraints"] if c["status"] == "fail"
-                        ]
-                        penalty = 0.0
-                        for check in violations:
-                            observed, limit = check.get("observed_value"), check.get("limit_value")
-                            penalty += (
-                                min(
-                                    1.0,
-                                    max(
-                                        0.0,
-                                        (1 - observed / limit)
-                                        if check["constraint_id"] == "REQUEST_MIN_EFFICIENCY"
-                                        else (observed / limit - 1),
-                                    ),
-                                )
-                                if isinstance(observed, (int, float))
-                                and isinstance(limit, (int, float))
-                                and limit > 0
-                                else 1.0
-                            )
-                        evaluation["cost"] = (
-                            1 + penalty / (1 + penalty) + 0.001 * objective["cost"]
-                            if violations
-                            else objective["cost"]
+                        evaluation["calibration_objective"] = calibration_cost(
+                            calibration["constraints"], objective
                         )
+                        evaluation["cost"] = evaluation["calibration_objective"]["cost"]
                         evaluation["cost_basis"] = "calibration_constraints_then_ml_waveform"
                     if objective is None:
                         rejections["ml_prediction_unavailable"] += 1
@@ -368,19 +351,9 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
         if req.purpose == "diagnostic" and len(successful_archive.best()) == 3:
             stop = "three_ml_waveforms_within_tolerance"
             break
-        if (
-            evaluator is None
-            and counters["ml_evaluations"]
-            and run_windows["fixed_charge_energy_infeasible"]
-        ):
-            stop = "fixed_charge_energy_infeasible"
-            break
-        if repeated >= req.search.repeat_window:
-            stop = "repeated_candidates"
-            break
-        if stagnant >= req.search.archive_stagnation_window:
-            stop = "archive_stagnation"
-            break
+        # Failed constraints, duplicates and stagnation remain diagnostic signals.
+        # Keep asking the optimiser until three successes or an explicit resource
+        # budget/cancellation/search-space exhaustion, rather than stopping early.
     best = archive.best()
     predicted = successful_archive.best()
     waveforms = bundle(context, predicted if req.purpose == "diagnostic" else best)

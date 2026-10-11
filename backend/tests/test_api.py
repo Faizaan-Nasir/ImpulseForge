@@ -11,6 +11,26 @@ def test_equipment_api_exposes_fifteen_stage_limit(tmp_path):
             assert response.json()["N_max"] == 15
 
 
+def test_stage_energy_input_reaches_calibration_and_api_provenance(request_data, tmp_path):
+    request_data["equipment_inputs"]["stage_energy_max_J"] = 60000
+    with TestClient(create_app(tmp_path, False)) as client:
+        body = {
+            "request": request_data,
+            "proposal": {"N": 9, "Rf_required_ohm": 50, "Rt_required_ohm": 25},
+        }
+        assembly = client.post("/v1/assemblies/realise", json=body)
+        assert assembly.status_code == 200, assembly.text
+        body["candidate"] = assembly.json()["candidate"]
+        response = client.post("/v1/calibration/evaluate", json=body)
+        assert response.status_code == 200, response.text
+        result = response.json()
+        report = result["calibration"]
+        energy = next(c for c in report["constraints"] if c["constraint_id"] == "HW_STAGE_ENERGY")
+        assert energy["limit_value"] == 60000 and energy["status"] == "pass"
+        assert energy["origin"] == "frontend_input"
+        assert report["feasibility_windows"]["stage_energy_limit_J"] == 60000
+
+
 def test_api_exposes_frontend_values_and_fallback_provenance(request_data, tmp_path):
     request_data["equipment_inputs"] = {"N_max": 8, "U_stage_max_V": 250000, "C_stage_F": 2e-6}
     with TestClient(create_app(tmp_path, False)) as client:

@@ -28,7 +28,11 @@ describe("frontend request contract", () => {
     expect(
       toRequest({ ...form, extrapolate: false }, inventory).ml_domain_policy,
     ).toBe("strict");
-    expect(r.equipment_inputs).not.toHaveProperty("stage_energy_max_J");
+    expect(r.equipment_inputs.stage_energy_max_J).toBe(2500);
+    expect(
+      toRequest({ ...form, wStage: 60 }, inventory).equipment_inputs
+        .stage_energy_max_J,
+    ).toBe(60000);
   });
   it("sends switching and RLC inputs without hardcoding insulator-only loads", () => {
     const r = toRequest(
@@ -62,6 +66,8 @@ describe("frontend request contract", () => {
   it("rejects invalid numeric input before starting a job", () => {
     expect(() => toRequest({ ...form, vTest: "" }, inventory)).toThrow();
     expect(() => toRequest({ ...form, nMax: 1.5 }, inventory)).toThrow();
+    expect(() => toRequest({ ...form, wStage: 0 }, inventory)).toThrow();
+    expect(() => toRequest({ ...form, wStage: "" }, inventory)).toThrow();
   });
   it("loads runtime environment defaults and preserves later explicit budget edits", () => {
     expect(initialForm.maxProposals).toBe("");

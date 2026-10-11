@@ -1,0 +1,13 @@
+
+> powernext-dashboard@0.1.0 build
+> vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 1591 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.77 kB │ gzip:  0.43 kB
+dist/assets/index-BjPFj39u.css   31.16 kB │ gzip:  7.33 kB
+dist/assets/index-DHcTmIqv.js   294.87 kB │ gzip: 92.49 kB
+✓ built in 995ms

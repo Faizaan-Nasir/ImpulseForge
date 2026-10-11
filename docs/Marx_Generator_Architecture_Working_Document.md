@@ -218,7 +218,7 @@ Only the following values from the last page of the problem statement enter the 
 | Parameter | Value | Use |
 | --- | --- | --- |
 | Maximum stored energy at rated voltage | 30 kJ | Hard total stored-energy limit |
-| Stored energy per stage | 2.5 kJ | Hard energy limit for each stage |
+| Stored energy per stage | Positive frontend input; 2.5 kJ fallback | Calibration enforces the resolved limit for each stage |
 | Impulse capacitance per stage | 0.125 µF | Fallback only when frontend stage capacitance is missing; a supplied value wins |
 
 Compute `E_stage = 0.5 × supplied_or_fallback_C_stage × U_charge²` and `E_total = N × E_stage`. Do not overwrite a supplied capacitance to make these limits pass. A 3 µF stage at 200 kV stores 60 kJ, so those frontend values fail the retained per-stage limit.
@@ -229,7 +229,7 @@ No other last-page values are imported. In particular, there is no document-base
 
 All eleven fields in the workbook’s USER INPUT section (`Hybrid Calculator!B5:B15`) have API fields. Use `impulse_type` for Lightning/Switching, `equipment_inputs.N_max` for maximum stages, `equipment_inputs.U_stage_max_V` for maximum stage voltage and `equipment_inputs.C_stage_F` for stage capacitance. Other fields carry system-voltage classification, required crest, load/divider/stray capacitance, stray inductance and expected efficiency. Inventory is also a supplied input, independent of the example catalogue.
 
-A missing stage-count or stage-voltage maximum uses the workbook example default. Missing capacitance uses 0.125 µF in the default document-fallback profile. Only the two retained energy limits are unconditional document constraints. Require positive integer `1 ≤ N ≤ resolved.N_max`; a PDF minimum of two is not imported. Component ratings supplied with inventory, supported circuit topology, ML coverage and the previously agreed independent four-per-type/role cap remain separate project/input/model policies.
+A missing stage-count or stage-voltage maximum uses the workbook example default. Missing capacitance uses 0.125 µF in the default document-fallback profile. Total generator energy is the retained unconditional document limit. Stage energy uses a positive frontend input with 2500 J fallback. Require positive integer `1 ≤ N ≤ resolved.N_max`; a PDF minimum of two is not imported. Component ratings supplied with inventory, supported circuit topology, ML coverage and the previously agreed independent four-per-type/role cap remain separate project/input/model policies.
 
 API output exposes `value_sources`, `input_sources`, resolved values and constraint outcomes. Physics uses `C_effective_load = C_object + C_divider + C_stray`, with no automatic document basic-capacitance term. Optional shot rate must be supplied explicitly for average-power/periodic-heat estimates. The optimiser varies actual `N`, required `Rf` and required `Rt` while the scenario inputs remain fixed within that run.
 
@@ -693,7 +693,7 @@ If the same realised configuration returns under the same context and determinis
 
 Equal nominal Rf/Rt alone is not always identical configuration: different wiring can have different ratings or parasitics. Candidate identity should include assembly recipes where those effects are represented.
 
-Predicted deviations may also be effectively unchanged without an identical configuration. Define numerical thresholds, rather than relying on exact floating-point equality. The run can stop after a declared number of cycles without a meaningful improvement in the best objective. If the chosen strategy deliberately explores plateaus, allow a declared stagnation window rather than stopping on its first repeated value.
+Predicted deviations may also be effectively unchanged without an identical configuration. Define numerical thresholds, rather than relying on exact floating-point equality. Track unchanged objectives as stagnation, but continue exploring to the declared count/time budgets. Repetition and stagnation do not end calibration early.
 
 ### 9.3 Stopping rules
 
@@ -701,13 +701,13 @@ Predicted deviations may also be effectively unchanged without an identical conf
 | --- | --- | --- |
 | Three ML waveform matches | Three distinct corrected predictions meet front/tail bands and crest from the target up to its upper allowance | `ml_converged=true`; physical eligibility remains separate |
 | Three eligible recommendations | Three separately eligible setups also meet the waveform acceptance rule | Verified-eligibility archive success under its recorded evidence |
-| Repeated realised configuration | The strategy returns an already evaluated configuration without an allowed new exploration step | Stagnation under the current search strategy |
-| Archive stagnation | The declared window passes without improving the retained alternatives | Search stalled; `ml_converged=false` unless three waveform matches were actually obtained |
+| Repeated realised configuration | Return cached predictions and tell the optimiser the cost | Continue searching; this is not a stopping rule |
+| Archive stagnation | Track lack of archive improvement | Continue searching; this is not a stopping rule |
 | Maximum iterations | The deterministic overall proposal/cycle cap is reached | Search budget exhausted |
 | DP budget exhausted | Constructibility cannot be resolved within its allowed effort | Proposal unresolved or rejected; bounded handling required |
 | No feasible/supported candidate | Constraints or data coverage prevent meaningful evaluation | Explain the blocking conditions |
 
-Finding a single predicted exact match does not trigger the three-setup success condition. Continue exploring distinct setups within the declared budgets. Stagnation and deterministic maximum counts may still end the run with fewer than three; report this explicitly. Track improvement in archive membership and quality as well as the leading objective, so the second and third recommendations can improve even when the first remains unchanged.
+Finding a single predicted exact match does not trigger the three-setup success condition. Continue exploring distinct setups within the declared budgets. Deterministic maximum counts/time budgets may still end the run with fewer than three; report this explicitly. Track improvement in archive membership and quality as well as the leading objective, so the second and third recommendations can improve even when the first remains unchanged.
 
 Store the stop reason and the limits used. A repeated candidate or negligible improvement does not establish that no better configuration exists elsewhere.
 
@@ -752,14 +752,12 @@ while proposal/evaluation/time budgets remain:
         mark ml_converged=true
         if diagnostic purpose or three eligible matches exist:
             stop with successful-match reason
-    if calibration proves no N can satisfy frozen charge/capacitance limits:
-        stop with fixed_charge_energy_infeasible and return windows
-    if declared repetition/stagnation limit reached:
-        stop with that reason
+    # Fixed-input energy infeasibility, repetition and stagnation remain visible.
+    # Continue optimisation; only explicit budgets/cancellation/exhaustion stop it.
 
 return successful and eligible setups, diagnostic progress, complete attempt history,
        exact recipes, waveforms, metrics, constraints and stop reason
-# Budget/repetition/stagnation stopping is not a claim that a shortfall was resolved.
+# Budget stopping is not a claim that a shortfall was resolved.
 ```
 
 Known hardware failures retain their calibration verdicts and cannot enter either the successful or eligible archive, but they do not suppress residual evaluation after a successful forward prediction. Unsupported correction has no objective and cannot count toward ML convergence. Previously saved runs retain historical decisions; start a fresh calculation to apply a changed policy.
@@ -780,9 +778,9 @@ Three outcomes are possible:
 
 - The new actual configuration qualifies for the top three, so it enters the archive and displaces the worst retained entry if necessary.
 - It performs worse than the retained top three, so the earlier three remain stored; the new evaluation remains in the history.
-- The required-value change maps back to the same actual assemblies and stage count/charge, so the realised candidate is unchanged and the stagnation policy applies.
+- The required-value change maps back to the same actual assemblies and stage count/charge, so the realised candidate is unchanged; reuse its prediction and continue searching.
 
-If three distinct candidates reach the thresholds, return those best satisfactory configurations. If the maximum iterations or stagnation condition is reached first, return only the available successful waveform matches in the top-three slots and report the missing count. Outside-threshold predictions remain in diagnostic progress and the attempt table. Set `ml_converged=false` unless three accepted waveforms were actually obtained. The dashboard never substitutes ideal requested resistance for the selected wiring.
+If three distinct candidates reach the thresholds, return those best satisfactory configurations. If the maximum iterations or wall-time budget is reached first, return only the available successful waveform matches in the top-three slots and report the missing count. Outside-threshold predictions remain in diagnostic progress and the attempt table. Set `ml_converged=false` unless three accepted waveforms were actually obtained. The dashboard never substitutes ideal requested resistance for the selected wiring.
 
 ### 9.6 See every attempt from first to last
 
@@ -925,11 +923,11 @@ Checks that protect the agreed architecture:
 - Feature and residual-target scalers fit only Train records and are frozen for validation and inference; corrections return to SI before physics addition.
 - Any corrected crest below target requires calibration, including the closest representable value below target; prediction clamping and rounding-based acceptance are forbidden.
 - Each candidate is evaluated using the same ML/feature versions and scenario.
-- Repeated realised candidates are cached and handled by the declared stagnation policy.
+- Repeated realised candidates are cached and fed back without ending the run.
 - The three best distinct complete evaluated candidates survive later worse candidates; repeated proposals never occupy multiple recommendation slots.
 - The maximum proposal/cycle count remains effective even when proposals fail before ML.
 - Predicted outcomes never become measured training labels.
-- Final output distinguishes threshold success, stagnation, exhausted budget and lack of feasible candidates. Shortfall plus budget stopping remains `ml_converged=false`.
+- Final output distinguishes threshold success, exhausted budget, cancellation and exhausted search space. Stagnation remains diagnostic. Shortfall plus budget stopping remains `ml_converged=false`.
 
 ## 15. Source status and decisions still required
 
@@ -956,7 +954,7 @@ Remaining decisions:
 | Environmental feature set and preparation | To be provided after feature extraction/assessment |
 | ML algorithm and interface | Residual-only TabPFN v2; train-only feature/target scaling; synthetic validation completed, laboratory validation pending |
 | Optimisation algorithm and objective preferences | SMAC3; crest minimum then S/J and configured tie preferences; DP plus CP-SAT for realisation |
-| Waveform tolerances and stopping | Front/tail symmetric; crest no shortfall plus supplied upper allowance; configured proposal/evaluation/time/repetition/stagnation limits |
+| Waveform tolerances and stopping | Front/tail symmetric; crest no shortfall plus supplied upper allowance; configured proposal/evaluation/time limits; repetition/stagnation are diagnostic only |
 | Supported load models and terminal conditions | To be declared and validated |
 | Dashboard layout | React/Tailwind dashboard implemented; actual candidate diagrams, metrics, reconstructed curves and grounded Gemini summary API |
 
@@ -978,7 +976,7 @@ The dashboard and API obtain default budgets from backend environment configurat
 
 A proposal limit of 24 means at most **24 candidate attempts, including the initial proposal**, not 24 extra recalibrations. Successful new realisations receive physics and ML; rejected proposals and cache hits can leave fewer fresh ML calls. The dashboard's Maximum iterations input sets all three proposal/physics/ML count limits together. Increasing wall time alone does not increase those count limits.
 
-The worker stops at the first applicable condition: three accepted ML predictions without known physical failures in diagnostic mode (or three accepted eligible recommendations for recommendation success), proven fixed-input energy/charging infeasibility after physics/ML, proposal/evaluation exhaustion, wall-time exhaustion, repeated candidates, stagnation, exhausted search space or cancellation. An ML crest below the target cannot count as a match, regardless of its percentage shortfall. Budget/repetition/stagnation stopping without three matches reports `ml_converged=false`. The time check prevents starting further cycles after the worker budget is consumed; an in-flight call and final response/plot construction can finish later. The separate pre-run workbook-reference request is not part of the asynchronous worker's wall-time budget.
+The worker stops at the first applicable condition: three accepted ML predictions without known physical failures in diagnostic mode (or three accepted eligible recommendations for recommendation success), proposal/evaluation exhaustion, wall-time exhaustion, exhausted search space or cancellation. Constraint failures (including fixed-input energy incompatibility), repeated realised candidates and archive stagnation never cause early stopping. An ML crest below the target cannot count as a match, regardless of its percentage shortfall. Budget stopping without three matches reports `ml_converged=false`. The time check prevents starting further cycles after the worker budget is consumed; an in-flight call and final response/plot construction can finish later. The separate pre-run workbook-reference request is not part of the asynchronous worker's wall-time budget.
 
 Actual counts are exposed as `counters.proposals`, `physics_evaluations`, `physics_predictions`, `ml_evaluations`, `ml_predictions` and `cache_hits`, together with `stop_reason` and elapsed time. These report the work that actually occurred rather than implying a fixed number of completed calibration cycles.
 
@@ -994,7 +992,7 @@ POWERNEXT_CALIBRATION_MAX_ATTEMPTS=24
 
 The attempt setting supplies omitted `max_proposals`, `max_forward_evaluations` and `max_ml_evaluations` fields. Wall time must be positive and finite; attempts must be an integer from 1 to 10,000. Invalid environment settings fail service configuration rather than silently disabling limits. Explicit request fields retain precedence. The request schema's numeric defaults are fallback values; runtime environment defaults are advertised by bootstrap and frozen in the persisted resolved context. A partial request receives environment defaults only for its omitted budget fields.
 
-Restart the backend after editing `.env`, then refresh the dashboard to load the new defaults. Existing queued/running/saved contexts and resumes keep their submitted budgets. Repetition, stagnation, evaluation, cancellation and waveform-success stopping rules still apply; the maximum attempt setting does not guarantee that all those attempts will be executed. These are search budgets, not TabPFN training epochs or model retraining counts.
+Restart the backend after editing `.env`, then refresh the dashboard to load the new defaults. Existing queued/running/saved contexts and resumes keep their submitted budgets. Evaluation/time budgets, cancellation, search-space exhaustion and waveform-success stopping rules still apply; the maximum attempt setting does not guarantee that all those attempts will be executed. These are search budgets, not TabPFN training epochs or model retraining counts.
 
 
 ### Decision summary: explain the calculation and selection
@@ -1036,6 +1034,15 @@ For the case with 9 stages, 3 µF and 193.089430894 kV per stage, every stage st
 
 These windows only establish necessary energy/voltage conditions. They do not promise that the resistor inventory, timing or corrected voltage will meet every requirement. Other capacitances are outside the present 3 µF training data. Missing topology/rating evidence cannot be repaired by an invented range: exact resistor stress data and manufacturer ratings, a verified circuit, and capacitor internal transient/reversal evidence are needed.
 
-Calibration does not count known-failing waveform matches toward the requested three successful setups. After the initial physics and ML evaluation it can report a proven fixed-input conflict rather than repeat a search that cannot repair it. If feasible N values exist, search continues within the environment/request budgets. Unknown hardware checks remain diagnostic; verified recommendations require all checks passed. Every attempt and its prediction remain available in history. The dashboard now displays constraint windows and a separate known-constraint status. Start a new calculation to apply the revised policy; older saved runs retain their original result.
+Calibration does not count known-failing waveform matches toward the requested three successful setups. A proven fixed-input conflict stays visible in the constraint windows but does not terminate calibration. Search continues within the environment/request budgets whether or not energy-compatible N values exist. Unknown hardware checks remain diagnostic; verified recommendations require all checks passed. Every attempt and its prediction remain available in history. The dashboard now displays constraint windows and a separate known-constraint status. Start a new calculation to apply the revised policy; older saved runs retain their original result.
 
 The exact API, formulas, Python stack, independent module fixtures and deliverables are specified in technical Section 19.
+
+
+### 16.4 Continue constraint repair and edit the stage-energy limit
+
+The energy-per-stage field is now your input, just like a supplied equipment capability. Enter a positive limit in kJ; the frontend sends it as `equipment_inputs.stage_energy_max_J` in J. The backend uses your value everywhere, including calibration checks, margins, performance metrics and energy windows. Missing/null API input uses the document's 2.5 kJ fallback; total generator energy remains capped at 30 kJ. The optimiser does not change either limit. Changing the limit changes the input context and requires a new calculation.
+
+A constraint failure no longer ends the run. The optimiser continues proposing N/Rf/Rt, obtains physics and ML results for each new buildable candidate, and receives penalties that improve when violations shrink. Large violations are not clipped: reducing total energy from 500 kJ to 400 kJ still helps the optimiser, even though both exceed 30 kJ. Failures and missing evidence stay visible, and failing candidates do not count toward the requested three successes. Exact repeat configurations reuse predictions and remain in the attempt table; repeats and stagnation no longer trigger early stopping.
+
+Calibration finishes when it finds three qualifying distinct setups, reaches the configured proposal/evaluation/time budget, is cancelled or exhausts its search space. With fixed charging voltage U and stage capacitance C, per-stage energy remains `0.5·C·U²`: changing stage count or resistors cannot repair that particular failure. Decreasing N can reduce total energy. Continuing the search does not guarantee that a feasible setup exists, so report a genuine shortfall and the possible input/rating windows if the budget expires. The demonstration tab remains unrelated.

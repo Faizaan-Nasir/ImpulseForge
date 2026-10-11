@@ -685,6 +685,19 @@
       ],
       "title": "Objective"
     },
+    "calibration_objective": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Calibration Objective"
+    },
     "eligible": {
       "title": "Eligible",
       "type": "boolean"

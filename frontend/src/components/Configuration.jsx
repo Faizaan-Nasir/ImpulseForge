@@ -130,15 +130,12 @@ export default function Configuration({
         </div>
         <div className="grid2">
           {f("cStage", "Stage capacitance", "µF")}
-          <Field
-            id="wStage"
-            label="Energy limit per stage"
-            value={2.5}
-            disabled
-            unit="kJ"
-          />
+          {f("wStage", "Energy limit per stage", "kJ", { min: 0.000001 })}
         </div>
-        <p className="hint">Retained limits: 2.5 kJ/stage and 30 kJ total.</p>
+        <p className="hint">
+          Your stage-energy limit is used by calibration. Total generator energy
+          remains limited to 30 kJ.
+        </p>
         {f("cBo", "Basic load Cbo", "pF")}
         <label className="check">
           <input

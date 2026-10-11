@@ -143,3 +143,52 @@ def test_calibration_can_change_n_and_does_not_stop_on_energy_failing_waveforms(
     assert "HW_TOTAL_ENERGY" in history[0]["failed_hardware_constraints"]
     assert history[0]["hardware_feasible"] is False
     assert all(r["known_constraints_satisfied"] for r in history[1:])
+
+
+@pytest.mark.parametrize("repeated", [False, True])
+def test_energy_conflict_continues_to_budget_despite_stagnation(request_data, tmp_path, repeated):
+    from powernext.contracts.models import Proposal
+    from powernext.pipeline.runner import run
+    from powernext.pipeline.storage import Store
+
+    request_data["search"].update(max_proposals=6, repeat_window=1, archive_stagnation_window=1)
+    ctx = resolve(RunRequest.model_validate(request_data))  # default 3 µF exceeds stage energy
+
+    class Proposer:
+        def __init__(self):
+            self.costs = []
+
+        def ask(self, index):
+            return index, Proposal(
+                N=9 if repeated else 9 - index, Rf_required_ohm=50, Rt_required_ohm=25
+            )
+
+        def tell(self, trial, cost):
+            self.costs.append(cost)
+
+    class Model:
+        def report(self):
+            return {}
+
+        def correct(self, ctx, candidate, baseline):
+            assert not baseline["constraints"]
+            return {
+                "status": "fixture",
+                "corrected_metrics": {"front_s": 1.2e-6, "tail_s": 50e-6, "crest_V": 1425000},
+                "support": {"status": "supported_diagnostic"},
+                "lab_validated": False,
+            }
+
+    store = Store(tmp_path / "energy.sqlite")
+    rid, _ = store.create_run(ctx)
+    proposer = Proposer()
+    result = run(ctx, rid, store, tmp_path, proposer=proposer, model=Model())
+    assert result["counters"]["proposals"] == len(proposer.costs) == 6
+    assert result["stop_reason"] == "maximum_proposals"
+    assert result["feasibility_windows"]["fixed_charge_energy_infeasible"]
+    assert not result["feasibility_windows"]["energy_infeasibility_stops_search"]
+    assert not result["ml_converged"] and result["returned_predictions"] == 0
+    assert result["counters"]["ml_predictions"] == (1 if repeated else 6)
+    assert result["counters"]["cache_hits"] == (5 if repeated else 0)
+    if not repeated:
+        assert all(later < earlier for earlier, later in zip(proposer.costs, proposer.costs[1:]))

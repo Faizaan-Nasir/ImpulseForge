@@ -1,5 +1,5 @@
 {
-  "hardware_authority": "Frontend workbook inputs and example defaults; exactly two document energy limits plus capacitance fallback",
+  "hardware_authority": "Frontend equipment inputs; editable stage-energy limit with 2500 J fallback; retained total energy 30000 J; capacitance fallback",
   "implemented": [
     {
       "id": "HW_STAGES",
@@ -28,12 +28,14 @@
     },
     {
       "id": "HW_STAGE_ENERGY",
-      "value": 2500,
+      "value": "resolved frontend input; fallback only when omitted/null",
       "unit": "J",
       "module": "calibration/constraints.py; calibration/windows.py; pipeline/runner.py",
-      "tests": "test_physics.py",
-      "source": "Retained problem-statement energy constraint",
-      "verdict_owner": "calibration"
+      "tests": "test_context.py; test_api.py; test_calibration.py",
+      "source": "Frontend stage-energy input or problem-statement fallback",
+      "verdict_owner": "calibration",
+      "fallback_value": 2500,
+      "input_field": "equipment_inputs.stage_energy_max_J"
     },
     {
       "id": "HW_TOTAL_ENERGY",
@@ -150,5 +152,6 @@
     "ml_residual_prediction",
     "calibration_constraint_assessment"
   ],
-  "constraint_policy": "calibration_after_prediction_v1"
+  "constraint_policy": "calibration_budgeted_constraints_v2",
+  "stopping_policy": "three successful distinct setups or explicit proposal/evaluation/time limits, cancellation or exhausted search; constraint failures, repetition and stagnation never stop early"
 }

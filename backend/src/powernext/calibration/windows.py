@@ -43,7 +43,7 @@ def feasibility_windows(context, candidate=None, baseline=None, checks=()):
         f"At N={n} and fixed charge {U / 1000:.6f} kV/stage, stage capacitance must be >0 and <= {cmax * 1e6:.6f} µF to satisfy both stored-energy limits. Retest timing and ML after changing capacitance.",
         f"At N={n} and {C * 1e6:.6f} µF/stage, charge must be >0 and <= {at_current['charge_upper_V'] / 1000:.6f} kV/stage for energy/charging limits. This alone does not meet the requested crest.",
         f"If charge is deliberately retuned at N={hw['N_max']}, the expected-efficiency formula requires {retuned_u / 1000:.6f} kV/stage; capacitance must be <= {retuned_cmax * 1e6:.6f} µF, and the stage-voltage rating must also permit that charge.",
-        f"To operate the current N={n} configuration unchanged, different equipment would need at least {E / 1000:.3f} kJ/stage and {n * E / 1000:.3f} kJ total stored-energy capability. These are required capabilities, not permission to change the retained limits.",
+        f"To operate the current N={n} configuration unchanged, different equipment would need at least {E / 1000:.3f} kJ/stage and {n * E / 1000:.3f} kJ total stored-energy capability. These are required capabilities, not changes to the configured limits.",
     ]
     for check in checks:
         if check["status"] != "unknown":
@@ -89,6 +89,9 @@ def feasibility_windows(context, candidate=None, baseline=None, checks=()):
         "actual_charge_V": U,
         "fixed_charge_energy_feasible_stage_counts": fixed_counts,
         "fixed_charge_energy_infeasible": not fixed_counts,
+        "energy_infeasibility_stops_search": False,
+        "stage_energy_limit_J": Es,
+        "total_energy_limit_J": Et,
         "current_stage_capacitance_upper_F": cmax,
         "current_stage_charge_upper_V": at_current["charge_upper_V"],
         "required_current_stage_energy_rating_J": E,

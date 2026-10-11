@@ -173,8 +173,16 @@ class Search(Record):
     dp_seconds: Positive = 10
     cp_sat_seconds: Positive = 2
     cp_pair_retries: int = Field(default=5, ge=1, le=100)
-    repeat_window: int = Field(default=10, ge=1)
-    archive_stagnation_window: int = Field(default=20, ge=1)
+    repeat_window: int = Field(
+        default=10,
+        ge=1,
+        description="Legacy compatibility field; repetition does not stop the search.",
+    )
+    archive_stagnation_window: int = Field(
+        default=20,
+        ge=1,
+        description="Legacy compatibility field; stagnation does not stop the search.",
+    )
     wall_time_seconds: Positive = Field(
         default=600,
         description="Omitted API field uses POWERNEXT_CALIBRATION_WALL_TIME_SECONDS; 600 is the fallback.",
@@ -198,7 +206,7 @@ class ObjectiveConfig(Record):
 
 
 class EquipmentInputs(Record):
-    """Editable workbook fields; omitted/null values request the profile fallback."""
+    """Editable equipment fields; omitted/null values request the profile fallback."""
 
     N_max: int | None = Field(
         default=None,
@@ -213,6 +221,11 @@ class EquipmentInputs(Record):
     C_stage_F: Positive | None = Field(
         default=None,
         description="Frontend stage capacitance in F (B15); example 3e-6.",
+    )
+
+    stage_energy_max_J: Positive | None = Field(
+        default=None,
+        description="Frontend energy limit per stage in J; omitted/null uses 2500 J fallback.",
     )
 
 
@@ -394,6 +407,7 @@ class CandidateEvaluation(Record):
     calibration: dict[str, Any] = Field(default_factory=dict)
     correction: dict[str, Any]
     objective: dict[str, Any] | None
+    calibration_objective: dict[str, Any] | None = None
     eligible: bool
     cost: Nonnegative
     objective_origin: Literal["residual_corrected", "physics_baseline"] | None = None

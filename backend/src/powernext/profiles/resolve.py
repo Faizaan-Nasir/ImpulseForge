@@ -97,7 +97,9 @@ def resolve(request: RunRequest, saved_inventories=None, model_bundle_hash=None)
         value_sources[name] = {
             "source": "frontend_input" if supplied is not None else field_fallback_source,
             "input_field": f"equipment_inputs.{name}",
-            "workbook_cell": f"Hybrid Calculator!{workbook_cells[name]}",
+            "workbook_cell": (
+                f"Hybrid Calculator!{workbook_cells[name]}" if name in workbook_cells else None
+            ),
             "value": hw[name],
             "fallback_value": fallback,
             "fallback_applied": supplied is None,
@@ -162,7 +164,7 @@ def resolve(request: RunRequest, saved_inventories=None, model_bundle_hash=None)
     if charge is None:
         raise DomainError("missing_charging_voltage", "Charging voltage required")
     data = {
-        "constraint_policy": "calibration_after_prediction_v1",
+        "constraint_policy": "calibration_budgeted_constraints_v2",
         "objective_acceptance_policy": OBJECTIVE_POLICY,
         "request": request.model_dump(mode="json"),
         "model_bundle_hash": model_bundle_hash,

@@ -55,11 +55,12 @@ it("shows an ML crest shortfall as requiring calibration with no negative allowa
 });
 it("edits arbitrary inventory and sends calculation through the supplied handler", () => {
   const calculate = vi.fn(),
+    change = vi.fn(),
     setInventory = vi.fn();
   render(
     <Configuration
       form={initialForm}
-      change={vi.fn()}
+      change={change}
       inventory={inventory}
       setInventory={setInventory}
       busy={false}
@@ -73,7 +74,11 @@ it("edits arbitrary inventory and sends calculation through the supplied handler
   expect(calculate).toHaveBeenCalledOnce();
   fireEvent.click(screen.getByRole("button", { name: "Add resistor" }));
   expect(setInventory.mock.calls[0][0].front).toHaveLength(2);
-  expect(screen.getByLabelText("Energy limit per stage")).toBeDisabled();
+  expect(screen.getByLabelText("Energy limit per stage")).toBeEnabled();
+  fireEvent.change(screen.getByLabelText("Energy limit per stage"), {
+    target: { value: "60" },
+  });
+  expect(change).toHaveBeenCalledWith("wStage", "60");
 });
 it("renders exact arbitrary nested networks from backend recipes", () => {
   const leaf = (ohm) => ({ op: "resistor", ohm, type_id: `r${ohm}` });

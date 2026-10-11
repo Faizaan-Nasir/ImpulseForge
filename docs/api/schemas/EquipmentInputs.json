@@ -1,6 +1,6 @@
 {
   "additionalProperties": false,
-  "description": "Editable workbook fields; omitted/null values request the profile fallback.",
+  "description": "Editable equipment fields; omitted/null values request the profile fallback.",
   "properties": {
     "N_max": {
       "anyOf": [
@@ -43,6 +43,20 @@
       "default": null,
       "description": "Frontend stage capacitance in F (B15); example 3e-6.",
       "title": "C Stage F"
+    },
+    "stage_energy_max_J": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Frontend energy limit per stage in J; omitted/null uses 2500 J fallback.",
+      "title": "Stage Energy Max J"
     }
   },
   "title": "EquipmentInputs",

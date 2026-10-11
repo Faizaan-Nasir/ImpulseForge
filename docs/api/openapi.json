@@ -2240,12 +2240,25 @@
             ],
             "title": "C Stage F",
             "description": "Frontend stage capacitance in F (B15); example 3e-6."
+          },
+          "stage_energy_max_J": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stage Energy Max J",
+            "description": "Frontend energy limit per stage in J; omitted/null uses 2500 J fallback."
           }
         },
         "additionalProperties": false,
         "type": "object",
         "title": "EquipmentInputs",
-        "description": "Editable workbook fields; omitted/null values request the profile fallback."
+        "description": "Editable equipment fields; omitted/null values request the profile fallback."
       },
       "HTTPValidationError": {
         "properties": {
@@ -3413,12 +3426,14 @@
             "type": "integer",
             "minimum": 1.0,
             "title": "Repeat Window",
+            "description": "Legacy compatibility field; repetition does not stop the search.",
             "default": 10
           },
           "archive_stagnation_window": {
             "type": "integer",
             "minimum": 1.0,
             "title": "Archive Stagnation Window",
+            "description": "Legacy compatibility field; stagnation does not stop the search.",
             "default": 20
           },
           "wall_time_seconds": {

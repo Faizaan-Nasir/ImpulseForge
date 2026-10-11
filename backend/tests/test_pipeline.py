@@ -121,21 +121,21 @@ def test_hardware_verdict_does_not_skip_ml(request_data, tmp_path, charge):
     assert result["returned_recommendations"] == 0
     assert result["counters"]["ml_evaluations"] == 1
     assert result["counters"]["physics_evaluations"] == 1
-    assert result["counters"]["cache_hits"] == (0 if charge == 190000 else 3)
+    assert result["counters"]["cache_hits"] == 3
+    assert result["counters"]["proposals"] == 4
+    assert result["stop_reason"] == "maximum_proposals"
     candidates = store.list("candidate")
     assert len(candidates) == 1
     performance = candidates[0][1]["performance"]
     assert performance["correction_status"] == "predicted_diagnostic"
     assert performance["corrected"] is not None
     assert performance["runtime"]["stage_seconds"]["physics"] > 0
-    assert result["performance"]["cache_hit_fraction"] == (0 if charge == 190000 else 0.75)
+    assert result["performance"]["cache_hit_fraction"] == 0.75
     assert result["performance"]["elapsed_seconds"] > 0
     evaluation_events = [
         e for e in store.event_page(ident, 0, 100) if e["pipeline_stage_name"] == "evaluation"
     ]
-    assert [e["cache_hit"] for e in evaluation_events] == (
-        [False] if charge == 190000 else [False, True, True, True]
-    )
+    assert [e["cache_hit"] for e in evaluation_events] == [False, True, True, True]
     checks = {c["constraint_id"]: c for c in candidates[0][1]["physics"]["constraints"]}
     assert checks["HW_STAGE_ENERGY"]["status"] == ("fail" if charge == 190000 else "pass")
 

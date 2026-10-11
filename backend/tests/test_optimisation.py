@@ -3,7 +3,7 @@ import math
 import pytest
 
 from powernext.contracts.models import DomainError, Proposal, RunRequest
-from powernext.optimisation.objective import Archive, evaluate_objective
+from powernext.optimisation.objective import Archive, calibration_cost, evaluate_objective
 from powernext.optimisation.smac_adapter import SmacAdapter
 from powernext.pipeline.runner import run
 from powernext.pipeline.storage import Store
@@ -37,6 +37,33 @@ def test_objective_worst_error(context):
     assert o["S"] == pytest.approx(5)
     assert o["cost"] == pytest.approx(5 / 6)
     assert not o["waveform_within_tolerance"]
+
+
+def test_constraint_cost_rewards_reducing_large_violations(context):
+    objective = evaluate_objective(
+        context, {"front_s": 1.2e-6, "tail_s": 50e-6, "crest_V": 1425000}
+    )
+
+    def score(energy):
+        return calibration_cost(
+            [
+                {
+                    "constraint_id": "HW_TOTAL_ENERGY",
+                    "status": "fail",
+                    "observed_value": energy,
+                    "limit_value": 30000,
+                }
+            ],
+            objective,
+        )
+
+    worse, better = score(500000), score(400000)
+    assert 1 <= better["cost"] < worse["cost"] < 2
+    assert better["relative_violation_sum"] < worse["relative_violation_sum"]
+    feasible = calibration_cost([{"constraint_id": "UNVERIFIED", "status": "unknown"}], objective)
+    assert feasible["cost"] == 0 and feasible["known_constraints_satisfied"]
+    poor_waveform = {**objective, "cost": 0.999999}
+    assert calibration_cost([], poor_waveform)["cost"] < better["cost"]
 
 
 @pytest.mark.parametrize("fraction", [0.9976, 0.99, 0.97, 0.5])

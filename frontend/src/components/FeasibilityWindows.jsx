@@ -17,7 +17,9 @@ export default function FeasibilityWindows({ windows }) {
         </p>
         <p>
           The optimiser can change N, Rf and Rt. Charge and capacitance remain
-          your inputs; changing them requires a new calculation.
+          your inputs; changing them requires a new calculation. Constraint
+          failures do not stop the search: calibration continues until three
+          successful setups or the configured search limits.
         </p>
         <table className="score-tbl" aria-label="Necessary energy windows">
           <tbody>

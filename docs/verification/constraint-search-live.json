@@ -1,0 +1,1056 @@
+{
+  "run_id": "baf0063489c14a37b4b514c445090b8d",
+  "stop_reason": "maximum_proposals",
+  "counters": {
+    "proposals": 6,
+    "physics_evaluations": 2,
+    "ml_evaluations": 2,
+    "physics_predictions": 2,
+    "ml_predictions": 2,
+    "cache_hits": 3,
+    "unique_realised": 2
+  },
+  "returned_successful_predictions": 0,
+  "feasibility_windows": {
+    "owner": "calibration",
+    "scope": "necessary_analytical_energy_and_voltage_conditions_only",
+    "waveform_or_ml_feasibility_guaranteed": false,
+    "charge_policy": "fixed_during_this_search",
+    "actual_stage_count": 10,
+    "stage_capacitance_F": 3e-06,
+    "actual_charge_V": 198825.0163101914,
+    "fixed_charge_energy_feasible_stage_counts": [],
+    "fixed_charge_energy_infeasible": true,
+    "energy_infeasibility_stops_search": false,
+    "stage_energy_limit_J": 2500.0,
+    "total_energy_limit_J": 30000,
+    "current_stage_capacitance_upper_F": 1.264817747475547e-07,
+    "current_stage_charge_upper_V": 40824.8290463863,
+    "required_current_stage_energy_rating_J": 59297.08066612181,
+    "required_current_total_energy_rating_J": 592970.806661218,
+    "stage_options_with_charge_retuning": [
+      {
+        "N": 1,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 1789425.1467917224,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 2,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 894712.5733958612,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 3,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 596475.0489305742,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 4,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 447356.2866979306,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 5,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 357885.02935834444,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 6,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 298237.5244652871,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 7,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 255632.16382738893,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 8,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 223678.1433489653,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 9,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 198825.01631019136,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 10,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 178942.51467917222,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 11,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 162675.01334470202,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 12,
+        "charge_upper_V": 40824.8290463863,
+        "charge_required_from_expected_efficiency_V": 149118.76223264355,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 13,
+        "charge_upper_V": 39223.22702763681,
+        "charge_required_from_expected_efficiency_V": 137648.0882147479,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 14,
+        "charge_upper_V": 37796.44730092272,
+        "charge_required_from_expected_efficiency_V": 127816.08191369446,
+        "necessary_target_energy_window_exists": false
+      },
+      {
+        "N": 15,
+        "charge_upper_V": 36514.83716701107,
+        "charge_required_from_expected_efficiency_V": 119295.00978611484,
+        "necessary_target_energy_window_exists": false
+      }
+    ],
+    "expected_efficiency_crest_upper_at_N_max_V": 449786.7498764389,
+    "conditional_target_charge_at_N_max_V": 119295.00978611484,
+    "conditional_target_capacitance_upper_at_N_max_F": 2.8107061055012154e-07,
+    "expected_efficiency_assumption": 0.8211944965808653,
+    "suggestions": [
+      "At N=10 and fixed charge 198.825016 kV/stage, stage capacitance must be >0 and <= 0.126482 \u00b5F to satisfy both stored-energy limits. Retest timing and ML after changing capacitance.",
+      "At N=10 and 3.000000 \u00b5F/stage, charge must be >0 and <= 40.824829 kV/stage for energy/charging limits. This alone does not meet the requested crest.",
+      "If charge is deliberately retuned at N=15, the expected-efficiency formula requires 119.295010 kV/stage; capacitance must be <= 0.281071 \u00b5F, and the stage-voltage rating must also permit that charge.",
+      "To operate the current N=10 configuration unchanged, different equipment would need at least 59.297 kJ/stage and 592.971 kJ total stored-energy capability. These are required capabilities, not changes to the configured limits.",
+      "Topology has no numerical safe window until its circuit/branch arrangement is verified and recorded; provide circuit evidence and external-front resistance.",
+      "Capacitor transient/reversal rating needs internal capacitor stress evidence and manufacturer ratings. Per-stage charging voltage is not a verified transient rating.",
+      "Resistor ratings require manufacturer/equipment evidence plus voltage, current, pulse energy, average power and temperature limits. Calculator mode supplies no current/voltage traces, so it cannot establish these rating windows; an exact, supported circuit evaluation or measurement is required."
+    ],
+    "component_required_ratings": [
+      {
+        "component_id": "stage_01/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_02/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_03/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_04/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_05/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_06/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_07/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_08/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_09/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_10/front/fixture_front-1",
+        "role": "front",
+        "type_id": "fixture_front",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_01/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_02/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_03/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_04/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_05/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_06/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_07/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_08/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_09/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      },
+      {
+        "component_id": "stage_10/tail/fixture_tail-1",
+        "role": "tail",
+        "type_id": "fixture_tail",
+        "minimum_required_ratings": {
+          "pulse_voltage_limit_V": null,
+          "pulse_current_limit_A": null,
+          "pulse_energy_limit_J": null,
+          "average_power_limit_W": null,
+          "temperature_limit_K": null
+        },
+        "status": "required_capability_only_not_equipment_approval"
+      }
+    ]
+  },
+  "attempts": {
+    "run_id": "baf0063489c14a37b4b514c445090b8d",
+    "total": 6,
+    "proposal_count": 6,
+    "offset": 0,
+    "limit": 1000,
+    "ordering": "proposal then ML evaluation, from first to last; repeated proposals retained",
+    "items": [
+      {
+        "event_sequence": 2832,
+        "candidate_id": null,
+        "N": null,
+        "U_charge_V": null,
+        "Rf_actual_ohm": null,
+        "Rt_actual_ohm": null,
+        "front_recipe": null,
+        "tail_recipe": null,
+        "ml_metrics": null,
+        "ml_evaluation_number": null,
+        "prediction_source": "not_invoked",
+        "correction_status": "not_invoked",
+        "model_version": null,
+        "model_support": null,
+        "objective": null,
+        "waveform_within_tolerance": false,
+        "hardware_feasible": null,
+        "failed_hardware_constraints": [],
+        "eligible": null,
+        "reason_codes": [
+          "resistance_tolerance_unmet"
+        ],
+        "status": "ml_unavailable",
+        "attempt_number": 1,
+        "evaluation_in_attempt": 1,
+        "proposal": {
+          "N": 12,
+          "Rf_required_ohm": 11.763199681696,
+          "Rt_required_ohm": 98.3475147150122,
+          "proposal_index": 0,
+          "source": "SMAC3"
+        },
+        "attempt_status": "rejected"
+      },
+      {
+        "event_sequence": 2843,
+        "candidate_id": "b98c6ee9ea616780036ccd5483cbfaba",
+        "N": 9,
+        "U_charge_V": 198825.0163101914,
+        "Rf_actual_ohm": 40.0,
+        "Rt_actual_ohm": 25.0,
+        "front_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "tail_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "ml_metrics": {
+          "front_s": 1.2021198763502161e-06,
+          "tail_s": 5.218823769703769e-05,
+          "crest_V": 1459533.8955645978
+        },
+        "ml_evaluation_number": 1,
+        "prediction_source": "fresh_ml",
+        "correction_status": "predicted_diagnostic",
+        "model_version": "residual-tabpfn-v2-standardised-v1",
+        "model_support": {
+          "status": "supported_diagnostic",
+          "reasons": [],
+          "joint_domain_validated": false,
+          "lab_validated": false
+        },
+        "objective": {
+          "acceptance_policy": "crest_no_shortfall_v1",
+          "errors": {
+            "front": {
+              "unit": "s",
+              "target": 1.2e-06,
+              "predicted": 1.2021198763502161e-06,
+              "signed_delta": 2.1198763502161965e-09,
+              "absolute_delta": 2.1198763502161965e-09,
+              "percentage_delta": 0.1766563625180164,
+              "absolute_percentage_delta": 0.1766563625180164,
+              "allowed_delta": 3.6e-07,
+              "lower_limit": 8.4e-07,
+              "upper_limit": 1.5599999999999999e-06,
+              "allowed_negative_delta": 3.6e-07,
+              "allowed_positive_delta": 3.6e-07,
+              "normalised_error": 0.005888545417267212,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "tail": {
+              "unit": "s",
+              "target": 5e-05,
+              "predicted": 5.218823769703769e-05,
+              "signed_delta": 2.188237697037685e-06,
+              "absolute_delta": 2.188237697037685e-06,
+              "percentage_delta": 4.37647539407537,
+              "absolute_percentage_delta": 4.37647539407537,
+              "allowed_delta": 1e-05,
+              "lower_limit": 4e-05,
+              "upper_limit": 6e-05,
+              "allowed_negative_delta": 1e-05,
+              "allowed_positive_delta": 1e-05,
+              "normalised_error": 0.21882376970376846,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "crest": {
+              "unit": "V",
+              "target": 1469466.0825887695,
+              "predicted": 1459533.8955645978,
+              "signed_delta": -9932.187024171697,
+              "absolute_delta": 9932.187024171697,
+              "percentage_delta": -0.6759044759082896,
+              "absolute_percentage_delta": 0.6759044759082896,
+              "allowed_delta": 44083.982477663085,
+              "lower_limit": 1469466.0825887695,
+              "upper_limit": 1513550.0650664326,
+              "allowed_negative_delta": 0,
+              "allowed_positive_delta": 44083.982477663085,
+              "normalised_error": 0.2253014919694299,
+              "within_tolerance": false,
+              "reason_code": "crest_below_required"
+            }
+          },
+          "S": 1.2253014919694298,
+          "J": 0.15000460236348853,
+          "cost": 0.5506226892810903,
+          "crest_minimum_satisfied": false,
+          "crest_shortfall_V": 9932.187024171697,
+          "calibration_required": true,
+          "waveform_within_tolerance": false
+        },
+        "waveform_within_tolerance": false,
+        "hardware_feasible": false,
+        "failed_hardware_constraints": [
+          "HW_STAGE_ENERGY",
+          "HW_TOTAL_ENERGY"
+        ],
+        "eligible": false,
+        "reason_codes": [],
+        "status": "outside_thresholds",
+        "known_constraints_satisfied": false,
+        "constraint_owner": "calibration",
+        "attempt_number": 2,
+        "evaluation_in_attempt": 1,
+        "proposal": {
+          "N": 9,
+          "Rf_required_ohm": 40.0,
+          "Rt_required_ohm": 25.0,
+          "proposal_index": 1,
+          "source": "SMAC3"
+        },
+        "attempt_status": "evaluated"
+      },
+      {
+        "event_sequence": 2848,
+        "candidate_id": "b98c6ee9ea616780036ccd5483cbfaba",
+        "N": 9,
+        "U_charge_V": 198825.0163101914,
+        "Rf_actual_ohm": 40.0,
+        "Rt_actual_ohm": 25.0,
+        "front_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "tail_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "ml_metrics": {
+          "front_s": 1.2021198763502161e-06,
+          "tail_s": 5.218823769703769e-05,
+          "crest_V": 1459533.8955645978
+        },
+        "ml_evaluation_number": null,
+        "prediction_source": "cached_ml",
+        "correction_status": "predicted_diagnostic",
+        "model_version": "residual-tabpfn-v2-standardised-v1",
+        "model_support": {
+          "status": "supported_diagnostic",
+          "reasons": [],
+          "joint_domain_validated": false,
+          "lab_validated": false
+        },
+        "objective": {
+          "acceptance_policy": "crest_no_shortfall_v1",
+          "errors": {
+            "front": {
+              "unit": "s",
+              "target": 1.2e-06,
+              "predicted": 1.2021198763502161e-06,
+              "signed_delta": 2.1198763502161965e-09,
+              "absolute_delta": 2.1198763502161965e-09,
+              "percentage_delta": 0.1766563625180164,
+              "absolute_percentage_delta": 0.1766563625180164,
+              "allowed_delta": 3.6e-07,
+              "lower_limit": 8.4e-07,
+              "upper_limit": 1.5599999999999999e-06,
+              "allowed_negative_delta": 3.6e-07,
+              "allowed_positive_delta": 3.6e-07,
+              "normalised_error": 0.005888545417267212,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "tail": {
+              "unit": "s",
+              "target": 5e-05,
+              "predicted": 5.218823769703769e-05,
+              "signed_delta": 2.188237697037685e-06,
+              "absolute_delta": 2.188237697037685e-06,
+              "percentage_delta": 4.37647539407537,
+              "absolute_percentage_delta": 4.37647539407537,
+              "allowed_delta": 1e-05,
+              "lower_limit": 4e-05,
+              "upper_limit": 6e-05,
+              "allowed_negative_delta": 1e-05,
+              "allowed_positive_delta": 1e-05,
+              "normalised_error": 0.21882376970376846,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "crest": {
+              "unit": "V",
+              "target": 1469466.0825887695,
+              "predicted": 1459533.8955645978,
+              "signed_delta": -9932.187024171697,
+              "absolute_delta": 9932.187024171697,
+              "percentage_delta": -0.6759044759082896,
+              "absolute_percentage_delta": 0.6759044759082896,
+              "allowed_delta": 44083.982477663085,
+              "lower_limit": 1469466.0825887695,
+              "upper_limit": 1513550.0650664326,
+              "allowed_negative_delta": 0,
+              "allowed_positive_delta": 44083.982477663085,
+              "normalised_error": 0.2253014919694299,
+              "within_tolerance": false,
+              "reason_code": "crest_below_required"
+            }
+          },
+          "S": 1.2253014919694298,
+          "J": 0.15000460236348853,
+          "cost": 0.5506226892810903,
+          "crest_minimum_satisfied": false,
+          "crest_shortfall_V": 9932.187024171697,
+          "calibration_required": true,
+          "waveform_within_tolerance": false
+        },
+        "waveform_within_tolerance": false,
+        "hardware_feasible": false,
+        "failed_hardware_constraints": [
+          "HW_STAGE_ENERGY",
+          "HW_TOTAL_ENERGY"
+        ],
+        "eligible": false,
+        "reason_codes": [],
+        "status": "outside_thresholds",
+        "known_constraints_satisfied": false,
+        "constraint_owner": "calibration",
+        "source_ml_evaluation_number": 1,
+        "attempt_number": 3,
+        "evaluation_in_attempt": 1,
+        "proposal": {
+          "N": 9,
+          "Rf_required_ohm": 39.9353656036206,
+          "Rt_required_ohm": 23.9215399185801,
+          "proposal_index": 2,
+          "source": "SMAC3"
+        },
+        "attempt_status": "evaluated"
+      },
+      {
+        "event_sequence": 2851,
+        "candidate_id": "b98c6ee9ea616780036ccd5483cbfaba",
+        "N": 9,
+        "U_charge_V": 198825.0163101914,
+        "Rf_actual_ohm": 40.0,
+        "Rt_actual_ohm": 25.0,
+        "front_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "tail_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "ml_metrics": {
+          "front_s": 1.2021198763502161e-06,
+          "tail_s": 5.218823769703769e-05,
+          "crest_V": 1459533.8955645978
+        },
+        "ml_evaluation_number": null,
+        "prediction_source": "cached_ml",
+        "correction_status": "predicted_diagnostic",
+        "model_version": "residual-tabpfn-v2-standardised-v1",
+        "model_support": {
+          "status": "supported_diagnostic",
+          "reasons": [],
+          "joint_domain_validated": false,
+          "lab_validated": false
+        },
+        "objective": {
+          "acceptance_policy": "crest_no_shortfall_v1",
+          "errors": {
+            "front": {
+              "unit": "s",
+              "target": 1.2e-06,
+              "predicted": 1.2021198763502161e-06,
+              "signed_delta": 2.1198763502161965e-09,
+              "absolute_delta": 2.1198763502161965e-09,
+              "percentage_delta": 0.1766563625180164,
+              "absolute_percentage_delta": 0.1766563625180164,
+              "allowed_delta": 3.6e-07,
+              "lower_limit": 8.4e-07,
+              "upper_limit": 1.5599999999999999e-06,
+              "allowed_negative_delta": 3.6e-07,
+              "allowed_positive_delta": 3.6e-07,
+              "normalised_error": 0.005888545417267212,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "tail": {
+              "unit": "s",
+              "target": 5e-05,
+              "predicted": 5.218823769703769e-05,
+              "signed_delta": 2.188237697037685e-06,
+              "absolute_delta": 2.188237697037685e-06,
+              "percentage_delta": 4.37647539407537,
+              "absolute_percentage_delta": 4.37647539407537,
+              "allowed_delta": 1e-05,
+              "lower_limit": 4e-05,
+              "upper_limit": 6e-05,
+              "allowed_negative_delta": 1e-05,
+              "allowed_positive_delta": 1e-05,
+              "normalised_error": 0.21882376970376846,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "crest": {
+              "unit": "V",
+              "target": 1469466.0825887695,
+              "predicted": 1459533.8955645978,
+              "signed_delta": -9932.187024171697,
+              "absolute_delta": 9932.187024171697,
+              "percentage_delta": -0.6759044759082896,
+              "absolute_percentage_delta": 0.6759044759082896,
+              "allowed_delta": 44083.982477663085,
+              "lower_limit": 1469466.0825887695,
+              "upper_limit": 1513550.0650664326,
+              "allowed_negative_delta": 0,
+              "allowed_positive_delta": 44083.982477663085,
+              "normalised_error": 0.2253014919694299,
+              "within_tolerance": false,
+              "reason_code": "crest_below_required"
+            }
+          },
+          "S": 1.2253014919694298,
+          "J": 0.15000460236348853,
+          "cost": 0.5506226892810903,
+          "crest_minimum_satisfied": false,
+          "crest_shortfall_V": 9932.187024171697,
+          "calibration_required": true,
+          "waveform_within_tolerance": false
+        },
+        "waveform_within_tolerance": false,
+        "hardware_feasible": false,
+        "failed_hardware_constraints": [
+          "HW_STAGE_ENERGY",
+          "HW_TOTAL_ENERGY"
+        ],
+        "eligible": false,
+        "reason_codes": [],
+        "status": "outside_thresholds",
+        "known_constraints_satisfied": false,
+        "constraint_owner": "calibration",
+        "source_ml_evaluation_number": 1,
+        "attempt_number": 4,
+        "evaluation_in_attempt": 1,
+        "proposal": {
+          "N": 9,
+          "Rf_required_ohm": 37.9385973234396,
+          "Rt_required_ohm": 25.1176169145092,
+          "proposal_index": 3,
+          "source": "SMAC3"
+        },
+        "attempt_status": "evaluated"
+      },
+      {
+        "event_sequence": 2855,
+        "candidate_id": "f144bc22bfb2e63576a36c352e0147d6",
+        "N": 10,
+        "U_charge_V": 198825.0163101914,
+        "Rf_actual_ohm": 40.0,
+        "Rt_actual_ohm": 25.0,
+        "front_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "tail_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "ml_metrics": {
+          "front_s": 1.3120481780230113e-06,
+          "tail_s": 5.218571651791917e-05,
+          "crest_V": 1622514.1704093604
+        },
+        "ml_evaluation_number": 2,
+        "prediction_source": "fresh_ml",
+        "correction_status": "predicted_extrapolation",
+        "model_version": "residual-tabpfn-v2-standardised-v1",
+        "model_support": {
+          "status": "extrapolated_diagnostic",
+          "reasons": [
+            "feature_outside_training_envelope:physics_front_s",
+            "feature_outside_training_envelope:physics_crest_V"
+          ],
+          "joint_domain_validated": false,
+          "lab_validated": false,
+          "prediction_trusted": false
+        },
+        "objective": {
+          "acceptance_policy": "crest_no_shortfall_v1",
+          "errors": {
+            "front": {
+              "unit": "s",
+              "target": 1.2e-06,
+              "predicted": 1.3120481780230113e-06,
+              "signed_delta": 1.1204817802301135e-07,
+              "absolute_delta": 1.1204817802301135e-07,
+              "percentage_delta": 9.33734816858428,
+              "absolute_percentage_delta": 9.33734816858428,
+              "allowed_delta": 3.6e-07,
+              "lower_limit": 8.4e-07,
+              "upper_limit": 1.5599999999999999e-06,
+              "allowed_negative_delta": 3.6e-07,
+              "allowed_positive_delta": 3.6e-07,
+              "normalised_error": 0.3112449389528093,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "tail": {
+              "unit": "s",
+              "target": 5e-05,
+              "predicted": 5.218571651791917e-05,
+              "signed_delta": 2.1857165179191686e-06,
+              "absolute_delta": 2.1857165179191686e-06,
+              "percentage_delta": 4.371433035838337,
+              "absolute_percentage_delta": 4.371433035838337,
+              "allowed_delta": 1e-05,
+              "lower_limit": 4e-05,
+              "upper_limit": 6e-05,
+              "allowed_negative_delta": 1e-05,
+              "allowed_positive_delta": 1e-05,
+              "normalised_error": 0.21857165179191684,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "crest": {
+              "unit": "V",
+              "target": 1469466.0825887695,
+              "predicted": 1622514.1704093604,
+              "signed_delta": 153048.08782059094,
+              "absolute_delta": 153048.08782059094,
+              "percentage_delta": 10.415217447616413,
+              "absolute_percentage_delta": 10.415217447616413,
+              "allowed_delta": 44083.982477663085,
+              "lower_limit": 1469466.0825887695,
+              "upper_limit": 1513550.0650664326,
+              "allowed_negative_delta": 0,
+              "allowed_positive_delta": 44083.982477663085,
+              "normalised_error": 3.471739149205471,
+              "within_tolerance": false,
+              "reason_code": null
+            }
+          },
+          "S": 3.471739149205471,
+          "J": 1.3338519133167324,
+          "cost": 0.7763733601997609,
+          "crest_minimum_satisfied": true,
+          "crest_shortfall_V": 0,
+          "calibration_required": true,
+          "waveform_within_tolerance": false
+        },
+        "waveform_within_tolerance": false,
+        "hardware_feasible": false,
+        "failed_hardware_constraints": [
+          "HW_STAGE_ENERGY",
+          "HW_TOTAL_ENERGY"
+        ],
+        "eligible": false,
+        "reason_codes": [
+          "feature_outside_training_envelope:physics_front_s",
+          "feature_outside_training_envelope:physics_crest_V"
+        ],
+        "status": "outside_thresholds",
+        "known_constraints_satisfied": false,
+        "constraint_owner": "calibration",
+        "attempt_number": 5,
+        "evaluation_in_attempt": 1,
+        "proposal": {
+          "N": 10,
+          "Rf_required_ohm": 35.0,
+          "Rt_required_ohm": 25.0,
+          "proposal_index": 4,
+          "source": "SMAC3"
+        },
+        "attempt_status": "evaluated"
+      },
+      {
+        "event_sequence": 2860,
+        "candidate_id": "f144bc22bfb2e63576a36c352e0147d6",
+        "N": 10,
+        "U_charge_V": 198825.0163101914,
+        "Rf_actual_ohm": 40.0,
+        "Rt_actual_ohm": 25.0,
+        "front_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_front",
+          "ohm": 40.0,
+          "children": []
+        },
+        "tail_recipe": {
+          "op": "resistor",
+          "type_id": "fixture_tail",
+          "ohm": 25.0,
+          "children": []
+        },
+        "ml_metrics": {
+          "front_s": 1.3120481780230113e-06,
+          "tail_s": 5.218571651791917e-05,
+          "crest_V": 1622514.1704093604
+        },
+        "ml_evaluation_number": null,
+        "prediction_source": "cached_ml",
+        "correction_status": "predicted_extrapolation",
+        "model_version": "residual-tabpfn-v2-standardised-v1",
+        "model_support": {
+          "status": "extrapolated_diagnostic",
+          "reasons": [
+            "feature_outside_training_envelope:physics_front_s",
+            "feature_outside_training_envelope:physics_crest_V"
+          ],
+          "joint_domain_validated": false,
+          "lab_validated": false,
+          "prediction_trusted": false
+        },
+        "objective": {
+          "acceptance_policy": "crest_no_shortfall_v1",
+          "errors": {
+            "front": {
+              "unit": "s",
+              "target": 1.2e-06,
+              "predicted": 1.3120481780230113e-06,
+              "signed_delta": 1.1204817802301135e-07,
+              "absolute_delta": 1.1204817802301135e-07,
+              "percentage_delta": 9.33734816858428,
+              "absolute_percentage_delta": 9.33734816858428,
+              "allowed_delta": 3.6e-07,
+              "lower_limit": 8.4e-07,
+              "upper_limit": 1.5599999999999999e-06,
+              "allowed_negative_delta": 3.6e-07,
+              "allowed_positive_delta": 3.6e-07,
+              "normalised_error": 0.3112449389528093,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "tail": {
+              "unit": "s",
+              "target": 5e-05,
+              "predicted": 5.218571651791917e-05,
+              "signed_delta": 2.1857165179191686e-06,
+              "absolute_delta": 2.1857165179191686e-06,
+              "percentage_delta": 4.371433035838337,
+              "absolute_percentage_delta": 4.371433035838337,
+              "allowed_delta": 1e-05,
+              "lower_limit": 4e-05,
+              "upper_limit": 6e-05,
+              "allowed_negative_delta": 1e-05,
+              "allowed_positive_delta": 1e-05,
+              "normalised_error": 0.21857165179191684,
+              "within_tolerance": true,
+              "reason_code": null
+            },
+            "crest": {
+              "unit": "V",
+              "target": 1469466.0825887695,
+              "predicted": 1622514.1704093604,
+              "signed_delta": 153048.08782059094,
+              "absolute_delta": 153048.08782059094,
+              "percentage_delta": 10.415217447616413,
+              "absolute_percentage_delta": 10.415217447616413,
+              "allowed_delta": 44083.982477663085,
+              "lower_limit": 1469466.0825887695,
+              "upper_limit": 1513550.0650664326,
+              "allowed_negative_delta": 0,
+              "allowed_positive_delta": 44083.982477663085,
+              "normalised_error": 3.471739149205471,
+              "within_tolerance": false,
+              "reason_code": null
+            }
+          },
+          "S": 3.471739149205471,
+          "J": 1.3338519133167324,
+          "cost": 0.7763733601997609,
+          "crest_minimum_satisfied": true,
+          "crest_shortfall_V": 0,
+          "calibration_required": true,
+          "waveform_within_tolerance": false
+        },
+        "waveform_within_tolerance": false,
+        "hardware_feasible": false,
+        "failed_hardware_constraints": [
+          "HW_STAGE_ENERGY",
+          "HW_TOTAL_ENERGY"
+        ],
+        "eligible": false,
+        "reason_codes": [
+          "feature_outside_training_envelope:physics_front_s",
+          "feature_outside_training_envelope:physics_crest_V"
+        ],
+        "status": "outside_thresholds",
+        "known_constraints_satisfied": false,
+        "constraint_owner": "calibration",
+        "source_ml_evaluation_number": 2,
+        "attempt_number": 6,
+        "evaluation_in_attempt": 1,
+        "proposal": {
+          "N": 10,
+          "Rf_required_ohm": 35.9418290432585,
+          "Rt_required_ohm": 23.9073485956523,
+          "proposal_index": 5,
+          "source": "SMAC3"
+        },
+        "attempt_status": "evaluated"
+      }
+    ]
+  }
+}

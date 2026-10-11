@@ -5,6 +5,45 @@ from powernext.contracts.models import DomainError
 OBJECTIVE_POLICY = "crest_no_shortfall_v1"
 
 
+def calibration_cost(checks, objective):
+    """Constraint feasibility first, then the unchanged ML waveform objective.
+
+    Keep full relative violations: clipping each at 1 hid progress when energy
+    was more than twice its limit. The bounded cost still distinguishes them.
+    Unknown evidence stays unknown and cannot verify a recommendation.
+    """
+    violations = []
+    for check in checks:
+        if check["status"] != "fail":
+            continue
+        observed, limit = check.get("observed_value"), check.get("limit_value")
+        relative = 1.0
+        if isinstance(observed, (int, float)) and isinstance(limit, (int, float)) and limit > 0:
+            relative = max(
+                0.0,
+                1 - observed / limit
+                if check["constraint_id"] == "REQUEST_MIN_EFFICIENCY"
+                else observed / limit - 1,
+            )
+        violations.append({"constraint_id": check["constraint_id"], "relative_violation": relative})
+    total = sum(v["relative_violation"] for v in violations)
+    # Feasible scores are <1; every known failing configuration scores >=1.
+    # The waveform term breaks equal-violation ties without crossing this band.
+    cost = (
+        1 + (total + 0.001 * objective["cost"]) / (1 + total + 0.001 * objective["cost"])
+        if violations
+        else objective["cost"]
+    )
+    return {
+        "policy": "operating_constraints_then_ml_waveform_v2",
+        "cost": cost,
+        "relative_violation_sum": total,
+        "violations": violations,
+        "waveform_cost": objective["cost"],
+        "known_constraints_satisfied": not violations,
+    }
+
+
 def objective_order(objective):
     """Respect the minimum crest before comparing remaining waveform deviations."""
     return (
