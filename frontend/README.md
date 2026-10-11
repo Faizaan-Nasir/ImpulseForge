@@ -22,7 +22,7 @@ A diagnostic display is explicitly separate from physical recommendations. Curre
 
 Gemini receives only the backend's compact decision evidence. The backend validates structured responses and references, caches successful explanations by evidence/model hash, and holds recommendation IDs and scores outside Gemini's control. Missing credentials or provider failures show deterministic evidence and an explicit status. No live Gemini request was verified without a configured key.
 
-Differences from the illustrative artifact preserve agreed project authority: stage energy is editable (2.5 kJ initial value, passed in J to the API); total energy remains 30 kJ; the fallback preset uses 15 default available stages and zero default basic capacitance; target timing/tolerances are editable; all workbook fields include maximum system voltage; priority preferences only break equal S/J scores. No KNN ranking or additive part/stage penalty is introduced. No unverified IEC certification is claimed.
+Differences from the illustrative artifact preserve agreed project authority: stage energy is editable (2.5 kJ initial value, passed in J to the API); total energy is editable too (30 kJ initial value, passed in J); the fallback preset uses 15 default available stages and zero default basic capacitance; target timing/tolerances are editable; all workbook fields include maximum system voltage; priority preferences only break equal S/J scores. No KNN ranking or additive part/stage penalty is introduced. No unverified IEC certification is claimed.
 
 ```sh
 npm --prefix frontend test

@@ -132,9 +132,9 @@ export default function Configuration({
           {f("cStage", "Stage capacitance", "µF")}
           {f("wStage", "Energy limit per stage", "kJ", { min: 0.000001 })}
         </div>
+        {f("wTotal", "Total generator energy limit", "kJ", { min: 0.000001 })}
         <p className="hint">
-          Your stage-energy limit is used by calibration. Total generator energy
-          remains limited to 30 kJ.
+          Calibration uses your per-stage and total generator energy limits.
         </p>
         {f("cBo", "Basic load Cbo", "pF")}
         <label className="check">

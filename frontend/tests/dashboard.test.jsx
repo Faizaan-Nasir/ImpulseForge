@@ -79,6 +79,11 @@ it("edits arbitrary inventory and sends calculation through the supplied handler
     target: { value: "60" },
   });
   expect(change).toHaveBeenCalledWith("wStage", "60");
+  expect(screen.getByLabelText("Total generator energy limit")).toBeEnabled();
+  fireEvent.change(screen.getByLabelText("Total generator energy limit"), {
+    target: { value: "600" },
+  });
+  expect(change).toHaveBeenCalledWith("wTotal", "600");
 });
 it("renders exact arbitrary nested networks from backend recipes", () => {
   const leaf = (ohm) => ({ op: "resistor", ohm, type_id: `r${ohm}` });

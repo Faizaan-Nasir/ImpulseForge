@@ -227,6 +227,10 @@ class EquipmentInputs(Record):
         default=None,
         description="Frontend energy limit per stage in J; omitted/null uses 2500 J fallback.",
     )
+    total_energy_max_J: Positive | None = Field(
+        default=None,
+        description="Frontend total generator energy limit in J; omitted/null uses 30000 J fallback.",
+    )
 
 
 class RunRequest(Record):

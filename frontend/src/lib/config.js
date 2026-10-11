@@ -11,6 +11,7 @@ export const initialForm = {
   uMax: 200,
   cStage: 3,
   wStage: 2.5,
+  wTotal: 30,
   cBo: 0,
   includeCbo: false,
   profile: "workbook",
@@ -49,6 +50,7 @@ export function toRequest(form, inventory) {
     "uMax",
     "cStage",
     "wStage",
+    "wTotal",
     "tFront",
     "tTail",
     "tolCrest",
@@ -82,6 +84,7 @@ export function toRequest(form, inventory) {
       U_stage_max_V: n("uMax") * 1000,
       C_stage_F: n("cStage") * 1e-6,
       stage_energy_max_J: n("wStage") * 1000,
+      total_energy_max_J: n("wTotal") * 1000,
     },
     system_max_voltage_V: n("systemMax") * 1000,
     target: {

@@ -2,8 +2,8 @@
   "files": [
     {
       "name": "Dashboard_Implementation.md",
-      "sha256": "97a4074f05bbcb63344b3e32711208c3394b7b8cb45bd0397f24a85b62b5408d",
-      "size_bytes": 21337
+      "sha256": "fbea3dbb81b6c92a55f9e52d73554246c1103c16835e20b237f43ae9d351458f",
+      "size_bytes": 21478
     },
     {
       "name": "HV IG Problem Statement.pdf",
@@ -27,8 +27,8 @@
     },
     {
       "name": "Marx_Generator_Architecture_Working_Document.md",
-      "sha256": "4de3b8dcb4b6efb8bf0d2ba191740a744aeff835bf1fe359fb46a41df5e9e3b6",
-      "size_bytes": 93214
+      "sha256": "542243ab00cf012c0e18299731009fcdb6b6c5cb8c4927f5d9e2ff9025943244",
+      "size_bytes": 94005
     },
     {
       "name": "Marx_Generator_Architecture_Working_Document.pdf",
@@ -37,8 +37,8 @@
     },
     {
       "name": "Marx_Generator_Technical_Implementation_Specification.md",
-      "sha256": "3a6e6b7408479b9aa63c4b53a72a6cec9616d0319c5fce3aaa73e34057ab2acf",
-      "size_bytes": 192438
+      "sha256": "70ff3ea1c0828aa62a340808c7c4ce057b3158add4bcda54ef4d0882bf6c8a99",
+      "size_bytes": 194717
     },
     {
       "name": "Marx_Generator_Technical_Implementation_Specification.pdf",
@@ -57,8 +57,8 @@
     },
     {
       "name": "backend_implementation_status.md",
-      "sha256": "7fcd930b4f9694e8eb8e955a33bd41348726ff36ae43d6bd3a37e1def66517e1",
-      "size_bytes": 16961
+      "sha256": "d93a6674a1c8bdd3351e81a7b87a2f46febcc4951f4d979eeb0753a7a811def6",
+      "size_bytes": 17019
     },
     {
       "name": "frontend_environment_report.json",
@@ -92,8 +92,8 @@
     },
     {
       "name": "verification_report.json",
-      "sha256": "ccf378231215dc8f5a425e340cde034aa4389c04cea91e03d952b9cb8f4dfd19",
-      "size_bytes": 12664
+      "sha256": "e062c1ee43f0c0b84a0953f6b173b3cf674c2e0fb6057a2106fff58868790533",
+      "size_bytes": 13548
     },
     {
       "name": "~$Hybrid_Physics_ML_Impulse_Generator_Optimiser.xlsx",
@@ -120,7 +120,7 @@
     "authority": "Visual reference; prior project constraints override illustrative values"
   },
   "authority": {
-    "hardware": "Frontend equipment inputs including editable stage-energy limit (2500 J fallback); retained total energy 30000 J; capacitance fallback",
+    "hardware": "Frontend equipment inputs, including both editable energy limits; document fallbacks only (2500 J/stage, 30000 J total, capacitance 0.125 \u00b5F)",
     "workbook_input_sheet": "Hybrid Calculator!B5:B15; Resistor Inventory",
     "retained_document_parameters": {
       "total_energy_max_J": 30000,

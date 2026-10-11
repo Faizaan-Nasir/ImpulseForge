@@ -1,5 +1,5 @@
 {
-  "hardware_authority": "Frontend equipment inputs; editable stage-energy limit with 2500 J fallback; retained total energy 30000 J; capacitance fallback",
+  "hardware_authority": "Frontend equipment inputs; both stored-energy limits are editable with document fallbacks (2500 J/stage, 30000 J total); capacitance fallback",
   "implemented": [
     {
       "id": "HW_STAGES",
@@ -39,12 +39,14 @@
     },
     {
       "id": "HW_TOTAL_ENERGY",
-      "value": 30000,
+      "value": "resolved frontend input; fallback only when omitted/null",
       "unit": "J",
       "module": "calibration/constraints.py; calibration/windows.py; pipeline/runner.py",
-      "tests": "test_physics.py",
-      "source": "Retained problem-statement energy constraint",
-      "verdict_owner": "calibration"
+      "tests": "test_context.py; test_api.py; test_calibration.py",
+      "source": "Frontend total-energy input or problem-statement fallback",
+      "verdict_owner": "calibration",
+      "fallback_value": 30000,
+      "input_field": "equipment_inputs.total_energy_max_J"
     },
     {
       "id": "STAGE_CAPACITANCE",

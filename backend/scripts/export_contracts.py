@@ -103,7 +103,7 @@ def main():
                 "authority": "Visual reference; prior project constraints override illustrative values",
             },
             "authority": {
-                "hardware": "Frontend equipment inputs including editable stage energy (2500 J fallback); retained total energy 30000 J plus capacitance fallback",
+                "hardware": "Frontend equipment inputs including editable stage energy (2500 J fallback); editable total energy (30000 J fallback) plus capacitance fallback",
                 "workbook_input_sheet": "Hybrid Calculator!B5:B15; Resistor Inventory",
                 "retained_document_parameters": DOCUMENT_PARAMETERS,
                 "workbook": "primary input-field definition; example values and synthetic diagnostic data",

@@ -54,7 +54,11 @@ def assess(context, candidate, baseline, correction=None):
             value_sources.get("stage_energy_max_J", {}).get("source", "problem_statement_fallback"),
         ),
         check_bound(
-            "HW_TOTAL_ENERGY", N * E, hw["total_energy_max_J"], "J", "problem_statement_fallback"
+            "HW_TOTAL_ENERGY",
+            N * E,
+            hw["total_energy_max_J"],
+            "J",
+            value_sources.get("total_energy_max_J", {}).get("source", "problem_statement_fallback"),
         ),
     ]
     for role in ("front", "tail"):

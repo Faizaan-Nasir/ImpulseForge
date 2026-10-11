@@ -217,7 +217,7 @@ Only the following values from the last page of the problem statement enter the 
 
 | Parameter | Value | Use |
 | --- | --- | --- |
-| Maximum stored energy at rated voltage | 30 kJ | Hard total stored-energy limit |
+| Maximum stored energy at rated voltage | Positive frontend input; 30 kJ fallback | Calibration enforces the resolved total limit |
 | Stored energy per stage | Positive frontend input; 2.5 kJ fallback | Calibration enforces the resolved limit for each stage |
 | Impulse capacitance per stage | 0.125 µF | Fallback only when frontend stage capacitance is missing; a supplied value wins |
 
@@ -229,7 +229,7 @@ No other last-page values are imported. In particular, there is no document-base
 
 All eleven fields in the workbook’s USER INPUT section (`Hybrid Calculator!B5:B15`) have API fields. Use `impulse_type` for Lightning/Switching, `equipment_inputs.N_max` for maximum stages, `equipment_inputs.U_stage_max_V` for maximum stage voltage and `equipment_inputs.C_stage_F` for stage capacitance. Other fields carry system-voltage classification, required crest, load/divider/stray capacitance, stray inductance and expected efficiency. Inventory is also a supplied input, independent of the example catalogue.
 
-A missing stage-count or stage-voltage maximum uses the workbook example default. Missing capacitance uses 0.125 µF in the default document-fallback profile. Total generator energy is the retained unconditional document limit. Stage energy uses a positive frontend input with 2500 J fallback. Require positive integer `1 ≤ N ≤ resolved.N_max`; a PDF minimum of two is not imported. Component ratings supplied with inventory, supported circuit topology, ML coverage and the previously agreed independent four-per-type/role cap remain separate project/input/model policies.
+A missing stage-count or stage-voltage maximum uses the workbook example default. Missing capacitance uses 0.125 µF in the default document-fallback profile. Total generator energy uses a positive frontend input with 30000 J fallback. Stage energy uses a positive frontend input with 2500 J fallback. Require positive integer `1 ≤ N ≤ resolved.N_max`; a PDF minimum of two is not imported. Component ratings supplied with inventory, supported circuit topology, ML coverage and the previously agreed independent four-per-type/role cap remain separate project/input/model policies.
 
 API output exposes `value_sources`, `input_sources`, resolved values and constraint outcomes. Physics uses `C_effective_load = C_object + C_divider + C_stray`, with no automatic document basic-capacitance term. Optional shot rate must be supplied explicitly for average-power/periodic-heat estimates. The optimiser varies actual `N`, required `Rf` and required `Rt` while the scenario inputs remain fixed within that run.
 
@@ -1041,8 +1041,13 @@ The exact API, formulas, Python stack, independent module fixtures and deliverab
 
 ### 16.4 Continue constraint repair and edit the stage-energy limit
 
-The energy-per-stage field is now your input, just like a supplied equipment capability. Enter a positive limit in kJ; the frontend sends it as `equipment_inputs.stage_energy_max_J` in J. The backend uses your value everywhere, including calibration checks, margins, performance metrics and energy windows. Missing/null API input uses the document's 2.5 kJ fallback; total generator energy remains capped at 30 kJ. The optimiser does not change either limit. Changing the limit changes the input context and requires a new calculation.
+The energy-per-stage field is now your input, just like a supplied equipment capability. Enter a positive limit in kJ; the frontend sends it as `equipment_inputs.stage_energy_max_J` in J. The backend uses your value everywhere, including calibration checks, margins, performance metrics and energy windows. Missing/null API input uses the document's 2.5 kJ fallback; total energy is likewise editable via `equipment_inputs.total_energy_max_J` with a 30 kJ fallback. The optimiser does not change either limit. Changing the limit changes the input context and requires a new calculation.
 
 A constraint failure no longer ends the run. The optimiser continues proposing N/Rf/Rt, obtains physics and ML results for each new buildable candidate, and receives penalties that improve when violations shrink. Large violations are not clipped: reducing total energy from 500 kJ to 400 kJ still helps the optimiser, even though both exceed 30 kJ. Failures and missing evidence stay visible, and failing candidates do not count toward the requested three successes. Exact repeat configurations reuse predictions and remain in the attempt table; repeats and stagnation no longer trigger early stopping.
 
 Calibration finishes when it finds three qualifying distinct setups, reaches the configured proposal/evaluation/time budget, is cancelled or exhausts its search space. With fixed charging voltage U and stage capacitance C, per-stage energy remains `0.5·C·U²`: changing stage count or resistors cannot repair that particular failure. Decreasing N can reduce total energy. Continuing the search does not guarantee that a feasible setup exists, so report a genuine shortfall and the possible input/rating windows if the budget expires. The demonstration tab remains unrelated.
+
+
+### 16.5 Edit both energy capabilities
+
+Both energy limits are now frontend inputs: **Energy limit per stage** and **Total generator energy limit**, in kJ. The API receives `equipment_inputs.stage_energy_max_J` and `equipment_inputs.total_energy_max_J` in J. Use the document's 2.5 kJ and 30 kJ only when the respective API input is omitted/null. Your explicit values govern the calibration checks, optimisation penalties, performance utilisation and possible operating windows. The optimiser changes N/Rf/Rt within those supplied limits; it never changes the limits itself. Refresh and begin a new calculation to use changed capabilities; saved runs retain their original inputs.

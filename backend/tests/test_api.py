@@ -13,6 +13,7 @@ def test_equipment_api_exposes_fifteen_stage_limit(tmp_path):
 
 def test_stage_energy_input_reaches_calibration_and_api_provenance(request_data, tmp_path):
     request_data["equipment_inputs"]["stage_energy_max_J"] = 60000
+    request_data["equipment_inputs"]["total_energy_max_J"] = 600000
     with TestClient(create_app(tmp_path, False)) as client:
         body = {
             "request": request_data,
@@ -29,6 +30,17 @@ def test_stage_energy_input_reaches_calibration_and_api_provenance(request_data,
         assert energy["limit_value"] == 60000 and energy["status"] == "pass"
         assert energy["origin"] == "frontend_input"
         assert report["feasibility_windows"]["stage_energy_limit_J"] == 60000
+        total = next(c for c in report["constraints"] if c["constraint_id"] == "HW_TOTAL_ENERGY")
+        assert total["limit_value"] == 600000 and total["status"] == "pass"
+        assert total["origin"] == "frontend_input"
+        assert report["known_constraints_satisfied"]
+        assert report["feasibility_windows"]["total_energy_limit_J"] == 600000
+        assert report["feasibility_windows"]["fixed_charge_energy_feasible_stage_counts"] == list(
+            range(1, 11)
+        )
+        performance = client.post("/v1/performance/evaluate", json=body)
+        assert performance.status_code == 200, performance.text
+        assert performance.json()["stored_energy"]["total_limit_J"] == 600000
 
 
 def test_api_exposes_frontend_values_and_fallback_provenance(request_data, tmp_path):

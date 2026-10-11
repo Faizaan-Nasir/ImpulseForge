@@ -2253,6 +2253,19 @@
             ],
             "title": "Stage Energy Max J",
             "description": "Frontend energy limit per stage in J; omitted/null uses 2500 J fallback."
+          },
+          "total_energy_max_J": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Energy Max J",
+            "description": "Frontend total generator energy limit in J; omitted/null uses 30000 J fallback."
           }
         },
         "additionalProperties": false,

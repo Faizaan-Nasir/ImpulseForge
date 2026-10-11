@@ -104,7 +104,15 @@ export default function App() {
           mode: value === "workbook" ? "calculator" : next.mode,
         };
       if (
-        ["nMax", "uMax", "cStage", "wStage", "cBo", "includeCbo"].includes(key)
+        [
+          "nMax",
+          "uMax",
+          "cStage",
+          "wStage",
+          "wTotal",
+          "cBo",
+          "includeCbo",
+        ].includes(key)
       )
         next.profile = "custom";
       if (["tFront", "tTail", "tolCrest", "tolFront", "tolTail"].includes(key))

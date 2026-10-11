@@ -317,5 +317,25 @@
     "dashboard_screenshot": "verification/constraint-search-dashboard.jpg",
     "final_contract_tests": "verification/constraint-search-final-contract-tests.txt",
     "lint": "passed; verification/constraint-search-lint.txt"
+  },
+  "editable_total_energy": {
+    "status": "verified",
+    "input": "equipment_inputs.total_energy_max_J",
+    "frontend_field": "Total generator energy limit; kJ converted to J",
+    "fallback_only_when_omitted_or_null_J": 30000,
+    "backend_tests": {
+      "passed": 60,
+      "report": "verification/editable-total-energy-backend-tests.txt"
+    },
+    "frontend_tests": {
+      "passed": 32,
+      "report": "verification/editable-total-energy-frontend-tests.txt"
+    },
+    "build": "passed; verification/editable-total-energy-build.txt",
+    "lint": "passed; verification/editable-total-energy-lint.txt",
+    "types": "0 errors; verification/editable-total-energy-typecheck.txt",
+    "live_api": "verification/editable-total-energy-live.json",
+    "screenshot": "verification/editable-total-energy-dashboard.jpg",
+    "docs": "technical Section 19.5; working Section 16.5"
   }
 }

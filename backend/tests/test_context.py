@@ -165,23 +165,30 @@ def test_frontend_target_is_not_replaced_or_clamped_to_document_example(request_
     assert context.data["input_sources"]["target.crest_V"]["source"] == "frontend_input"
 
 
-@pytest.mark.parametrize("value", [None, 60000.0])
-def test_editable_stage_energy_limit_and_provenance(request_data, value):
+@pytest.mark.parametrize(
+    "field,default,custom",
+    [("stage_energy_max_J", 2500, 60000.0), ("total_energy_max_J", 30000, 600000.0)],
+)
+@pytest.mark.parametrize("use_fallback", [False, True])
+def test_editable_energy_limit_and_provenance(request_data, field, default, custom, use_fallback):
     original = resolve(RunRequest.model_validate(request_data))
-    request_data["equipment_inputs"]["stage_energy_max_J"] = value
+    value = None if use_fallback else custom
+    request_data["equipment_inputs"][field] = value
     ctx = resolve(RunRequest.model_validate(request_data))
-    assert ctx.hardware["stage_energy_max_J"] == (2500 if value is None else value)
-    source = ctx.data["value_sources"]["stage_energy_max_J"]
+    assert ctx.hardware[field] == (default if value is None else value)
+    source = ctx.data["value_sources"][field]
     assert source["source"] == ("problem_statement_fallback" if value is None else "frontend_input")
     assert source["workbook_cell"] is None
     assert source["fallback_applied"] is (value is None)
-    assert ctx.hardware["total_energy_max_J"] == 30000
+    other = "total_energy_max_J" if field == "stage_energy_max_J" else "stage_energy_max_J"
+    assert ctx.hardware[other] == original.hardware[other]
     if value is not None:
         assert ctx.context_hash != original.context_hash
 
 
 @pytest.mark.parametrize("value", [0, -1, float("inf")])
-def test_invalid_stage_energy_limit(request_data, value):
-    request_data["equipment_inputs"]["stage_energy_max_J"] = value
+@pytest.mark.parametrize("field", ["stage_energy_max_J", "total_energy_max_J"])
+def test_invalid_energy_limit(request_data, value, field):
+    request_data["equipment_inputs"][field] = value
     with pytest.raises(ValidationError):
         RunRequest.model_validate(request_data)
