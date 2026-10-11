@@ -2,17 +2,17 @@
   "checked_at": "2026-10-11",
   "software_tests": {
     "status": "passed",
-    "passed": 144,
+    "passed": 148,
     "skipped": 0,
-    "report": "verification/shap-summary-backend-tests.txt"
+    "report": "verification/calibration-constraint-backend-tests.txt"
   },
   "lint": {
     "status": "passed",
-    "report": "verification/lint.txt"
+    "report": "verification/calibration-constraint-lint.txt"
   },
   "typecheck": {
     "status": "passed",
-    "report": "verification/typecheck.txt"
+    "report": "verification/calibration-constraint-typecheck.txt"
   },
   "locked_environment": {
     "status": "verified",
@@ -65,10 +65,10 @@
   "frontend": {
     "status": "implemented",
     "stack": "React 19 / Tailwind 4 / Vite 7",
-    "tests_passed": 22,
+    "tests_passed": 32,
     "build": "passed",
     "audit_vulnerabilities": 0,
-    "tests_report": "verification/shap-summary-frontend-tests.txt",
+    "tests_report": "verification/failure-demo-frontend-tests.txt",
     "preview": "verification/dashboard-preview.jpg",
     "root_launcher": "verified: backend readiness precedes frontend startup; both local URLs returned HTTP 200",
     "physics_row_reproduction": {
@@ -263,5 +263,30 @@
     "report": "verification/shap-decision-summary.json",
     "browser_report": "verification/shap-decision-browser.json",
     "technical_contract": "Marx_Generator_Technical_Implementation_Specification.md Section 18.1"
+  },
+  "calibration_constraint_ownership": {
+    "status": "passed",
+    "owner": "calibration",
+    "evaluation_order": [
+      "physics",
+      "correction",
+      "calibration"
+    ],
+    "standalone_physics_ml_physical_checks": "unassessed",
+    "known_physical_failures_excluded_from_successful_archive": true,
+    "stage_only_total_energy_repair": "fixture verified: N=15 fails; N=12,11,10 pass known constraints at 0.125 \u00b5F and 200 kV",
+    "live_api_report": "verification/calibration-constraint-ownership.json",
+    "dashboard_screenshot": "verification/calibration-constraint-windows.jpg",
+    "window_guarantee": "necessary analytical energy/voltage bounds only",
+    "model_retrained": false
+  },
+  "transformer_failure_demo": {
+    "status": "implemented_and_verified",
+    "independent_of_physics_ml_calibration": true,
+    "randomness": "preset selection only; four equally likely presets with repeats allowed",
+    "samples_per_preset": 4001,
+    "frontend_only": true,
+    "tests": "verification/failure-demo-frontend-tests.txt",
+    "preview": "verification/transformer-failure-demo.jpg"
   }
 }

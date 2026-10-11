@@ -184,7 +184,7 @@ Charging voltage must also be defined. Stage count alone cannot determine crest.
 
 Under either policy, capacitor/stage voltage ratings are hard constraints. If a low predicted crest would require charging above an allowed voltage, reject that proposed charge and consider other feasible settings, including a larger active stage count. Increasing `N` is therefore an available way to address voltage feasibility, not merely a timing adjustment. Section 5.4 gives the physical reasoning and its limits.
 
-The charging policy is not yet selected. `U_ch` must be included in the candidate record and physics/ML context under either policy. It does not become a new independent optimiser control unless that is explicitly chosen later.
+The implemented policy is fixed charge or seed-then-fixed charge. Per-proposal charge recomputation is a future option requiring an explicit change. `U_ch` must be included in the candidate record and physics/ML context under either policy. It does not become a new independent optimiser control unless that is explicitly chosen later.
 
 The environment is held fixed so that successive deviations refer to the same problem. A change in measured conditions starts a new scenario or requires an explicit update and reevaluation of stored candidates.
 
@@ -237,9 +237,9 @@ Pass the same complete scenario through the loop:
 
 1. **Initial physics:** consume targets, expected efficiency where appropriate, load/setup parameters, stage capacitance and all equipment bounds to propose stage count, charge and required resistances.
 2. **DP:** use the selected front/tail catalogues, quantities, permitted assembly wiring and component constraints to realise resistances.
-3. **Forward physics:** recompute from actual settings and active auxiliary circuitry; recheck the supplied stage-voltage limit and the two retained energy limits. Never set predicted crest equal to the requested crest merely to satisfy the request.
+3. **Forward physics:** recompute the numerical waveform and stored energy from actual settings and active auxiliary circuitry; do not judge physical constraints. Never set predicted crest equal to the requested crest merely to satisfy the request.
 4. **ML:** predict at the same realised operating point using its validated feature contract. Expected efficiency may be supplied if appropriate, but a post-shot measured efficiency would be unavailable during prediction and must not leak into the input.
-5. **Optimisation:** hold the scenario and bounds fixed while proposing new `N`, `Rf_req` and `Rt_req`; evaluate waveform errors and any explicitly declared efficiency requirement after each realisation. The optimiser cannot change equipment ratings to obtain feasibility.
+5. **Calibration and optimisation:** after physics and ML, check all physical constraints, waveform errors and any explicitly declared minimum-efficiency requirement; hold scenario inputs fixed while proposing new `N`, `Rf_req` and `Rt_req`. The optimiser cannot change equipment ratings to obtain feasibility.
 6. **Dashboard/testing:** retain all inputs and constraint outcomes with each of the three retained configurations; record any explicitly supplied operating rate and setup evidence when measurements are taken; no PDF shot-rate restriction is imported.
 
 ## 4. End-to-end architecture
@@ -254,9 +254,9 @@ flowchart TB
     E -->|No| G[Expand allowed search or reject proposal with reasons]
     G --> O[Optimisation and Calibration Engine]
     F --> H[Always invoke residual ML: fixed actual settings plus physics baseline]
-    H --> I[Score corrected predictions; any crest shortfall requires calibration]
+    H --> I[Calibration checks physical constraints and scores corrected predictions]
     I --> J[Update successful ML and eligible archives; retain every attempt]
-    J --> K{Three ML matches or bounded stop?}
+    J --> K{Three matches without known failures or bounded stop?}
     K -->|No| O
     O --> L[New N and required per-stage Rf and Rt]
     L --> D
@@ -671,9 +671,9 @@ If fewer than three eligible distinct configurations have been found when the ru
 
 1. Physics proposes the initial stage count and required per-stage resistances.
 2. DP constructs a feasible front/tail assembly pair within the resistance tolerances and search budget.
-3. Physics recomputes the achievable waveform and verifies the actual configuration.
+3. Physics recomputes the numerical waveform and stresses for the actual configuration.
 4. The fixed ML model predicts `tf`, `tt` and `V` for that configuration under the declared conditions.
-5. Score only corrected predictions and update the successful waveform archive, the diagnostic progress archive and the separate eligible recommendation archive.
+5. Calibration applies all physical-constraint verdicts, scores only corrected predictions and updates the successful waveform archive, the diagnostic progress archive and the separate eligible recommendation archive.
 6. Evaluate stopping conditions.
 7. If continuing, the optimiser proposes revised `N`, `Rf_req` and `Rt_req`.
 8. Repeat from DP, including forward physics, with the new proposal.
@@ -726,30 +726,34 @@ while proposal/evaluation/time budgets remain:
     actual = dp_and_cp_sat.realise(proposal, context)
     if no valid realisation:
         record reason; smac.tell(cost=2); continue within budgets
-    apply_and_validate_declared_charge(actual, context)
+    assign_frozen_charge(actual, context)
     if actual identity is cached:
         evaluation = cached complete physics/ML evaluation
     else:
-        baseline = physics.predict_and_check(actual, context)
+        baseline = physics.predict(actual, context)
         correction = fixed_residual_ml.correct(actual, baseline, context)
-        # A completed physics prediction always receives a correction attempt.
+        calibration_report = calibration.assess(context, actual, baseline, correction)
+        # Physical verdicts are assessed after the correction attempt.
         if correction has no valid corrected triplet:
             evaluation = unavailable_ML(objective=None, cost=2)
         else:
             objective = score_corrected_outputs_with_no_crest_shortfall(correction)
-            eligibility = separately_check_hardware_and_model_evidence()
-            evaluation = record(baseline, correction, objective, eligibility)
+            eligibility = calibration_report.hardware_feasible and model_evidence_valid()
+            evaluation = record(baseline, correction, calibration_report, objective, eligibility)
+            evaluation.cost = calibration.constraint_and_waveform_cost(evaluation)
         cache[identity] = evaluation
     progress_archive.add_valid_ML(evaluation)
-    if evaluation meets all waveform thresholds:
+    if evaluation meets all waveform thresholds and evaluation.calibration.known_constraints_satisfied:
         successful_archive.add_distinct(evaluation)
         if evaluation is separately eligible:
             eligible_archive.add_distinct(evaluation)
     smac.tell(evaluation.cost)
-    if three selected ML predictions meet every waveform bound:
+    if three selected ML predictions meet every waveform bound and have no known physical failures:
         mark ml_converged=true
         if diagnostic purpose or three eligible matches exist:
             stop with successful-match reason
+    if calibration proves no N can satisfy frozen charge/capacitance limits:
+        stop with fixed_charge_energy_infeasible and return windows
     if declared repetition/stagnation limit reached:
         stop with that reason
 
@@ -758,7 +762,7 @@ return successful and eligible setups, diagnostic progress, complete attempt his
 # Budget/repetition/stagnation stopping is not a claim that a shortfall was resolved.
 ```
 
-Hardware failures retain their original verdicts and cannot enter the eligible archive, but they do not suppress residual evaluation after a successful forward prediction. Unsupported correction has no objective and cannot count toward ML convergence. Previously saved runs retain historical decisions; start a fresh calculation to apply a changed policy.
+Known hardware failures retain their calibration verdicts and cannot enter either the successful or eligible archive, but they do not suppress residual evaluation after a successful forward prediction. Unsupported correction has no objective and cannot count toward ML convergence. Previously saved runs retain historical decisions; start a fresh calculation to apply a changed policy.
 
 ## 10. Walkthrough of the architecture
 
@@ -974,7 +978,7 @@ The dashboard and API obtain default budgets from backend environment configurat
 
 A proposal limit of 24 means at most **24 candidate attempts, including the initial proposal**, not 24 extra recalibrations. Successful new realisations receive physics and ML; rejected proposals and cache hits can leave fewer fresh ML calls. The dashboard's Maximum iterations input sets all three proposal/physics/ML count limits together. Increasing wall time alone does not increase those count limits.
 
-The worker stops at the first applicable condition: three accepted ML predictions in diagnostic mode (or three accepted eligible recommendations for recommendation success), proposal/evaluation exhaustion, wall-time exhaustion, repeated candidates, stagnation, exhausted search space or cancellation. An ML crest below the target cannot count as a match, regardless of its percentage shortfall. Budget/repetition/stagnation stopping without three matches reports `ml_converged=false`. The time check prevents starting further cycles after the worker budget is consumed; an in-flight call and final response/plot construction can finish later. The separate pre-run workbook-reference request is not part of the asynchronous worker's wall-time budget.
+The worker stops at the first applicable condition: three accepted ML predictions without known physical failures in diagnostic mode (or three accepted eligible recommendations for recommendation success), proven fixed-input energy/charging infeasibility after physics/ML, proposal/evaluation exhaustion, wall-time exhaustion, repeated candidates, stagnation, exhausted search space or cancellation. An ML crest below the target cannot count as a match, regardless of its percentage shortfall. Budget/repetition/stagnation stopping without three matches reports `ml_converged=false`. The time check prevents starting further cycles after the worker budget is consumed; an in-flight call and final response/plot construction can finish later. The separate pre-run workbook-reference request is not part of the asynchronous worker's wall-time budget.
 
 Actual counts are exposed as `counters.proposals`, `physics_evaluations`, `physics_predictions`, `ml_evaluations`, `ml_predictions` and `cache_hits`, together with `stop_reason` and elapsed time. These report the work that actually occurred rather than implying a fixed number of completed calibration cycles.
 
@@ -1004,7 +1008,7 @@ Gemini provides readable narration grounded in this computed evidence, including
 SHAP explains what the fitted model learned from synthetic data; it does not prove the physical cause of reality. Environmental conditions, per-resistor heat and exact wiring effects are not learned by the current model and receive no invented attribution. Correlated input features and approximate SHAP sampling limit how uniquely an effect can be allocated. See technical Section 18.1 for independent implementation contracts, cache validity and acceptance checks.
 
 
-## 15. Final responsibility: physics → ML → calibration
+## 16. Final responsibility: physics → ML → calibration
 
 Physics supplies calculations; ML supplies three residual corrections; calibration owns all physical-constraint verdicts. Physics and ML do not stop numerical predictions because energy or ratings fail. Calibration checks stored energy, stage voltage/count, stock, topology evidence, capacitor transient ratings, resistor ratings and optional minimum efficiency afterward. Its results determine optimiser feedback and which setups may count toward completion. Canonical inventory recipes and valid numerical/model inputs are still required to calculate meaningful results.
 

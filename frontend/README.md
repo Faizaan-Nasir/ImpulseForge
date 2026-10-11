@@ -31,3 +31,5 @@ npm --prefix frontend audit --audit-level=moderate
 ```
 
 See `docs/Dashboard_Implementation.md` for route mappings and tests.
+
+The **Transformer test demo** tab is an independent illustration. Click **Generate random waveform** to select a fixed pass/failure preset and show its label above the plot. It requires no backend inference; the existing dashboard remains in its own workspace. See `docs/Transformer_Test_Demo.md` for the templates and isolation checks.

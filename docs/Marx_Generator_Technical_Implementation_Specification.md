@@ -70,10 +70,10 @@ Every serialisable record includes `schema_version`, `record_id`, creation time,
 | `Proposal` | `N`, `Rf_required_ohm`, `Rt_required_ohm`, proposal source, proposal index, SMAC trial metadata |
 | `Assembly` | Role, exact nominal resistance, topology tree, explicit netlist, leaf IDs, per-type quantities, assembly counts, approvals, ratings metadata and search guarantee |
 | `RealisedCandidate` | Proposal, actual front/tail assemblies, `U_charge_V`, `N`, stage topology, per-stage replication manifest, canonical identity |
-| `PhysicsEvaluation` | Effective circuit parameters; waveform metrics/trace; efficiency; stage energies; component stresses; assumptions; numerical diagnostics; numerical diagnostics; no physical verdict before calibration |
+| `PhysicsEvaluation` | Effective circuit parameters; waveform metrics/trace; efficiency; stage energies; component stresses; assumptions; numerical diagnostics; no physical verdict before calibration |
 | `CorrectionEvaluation` | Baseline ID/hash; feature values/provenance; three residuals; corrected outputs; model support; validated uncertainty if available; explanation records |
 | `ObjectiveEvaluation` | Signed/absolute/percentage/normalised errors; worst error; weighted mean; optimiser cost; archive key; tolerance flags |
-| `CandidateEvaluation` | Full nested realised/physics/correction/objective records; eligibility; all constraints; durations; rejection reasons |
+| `CandidateEvaluation` | Full nested realised/physics/correction/calibration/objective records; eligibility; all constraints; durations; rejection reasons |
 | `WaveformPlotBundle` | Target reference samples, one ML-parameter reconstruction per returned candidate, common SI time grid, curve provenance, metrics, extraction checks and plot metadata |
 | `RunResult` | Ordered top-three records; waveform plot bundle/reference; history/query references; counters; stop reason; shortfall reason; guarantee scope; model/data/hardware versions |
 
@@ -780,11 +780,12 @@ flowchart TB
     D --> E[DP and CP-SAT realise exact inventory networks]
     E --> F[Forward physics predicts front, tail and crest plus stresses]
     F --> G[Always invoke residual ML correction]
-    G --> H{Valid corrected prediction available?}
+    G --> Cal[Calibration assesses all physical constraints]
+    Cal --> H{Valid corrected prediction available?}
     H -->|No| I[Expose ML unavailability; no physics-only objective; cost 2]
-    H -->|Yes| J[Score corrected front, tail and crest against target]
-    J --> K[Keep three distinct passing ML setups; retain every attempt and hardware verdict]
-    K --> L{Three corrected waveforms within tolerance or budget reached?}
+    H -->|Yes| J[Score corrected outputs and physical violations]
+    J --> K[Keep three distinct ML matches without known failures; retain every attempt]
+    K --> L{Three matches without known failures or a bounded stop?}
     I --> M[SMAC receives unavailable-prediction cost]
     M -->|Budget remains| D
     J --> N[SMAC receives ML-derived cost]
@@ -822,19 +823,20 @@ while proposal_budget_remains and evaluation_budget_remains:
         count_forward_evaluation()
         correction = residual_model.correct(context, realised, physics_result)
         count_ml_evaluation()  # Every successful forward prediction; include domain/failure checks.
+        calibration_report = calibration.assess(context, realised, physics_result, correction)
         if correction.corrected_metrics is None:
             evaluation = ml_unavailable(physics_result, correction, objective=None, cost=2)
         else:
             count_ml_prediction()
-            evaluation = ml_objective_and_separate_eligibility(physics_result, correction)
+            evaluation = calibration_objective_cost_and_eligibility(physics_result, correction, calibration_report)
         cache[identity] = evaluation
     append_history(proposal, evaluation)
     if evaluation.eligible and evaluation.objective.waveform_within_tolerance:
         archive.insert_deduplicate_and_keep_three(evaluation)
     smac.tell(trial, evaluation.cost)
     diagnostic_progress_archive.add_only_corrected_predictions(evaluation)
-    ml_prediction_archive.add_only_distinct_corrected_waveform_matches(evaluation)
-    if three_distinct_ml_predictions_within_tolerances(ml_prediction_archive) or other_stop_rule:
+    ml_prediction_archive.add_distinct_matches_without_known_physical_failures(evaluation)
+    if three_distinct_matches_without_known_failures(ml_prediction_archive) or calibration_proves_fixed_input_infeasibility or other_stop_rule:
         break
 
 explain_each_returned_candidate(archive, context)
@@ -1508,7 +1510,7 @@ The dashboard and API obtain default budgets from backend environment configurat
 
 A proposal limit of 24 means at most **24 candidate attempts, including the initial proposal**, not 24 extra recalibrations. Successful new realisations receive physics and ML; rejected proposals and cache hits can leave fewer fresh ML calls. The dashboard's Maximum iterations input sets all three proposal/physics/ML count limits together. Increasing wall time alone does not increase those count limits.
 
-The worker stops at the first applicable condition: three accepted ML predictions in diagnostic mode (or three accepted eligible recommendations for recommendation success), proposal/evaluation exhaustion, wall-time exhaustion, repeated candidates, stagnation, exhausted search space or cancellation. An ML crest below the target cannot count as a match, regardless of its percentage shortfall. Budget/repetition/stagnation stopping without three matches reports `ml_converged=false`. The time check prevents starting further cycles after the worker budget is consumed; an in-flight call and final response/plot construction can finish later. The separate pre-run workbook-reference request is not part of the asynchronous worker's wall-time budget.
+The worker stops at the first applicable condition: three accepted ML predictions without known physical failures in diagnostic mode (or three accepted eligible recommendations for recommendation success), proven fixed-input energy/charging infeasibility after physics/ML, proposal/evaluation exhaustion, wall-time exhaustion, repeated candidates, stagnation, exhausted search space or cancellation. An ML crest below the target cannot count as a match, regardless of its percentage shortfall. Budget/repetition/stagnation stopping without three matches reports `ml_converged=false`. The time check prevents starting further cycles after the worker budget is consumed; an in-flight call and final response/plot construction can finish later. The separate pre-run workbook-reference request is not part of the asynchronous worker's wall-time budget.
 
 Actual counts are exposed as `counters.proposals`, `physics_evaluations`, `physics_predictions`, `ml_evaluations`, `ml_predictions` and `cache_hits`, together with `stop_reason` and elapsed time. These report the work that actually occurred rather than implying a fixed number of completed calibration cycles.
 

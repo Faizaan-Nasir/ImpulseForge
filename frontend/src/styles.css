@@ -1498,3 +1498,75 @@
     @apply animate-pulse;
   }
 }
+
+@layer components {
+  .workspace-tabs {
+    @apply mb-5 flex flex-wrap gap-1 border-b;
+    border-color: var(--line-strong);
+  }
+  .workspace-tabs button {
+    @apply border-b-2 px-5 py-3 text-sm font-semibold;
+    border-color: transparent;
+    color: var(--ink-2);
+  }
+  .workspace-tabs button[aria-selected="true"] {
+    color: var(--teal);
+    border-color: var(--teal);
+    background: var(--teal-weak);
+  }
+  .appbar button[hidden] {
+    display: none;
+  }
+  .demo-workspace {
+    @apply grid gap-5;
+  }
+  .demo-intro {
+    @apply grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center;
+  }
+  .demo-intro h2 {
+    @apply mt-1 mb-2 text-2xl;
+  }
+  .demo-intro p {
+    color: var(--ink-2);
+  }
+  .demo-scope {
+    @apply sm:col-span-2;
+  }
+  .demo-classification {
+    @apply mb-5 flex flex-wrap items-center justify-between gap-3;
+  }
+  .demo-classification h2 {
+    @apply mt-1 text-2xl;
+  }
+  .demo-plot-toolbar {
+    @apply mb-3 flex flex-wrap items-center justify-between gap-3;
+  }
+  .demo-chart svg {
+    @apply block w-full;
+    min-height: 240px;
+  }
+  .demo-chart svg text {
+    font-family: var(--font);
+    font-size: 15px;
+  }
+  .demo-description {
+    @apply mt-3 grid gap-1;
+  }
+  .demo-empty {
+    @apply flex min-h-80 flex-col items-center justify-center gap-3;
+    color: var(--ink-3);
+  }
+  .demo-case-catalogue {
+    @apply grid gap-4 sm:grid-cols-2 xl:grid-cols-4;
+  }
+  .demo-case h3 {
+    @apply mt-2 mb-2 text-lg;
+  }
+  .demo-case p {
+    color: var(--ink-2);
+  }
+  .demo-case.selected {
+    border-color: var(--teal);
+    background: var(--teal-weak);
+  }
+}

@@ -2,8 +2,8 @@
   "files": [
     {
       "name": "Dashboard_Implementation.md",
-      "sha256": "520d046e4b647f0c64a5aae18365725a24dd068ba8a42226045630e19cf4ff59",
-      "size_bytes": 19166
+      "sha256": "809f61feafc87f582fd8c4da7d7ca128f7a670e752f6181007a704fde6ebced6",
+      "size_bytes": 20787
     },
     {
       "name": "HV IG Problem Statement.pdf",
@@ -27,8 +27,8 @@
     },
     {
       "name": "Marx_Generator_Architecture_Working_Document.md",
-      "sha256": "c2790536fd43bb941522551fe3d79f53260725ad6bad35de44fec7da40b456a8",
-      "size_bytes": 86672
+      "sha256": "95347bf6f4bf31f427c60c1986fb610fcbd85d537b18c6a1e8ba8722171f3ebe",
+      "size_bytes": 91527
     },
     {
       "name": "Marx_Generator_Architecture_Working_Document.pdf",
@@ -37,8 +37,8 @@
     },
     {
       "name": "Marx_Generator_Technical_Implementation_Specification.md",
-      "sha256": "316461dd42790466966710a779976e6fd552b8c4956f0c8ecbf83a54e75a465b",
-      "size_bytes": 178541
+      "sha256": "011d96902d422aced999fb96e0360e7eabdb790364f40a0df6e17ae9872b3262",
+      "size_bytes": 188403
     },
     {
       "name": "Marx_Generator_Technical_Implementation_Specification.pdf",
@@ -51,9 +51,14 @@
       "size_bytes": 2097
     },
     {
+      "name": "Transformer_Test_Demo.md",
+      "sha256": "829cc8a2cbb05b2e43a68561460fe3aacc4a050af9d469470bd809dd3621cf86",
+      "size_bytes": 3839
+    },
+    {
       "name": "backend_implementation_status.md",
-      "sha256": "50905422ec342f681103a01101bfa88d2dc8b67731311187c533284247de6320",
-      "size_bytes": 15545
+      "sha256": "1611a558379508971ac99d7a332fd765d393b380be6ad5e5f103ce429e861f87",
+      "size_bytes": 16516
     },
     {
       "name": "frontend_environment_report.json",
@@ -87,8 +92,8 @@
     },
     {
       "name": "verification_report.json",
-      "sha256": "ab8fd5f533b0341724e9526c465f13bc5c394e2022101a5a9a95a9afda258d28",
-      "size_bytes": 10248
+      "sha256": "84f0349d4bea29de757e9df77bfdeb8bc36cbc9a83ffed422685ce6e5ae66fbe",
+      "size_bytes": 11415
     },
     {
       "name": "~$Hybrid_Physics_ML_Impulse_Generator_Optimiser.xlsx",
@@ -123,7 +128,8 @@
       "C_stage_F": 1.25e-07
     },
     "workbook": "primary input-field definition; example values and synthetic diagnostic data",
-    "architecture": "latest user instructions and technical Markdown"
+    "architecture": "latest user instructions and technical Markdown",
+    "physical_constraint_owner": "calibration after physics and residual ML"
   },
   "unresolved": [
     "capacitor transient/reverse ratings",

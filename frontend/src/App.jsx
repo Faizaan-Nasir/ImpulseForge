@@ -5,6 +5,7 @@ import Configuration from "./components/Configuration.jsx";
 import Networks from "./components/Networks.jsx";
 import Waveform from "./components/Waveform.jsx";
 import AttemptHistory from "./components/AttemptHistory.jsx";
+import FailureWaveformDemo from "./components/FailureWaveformDemo.jsx";
 import {
   SettingsPanel,
   PerformanceMetrics,
@@ -21,6 +22,7 @@ import {
 } from "./lib/config.js";
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [form, setForm] = useState(initialForm),
     [inventory, setInventory] = useState({ front: [], tail: [] });
   const [bootstrap, setBootstrap] = useState(null),
@@ -319,11 +321,14 @@ export default function App() {
         <div className="actions">
           <span className="badge">
             <Info size={15} />
-            Model output · not lab-validated
+            {activeTab === "demo"
+              ? "Synthetic demonstration"
+              : "Model output · not lab-validated"}
           </span>
           <button
             className="btn"
             type="button"
+            hidden={activeTab === "demo"}
             onClick={() => setExportOpen(true)}
           >
             <Download size={16} />
@@ -331,152 +336,203 @@ export default function App() {
           </button>
         </div>
       </header>
-      <div className="layout">
-        <Configuration
-          form={form}
-          change={change}
-          inventory={inventory}
-          setInventory={(value) => {
-            setInventory(value);
-            setDirty(true);
-          }}
-          busy={busy}
-          onCalculate={calculate}
-          onCancel={cancel}
-          status={status}
-          bootstrap={bootstrap}
-        />
-        <main className={`results ${busy ? "busy" : ""}`}>
-          {error && (
-            <div className="banner error" role="alert">
-              <span>{error}</span>
-              {!bootstrap && (
+      <nav className="workspace-tabs" role="tablist" aria-label="Workspace">
+        {[
+          ["dashboard", "Configuration & calibration"],
+          ["demo", "Transformer test demo"],
+        ].map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            id={`tab-${id}`}
+            aria-selected={activeTab === id}
+            aria-controls={`panel-${id}`}
+            tabIndex={activeTab === id ? 0 : -1}
+            onClick={() => setActiveTab(id)}
+            onKeyDown={(event) => {
+              if (
+                ["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)
+              ) {
+                event.preventDefault();
+                const next =
+                  event.key === "Home"
+                    ? "dashboard"
+                    : event.key === "End"
+                      ? "demo"
+                      : id === "dashboard"
+                        ? "demo"
+                        : "dashboard";
+                setActiveTab(next);
+                document.getElementById(`tab-${next}`).focus();
+              }
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
+      <div
+        role="tabpanel"
+        id="panel-dashboard"
+        aria-labelledby="tab-dashboard"
+        hidden={activeTab !== "dashboard"}
+      >
+        <div className="layout">
+          <Configuration
+            form={form}
+            change={change}
+            inventory={inventory}
+            setInventory={(value) => {
+              setInventory(value);
+              setDirty(true);
+            }}
+            busy={busy}
+            onCalculate={calculate}
+            onCancel={cancel}
+            status={status}
+            bootstrap={bootstrap}
+          />
+          <main className={`results ${busy ? "busy" : ""}`}>
+            {error && (
+              <div className="banner error" role="alert">
+                <span>{error}</span>
+                {!bootstrap && (
+                  <button
+                    type="button"
+                    className="btn small"
+                    onClick={() => window.location.reload()}
+                  >
+                    <RefreshCw size={14} />
+                    Reconnect
+                  </button>
+                )}
+              </div>
+            )}
+            {dirty && dashboard && (
+              <div className="banner stale">
+                <span>
+                  Inputs have changed. These results belong to the previous
+                  scenario.
+                </span>
                 <button
                   type="button"
                   className="btn small"
-                  onClick={() => window.location.reload()}
+                  disabled={busy}
+                  onClick={calculate}
                 >
-                  <RefreshCw size={14} />
-                  Reconnect
+                  Recalculate
                 </button>
-              )}
-            </div>
-          )}
-          {dirty && dashboard && (
-            <div className="banner stale">
-              <span>
-                Inputs have changed. These results belong to the previous
-                scenario.
-              </span>
-              <button
-                type="button"
-                className="btn small"
-                disabled={busy}
-                onClick={calculate}
-              >
-                Recalculate
-              </button>
-            </div>
-          )}
-          {dashboard?.display_mode === "diagnostic_evaluated_cases" && (
-            <div className="banner info">
-              <span>
-                <strong>No verified recommendation.</strong> Showing the best
-                evaluated diagnostic cases with their failed or unknown checks.{" "}
-                {dashboard.run.returned_recommendations ?? 0} of 3 eligible
-                recommendations returned.{" "}
-                {dashboard.run.ml_converged
-                  ? "Three ML-predicted setups meet waveform tolerances and have no known constraint failures."
-                  : "ML calibration has not reached three matching setups."}
-              </span>
-            </div>
-          )}
-          {baselineError && (
-            <div className="banner error" role="alert">
-              {baselineError}
-            </div>
-          )}
-          {workbookBaseline && (
-            <PhysicsBaseline
-              record={workbookBaseline.record}
-              settings={workbookBaseline.settings}
-              title="Workbook baseline · before optimisation"
-              referenceStatus={workbookBaseline.status}
+              </div>
+            )}
+            {dashboard?.display_mode === "diagnostic_evaluated_cases" && (
+              <div className="banner info">
+                <span>
+                  <strong>No verified recommendation.</strong> Showing the best
+                  evaluated diagnostic cases with their failed or unknown
+                  checks. {dashboard.run.returned_recommendations ?? 0} of 3
+                  eligible recommendations returned.{" "}
+                  {dashboard.run.ml_converged
+                    ? "Three ML-predicted setups meet waveform tolerances and have no known constraint failures."
+                    : "ML calibration has not reached three matching setups."}
+                </span>
+              </div>
+            )}
+            {baselineError && (
+              <div className="banner error" role="alert">
+                {baselineError}
+              </div>
+            )}
+            {workbookBaseline && (
+              <PhysicsBaseline
+                record={workbookBaseline.record}
+                settings={workbookBaseline.settings}
+                title="Workbook baseline · before optimisation"
+                referenceStatus={workbookBaseline.status}
+              />
+            )}
+            <SettingsPanel
+              cases={cases}
+              selected={selected}
+              onSelect={setSelected}
+              context={dashboard?.context}
+              mode={dashboard?.display_mode}
             />
-          )}
-          <SettingsPanel
-            cases={cases}
-            selected={selected}
-            onSelect={setSelected}
-            context={dashboard?.context}
-            mode={dashboard?.display_mode}
-          />
-          <Comparison
-            cases={cases}
-            selected={selected}
-            onSelect={setSelected}
-            mode={dashboard?.display_mode}
-          />
-          <Networks
-            key={record?.candidate_id || "empty"}
-            record={record}
-            rank={selected + 1}
-            inventory={dashboard?.context?.inventory || inventory}
-          />
-          <div className="wave-row">
-            <Waveform
-              key={`${runId || "initial"}-${selected}`}
-              bundle={plot}
-              selectedId={record?.candidate_id}
-              rank={selected + 1}
+            <Comparison
+              cases={cases}
+              selected={selected}
+              onSelect={setSelected}
+              mode={dashboard?.display_mode}
             />
-            <PerformanceMetrics
+            <Networks
               key={record?.candidate_id || "empty"}
               record={record}
-              curve={curve}
-              context={dashboard?.context}
+              rank={selected + 1}
+              inventory={dashboard?.context?.inventory || inventory}
             />
-          </div>
-          <PhysicsBaseline record={record} />
-          <AttemptHistory
-            key={`attempts-${runId || "empty"}`}
-            history={attempts}
-            error={historyError}
-          />
-          <FeasibilityWindows windows={dashboard?.run?.feasibility_windows} />
-          <DecisionSummary
-            runId={runId}
-            summary={summary}
-            onSummary={setSummary}
-            gemini={bootstrap?.gemini}
-            busy={busy}
-            pending={summaryPending}
-            disabled={dirty}
-          />
-          {dashboard && (
-            <details className="card">
-              <summary className="cursor-pointer font-semibold">
-                Run performance and input provenance
-              </summary>
-              <div className="trace-detail">
-                <pre>
-                  {JSON.stringify(
-                    {
-                      run: dashboard.run.performance,
-                      source_precedence: dashboard.context.source_precedence,
-                      value_sources: dashboard.context.value_sources,
-                      input_sources: dashboard.context.input_sources,
-                      target_sources: dashboard.context.target_sources,
-                      rejections: dashboard.run.rejections,
-                    },
-                    null,
-                    2,
-                  )}
-                </pre>
-              </div>
-            </details>
-          )}
-        </main>
+            <div className="wave-row">
+              <Waveform
+                key={`${runId || "initial"}-${selected}`}
+                bundle={plot}
+                selectedId={record?.candidate_id}
+                rank={selected + 1}
+              />
+              <PerformanceMetrics
+                key={record?.candidate_id || "empty"}
+                record={record}
+                curve={curve}
+                context={dashboard?.context}
+              />
+            </div>
+            <PhysicsBaseline record={record} />
+            <AttemptHistory
+              key={`attempts-${runId || "empty"}`}
+              history={attempts}
+              error={historyError}
+            />
+            <FeasibilityWindows windows={dashboard?.run?.feasibility_windows} />
+            <DecisionSummary
+              runId={runId}
+              summary={summary}
+              onSummary={setSummary}
+              gemini={bootstrap?.gemini}
+              busy={busy}
+              pending={summaryPending}
+              disabled={dirty}
+            />
+            {dashboard && (
+              <details className="card">
+                <summary className="cursor-pointer font-semibold">
+                  Run performance and input provenance
+                </summary>
+                <div className="trace-detail">
+                  <pre>
+                    {JSON.stringify(
+                      {
+                        run: dashboard.run.performance,
+                        source_precedence: dashboard.context.source_precedence,
+                        value_sources: dashboard.context.value_sources,
+                        input_sources: dashboard.context.input_sources,
+                        target_sources: dashboard.context.target_sources,
+                        rejections: dashboard.run.rejections,
+                      },
+                      null,
+                      2,
+                    )}
+                  </pre>
+                </div>
+              </details>
+            )}
+          </main>
+        </div>
+      </div>
+      <div
+        role="tabpanel"
+        id="panel-demo"
+        aria-labelledby="tab-demo"
+        hidden={activeTab !== "demo"}
+      >
+        <FailureWaveformDemo />
       </div>
       {exportOpen && (
         <div
