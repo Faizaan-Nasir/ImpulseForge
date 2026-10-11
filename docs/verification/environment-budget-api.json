@@ -1,0 +1,13 @@
+{
+  "endpoint": "/v1/dashboard/bootstrap",
+  "defaults": {
+    "search": {
+      "wall_time_seconds": 600.0,
+      "max_proposals": 24,
+      "max_forward_evaluations": 24,
+      "max_ml_evaluations": 24
+    }
+  },
+  "source": "backend_environment",
+  "secret_values_included": false
+}

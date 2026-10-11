@@ -281,13 +281,15 @@ export function PerformanceMetrics({ record, curve, context }) {
             number(value, role === "tail" ? 2 : 3),
             unit,
             error
-              ? `Target ${number(role === "crest" ? error.target / 1000 : error.target * 1e6, 3)} ${unit} · deviation ${percentage(error.percentage_delta)} · allowed ±${number((100 * error.allowed_delta) / error.target, 1)} %`
+              ? `Target ${number(role === "crest" ? error.target / 1000 : error.target * 1e6, 3)} ${unit} · deviation ${percentage(error.percentage_delta)} · allowed ${role === "crest" ? "0 to +" : "±"}${number((100 * error.allowed_delta) / error.target, 1)} %${error.reason_code === "crest_below_required" ? " · Below required voltage; calibration required" : ""}`
               : "Prediction unavailable",
             error ? (error.within_tolerance ? "good" : "bad") : "neutral",
             error
               ? error.within_tolerance
                 ? "Within"
-                : "Outside"
+                : error.reason_code === "crest_below_required"
+                  ? "Calibrate"
+                  : "Outside"
               : "Unavailable",
           );
         })}

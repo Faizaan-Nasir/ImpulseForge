@@ -1,6 +1,6 @@
 # Marx Generator Configuration Through Physics, Inventory Search, ML and Optimisation
 
-Working architecture document | 10 October 2026
+Working architecture document | Updated 11 October 2026 | Aligned with technical specification v1.12
 
 ## 1. Purpose and agreed design
 
@@ -13,21 +13,15 @@ The agreed design has three engines and one supporting solver:
 | Component | Responsibility |
 | --- | --- |
 | Physics Engine | Propose an initial active stage count and required front/tail resistance per stage; predict a waveform for actual constructible settings |
-| Inventory DP Solver | Convert required per-stage resistance into allowed series–parallel resistor assemblies, within inventory and an explicit search budget |
-| ML Prediction Engine | Hold the candidate's realised settings fixed and predict front/peak time, tail time and crest under the specified load, setup and environmental conditions |
-| Optimisation and Calibration Engine | Propose revised stage count and required per-stage resistances to reduce waveform deviations; retain the three best distinct evaluated configurations and manage stopping |
+| Inventory DP + CP-SAT Solver | Generate exact series–parallel assemblies with bounded DP; select compatible front/tail assemblies and enforce representable discrete constraints using OR-Tools CP-SAT |
+| Residual ML Correction Engine | Hold realised settings fixed; use TabPFN v2 to estimate three corrections to physics, then add them back to obtain predicted front/peak, tail and crest |
+| SMAC3 Optimisation and Calibration Engine | Propose revised integer stage count and required per-stage resistances; score ML-corrected predictions, retain three distinct alternatives and manage bounded stopping |
 
 The DP solver is a component-selection service used by the Physics Engine and the optimisation loop. It is not a fourth learning engine. A dashboard presents up to three distinct recommended configurations and the evidence supporting each.
 
-Decisions deliberately left open:
+The selected implementation uses **physics correction only**, TabPFN v2, SMAC3 and DP with OR-Tools CP-SAT. The React/Tailwind dashboard and FastAPI backend are implemented. Environmental feature collection, measured-data validation, approved physical connections and missing component ratings remain work items; accepting a frontend field does not mean the current model learned its effect.
 
-- The ML algorithm and whether it predicts outputs directly or learns corrections to physics.
-- The optimisation algorithm.
-- The final environmental variables, to be supplied after feature extraction and assessment.
-- Numerical resistance and waveform tolerances, convergence thresholds and iteration budgets.
-- The dashboard layout.
-
-No nearest-neighbour model or neighbour count is prescribed. The three recommended configurations are selected from the evaluated optimisation history using the declared objective; this does not prescribe the workbook’s ML architecture. The supplied Excel workbook is reference material, not the implementation specification.
+No nearest-neighbour model, KNN-7 scheme or workbook ranking architecture is required. The workbook is the primary source of input-field definitions and supplied synthetic data; its example values are editable run inputs. The technical implementation specification supplies exact schemas, libraries and executable section deliverables. See [technical specification](Marx_Generator_Technical_Implementation_Specification.md) and [implementation status](backend_implementation_status.md).
 
 ## 2. Electrical foundations and terminology
 
@@ -86,12 +80,12 @@ Use explicit notation:
 
 The current project assumption is:
 
-1. Each stage has a front catalogue of **10 types** and a tail catalogue of **12 types**.
+1. Inventory is a frontend/API input with arbitrary resistor values and catalogue sizes. The workbook example has **10 front types** and **12 tail types**; these counts are not restrictions on supplied inventory.
 2. Up to four copies of each type are available in its respective catalogue in that stage.
 3. Allowed assemblies may use arbitrary two-terminal series–parallel connections.
 4. The selected front assembly and selected tail assembly are repeated identically across all active stages.
 
-This represents **40 available front parts and 48 available tail parts per stage**, or 88 listed parts across both catalogues. It does not require using every available part. “Four copies of each type” also does not mean that every assembly must contain exactly four resistors.
+The workbook example represents **40 available front parts and 48 available tail parts per stage**, or 88 listed parts across both catalogues. It does not require using every available part. “Four copies of each type” also does not mean that every assembly must contain exactly four resistors.
 
 | Catalogue | Nominal values (Ω) | Types | Copies per type per stage |
 | --- | --- | --- | --- |
@@ -254,19 +248,19 @@ Pass the same complete scenario through the loop:
 flowchart TB
     A[Target, load, setup, environment and equipment profile] --> B[Validate inputs and declared policies]
     B --> C[Physics Engine: propose N and required per-stage Rf and Rt]
-    C --> D[Inventory DP Solver: realise front and tail assemblies]
+    C --> D[DP plus CP-SAT: realise exact front and tail assemblies]
     D --> E{Constructible and within resistance tolerance?}
     E -->|Yes| F[Physics Engine: recompute waveform for actual assemblies]
     E -->|No| G[Expand allowed search or reject proposal with reasons]
     G --> O[Optimisation and Calibration Engine]
-    F --> H[ML Prediction Engine: fixed actual settings and current conditions]
-    H --> I[Calculate absolute waveform deviations]
-    I --> J[Update three best distinct evaluated configurations]
-    J --> K{Stopping condition met?}
+    F --> H[Always invoke residual ML: fixed actual settings plus physics baseline]
+    H --> I[Score corrected predictions; any crest shortfall requires calibration]
+    I --> J[Update ML prediction archive and separate eligible archive]
+    J --> K{Three ML matches or bounded stop?}
     K -->|No| O
     O --> L[New N and required per-stage Rf and Rt]
     L --> D
-    K -->|Yes| M[Return up to three best supported configurations with stop reason]
+    K -->|Yes| M[Return predictions, eligibility, convergence and stop reason]
     M --> N[Dashboard presents three configurations and their predictions]
 ```
 
@@ -426,7 +420,7 @@ Larger assemblies are built recursively from smaller assemblies. This covers arb
 
 ### 6.2 Count vectors and reuse of subproblems
 
-For a catalogue with `m` types, a count vector `c = (c1, ..., cm)` records how many of each type are used. Each count is between zero and four. The front solver uses `m = 10`; the tail solver uses `m = 12`. Each uses its own catalogue and stock counts.
+For a catalogue with `m` types, a count vector `c = (c1, ..., cm)` records how many of each type are used. Each count is between zero and four. For the workbook example, the front solver uses `m = 10` and the tail solver uses `m = 12`; for supplied inventory, use its actual type counts and quantities. Each uses its own catalogue and stock counts.
 
 Store the achievable equivalent resistances for each count vector, with wiring recipes. Build results in order of total parts used:
 
@@ -475,8 +469,8 @@ A tolerance can be expressed in ohms or as a fraction of the required value. Dec
 For the workbook's separate catalogues:
 
 ```text
-front_count[j] ≤ 4, for each of the 10 front types
-tail_count[k]  ≤ 4, for each of the 12 tail types
+front_count[j] ≤ 4, for each supplied front type (10 in the workbook example)
+tail_count[k]  ≤ 4, for each supplied tail type (12 in the workbook example)
 ```
 
 Select each assembly independently from its respective permitted catalogue, enforcing its own quantities and resistance tolerance. For example, four 30 Ω front parts and four 30 Ω tail parts in the same stage satisfy the inventory rule. The presence of the same nominal value in both catalogues does not join their stock budgets. The two resulting assemblies are then evaluated together as one complete generator candidate.
@@ -501,9 +495,9 @@ Under uniform-stage configuration, every active stage receives this same front a
 
 The actual front value is fed into physics and ML. The required value is retained for traceability, not substituted back into prediction.
 
-The existing [nominal DP prototype](resistor_inventory_search.py), [proposed front inventory](resistor_inventory_front.json), [12-type tail inventory](resistor_inventory_tail.json) and [saved example](resistor_search_example.json) demonstrate the single-assembly search. The prototype does not yet implement repeated-stage resource checks, ratings or every equal-resistance topology. These are implementation requirements for the architecture, not features claimed to exist already.
+The existing [nominal DP prototype](resistor_inventory_search.py), [proposed front inventory](resistor_inventory_front.json), [12-type tail inventory](resistor_inventory_tail.json) and [saved example](resistor_search_example.json) demonstrate the single-assembly search. That reference prototype is separate from the implemented backend DP/CP-SAT service, which checks declared stock scope and exposes exact recipe witnesses and rating verdicts. Unknown ratings remain unknown; bounded recipe coverage is not exhaustive over unlimited assemblies.
 
-## 7. Feature preparation and ML Prediction Engine
+## 7. Feature preparation and Residual ML Correction Engine
 
 ### 7.1 Fixed settings in one prediction
 
@@ -511,25 +505,25 @@ For an evaluated candidate, the ML engine receives the realised `N`, `Rf_actual`
 
 “Fixed” applies to a single evaluation. In the next cycle, the optimiser may change `N` or required resistance; DP then supplies a new realised configuration for a new ML evaluation.
 
-The ML inputs must contain enough information to identify the electrical operating point. Alongside the realised settings, include charging voltage/policy, the declared load model and setup representation. Assembly features and physics outputs may be included if the selected model design uses them.
+The ML inputs must contain enough information to identify the electrical operating point. Alongside the realised settings, include charging voltage/policy, the declared load model and setup representation. Physics baseline outputs are included in the selected residual model. The API exposes exact assembly recipes, but the current synthetic training data does not contain wiring-level measurements, so the model cannot claim it learned differences between equal-resistance recipes.
 
 The environmental variables will be supplied later. The model should learn how the recorded conditions and realised settings relate to measured `tf`, `tt` and `V`. It cannot learn an explicit environmental effect from a variable that was never recorded or from variation that the training data never contained.
 
-### 7.2 Two possible prediction interfaces
+### 7.2 Selected residual-only prediction interface
 
-The ML architecture is not selected yet. Either of these interfaces can support the agreed loop:
+For each training record and each of the three outputs:
 
 ```text
-Direct prediction:
-    ML(realised settings, load, setup, environment) → tf, tt, V
-
-Physics correction:
-    ML(realised settings, load, setup, environment, physics outputs)
-        → corrections
-    predicted outputs = physics outputs + corrections
+residual label = observed output − matching physics baseline
+ML(actual candidate features, physics baseline) → predicted residual
+corrected prediction = physics baseline + predicted residual
 ```
 
-Choose using validation, data coverage and engineering interpretability. The rest of the loop consumes the same three predicted outputs regardless of the selected interface. The source workbook's particular ML implementation does not bind this choice.
+For example, a physics crest of 1425 kV plus an ML residual of −3 kV gives a corrected crest of 1422 kV. The residual may be negative. If the requested voltage is 1425 kV, this prediction requires further calibration; do not replace it with 1425 kV to make it pass.
+
+The implementation uses three separate pretrained TabPFN v2 regressors per category: front/peak residual in seconds, tail residual in seconds and crest residual in volts. Lightning and Switching have separate bundles. Each category uses 700 Train records and 150 Validation records; the remaining 150 Hidden Test records are retained for final evaluation. These are synthetic observations, not verified laboratory results. TabPFN uses pretrained in-context fitting, so downstream training epochs and gradient updates are not applicable. There is no defensible convergence-epoch count to infer from the 700 records.
+
+The deployed model receives actual settings and baselines, never the observed outcomes being predicted. It remains fixed during a search run. Changing its baseline mode or feature contract requires compatible labels/artifacts; a Calculator-trained correction cannot simply be applied to an incompatible Exact simulation.
 
 ### 7.3 Feature extraction and selection
 
@@ -564,9 +558,31 @@ Preparation and selection must not learn from the final test set. Source: [sciki
 
 Keep one accepted ML model and feature pipeline fixed for a run. Each new realised candidate is evaluated by that same version under the same declared conditions. This makes changes in predicted deviation attributable to changes in the candidate rather than a moving model.
 
-Recompute forward physics for every realised candidate, even if the chosen direct ML model does not consume the physics outputs. Physics still validates the assembly and provides an independent baseline.
+Recompute forward physics for every new realised candidate and immediately invoke residual correction after every successful forward prediction. Hardware failure does not skip diagnostic inference. Duplicate candidates in the same immutable context reuse their complete cached physics/ML evaluation. Unavailable or incompatible correction returns no corrected triplet and no physics-only calibration objective.
 
 Return prediction-support information alongside `tf`, `tt` and `V`. A model trained only on insulator-oriented examples cannot establish transformer prediction accuracy. A proposal outside supported load, stage, resistance, voltage or environmental coverage needs explicit handling rather than an unsupported claim of realistic behaviour.
+
+### 7.5 Train-only normalisation and feature contract
+
+Normalisation puts different numerical units on comparable scales before the model sees them. For each selected feature and each residual target, fit a separate `StandardScaler` using that category's 700 Train rows only:
+
+```text
+standardised value z = (physical value − training mean) / training standard deviation
+physical residual = predicted z × training target standard deviation + training target mean
+corrected output = physics output + physical residual
+```
+
+A voltage measured in millions of volts and a front time measured in millionths of a second therefore use their own fitted scales. Validation rows, Hidden Test rows and live requests never refit the scalers. Constant training columns use the recorded selection/scale policy; unseen values are not clipped. The fitted feature/target scalers are saved with every model artifact. API traces expose their parameters and standardised inference values, while dashboard outputs remain in µs and kV.
+
+The current feature contract contains `N`, `U_charge_V`, actual per-stage Rf/Rt, object/divider/stray capacitances, effective loop inductance, effective generator/load capacitances, effective front/tail resistances, physics front/tail/crest and expected voltage efficiency. Only features varying in that category's Train rows are selected. This is the implemented constant-feature filter, not a claim that exhaustive statistical feature selection is complete.
+
+Environment, overshoot, exact wiring measurements and per-resistor heat are unavailable in the current training data. The model exposes `environment_effects.status=not_modelled`; supported diagnostic extrapolation is explicitly labelled and untrusted. It does not establish general transformer/RLC prediction accuracy.
+
+SHAP explanations mask standardised inputs and explain standardised residual outputs, then convert contributions and the reference back to seconds or volts. Approximate contributions must reconcile with the returned residual under the declared additivity check. These are associations, not proof that heat or another absent feature caused a correction. Calculated resistor stress/heat evidence remains separate.
+
+### 7.6 Understanding prediction error
+
+Compare a prediction to the matched observation to assess accuracy; compare it to the requested target to assess waveform acceptance. A green target status does not mean an exact match to an observation. Errors may come from missing physical/environmental features, narrow training coverage, synthetic label noise, model choices and normal generalisation error. An ML correction can improve timing while worsening crest on an individual record. Normalisation helps represent numerical scales consistently, but does not remove missing information or guarantee accurate predictions.
 
 ## 8. Optimisation and Calibration Engine
 
@@ -594,21 +610,27 @@ delta_crest = abs(V_predicted − V_required)
 
 For another impulse category, use the selected profile's timing targets and definitions. Stage count must remain an integer within allowed limits; required resistances must be positive and appropriate for the equipment.
 
-### 8.2 Combining errors without mixing units
+### 8.2 Combining errors and enforcing the minimum crest
 
-Front/tail errors are times and crest error is a voltage. Adding their raw numbers is not a meaningful objective. Retain the three absolute errors and, if the selected optimiser needs one scalar, use tolerance-normalised absolute errors:
+Use actual ML-corrected outputs, with each deviation divided by its own allowed upper/timing deviation. Do not add raw seconds and volts.
 
 ```text
-e_front = delta_front / allowed_front_deviation
-e_tail  = delta_tail  / allowed_tail_deviation
-e_crest = delta_crest / allowed_crest_deviation
-
-J = w_front*e_front + w_tail*e_tail + w_crest*e_crest
+e_front = abs(tf_predicted − tf_target) / (front_tolerance × tf_target)
+e_tail  = abs(tt_predicted − tt_target) / (tail_tolerance × tt_target)
+e_crest = abs(V_predicted − V_required) / (crest_tolerance × V_required)
+S = max(e_front, e_tail, e_crest)
+if V_predicted < V_required:
+    S = max(S, 1 + e_crest)
+J = (w_front*e_front + w_tail*e_tail + w_crest*e_crest) / sum(weights)
 ```
 
-The scales must be positive and the weights declared. Acceptance still requires each output to satisfy its own tolerance. A good average must not conceal one unacceptable output or an invalid hardware configuration.
+**Crest policy `crest_no_shortfall_v1`: no predicted voltage below the requested voltage is acceptable.** The configured crest tolerance controls overshoot only. Front and tail retain their symmetric bands. With a 1425 kV target and 3% upper allowance, the accepted crest interval is **1425 to 1467.75 kV**; 1422.451 kV requires calibration even though its shortfall is less than 3%.
 
-The optimisation model is to be selected later. Whatever method is chosen, it must use the realised candidate's error, account for integer/discrete changes and enforce feasibility. The final three configurations are ordered using this declared objective and acceptance priorities. This ordering compares complete generator setups; it does not require any particular ML or optimisation algorithm.
+Compare full-precision values without rounding or an epsilon. Preserve the actual ML output and residual, including negative residuals; a negative residual is acceptable if the corrected crest still reaches the requested voltage. Any shortfall exposes `crest_below_required`, `crest_shortfall_V`, `crest_minimum_satisfied=false` and `calibration_required=true` and prevents convergence. Raising N is permitted, but every candidate still has to pass the supplied voltage ceiling, stored-energy checks and inventory realisation.
+
+SMAC3 receives finite cost `S/(1+S)` for eligible predictions; diagnostic ineligible predictions receive `1 + S/(1+S)`. Missing ML or unresolved/unevaluable proposals receive cost 2. The diagnostic score provides feedback without waiving hardware constraints. Raw physics can be displayed and compared, but cannot replace missing correction as a calibration objective.
+
+Within each archive, meeting the minimum crest takes priority, followed by S, J, declared secondary tie preferences and deterministic candidate identity. These comparisons order complete evaluated setups; they do not introduce a KNN ranking model.
 
 ### 8.3 The objective is evaluated after DP
 
@@ -627,11 +649,12 @@ The mapping can be stepped or flat: several required resistance values may produ
 
 ### 8.4 Retain the three best distinct evaluated configurations
 
-Keep a history entry for every proposal and an ordered archive containing the **three best eligible distinct realised setups** found across all completed cycles. A later worse candidate must not overwrite a better earlier candidate. This is the best three within the evaluated search scope, not proof of the global three optimal configurations.
+Keep a history entry for every proposal and two ordered archives:
 
-Define eligibility using constructibility, independent front/tail inventory limits, hard equipment constraints and model support. Keep waveform-tolerance status separately. Prefer candidates satisfying all waveform tolerances, then order within each acceptance class using the declared objective `J` and a deterministic tie-break rule. If fewer than three satisfy the waveform tolerances, remaining eligible entries may be shown with an explicit outside-tolerance status. Hardware-infeasible or unsupported candidates cannot fill recommendation slots.
+- `predicted_setups`: up to three distinct realised configurations with valid ML-corrected outputs. Failed/unknown hardware and domain verdicts remain visible. These can be displayed as diagnostic alternatives, with no claim of verified hardware eligibility.
+- `recommendations`: up to three separately eligible configurations. Eligibility additionally requires hardware pass verdicts and appropriate model/laboratory evidence. The synthetic model is not laboratory validated.
 
-Preserve stage count, both assembly recipes, actual resistances, charge voltage, conditions and model versions as one complete candidate record. Do not mix the front assembly of one evaluated setup with the tail assembly of another without evaluating that combination as a new candidate.
+The same minimum-crest, S/J and tie ordering applies to both. Later worse candidates do not overwrite earlier better ones. These are the best evaluated configurations within the declared search scope, not a proof of the globally optimal three. Alternative setups are evaluated individually; their inventories are not consumed simultaneously. If fewer than three qualify for either archive, expose that archive's shortfall.
 
 Deduplicate by the realised identity described in Section 9.2. Different requested resistances mapping to the same realised setup count as one configuration. Equivalent redrawings or reordered descriptions of the same assembly also count as one. Different wiring recipes with equal nominal resistance are separate alternatives only when they represent genuinely different physical assemblies; do not imply different ML-predicted behaviour unless the model represents their relevant differences.
 
@@ -649,7 +672,7 @@ If fewer than three eligible distinct configurations have been found when the ru
 2. DP constructs a feasible front/tail assembly pair within the resistance tolerances and search budget.
 3. Physics recomputes the achievable waveform and verifies the actual configuration.
 4. The fixed ML model predicts `tf`, `tt` and `V` for that configuration under the declared conditions.
-5. Calculate deviations and update the archive of the three best distinct eligible candidates.
+5. Score only corrected predictions and update the diagnostic prediction archive and the separate eligible recommendation archive.
 6. Evaluate stopping conditions.
 7. If continuing, the optimiser proposes revised `N`, `Rf_req` and `Rt_req`.
 8. Repeat from DP, including forward physics, with the new proposal.
@@ -675,9 +698,10 @@ Predicted deviations may also be effectively unchanged without an identical conf
 
 | Rule | Condition | Reported meaning |
 | --- | --- | --- |
-| Three satisfactory setups found | Three distinct setups each meet all three waveform bounds and required support/feasibility checks | Three satisfactory predicted configurations found |
+| Three ML waveform matches | Three distinct corrected predictions meet front/tail bands and crest from the target up to its upper allowance | `ml_converged=true`; physical eligibility remains separate |
+| Three eligible recommendations | Three separately eligible setups also meet the waveform acceptance rule | Verified-eligibility archive success under its recorded evidence |
 | Repeated realised configuration | The strategy returns an already evaluated configuration without an allowed new exploration step | Stagnation under the current search strategy |
-| Negligible improvement | Best objective improves by less than a declared threshold over a declared window | Converged/stalled within that criterion, not proof of global optimum |
+| Archive stagnation | The declared window passes without improving the retained alternatives | Search stalled; `ml_converged=false` unless three waveform matches were actually obtained |
 | Maximum iterations | The deterministic overall proposal/cycle cap is reached | Search budget exhausted |
 | DP budget exhausted | Constructibility cannot be resolved within its allowed effort | Proposal unresolved or rejected; bounded handling required |
 | No feasible/supported candidate | Constraints or data coverage prevent meaningful evaluation | Explain the blocking conditions |
@@ -691,46 +715,44 @@ For reproducible stopping, fix maximum counts, model versions, search policies a
 ### 9.4 Conceptual control loop
 
 ```text
-proposal = physics.propose_initial_configuration(request)
-top_three = empty ordered archive
-history = empty
+context = resolve_and_freeze(request, inventory, model, crest_acceptance_policy)
+seed = physics.propose_initial_configuration(context)
+smac = initialise_smac(context, seed)
+prediction_archive = empty; eligible_archive = empty; cache = empty
 
-for cycle in range(maximum_proposals):
-    actual = dp.realise_front_and_tail(proposal, separate_inventories, dp_limits)
-    if actual is not constructible within the declared resistance tolerances:
-        record rejection
-        proposal = optimiser.propose_next(request, history)
-        continue
-
-    actual.U_ch = apply_declared_charging_policy(actual, request)
-    if actual.U_ch exceeds an applicable capacitor or stage charging limit:
-        record voltage-limit rejection and stage-count feasibility information
-        proposal = optimiser.propose_next(request, history)
-        continue
-    baseline = physics.predict_and_check(actual, request)
-    if baseline violates a required hardware constraint:
-        record rejection
-        proposal = optimiser.propose_next(request, history)
-        continue
-
-    if actual identity already evaluated:
-        reuse cached evaluation
-        apply declared repeated-candidate/stagnation policy
+while proposal/evaluation/time budgets remain:
+    proposal = smac.ask()
+    actual = dp_and_cp_sat.realise(proposal, context)
+    if no valid realisation:
+        record reason; smac.tell(cost=2); continue within budgets
+    apply_and_validate_declared_charge(actual, context)
+    if actual identity is cached:
+        evaluation = cached complete physics/ML evaluation
     else:
-        prediction = fixed_ml.predict(actual, baseline, request.conditions)
-        errors = compare_to_target(prediction, request.target)
-        record full evaluation
-        insert eligible candidate, deduplicate by realised identity, keep best three
+        baseline = physics.predict_and_check(actual, context)
+        correction = fixed_residual_ml.correct(actual, baseline, context)
+        # A completed physics prediction always receives a correction attempt.
+        if correction has no valid corrected triplet:
+            evaluation = unavailable_ML(objective=None, cost=2)
+        else:
+            objective = score_corrected_outputs_with_no_crest_shortfall(correction)
+            eligibility = separately_check_hardware_and_model_evidence()
+            evaluation = record(baseline, correction, objective, eligibility)
+        cache[identity] = evaluation
+    update_prediction_and_eligible_archives(evaluation)
+    smac.tell(evaluation.cost)
+    if three selected ML predictions meet every waveform bound:
+        mark ml_converged=true
+        if diagnostic purpose or three eligible matches exist:
+            stop with successful-match reason
+    if declared repetition/stagnation limit reached:
+        stop with that reason
 
-    if three distinct supported candidates meet predicted tolerances
-       or declared stagnation criterion reached:
-        break
-    proposal = optimiser.propose_next(request, history)
-
-return top_three, per-candidate tolerance status, search scope and stop reason
+return both archives, exact recipes, waveforms, metrics, constraints and stop reason
+# Budget/repetition/stagnation stopping is not a claim that a shortfall was resolved.
 ```
 
-Every failed branch remains bounded by the overall proposal cap. If `top_three` is empty, return explained failure rather than inventing a configuration. If it contains only one or two eligible distinct candidates when the budget or stopping criterion is reached, return those with an explicit shortfall reason.
+Hardware failures retain their original verdicts and cannot enter the eligible archive, but they do not suppress residual evaluation after a successful forward prediction. Unsupported correction has no objective and cannot count toward ML convergence. Previously saved runs retain historical decisions; start a fresh calculation to apply a changed policy.
 
 ## 10. Walkthrough of the architecture
 
@@ -742,7 +764,7 @@ The Physics Engine now evaluates the actual assemblies repeated across `N` stage
 
 The ML engine receives those same realised settings and the scenario features. Suppose its predictions have a front that is too slow, a tail that is too long and a crest that is above the requested value. These deviations describe the current candidate; the ML engine does not modify the resistors to repair them.
 
-The optimiser proposes a revised `N` and required per-stage resistances. Its exact update rule remains undecided. DP again maps these required values to constructible assemblies. Physics and the same ML model evaluate the new actual candidate, and the loop compares its deviations with the target.
+The optimiser proposes a revised `N` and required per-stage resistances. SMAC3 uses the recorded corrected-objective feedback to propose its next candidate. DP again maps these required values to constructible assemblies. Physics and the same ML model evaluate the new actual candidate, and the loop compares its deviations with the target.
 
 Three outcomes are possible:
 
@@ -750,7 +772,7 @@ Three outcomes are possible:
 - It performs worse than the retained top three, so the earlier three remain stored; the new evaluation remains in the history.
 - The required-value change maps back to the same actual assemblies and stage count/charge, so the realised candidate is unchanged and the stagnation policy applies.
 
-If three distinct candidates reach the thresholds, return those best satisfactory configurations. If the maximum iterations or stagnation condition is reached first, return up to three best supported hardware-feasible evaluated configurations with individual deviations and tolerance statuses. The dashboard never substitutes ideal requested resistance for the selected wiring.
+If three distinct candidates reach the thresholds, return those best satisfactory configurations. If the maximum iterations or stagnation condition is reached first, return up to three available diagnostic ML predictions plus the separately eligible recommendations, with individual deviations, constraint verdicts and `ml_converged=false` unless three accepted waveforms were actually obtained. The dashboard never substitutes ideal requested resistance for the selected wiring.
 
 This walkthrough illustrates the control flow. It does not assert a measured improvement or prescribe an optimiser.
 
@@ -791,7 +813,20 @@ Compare physics-only and ML predictions on untouched cases. Evaluate front/peak,
 
 Useful evidence includes absolute errors in µs/kV, tolerance-normalised errors, performance on held-out objects/configurations and the frequency of predicted acceptance followed by measured failure. Prediction uncertainty, if used, must be validated on relevant data. Three separate per-output intervals do not automatically imply a stated joint coverage for all outputs.
 
-The environmental feature set, training model and uncertainty method remain decisions for later model development.
+The training model is the selected residual TabPFN v2 bundle. Environmental feature collection, measured-data validation and calibrated uncertainty remain future work.
+
+### 11.4 Current per-output validation metrics
+
+The current model version is `residual-tabpfn-v2-standardised-v1`. MAE means the average absolute prediction-minus-observation error over the **150 Validation rows for each category**. It is not a tolerance band or a guaranteed error for a particular entered setup.
+
+| Category | Front/peak MAE (µs) | Tail MAE (µs) | Crest MAE (kV) |
+| --- | --- | --- | --- |
+| Lightning | 0.006473218116 | 0.583334388495 | 4.472448275740 |
+| Switching | 1.610415500553 | 22.426301997700 | 3.130558659210 |
+
+Values are rounded to 12 decimal places; full SI-valued metrics and RMSE are retained in [model performance report](model_performance_report.json). The earlier “under 0.7%” figure referred to the **change in MAE after explicit normalisation**, not a combined MAE or a model accuracy score. Seconds and volts are never averaged into one physical-unit MAE. Hidden Test rows were not used to fit scalers, select features or calculate these validation scores.
+
+Three performance views remain separate: per-setup mismatch to target and hardware constraints; per-output validation accuracy or matched-observation errors; and measured backend execution times/cache/iteration counts. Without a matched observation, exact accuracy for the entered setup is unavailable even though its exact predicted numbers and target deviations can be reported.
 
 ## 12. Records and interfaces
 
@@ -802,9 +837,9 @@ The environmental feature set, training model and uncertainty method remain deci
 | DP realisation | `Rf_actual`, `Rt_actual`, front/tail recipes, per-type usage, matching errors, part/search limits and guarantee scope |
 | Actual generator candidate | Realisation plus `N`, `U_ch`, approved stage topology and repeated-stage resource interpretation |
 | Physics evaluation | Predicted parameters/trace, stage/total stored energy, capacitor charging-voltage margin, represented transient/reverse stresses, feasibility checks, assumptions and physics version |
-| ML evaluation | Predicted `tf`, `tt`, `V`, support/uncertainty metadata and fixed model/feature versions |
+| ML evaluation | Physics baseline, actual feature values, standardised values and training-only scaler parameters, three residuals, corrected `tf/tt/V`, missing-effect/support status and fixed model/feature versions |
 | Recommendation archive | Up to three distinct complete candidate records, selection order, per-candidate feasibility/support/tolerance status and any shortfall reason |
-| Optimisation history | Candidate identity, target deviations, objective, rejection reasons, top-three archive, selection order and stop criterion |
+| Optimisation history | Candidate identity, target deviations, crest acceptance policy/shortfall/calibration flags, S/J/cost, rejection reasons, both archives, selection order and stop criterion |
 | Measured shot | Actual applied settings/conditions, raw waveform, extracted outputs, instrument metadata and quality flags |
 
 The optimiser uses required resistances as proposal variables. The predictor uses actual realised resistances as operating inputs. This boundary must be explicit in field names and interfaces.
@@ -813,7 +848,7 @@ Store requested and actually applied laboratory settings separately. An operator
 
 ## 13. Dashboard output
 
-The exact layout is deferred. The result must nevertheless communicate:
+The React/Tailwind dashboard is implemented using the supplied Claude artifact as a visual reference. Its panels communicate:
 
 - Selected number of active stages.
 - Per-stage actual front and tail resistance.
@@ -828,7 +863,7 @@ The exact layout is deferred. The result must nevertheless communicate:
 
 Present the **three best distinct evaluated setups**, ordered using the declared objective and acceptance priorities. Show the listed information separately for each setup. If only one or two eligible distinct setups were found, show those and explain the shortfall; do not duplicate an entry to fill three positions. Each is an alternative complete setup for the same equipment, load and environmental scenario, rather than three setups to build simultaneously.
 
-A plotted waveform needs a declared origin: numerical physics trace, measured trace or illustrative reconstruction. Three summary parameters do not uniquely identify ringing, overshoot or the complete waveform shape.
+The dashboard plots a target curve and up to three candidate curves on a common backend time grid. The API returns `time_s`, each curve's `voltage_V` samples, corrected metrics, landmark times, fit/sampling status and curve origin. Current ML curves are **parameter reconstructions from corrected front/tail/crest**, not point-by-point ML predictions. Three summary parameters do not uniquely determine ringing, overshoot or the complete physical waveform. Reconstructed-curve RMS difference from the target is a plot comparison, not measured model accuracy. Exact resistor recipes shown in diagrams and the values used for plots must belong to the selected candidate, rather than a default or the initial mathematical proposal. A mathematically valid worksheet reference is not necessarily buildable from the submitted inventory.
 
 ```mermaid
 flowchart LR
@@ -836,11 +871,13 @@ flowchart LR
     A --> C[Predicted waveform outputs and target deviations]
     A --> D[Feasibility, support and tolerance status]
     A --> E[Search scope, iterations and stop reason]
-    B --> F[Dashboard layout to be decided]
+    B --> F[React and Tailwind dashboard]
     C --> F
     D --> F
     E --> F
 ```
+
+The grounded Decision Summary uses backend evidence with Gemini. `GEMINI_MODEL` and `GEMINI_API_KEY` are backend environment variables; the key is never sent to the browser. Missing configuration is reported explicitly. Gemini explains saved numerical results and does not change candidate values or authorise hardware. See the technical document for route contracts and deliverables.
 
 ## 14. Implementation sequence and checks
 
@@ -855,7 +892,7 @@ flowchart LR
 
 Checks that protect the agreed architecture:
 
-- Four-per-type quantities are enforced correctly, and no requirement to use all 40 front or 48 tail parts is introduced.
+- Arbitrary supplied inventory is accepted; four-per-type quantities are enforced independently. No requirement to use all example 40 front or 48 tail parts is introduced.
 - Every active stage repeats the selected front/tail assembly pair.
 - Front and tail each allow four parts per type independently; global-versus-per-stage stock is handled correctly.
 - Nominal DP results cover the declared bounded series–parallel search and preserve a buildable witness.
@@ -866,16 +903,19 @@ Checks that protect the agreed architecture:
 - Decreasing Rf/Rt is never assumed to raise initial capacitor charging voltage automatically.
 - Capacitor charging limits, applicable transient/reverse-voltage limits and stage/total energy limits remain separate checks.
 - Load R/L/C, generator shaping resistance and setup inductance remain distinct.
+- Every successful new physics prediction receives a residual-ML attempt, even if hardware verdicts fail; missing correction cannot fall back to a physics-only objective.
+- Feature and residual-target scalers fit only Train records and are frozen for validation and inference; corrections return to SI before physics addition.
+- Any corrected crest below target requires calibration, including the closest representable value below target; prediction clamping and rounding-based acceptance are forbidden.
 - Each candidate is evaluated using the same ML/feature versions and scenario.
 - Repeated realised candidates are cached and handled by the declared stagnation policy.
 - The three best distinct complete evaluated candidates survive later worse candidates; repeated proposals never occupy multiple recommendation slots.
 - The maximum proposal/cycle count remains effective even when proposals fail before ML.
 - Predicted outcomes never become measured training labels.
-- Final output distinguishes threshold success, stagnation, exhausted budget and lack of feasible candidates.
+- Final output distinguishes threshold success, stagnation, exhausted budget and lack of feasible candidates. Shortfall plus budget stopping remains `ml_converged=false`.
 
 ## 15. Source status and decisions still required
 
-The architecture above follows the latest project decisions. The source workbook and written statement provide context and provisional data, not a required ML or optimisation implementation.
+The architecture above follows the latest project decisions and the implemented backend/dashboard. The workbook is primary for input-field definitions and synthetic data; its proposed ML architecture is not mandatory.
 
 Local sources:
 
@@ -891,15 +931,49 @@ Remaining decisions:
 | Decision | Current status |
 | --- | --- |
 | Verified hardware and generator topology | To be confirmed against the intended equipment |
-| Front/tail stock scope | Independent 40-part front and 48-part tail catalogues per stage; four copies per type in each catalogue |
-| Charging voltage policy | Fixed or recomputed policy to be selected |
+| Front/tail stock scope | Arbitrary supplied inventory; independent four-per-type/role caps. Workbook examples have 40 front and 48 tail parts per stage |
+| Charging voltage policy | Declared per request and frozen/resolved consistently for the run; optimiser controls N/Rf/Rt |
 | Capacitor/stage voltage and energy constraints | Hard constraints required; equipment-specific charging and transient/reversal limits to be verified |
-| Front/tail DP tolerances and effort limits | To be set |
+| Front/tail DP tolerances and effort limits | Configurable request policies with explicit bounded search scope |
 | Environmental feature set and preparation | To be provided after feature extraction/assessment |
-| ML algorithm and direct/correction interface | To be selected and validated |
-| Optimisation algorithm and objective preferences | To be selected |
-| Waveform tolerances, stagnation window and maximum iterations | To be set |
+| ML algorithm and interface | Residual-only TabPFN v2; train-only feature/target scaling; synthetic validation completed, laboratory validation pending |
+| Optimisation algorithm and objective preferences | SMAC3; crest minimum then S/J and configured tie preferences; DP plus CP-SAT for realisation |
+| Waveform tolerances and stopping | Front/tail symmetric; crest no shortfall plus supplied upper allowance; configured proposal/evaluation/time/repetition/stagnation limits |
 | Supported load models and terminal conditions | To be declared and validated |
-| Dashboard layout | To be decided |
+| Dashboard layout | React/Tailwind dashboard implemented; actual candidate diagrams, metrics, reconstructed curves and grounded Gemini summary API |
 
-The document specifies the intended workflow and interfaces. It does not claim that the complete application, complete inventory/rating validator, validated ML model or optimiser has already been implemented.
+The backend and dashboard are implemented and tested. This is not a claim of approved physical equipment, laboratory-validated predictions, full transformer support, exhaustive unlimited DP search or guaranteed exact matching. Detailed section deliverables and outstanding limitations are in the technical specification and implementation status.
+
+
+### Default search budgets (11 October 2026)
+
+The dashboard and API obtain default budgets from backend environment configuration. `POWERNEXT_CALIBRATION_WALL_TIME_SECONDS` has fallback **600 seconds (10 minutes)**; `POWERNEXT_CALIBRATION_MAX_ATTEMPTS` has fallback **24 total candidate attempts**, including the initial proposal. `GET /v1/dashboard/bootstrap` returns the active values under `defaults.search`; the frontend does not carry separate hardcoded numeric budget defaults. API request fields omitted by the caller use these same environment defaults. A supplied frontend/API value takes precedence; existing saved requests retain their original limits.
+
+| Limit | Dashboard request default | API default when search fields are omitted |
+| --- | --- | --- |
+| Total candidate proposals | Environment max attempts (fallback 24) | Environment max attempts (fallback 24) |
+| Forward-physics evaluations | Dashboard max attempts | Environment max attempts (fallback 24) |
+| Residual-ML correction attempts | Dashboard max attempts | Environment max attempts (fallback 24) |
+| Worker wall time | Environment wall time (fallback 600 seconds) | Environment wall time (fallback 600 seconds) |
+| Consecutive cached/repeated realised candidates | 10 | 10 |
+| Consecutive proposals without archive/diagnostic improvement | Dashboard max attempts | 20 unless explicitly supplied |
+
+A proposal limit of 24 means at most **24 candidate attempts, including the initial proposal**, not 24 extra recalibrations. Successful new realisations receive physics and ML; rejected proposals and cache hits can leave fewer fresh ML calls. The dashboard's Maximum iterations input sets all three proposal/physics/ML count limits together. Increasing wall time alone does not increase those count limits.
+
+The worker stops at the first applicable condition: three accepted ML predictions in diagnostic mode (or three accepted eligible recommendations for recommendation success), proposal/evaluation exhaustion, wall-time exhaustion, repeated candidates, stagnation, exhausted search space or cancellation. An ML crest below the target cannot count as a match, regardless of its percentage shortfall. Budget/repetition/stagnation stopping without three matches reports `ml_converged=false`. The time check prevents starting further cycles after the worker budget is consumed; an in-flight call and final response/plot construction can finish later. The separate pre-run workbook-reference request is not part of the asynchronous worker's wall-time budget.
+
+Actual counts are exposed as `counters.proposals`, `physics_evaluations`, `physics_predictions`, `ml_evaluations`, `ml_predictions` and `cache_hits`, together with `stop_reason` and elapsed time. These report the work that actually occurred rather than implying a fixed number of completed calibration cycles.
+
+
+### Environment-controlled calibration budgets
+
+Configure the backend in `backend/.env` (template: `backend/.env.example`):
+
+```dotenv
+POWERNEXT_CALIBRATION_WALL_TIME_SECONDS=600
+POWERNEXT_CALIBRATION_MAX_ATTEMPTS=24
+```
+
+The attempt setting supplies omitted `max_proposals`, `max_forward_evaluations` and `max_ml_evaluations` fields. Wall time must be positive and finite; attempts must be an integer from 1 to 10,000. Invalid environment settings fail service configuration rather than silently disabling limits. Explicit request fields retain precedence. The request schema's numeric defaults are fallback values; runtime environment defaults are advertised by bootstrap and frozen in the persisted resolved context. A partial request receives environment defaults only for its omitted budget fields.
+
+Restart the backend after editing `.env`, then refresh the dashboard to load the new defaults. Existing queued/running/saved contexts and resumes keep their submitted budgets. Repetition, stagnation, evaluation, cancellation and waveform-success stopping rules still apply; the maximum attempt setting does not guarantee that all those attempts will be executed. These are search budgets, not TabPFN training epochs or model retraining counts.

@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from powernext.optimisation.objective import evaluate_objective
+from powernext.optimisation.objective import evaluate_objective, objective_order
 from powernext.physics.plot_reconstruction import bundle
 
 
@@ -27,7 +27,7 @@ def cases_for_run(store, run_id, context):
     def key(record):
         metrics = record["correction"]["corrected_metrics"]
         objective = evaluate_objective(context, metrics)
-        return objective["S"], objective["J"], record["candidate_id"]
+        return (*objective_order(objective), record["candidate_id"])
 
     return sorted(evaluated, key=key)[:3], "diagnostic_evaluated_cases"
 
@@ -92,6 +92,9 @@ def evidence(context, run_record, cases, display_mode):
                 "S": score["S"],
                 "J": score["J"],
                 "waveform_within_tolerance": score["waveform_within_tolerance"],
+                "crest_minimum_satisfied": score["crest_minimum_satisfied"],
+                "calibration_required": score["calibration_required"],
+                "acceptance_policy": score["acceptance_policy"],
                 "errors": score["errors"],
                 "voltage_utilisation": physics["voltage_utilisation"],
                 "stage_energy_J": physics["stage_energy_J"],
@@ -131,6 +134,6 @@ def evidence(context, run_record, cases, display_mode):
             "tail_s": context.test["tail_s"],
         },
         "tolerances": context.test["tolerances"],
-        "ordering": "Worst normalised waveform deviation, then weighted deviation; hardware eligibility is required for recommendations",
+        "ordering": "Required crest minimum first, then worst normalised waveform deviation and weighted deviation; hardware eligibility is required for recommendations",
         "cases": rows,
     }

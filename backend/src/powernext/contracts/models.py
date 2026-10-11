@@ -150,9 +150,24 @@ class DPTolerances(Record):
 
 
 class Search(Record):
-    max_proposals: int = Field(default=100, ge=1, le=10000)
-    max_forward_evaluations: int = Field(default=100, ge=1, le=10000)
-    max_ml_evaluations: int = Field(default=100, ge=1, le=10000)
+    max_proposals: int = Field(
+        default=24,
+        ge=1,
+        le=10000,
+        description="Omitted API field uses POWERNEXT_CALIBRATION_MAX_ATTEMPTS; 24 is the fallback.",
+    )
+    max_forward_evaluations: int = Field(
+        default=24,
+        ge=1,
+        le=10000,
+        description="Omitted API field uses POWERNEXT_CALIBRATION_MAX_ATTEMPTS; 24 is the fallback.",
+    )
+    max_ml_evaluations: int = Field(
+        default=24,
+        ge=1,
+        le=10000,
+        description="Omitted API field uses POWERNEXT_CALIBRATION_MAX_ATTEMPTS; 24 is the fallback.",
+    )
     dp_max_parts: int = Field(default=4, ge=1, le=12)
     dp_max_states: int = Field(default=100000, ge=1, le=1000000)
     dp_seconds: Positive = 10
@@ -160,7 +175,10 @@ class Search(Record):
     cp_pair_retries: int = Field(default=5, ge=1, le=100)
     repeat_window: int = Field(default=10, ge=1)
     archive_stagnation_window: int = Field(default=20, ge=1)
-    wall_time_seconds: Positive = 300
+    wall_time_seconds: Positive = Field(
+        default=600,
+        description="Omitted API field uses POWERNEXT_CALIBRATION_WALL_TIME_SECONDS; 600 is the fallback.",
+    )
 
 
 class ObjectiveConfig(Record):

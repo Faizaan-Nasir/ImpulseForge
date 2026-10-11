@@ -155,6 +155,7 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
         return result
 
     def context(request):
+        request = settings.with_search_defaults(request)
         saved = {i: r for i, r in store.list("inventory")}
         ctx = resolve(request, saved, residual.fingerprint)
         store.save("context", ctx.context_id, ctx.model_dump())
@@ -183,6 +184,7 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
                 ),
             },
             "defaults": {
+                "search": settings.search_defaults(),
                 "physics_mode": "calculator",
                 "ml_domain_policy": "diagnostic_extrapolation",
                 "system_max_voltage_V": 400000,
@@ -205,7 +207,7 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
 
     @app.post("/v1/dashboard/workbook-baseline", response_model=WorkbookBaseline)
     def dashboard_baseline(body: ModuleInput):
-        ctx = context(reference_request(body.request))
+        ctx = context(reference_request(settings.with_search_defaults(body.request)))
         return workbook_baseline(ctx, assembly, residual)
 
     @app.get("/v1/runs")

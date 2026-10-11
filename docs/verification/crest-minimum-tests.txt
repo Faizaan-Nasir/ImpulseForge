@@ -1,0 +1,9 @@
+........................................................................ [ 60%]
+...............................................                          [100%]
+=============================== warnings summary ===============================
+tests/test_optimisation.py: 29 warnings
+  /Users/faizaan-nasir/Documents/GitHub/PowerNext AI/backend/.venv/lib/python3.12/site-packages/smac/initial_design/abstract_initial_design.py:113: DeprecationWarning: Please use `dict(config)` instead of `config.get_dictionary()` or use it as a dictionary directly if needed.
+    "additional_configs": [c.get_dictionary() for c in self._additional_configs],
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+119 passed, 29 warnings in 33.24s

@@ -194,7 +194,7 @@ export default function Configuration({
           ]}
         />
         <div className="grid grid-cols-3 gap-2">
-          {f("tolCrest", "Crest ±", "%")}
+          {f("tolCrest", "Crest upper tolerance +", "%")}
           {f("tolFront", "T1 ±", "%")}
           {f("tolTail", "T2 ±", "%")}
         </div>

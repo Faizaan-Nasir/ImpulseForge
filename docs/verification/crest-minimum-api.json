@@ -1,0 +1,258 @@
+{
+  "schema_version": "1.0",
+  "candidate_id": "a274a8619450ac46cb9066b79e538914",
+  "context_hash": "bd33e30db4d76a1adf4b0b70ada5b65f0db5034933d12ae1c50c9a46d05a3ebc",
+  "target": {
+    "front_s": 1.2e-06,
+    "tail_s": 5e-05,
+    "crest_V": 1469466.0825887695
+  },
+  "physics": {
+    "metrics": {
+      "front_s": 1.2015577788181402e-06,
+      "tail_s": 5.225416107217705e-05,
+      "crest_V": 1469466.0825887697
+    },
+    "acceptance_policy": "crest_no_shortfall_v1",
+    "errors": {
+      "front": {
+        "unit": "s",
+        "target": 1.2e-06,
+        "predicted": 1.2015577788181402e-06,
+        "signed_delta": 1.5577788181402913e-09,
+        "absolute_delta": 1.5577788181402913e-09,
+        "percentage_delta": 0.12981490151169095,
+        "absolute_percentage_delta": 0.12981490151169095,
+        "allowed_delta": 3.6e-07,
+        "lower_limit": 8.4e-07,
+        "upper_limit": 1.5599999999999999e-06,
+        "allowed_negative_delta": 3.6e-07,
+        "allowed_positive_delta": 3.6e-07,
+        "normalised_error": 0.004327163383723031,
+        "within_tolerance": true,
+        "reason_code": null
+      },
+      "tail": {
+        "unit": "s",
+        "target": 5e-05,
+        "predicted": 5.225416107217705e-05,
+        "signed_delta": 2.254161072177049e-06,
+        "absolute_delta": 2.254161072177049e-06,
+        "percentage_delta": 4.508322144354098,
+        "absolute_percentage_delta": 4.508322144354098,
+        "allowed_delta": 1e-05,
+        "lower_limit": 4e-05,
+        "upper_limit": 6e-05,
+        "allowed_negative_delta": 1e-05,
+        "allowed_positive_delta": 1e-05,
+        "normalised_error": 0.2254161072177049,
+        "within_tolerance": true,
+        "reason_code": null
+      },
+      "crest": {
+        "unit": "V",
+        "target": 1469466.0825887695,
+        "predicted": 1469466.0825887697,
+        "signed_delta": 2.3283064365386963e-10,
+        "absolute_delta": 2.3283064365386963e-10,
+        "percentage_delta": 1.584457419008203e-14,
+        "absolute_percentage_delta": 1.584457419008203e-14,
+        "allowed_delta": 44083.982477663085,
+        "lower_limit": 1469466.0825887695,
+        "upper_limit": 1513550.0650664326,
+        "allowed_negative_delta": 0,
+        "allowed_positive_delta": 44083.982477663085,
+        "normalised_error": 5.2815247300273425e-15,
+        "within_tolerance": true,
+        "reason_code": null
+      }
+    },
+    "S": 0.2254161072177049,
+    "J": 0.07658109020047774,
+    "cost": 0.18395066450490022,
+    "crest_minimum_satisfied": true,
+    "crest_shortfall_V": 0,
+    "calibration_required": false,
+    "waveform_within_tolerance": true
+  },
+  "corrected": {
+    "metrics": {
+      "front_s": 1.2021198763502161e-06,
+      "tail_s": 5.218823769703769e-05,
+      "crest_V": 1459533.8955645978
+    },
+    "acceptance_policy": "crest_no_shortfall_v1",
+    "errors": {
+      "front": {
+        "unit": "s",
+        "target": 1.2e-06,
+        "predicted": 1.2021198763502161e-06,
+        "signed_delta": 2.1198763502161965e-09,
+        "absolute_delta": 2.1198763502161965e-09,
+        "percentage_delta": 0.1766563625180164,
+        "absolute_percentage_delta": 0.1766563625180164,
+        "allowed_delta": 3.6e-07,
+        "lower_limit": 8.4e-07,
+        "upper_limit": 1.5599999999999999e-06,
+        "allowed_negative_delta": 3.6e-07,
+        "allowed_positive_delta": 3.6e-07,
+        "normalised_error": 0.005888545417267212,
+        "within_tolerance": true,
+        "reason_code": null
+      },
+      "tail": {
+        "unit": "s",
+        "target": 5e-05,
+        "predicted": 5.218823769703769e-05,
+        "signed_delta": 2.188237697037685e-06,
+        "absolute_delta": 2.188237697037685e-06,
+        "percentage_delta": 4.37647539407537,
+        "absolute_percentage_delta": 4.37647539407537,
+        "allowed_delta": 1e-05,
+        "lower_limit": 4e-05,
+        "upper_limit": 6e-05,
+        "allowed_negative_delta": 1e-05,
+        "allowed_positive_delta": 1e-05,
+        "normalised_error": 0.21882376970376846,
+        "within_tolerance": true,
+        "reason_code": null
+      },
+      "crest": {
+        "unit": "V",
+        "target": 1469466.0825887695,
+        "predicted": 1459533.8955645978,
+        "signed_delta": -9932.187024171697,
+        "absolute_delta": 9932.187024171697,
+        "percentage_delta": -0.6759044759082896,
+        "absolute_percentage_delta": 0.6759044759082896,
+        "allowed_delta": 44083.982477663085,
+        "lower_limit": 1469466.0825887695,
+        "upper_limit": 1513550.0650664326,
+        "allowed_negative_delta": 0,
+        "allowed_positive_delta": 44083.982477663085,
+        "normalised_error": 0.2253014919694299,
+        "within_tolerance": false,
+        "reason_code": "crest_below_required"
+      }
+    },
+    "S": 1.2253014919694298,
+    "J": 0.15000460236348853,
+    "cost": 0.5506226892810903,
+    "crest_minimum_satisfied": false,
+    "crest_shortfall_V": 9932.187024171697,
+    "calibration_required": true,
+    "waveform_within_tolerance": false
+  },
+  "correction_status": "predicted_diagnostic",
+  "efficiency": {
+    "definition": "crest_V / (N * U_charge_V); voltage transfer, not energy efficiency",
+    "initial_erected_voltage_V": 1789425.1467917226,
+    "expected": 0.8211944965808653,
+    "requested_minimum": null,
+    "physics_voltage_transfer": 0.8211944965808653,
+    "corrected_voltage_transfer": 0.8156440062225626,
+    "stage_voltage_utilisation": 0.9941250815509569
+  },
+  "stored_energy": {
+    "stage_J": 59297.08066612181,
+    "stage_limit_J": 2500,
+    "stage_utilisation": 23.71883226644872,
+    "total_J": 533673.7259950963,
+    "total_limit_J": 30000,
+    "total_utilisation": 17.789124199836543
+  },
+  "hardware": {
+    "feasible": false,
+    "constraint_counts": {
+      "pass": 4,
+      "fail": 2,
+      "unknown": 4,
+      "not_applicable": 0
+    },
+    "failed_constraint_ids": [
+      "HW_STAGE_ENERGY",
+      "HW_TOTAL_ENERGY"
+    ],
+    "unknown_constraint_ids": [
+      "CIRCUIT_TOPOLOGY_VERIFIED",
+      "CAPACITOR_TRANSIENT_RATING",
+      "RESISTOR_front_fixture_front_1",
+      "RESISTOR_tail_fixture_tail_1"
+    ],
+    "corrected_constraint_counts": {
+      "pass": 0,
+      "fail": 0,
+      "unknown": 0,
+      "not_applicable": 0
+    }
+  },
+  "model_quality": {
+    "status": "available",
+    "model_version": "residual-tabpfn-v2-standardised-v1",
+    "bundle_hash": "b7d1a992302dd72194e1dce3758c582d68cb86815d3f4029e4817281efbc057b",
+    "category": "Lightning",
+    "split": "Validation",
+    "dataset_origin": "synthetic_workbook",
+    "train_count": 700,
+    "validation_count": 150,
+    "hidden_test_evaluated": false,
+    "lab_validated": false,
+    "metrics": {
+      "residual_front_s": {
+        "unit": "s",
+        "validation_count": 150,
+        "validation_MAE": 6.47321811638569e-09,
+        "validation_RMSE": 7.3422227226725585e-09,
+        "validation_bias": 4.384367788367769e-10,
+        "validation_MAE_over_train_residual_std": 0.6608698020411852,
+        "physics_only_MAE": 8.240545740843459e-09,
+        "mean_residual_baseline_MAE": 8.207405713891005e-09,
+        "linear_residual_baseline_MAE": 6.518917806856653e-09
+      },
+      "residual_tail_s": {
+        "unit": "s",
+        "validation_count": 150,
+        "validation_MAE": 5.833343884952594e-07,
+        "validation_RMSE": 6.710124218551536e-07,
+        "validation_bias": -9.705599628959645e-09,
+        "validation_MAE_over_train_residual_std": 0.7247538830266277,
+        "physics_only_MAE": 6.87652498761937e-07,
+        "mean_residual_baseline_MAE": 6.870463165712267e-07,
+        "linear_residual_baseline_MAE": 5.802299220732198e-07
+      },
+      "residual_crest_V": {
+        "unit": "V",
+        "validation_count": 150,
+        "validation_MAE": 4472.448275739699,
+        "validation_RMSE": 5193.545486613155,
+        "validation_bias": -333.9059549477483,
+        "validation_MAE_over_train_residual_std": 0.410301690668843,
+        "physics_only_MAE": 9749.734449355396,
+        "mean_residual_baseline_MAE": 9735.026793715737,
+        "linear_residual_baseline_MAE": 4745.46329735606
+      }
+    },
+    "error_definition": "prediction_minus_observation",
+    "scope": "Dataset aggregate; not an error bound or accuracy score for this input"
+  },
+  "observed_accuracy": {
+    "status": "unavailable",
+    "reason": "A matched measured result is required to assess this input's accuracy",
+    "errors": null,
+    "provenance": null
+  },
+  "runtime": {
+    "clock": "monotonic_wall_clock",
+    "scope": "single_setup_diagnostic",
+    "stage_seconds": {
+      "context": 0.0020350420381873846,
+      "assembly": 0.003153541008941829,
+      "physics": 0.0019755830289795995,
+      "correction": 5.540291209006682
+    },
+    "total_seconds": 5.547638709074818,
+    "cache_hit": false,
+    "transport_time_included": false
+  },
+  "interpretation": "Computed values are predictions. Target mismatch is not model accuracy; dataset validation does not establish this setup's measured result."
+}

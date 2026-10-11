@@ -27,9 +27,16 @@ export const initialForm = {
   loadModel: "capacitive_v1",
   loadR: 1000000,
   loadL: 1,
-  maxProposals: 24,
-  wallSeconds: 60,
+  maxProposals: "",
+  wallSeconds: "",
 };
+export function withSearchDefaults(form, search) {
+  return {
+    ...form,
+    maxProposals: search.max_proposals,
+    wallSeconds: search.wall_time_seconds,
+  };
+}
 export function toRequest(form, inventory) {
   const n = (key) => Number(form[key]);
   for (const key of [

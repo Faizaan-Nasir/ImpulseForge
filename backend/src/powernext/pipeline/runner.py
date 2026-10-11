@@ -5,7 +5,7 @@ from time import monotonic
 from powernext.assembly.cp_sat import AssemblyEngine
 from powernext.contracts.models import DomainError
 from powernext.correction.model import ResidualModel
-from powernext.optimisation.objective import Archive, evaluate_objective
+from powernext.optimisation.objective import Archive, evaluate_objective, objective_order
 from powernext.optimisation.smac_adapter import SmacAdapter
 from powernext.performance.metrics import build_report, model_quality
 from powernext.physics.forward import evaluate
@@ -290,7 +290,7 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
             improved = archive.add(evaluation)
             improved = prediction_archive.add(evaluation) or improved
             if req.purpose == "diagnostic" and evaluation.get("objective"):
-                key = [evaluation["objective"]["S"], evaluation["objective"]["J"]]
+                key = list(objective_order(evaluation["objective"]))
                 if diagnostic_best_key is None or key < diagnostic_best_key:
                     diagnostic_best_key = key
                     improved = True

@@ -437,21 +437,24 @@
       "additionalProperties": false,
       "properties": {
         "max_proposals": {
-          "default": 100,
+          "default": 24,
+          "description": "Omitted API field uses POWERNEXT_CALIBRATION_MAX_ATTEMPTS; 24 is the fallback.",
           "maximum": 10000,
           "minimum": 1,
           "title": "Max Proposals",
           "type": "integer"
         },
         "max_forward_evaluations": {
-          "default": 100,
+          "default": 24,
+          "description": "Omitted API field uses POWERNEXT_CALIBRATION_MAX_ATTEMPTS; 24 is the fallback.",
           "maximum": 10000,
           "minimum": 1,
           "title": "Max Forward Evaluations",
           "type": "integer"
         },
         "max_ml_evaluations": {
-          "default": 100,
+          "default": 24,
+          "description": "Omitted API field uses POWERNEXT_CALIBRATION_MAX_ATTEMPTS; 24 is the fallback.",
           "maximum": 10000,
           "minimum": 1,
           "title": "Max Ml Evaluations",
@@ -503,7 +506,8 @@
           "type": "integer"
         },
         "wall_time_seconds": {
-          "default": 300,
+          "default": 600,
+          "description": "Omitted API field uses POWERNEXT_CALIBRATION_WALL_TIME_SECONDS; 600 is the fallback.",
           "exclusiveMinimum": 0,
           "title": "Wall Time Seconds",
           "type": "number"

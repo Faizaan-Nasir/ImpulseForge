@@ -2,6 +2,17 @@ import math
 
 from powernext.contracts.models import DomainError
 
+OBJECTIVE_POLICY = "crest_no_shortfall_v1"
+
+
+def objective_order(objective):
+    """Respect the minimum crest before comparing remaining waveform deviations."""
+    return (
+        not objective["crest_minimum_satisfied"],
+        objective["S"],
+        objective["J"],
+    )
+
 
 def evaluate_objective(context, metrics):
     target = {
@@ -18,6 +29,7 @@ def evaluate_objective(context, metrics):
         delta = value - target[key]
         allowed = context.test["tolerances"][role] * target[key]
         error = abs(delta) / allowed
+        minimum_satisfied = role != "crest" or delta >= 0
         normalised.append(error)
         errors[role] = {
             "unit": "V" if role == "crest" else "s",
@@ -28,20 +40,32 @@ def evaluate_objective(context, metrics):
             "percentage_delta": 100 * delta / target[key],
             "absolute_percentage_delta": 100 * abs(delta) / target[key],
             "allowed_delta": allowed,
-            "lower_limit": target[key] - allowed,
+            "lower_limit": target[key] if role == "crest" else target[key] - allowed,
             "upper_limit": target[key] + allowed,
+            "allowed_negative_delta": 0 if role == "crest" else allowed,
+            "allowed_positive_delta": allowed,
             "normalised_error": error,
-            "within_tolerance": error <= 1,
+            "within_tolerance": minimum_satisfied and error <= 1,
+            "reason_code": "crest_below_required" if not minimum_satisfied else None,
         }
     S = max(normalised)
+    crest_minimum_satisfied = metrics["crest_V"] >= target["crest_V"]
+    if not crest_minimum_satisfied:
+        # Make even a small shortfall a failing score, while retaining a smooth
+        # deficit signal for SMAC. Do not clamp or change the ML prediction.
+        S = max(S, 1 + errors["crest"]["normalised_error"])
     weights = context.request.objective.weights
     J = sum(weights[r] * errors[r]["normalised_error"] for r in errors) / sum(weights.values())
     return {
+        "acceptance_policy": OBJECTIVE_POLICY,
         "errors": errors,
         "S": S,
         "J": J,
         "cost": S / (1 + S),
-        "waveform_within_tolerance": S <= 1,
+        "crest_minimum_satisfied": crest_minimum_satisfied,
+        "crest_shortfall_V": max(0, -errors["crest"]["signed_delta"]),
+        "calibration_required": not all(e["within_tolerance"] for e in errors.values()),
+        "waveform_within_tolerance": all(e["within_tolerance"] for e in errors.values()),
     }
 
 
@@ -78,8 +102,7 @@ class Archive:
                 "voltage": (c["U_charge_V"], parts, c["N"]),
             }[self.secondary_preference]
             return (
-                o["S"],
-                o["J"],
+                *objective_order(o),
                 *ties,
                 e["candidate_id"],
             )

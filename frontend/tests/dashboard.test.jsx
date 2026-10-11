@@ -6,13 +6,53 @@ import {
   SettingsPanel,
   DecisionSummary,
   PhysicsBaseline,
+  PerformanceMetrics,
 } from "../src/components/Results.jsx";
-import { initialForm } from "../src/lib/config.js";
+import {
+  initialForm as emptyForm,
+  withSearchDefaults,
+} from "../src/lib/config.js";
 import { Schematic } from "../src/components/Networks.jsx";
+const initialForm = withSearchDefaults(emptyForm, {
+  max_proposals: 24,
+  wall_time_seconds: 600,
+});
 const inventory = {
   front: [{ type_id: "f50", nominal_ohm: 50, available_quantity: 4 }],
   tail: [{ type_id: "t25", nominal_ohm: 25, available_quantity: 4 }],
 };
+it("shows an ML crest shortfall as requiring calibration with no negative allowance", () => {
+  render(
+    <PerformanceMetrics
+      record={{
+        correction: {
+          corrected_metrics: {
+            front_s: 1.2e-6,
+            tail_s: 50e-6,
+            crest_V: 1422000,
+          },
+        },
+        objective: {
+          waveform_within_tolerance: false,
+          errors: {
+            crest: {
+              target: 1425000,
+              allowed_delta: 42750,
+              percentage_delta: -0.21,
+              within_tolerance: false,
+              reason_code: "crest_below_required",
+            },
+          },
+        },
+      }}
+    />,
+  );
+  expect(screen.getByText("Calibrate")).toBeInTheDocument();
+  expect(screen.getByText(/allowed 0 to \+3.0 %/)).toBeInTheDocument();
+  expect(
+    screen.getByText(/Below required voltage; calibration required/),
+  ).toBeInTheDocument();
+});
 it("edits arbitrary inventory and sends calculation through the supplied handler", () => {
   const calculate = vi.fn(),
     setInventory = vi.fn();

@@ -11,7 +11,12 @@ import {
   DecisionSummary,
 } from "./components/Results.jsx";
 import { api, post, sleep } from "./lib/api.js";
-import { initialForm, toRequest, number } from "./lib/config.js";
+import {
+  initialForm,
+  toRequest,
+  number,
+  withSearchDefaults,
+} from "./lib/config.js";
 
 export default function App() {
   const [form, setForm] = useState(initialForm),
@@ -36,6 +41,9 @@ export default function App() {
     const controller = new AbortController();
     api("/v1/dashboard/bootstrap", { signal: controller.signal })
       .then((data) => {
+        setForm((previous) =>
+          withSearchDefaults(previous, data.defaults.search),
+        );
         setBootstrap(data);
         setInventory({
           front: data.inventory.front,

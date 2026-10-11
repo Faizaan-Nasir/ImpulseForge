@@ -73,3 +73,14 @@ See [implementation status](../docs/backend_implementation_status.md), [model re
 ## Dashboard and Decision Summary
 
 Dashboard APIs provide bootstrap presets, a per-run view with up to three evaluated cases, explicit diagnostic inspection and a Gemini decision explanation. Optional `target.front_s`, `target.tail_s`, `target.tolerances` and `setup.basic_C_F` fields support the dashboard controls. Primary waveform objectives stay first; `objective.secondary_preference` only changes ties. Copy `.env.example` to `.env` and set `GEMINI_MODEL`/`GEMINI_API_KEY`; keys never reach frontend responses. See `../docs/Dashboard_Implementation.md` for contracts, provenance and missing-key behaviour.
+
+## Calibration budget environment settings
+
+Set these in `backend/.env` (also present in `.env.example`):
+
+```dotenv
+POWERNEXT_CALIBRATION_WALL_TIME_SECONDS=600
+POWERNEXT_CALIBRATION_MAX_ATTEMPTS=24
+```
+
+Restart the backend and refresh the dashboard after changes. Bootstrap exposes active values under `defaults.search`. Omitted API proposal/physics/ML caps use the configured attempt count; omitted worker wall time uses the configured seconds. Explicit per-run values override these defaults, and saved/resumed runs keep their frozen request. Attempts include the initial proposal. Repeated or rejected proposals can mean fewer fresh ML predictions, and waveform success or another stopping rule can finish earlier.

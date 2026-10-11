@@ -1,3 +1,5 @@
+import math
+
 import pytest
 
 from powernext.contracts.models import DomainError, Proposal, RunRequest
@@ -35,6 +37,46 @@ def test_objective_worst_error(context):
     assert o["S"] == pytest.approx(5)
     assert o["cost"] == pytest.approx(5 / 6)
     assert not o["waveform_within_tolerance"]
+
+
+@pytest.mark.parametrize("fraction", [0.9976, 0.99, 0.97, 0.5])
+def test_any_crest_shortfall_requires_calibration(context, fraction):
+    target = context.request.target.crest_V
+    o = evaluate_objective(
+        context, {"front_s": 1.2e-6, "tail_s": 50e-6, "crest_V": target * fraction}
+    )
+    assert not o["waveform_within_tolerance"]
+    assert not o["crest_minimum_satisfied"]
+    assert o["calibration_required"] and o["S"] > 1
+    assert o["crest_shortfall_V"] == pytest.approx(target * (1 - fraction))
+    assert o["errors"]["crest"]["predicted"] == target * fraction
+    assert o["errors"]["crest"]["lower_limit"] == target
+    assert o["errors"]["crest"]["allowed_negative_delta"] == 0
+    assert o["errors"]["crest"]["reason_code"] == "crest_below_required"
+
+
+def test_crest_boundary_has_no_rounding_or_epsilon_allowance(context):
+    target = context.request.target.crest_V
+    for value, accepted in [
+        (math.nextafter(target, 0), False),
+        (target, True),
+        (target * 1.02, True),
+        (target * 1.031, False),
+    ]:
+        o = evaluate_objective(context, {"front_s": 1.2e-6, "tail_s": 50e-6, "crest_V": value})
+        assert o["waveform_within_tolerance"] is accepted
+        assert o["calibration_required"] is not accepted
+
+
+def test_archive_prioritises_crest_minimum(context):
+    archive = Archive(require_eligible=False)
+    low = evaluation(context, "below", 0)
+    low["correction"]["corrected_metrics"]["crest_V"] *= 0.999
+    low["objective"] = evaluate_objective(context, low["correction"]["corrected_metrics"])
+    above = evaluation(context, "meets-minimum", 0.8)
+    archive.add(low)
+    archive.add(above)
+    assert archive.best()[0]["candidate_id"] == "meets-minimum"
 
 
 def test_archive(context):

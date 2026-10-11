@@ -2,8 +2,8 @@
   "files": [
     {
       "name": "Dashboard_Implementation.md",
-      "sha256": "a781b48c32747c944d097eb3896f9dc23546a4d26264518fef4b1f4c000cc8e8",
-      "size_bytes": 14333
+      "sha256": "664a87ef62ac25bc92f42dffefc67563a51d6da3c1194f6207a880d3e795e459",
+      "size_bytes": 15512
     },
     {
       "name": "HV IG Problem Statement.pdf",
@@ -27,8 +27,8 @@
     },
     {
       "name": "Marx_Generator_Architecture_Working_Document.md",
-      "sha256": "570eec420863456a4a75f912f17ccf6ac71fb5883421aecf18c1e583a5a5a478",
-      "size_bytes": 68201
+      "sha256": "042ba11e3cf00a0905a5c5245390d0618878185c7abb470875b21e75a10b8b7e",
+      "size_bytes": 82427
     },
     {
       "name": "Marx_Generator_Architecture_Working_Document.pdf",
@@ -37,8 +37,8 @@
     },
     {
       "name": "Marx_Generator_Technical_Implementation_Specification.md",
-      "sha256": "14d9ee44d7caaca6c83ccd7e0def8466f63d9b187337ba325b7f5e7fd0246ad2",
-      "size_bytes": 154707
+      "sha256": "a50e9a065e14c1dfd6c693c6669a71f4fbf12a4192246f17d38b40b31161f7c0",
+      "size_bytes": 163409
     },
     {
       "name": "Marx_Generator_Technical_Implementation_Specification.pdf",
@@ -52,8 +52,8 @@
     },
     {
       "name": "backend_implementation_status.md",
-      "sha256": "db38f5b79c2b993dbda5422943b531b95d730484d4b7c3462d3e7aa37e061b26",
-      "size_bytes": 12864
+      "sha256": "fe9865b8f964d1a722e31f7ad5f876b7281e56ac094aa8ee0907713995fa7c48",
+      "size_bytes": 13810
     },
     {
       "name": "frontend_environment_report.json",
@@ -87,8 +87,8 @@
     },
     {
       "name": "verification_report.json",
-      "sha256": "0476211fb785f30705ca20b91a63ae0866df6677e394928a917e8545dc0ea7a1",
-      "size_bytes": 6938
+      "sha256": "816585b64f755f6669e5d43d9e1ecf40ba9ea35ae1f520ac4898f5106e372052",
+      "size_bytes": 7980
     },
     {
       "name": "~$Hybrid_Physics_ML_Impulse_Generator_Optimiser.xlsx",

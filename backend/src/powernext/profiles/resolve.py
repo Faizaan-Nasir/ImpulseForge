@@ -8,6 +8,7 @@ from powernext.contracts.models import (
     Record,
     RunRequest,
 )
+from powernext.optimisation.objective import OBJECTIVE_POLICY
 from powernext.profiles.registry import (
     WORKBOOK_INPUTS,
     digest,
@@ -168,6 +169,7 @@ def resolve(request: RunRequest, saved_inventories=None, model_bundle_hash=None)
             f"Charging voltage exceeds resolved {hw['U_stage_max_V'] / 1000:g} kV/stage",
         )
     data = {
+        "objective_acceptance_policy": OBJECTIVE_POLICY,
         "request": request.model_dump(mode="json"),
         "model_bundle_hash": model_bundle_hash,
         "hardware": hw,

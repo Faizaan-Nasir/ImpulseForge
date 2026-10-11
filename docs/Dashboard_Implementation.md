@@ -93,3 +93,9 @@ Default reconciliation: the dashboard displays a separate workbook baseline befo
 
 
 ML-loop correction: defaults enable explicitly marked diagnostic extrapolation so the optimiser can vary realised resistances beyond the narrow workbook envelope. Strict policy is selectable. The three displayed calibration cases must all have corrected metrics; no physics-only fallback is scored or displayed as a calibrated alternative. Run status reports ML target convergence independently of hardware recommendation eligibility. New counters distinguish successful physics predictions, correction calls and actual ML predictions. A compatible ML artifact is required, and environmental effects remain explicitly not modelled until training data supports them.
+
+Crest acceptance now uses `crest_no_shortfall_v1`: zero shortfall is allowed. The crest tolerance input controls the upper allowance only; the result card shows `Calibrate` below the requested voltage. Calibration cannot converge until all three selected ML predictions meet the minimum crest and all waveform bands. Start a fresh calculation to apply the policy to previously saved results.
+
+Search time budget default is 600 seconds (10 minutes). The dashboard retains a separate default Maximum iterations of 24, setting proposal/physics/ML count caps together. A longer time budget does not raise this count. Stop earlier for three accepted ML predictions, repeated/stagnant search, cancellation or other applicable limits. Saved historical runs retain their submitted budgets.
+
+Budget values now come from backend `.env`: `POWERNEXT_CALIBRATION_WALL_TIME_SECONDS` (fallback 600) and `POWERNEXT_CALIBRATION_MAX_ATTEMPTS` (fallback 24). Bootstrap returns `defaults.search`; App initialises budget fields from it instead of frontend numeric constants. Edits remain explicit per-run overrides. Restart the backend and refresh the dashboard after changing environment defaults.

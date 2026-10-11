@@ -1,6 +1,6 @@
 # Marx Generator: Technical Implementation Specification
 
-Version 1.11 · 11 October 2026 · Status: implementation contract; hardware and measured-data verification pending.
+Version 1.12 · 11 October 2026 · Status: implementation contract; hardware and measured-data verification pending.
 
 This document specifies a transparent backend for recommending the three best distinct evaluated Marx-generator setups. It combines the project's latest architecture decisions with the supplied physics formula book. The React/Tailwind dashboard is now implemented; Section 18 specifies its integration. Every implementation module below has explicit inputs, outputs, constraints, standalone fixtures and acceptance criteria, so an AI agent can implement it without waiting for adjacent modules.
 
@@ -655,6 +655,8 @@ residual_prediction ≈ reference_residual + sum(feature_contribution)
 corrected_prediction = physics_baseline + residual_prediction
 ```
 
+For the implemented normalised model, mask standardised inputs and explain standardised residual predictions through the underlying estimator. Then inverse-scale the reference and contributions into SI units before reporting. This avoids treating tiny capacitance/time values as numerically constant. Include raw and standardised feature values, attribution space, background provenance and the SI additivity error.
+
 Feature contributions have the residual output's units. Explain whether increased temperature, pulse-energy or humidity features contributed positively or negatively relative to the selected reference, **only when those features were actually used and supported**. Correlated and derived features complicate attribution; preserve grouping and do not claim causal proof.
 
 Per-resistor heat is calculated evidence from Section 7.1. It is not automatically an explanation of the ML prediction. If the model uses only aggregate pulse-energy features, link the aggregation to per-resistor records and state that no unique per-resistor ML attribution exists. If thermal/environment fields are absent, explanation must explicitly say “not modelled by this version”. Never generate “heat caused this correction” merely because resistors dissipate energy.
@@ -682,8 +684,13 @@ percentage_delta_p = 100 * signed_delta_p / target_p
 allowed_delta_p = positive_relative_tolerance_p * target_p
 normalised_error_p = absolute_delta_p / allowed_delta_p
 S = max(normalised_error_front, normalised_error_tail, normalised_error_crest)
+crest_minimum_satisfied = (corrected_crest >= required_crest)
+if not crest_minimum_satisfied:
+    S = max(S, 1 + normalised_error_crest)
 J = sum(weight_p * normalised_error_p) / sum(weight_p)
-waveform_within_tolerance = (S <= 1)
+waveform_within_tolerance = all(per_output_within_tolerance)
+# Crest: required_crest <= corrected_crest <= required_crest * (1 + crest_tolerance)
+# Front/tail: retain their symmetric configured bands.
 ```
 
 Do not add raw seconds and volts. `S` prevents a good average hiding one failing output. `J` compares total normalised deviation when the worst error ties. Weights default to equal positive values; record any chosen change.
@@ -692,9 +699,11 @@ Versioned source/formula-book tolerance profiles:
 
 | Profile | Front/peak | Tail | Crest | Basis |
 | --- | --- | --- | --- | --- |
-| `lightning_project_v1` | 1.2 µs ±30% | 50 µs ±20% | Requested crest ±3% | Supplied formula book/project test policy |
-| `switching_workbook_legacy_v1` | Peak 250 µs ±20% | 2500 µs ±20% | Requested crest ±3% | Workbook comparison policy |
-| `switching_legacy_extended_tail_v1` | Peak 250 µs ±20% | 2500 µs ±60% | Requested crest ±3% | Formula-book legacy policy requiring standards verification |
+| `lightning_project_v1` | 1.2 µs ±30% | 50 µs ±20% | Requested crest +0% to +3% | Supplied formula book/project test policy |
+| `switching_workbook_legacy_v1` | Peak 250 µs ±20% | 2500 µs ±20% | Requested crest +0% to +3% | Workbook comparison policy |
+| `switching_legacy_extended_tail_v1` | Peak 250 µs ±20% | 2500 µs ±60% | Requested crest +0% to +3% | Formula-book legacy policy requiring standards verification |
+
+**Crest acceptance policy `crest_no_shortfall_v1`:** no ML-predicted crest below the requested voltage is acceptable, even when the shortfall is smaller than the configured tolerance. The crest tolerance input controls only the upper allowance; front/tail remain symmetric. Compare full-precision values without rounding or an epsilon. Preserve the original ML output and signed residual; a negative residual itself is allowed when the resulting crest still meets the target. Do not clamp or inflate ML outputs. A shortfall sets `reason_code=crest_below_required`, `calibration_required=true` and prevents convergence. Continue SMAC → DP/CP-SAT → physics → residual ML within the existing budgets. If limits stop the search, return the unmatched predictions and `ml_converged=false`, rather than claiming success. The resolved context includes this policy in its hash, so new runs do not reuse earlier-policy candidate identities.
 
 These tolerances are not taken from the PDF's last-page hardware table. Store exact profile, provenance and verification status. Do not equate a project tolerance verdict with verified standards compliance. Declared absolute tolerances may be supported as a separate schema; their scales must stay positive.
 
@@ -719,10 +728,10 @@ The frontend defaults to `ml_domain_policy=diagnostic_extrapolation`, with an ex
 This bounded monotone transform preserves `S` ordering and ensures a hardware violation cannot appear preferable to an eligible candidate. Keep individual failure codes and uncertainty; penalty cost is not a predicted waveform. The archive uses lexicographic ordering:
 
 ```text
-(S, J, total_parts_per_stage, N, U_charge/U_stage_max, canonical_candidate_id)
+(not crest_minimum_satisfied, S, J, total_parts_per_stage, N, U_charge/U_stage_max, canonical_candidate_id)
 ```
 
-Only eligible records enter the archive. Since `S<=1` precedes `S>1`, satisfactory candidates automatically outrank outside-tolerance candidates. Parts/stages/utilisation break actual waveform-objective ties; they do not override a waveform improvement. Compute objective values at declared precision and avoid undocumented “nearly equal” comparisons. If an epsilon policy is selected, version and expose it.
+Only eligible records enter the recommendation archive; diagnostic ML predictions use a separate archive with the same objective ordering. Setups meeting the minimum crest rank ahead of shortfall setups. Within that group, `S<=1` precedes `S>1`, so satisfactory candidates outrank outside-tolerance candidates. Parts/stages/utilisation break actual waveform-objective ties; they do not override a waveform improvement. Compute objective values at declared precision and avoid undocumented “nearly equal” comparisons. If an epsilon policy is selected, version and expose it.
 
 The formula book suggests `S + .002*parts + .001*N + .01*utilisation`. Do not use these additive weights as guaranteed tie-breakers: with many parts they can outweigh waveform improvements. An optional user-selected weighted multi-objective policy must explicitly accept that tradeoff. The primary objective still uses corrected predictions, not only the ideal physics targets.
 
@@ -1349,12 +1358,12 @@ For each output, let target be y*, prediction be y, and its allowed fractional t
 
 - Signed delta = y − y*; absolute delta = |y − y*|.
 - Signed percentage delta = 100(y − y*)/y*; absolute percentage delta = 100|y − y*|/y*.
-- Allowed absolute delta = q y*; lower/upper limits = y*(1 − q), y*(1 + q).
-- Normalised error = |y − y*|/(q y*). `within_tolerance` means this is at most 1.
+- Allowed upper absolute delta = q y*. Front/tail lower/upper limits = y*(1 − q), y*(1 + q); crest lower/upper limits = y*, y*(1 + q). Expose `allowed_negative_delta=0` for crest and `allowed_positive_delta=q y*`.
+- Normalised error = |y − y*|/(q y*). Front/tail `within_tolerance` means this is at most 1; crest additionally requires y >= y*. Return `acceptance_policy`, `crest_minimum_satisfied`, `crest_shortfall_V`, `calibration_required` and any `crest_below_required` reason. S includes the minimum-crest penalty from Section 8.
 
 Return these fields under `physics.errors.front/tail/crest` and, when available, `corrected.errors.front/tail/crest`, including `unit`. Include `S`, `J`, `cost` and `waveform_within_tolerance` from Section 8. These are waveform comparisons, not an independent override of hardware eligibility. Recommendation-mode cost remains 2 for ineligible candidates. Diagnostic-mode cost is `1 + S/(1+S)` when a valid prediction exists, with its source and eligibility penalty exposed.
 
-Example for the project's Lightning target 1.2/50 µs, crest 1425 kV, with the current profile tolerances 30%/20%/3%:
+Example for the project's Lightning target 1.2/50 µs, crest 1425 kV, with front/tail tolerances ±30%/±20% and crest allowance +0% to +3%:
 
 | Metric | Prediction | Signed delta | Absolute percentage delta | Normalised error |
 | --- | --- | --- | --- | --- |
@@ -1362,7 +1371,7 @@ Example for the project's Lightning target 1.2/50 µs, crest 1425 kV, with the c
 | Tail | 49 µs | −1 µs | 2% | 0.1 |
 | Crest | 1420 kV | −5 kV | 0.350877…% | 0.116959… |
 
-All three predicted values fall within those timing/crest tolerances. This does not imply measured compliance or hardware feasibility. Do not hardcode this example's target or tolerances into reporting; read them from the context.
+Front and tail meet their timing tolerances, but the 1420 kV crest is 5 kV below the requested 1425 kV. This case requires calibration, has `S=1.116959…`, and cannot count toward convergence. This does not imply measured compliance or hardware feasibility. Do not hardcode this example's target or tolerances into reporting; read them from the context.
 
 Additional report groups:
 
@@ -1402,6 +1411,19 @@ Although artifact keys are `residual_front_s`, `residual_tail_s` and `residual_c
 An individual input does not have a known accuracy score before its observed result exists. `observed_accuracy` therefore defaults to unavailable with a reason and `errors=null`. With an observation, report per-output prediction, observed value, signed error, absolute error and absolute percentage error relative to the observation. Also provide `physics_errors` for comparison. Keep this separate from deviation relative to the requested target. If correction is unavailable, the physics comparison may still be available but corrected errors remain null.
 
 Do not average seconds and volts into one MAE, call target mismatch an accuracy percentage, turn aggregate validation MAE into a per-input confidence interval, or invent a certainty probability. Environmental/heat explanations retain the evidence limitations from Section 7.
+
+### 17.3.1 Current fitted model: per-output physical-unit MAE
+
+The current model version is `residual-tabpfn-v2-standardised-v1`. MAE means the average absolute prediction-minus-observation error over the **150 Validation rows for each category**. It is not a tolerance band or a guaranteed error for a particular entered setup.
+
+| Category | Front/peak MAE (µs) | Tail MAE (µs) | Crest MAE (kV) |
+| --- | --- | --- | --- |
+| Lightning | 0.006473218116 | 0.583334388495 | 4.472448275740 |
+| Switching | 1.610415500553 | 22.426301997700 | 3.130558659210 |
+
+Values are rounded to 12 decimal places; full SI-valued metrics and RMSE are retained in [model performance report](model_performance_report.json). The earlier “under 0.7%” figure referred to the **change in MAE after explicit normalisation**, not a combined MAE or a model accuracy score. Seconds and volts are never averaged into one physical-unit MAE. Hidden Test rows were not used to fit scalers, select features or calculate these validation scores.
+
+Three performance views remain separate: per-setup mismatch to target and hardware constraints; per-output validation accuracy or matched-observation errors; and measured backend execution times/cache/iteration counts. Without a matched observation, exact accuracy for the entered setup is unavailable even though its exact predicted numbers and target deviations can be reported.
 
 ### 17.4 Backend speed, caching and iteration metrics
 
@@ -1458,3 +1480,42 @@ Only claim a buildable reference if those exact single resistors can be supplied
 Maintain two archives. `predicted_setups` contains up to three distinct configurations with actual ML-corrected metrics, exact inventory recipes and original hard-constraint/domain verdicts. `recommendations` contains only the separately eligible subset. Calibration/stagnation progress comes from the ML archive, not raw physics. In diagnostic mode, stop with `stop_reason=three_ml_waveforms_within_tolerance` when all three predicted setups satisfy every selected front/tail/crest band. Set `ml_converged=true` for that prediction criterion only. Recommendation mode still requires the eligible archive criterion. Keep all deterministic iteration/evaluation/time/duplicate/stagnation limits; budget stopping with unmatched ML outputs is not convergence. `returned_predictions`, `prediction_shortfall_reason`, `calibration_basis` and the existing recommendation shortfall expose the distinction. Exact equality is not promised. Plotted ML waveforms remain parameter reconstructions from these three targets, not learned pointwise traces.
 
 Environmental correction remains a data-dependent work item. When environmental measurements and matched outputs become available, extend the feature/training contract, fit and validate a new residual artifact, and version its support envelope. Accepting environment fields or calculating component stress does not make the present synthetic residual model environment-aware.
+
+
+### Crest minimum revision (11 October 2026)
+
+The dashboard labels the crest tolerance as an upper allowance and displays `Calibrate` for a shortfall. API objective and performance errors expose the exact target, prediction, zero lower allowance, upper allowance and failure reason. Both impulse categories use this acceptance policy. Model training, observation accuracy metrics and target scaling retain their existing meanings. Previously saved runs retain their recorded historical result; start a fresh calculation to apply the new acceptance rule. Regression checks cover sub-tolerance shortfalls, the closest representable value below the target, exact target equality, permitted overshoot, excessive overshoot, archive priority, a six-evaluation calibration cycle and an unsuccessful budget stop.
+
+
+### Default search budgets (11 October 2026)
+
+The dashboard and API obtain default budgets from backend environment configuration. `POWERNEXT_CALIBRATION_WALL_TIME_SECONDS` has fallback **600 seconds (10 minutes)**; `POWERNEXT_CALIBRATION_MAX_ATTEMPTS` has fallback **24 total candidate attempts**, including the initial proposal. `GET /v1/dashboard/bootstrap` returns the active values under `defaults.search`; the frontend does not carry separate hardcoded numeric budget defaults. API request fields omitted by the caller use these same environment defaults. A supplied frontend/API value takes precedence; existing saved requests retain their original limits.
+
+| Limit | Dashboard request default | API default when search fields are omitted |
+| --- | --- | --- |
+| Total candidate proposals | Environment max attempts (fallback 24) | Environment max attempts (fallback 24) |
+| Forward-physics evaluations | Dashboard max attempts | Environment max attempts (fallback 24) |
+| Residual-ML correction attempts | Dashboard max attempts | Environment max attempts (fallback 24) |
+| Worker wall time | Environment wall time (fallback 600 seconds) | Environment wall time (fallback 600 seconds) |
+| Consecutive cached/repeated realised candidates | 10 | 10 |
+| Consecutive proposals without archive/diagnostic improvement | Dashboard max attempts | 20 unless explicitly supplied |
+
+A proposal limit of 24 means at most **24 candidate attempts, including the initial proposal**, not 24 extra recalibrations. Successful new realisations receive physics and ML; rejected proposals and cache hits can leave fewer fresh ML calls. The dashboard's Maximum iterations input sets all three proposal/physics/ML count limits together. Increasing wall time alone does not increase those count limits.
+
+The worker stops at the first applicable condition: three accepted ML predictions in diagnostic mode (or three accepted eligible recommendations for recommendation success), proposal/evaluation exhaustion, wall-time exhaustion, repeated candidates, stagnation, exhausted search space or cancellation. An ML crest below the target cannot count as a match, regardless of its percentage shortfall. Budget/repetition/stagnation stopping without three matches reports `ml_converged=false`. The time check prevents starting further cycles after the worker budget is consumed; an in-flight call and final response/plot construction can finish later. The separate pre-run workbook-reference request is not part of the asynchronous worker's wall-time budget.
+
+Actual counts are exposed as `counters.proposals`, `physics_evaluations`, `physics_predictions`, `ml_evaluations`, `ml_predictions` and `cache_hits`, together with `stop_reason` and elapsed time. These report the work that actually occurred rather than implying a fixed number of completed calibration cycles.
+
+
+### Environment-controlled calibration budgets
+
+Configure the backend in `backend/.env` (template: `backend/.env.example`):
+
+```dotenv
+POWERNEXT_CALIBRATION_WALL_TIME_SECONDS=600
+POWERNEXT_CALIBRATION_MAX_ATTEMPTS=24
+```
+
+The attempt setting supplies omitted `max_proposals`, `max_forward_evaluations` and `max_ml_evaluations` fields. Wall time must be positive and finite; attempts must be an integer from 1 to 10,000. Invalid environment settings fail service configuration rather than silently disabling limits. Explicit request fields retain precedence. The request schema's numeric defaults are fallback values; runtime environment defaults are advertised by bootstrap and frozen in the persisted resolved context. A partial request receives environment defaults only for its omitted budget fields.
+
+Restart the backend after editing `.env`, then refresh the dashboard to load the new defaults. Existing queued/running/saved contexts and resumes keep their submitted budgets. Repetition, stagnation, evaluation, cancellation and waveform-success stopping rules still apply; the maximum attempt setting does not guarantee that all those attempts will be executed. These are search budgets, not TabPFN training epochs or model retraining counts.

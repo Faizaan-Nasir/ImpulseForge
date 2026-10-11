@@ -2,9 +2,9 @@
   "checked_at": "2026-10-11",
   "software_tests": {
     "status": "passed",
-    "passed": 111,
+    "passed": 127,
     "skipped": 0,
-    "report": "verification/tests.txt"
+    "report": "verification/environment-budget-tests.txt"
   },
   "lint": {
     "status": "passed",
@@ -65,7 +65,7 @@
   "frontend": {
     "status": "implemented",
     "stack": "React 19 / Tailwind 4 / Vite 7",
-    "tests_passed": 11,
+    "tests_passed": 13,
     "build": "passed",
     "audit_vulnerabilities": 0,
     "tests_report": "verification/frontend-tests.txt",
@@ -188,5 +188,34 @@
     "physical_units_restored": true,
     "waveform_tolerances_unchanged": true,
     "shap_additivity": "passed three SI residual outputs; dimensionless attribution avoids tiny-unit cutoffs"
+  },
+  "crest_minimum_acceptance": {
+    "status": "verified",
+    "policy": "crest_no_shortfall_v1",
+    "negative_allowance_V": 0,
+    "upper_allowance": "frontend crest tolerance input",
+    "live_report": "verification/crest-minimum-api.json",
+    "checks": [
+      "strict full-precision crest minimum",
+      "no prediction clamping",
+      "calibration continues after three shortfalls",
+      "budget exhaustion is not convergence",
+      "dashboard calibration status"
+    ]
+  },
+  "environment_search_budgets": {
+    "status": "verified",
+    "variables": {
+      "POWERNEXT_CALIBRATION_WALL_TIME_SECONDS": 600,
+      "POWERNEXT_CALIBRATION_MAX_ATTEMPTS": 24
+    },
+    "checks": [
+      "environment values reach bootstrap and omitted API fields",
+      "explicit fields retain precedence",
+      "saved contexts stay frozen",
+      "invalid nonfinite/nonpositive/fractional/excessive values rejected",
+      "frontend loads runtime defaults"
+    ],
+    "live_report": "verification/environment-budget-api.json"
   }
 }

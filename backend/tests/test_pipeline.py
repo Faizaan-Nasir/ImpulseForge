@@ -158,6 +158,69 @@ def test_missing_ml_prediction_never_uses_physics_as_calibration_objective(conte
     assert result["counters"]["ml_predictions"] == 0
 
 
+def test_loop_continues_after_three_undervoltage_ml_predictions(request_data, tmp_path):
+    from powernext.contracts.models import Proposal
+
+    request_data["search"]["max_proposals"] = 6
+    request_data["inventory"]["front"] = [
+        {"type_id": f"f{v}", "nominal_ohm": v, "available_quantity": 4}
+        for v in (40, 45, 50, 55, 60, 65)
+    ]
+    context = resolve(RunRequest.model_validate(request_data))
+
+    class Proposer:
+        def ask(self, i):
+            return i, Proposal(
+                N=9, Rf_required_ohm=40 + 5 * i, Rt_required_ohm=25, proposal_index=i
+            )
+
+        def tell(self, trial, cost):
+            pass
+
+    class CorrectionFixture:
+        def report(self):
+            return {}
+
+        def correct(self, ctx, candidate, baseline):
+            crest = ctx.request.target.crest_V
+            if candidate.front.equivalent_ohm <= 50:
+                crest *= 0.999  # Previously counted as within the symmetric 3% band.
+            return {
+                "status": "predicted_diagnostic",
+                "model_version": ctx.request.model_version,
+                "corrected_metrics": {"front_s": 1.2e-6, "tail_s": 50e-6, "crest_V": crest},
+                "support": {"status": "supported_diagnostic"},
+                "lab_validated": False,
+            }
+
+    store = Store(tmp_path / "jobs.sqlite")
+    ident, _ = store.create_run(context)
+    result = run(context, ident, store, tmp_path, proposer=Proposer(), model=CorrectionFixture())
+    assert result["counters"]["ml_predictions"] == 6
+    assert result["ml_converged"]
+    assert result["stop_reason"] == "three_ml_waveforms_within_tolerance"
+    assert all(e["objective"]["crest_minimum_satisfied"] for e in result["predicted_setups"])
+    assert sum(e[1]["objective"]["calibration_required"] for e in store.list("candidate")) == 3
+
+
+def test_undervoltage_budget_stop_is_not_convergence(context, tmp_path):
+    def below(p):
+        e = evaluation(context, str(p.proposal_index), 0)
+        e["correction"]["corrected_metrics"]["crest_V"] *= 0.999
+        from powernext.optimisation.objective import evaluate_objective
+
+        e["objective"] = evaluate_objective(context, e["correction"]["corrected_metrics"])
+        e["cost"] = e["objective"]["cost"]
+        return e
+
+    store = Store(tmp_path / "jobs.sqlite")
+    ident, _ = store.create_run(context)
+    result = run(context, ident, store, tmp_path, proposer=MockProposer(), evaluator=below)
+    assert result["counters"]["proposals"] == 4
+    assert result["stop_reason"] == "maximum_proposals"
+    assert not result["ml_converged"]
+
+
 def test_loop_uses_corrected_metrics_and_stops_at_three_ml_matches(request_data, tmp_path):
     from powernext.contracts.models import Proposal
 
