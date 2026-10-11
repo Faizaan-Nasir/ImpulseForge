@@ -458,6 +458,10 @@ export function Comparison({ cases, selected, onSelect, mode }) {
     ["Crest voltage", (r) => `${number(shownMetrics(r).crest_V / 1000, 1)} kV`],
     ["Status", (r) => (r.eligible ? "Eligible" : "Diagnostic")],
     [
+      "All waveform thresholds",
+      (r) => (shownObjective(r)?.waveform_within_tolerance ? "Pass" : "Fail"),
+    ],
+    [
       "ML training range",
       (r) =>
         !r.correction?.corrected_metrics
@@ -472,12 +476,12 @@ export function Comparison({ cases, selected, onSelect, mode }) {
   return (
     <section className="card" aria-label="Candidate comparison">
       <div className="card-head">
-        <h2>Candidate comparison</h2>
+        <h2>Top three successful configurations</h2>
         <span className="sub">
           {cases.length}{" "}
           {mode === "eligible_recommendations"
             ? "eligible settings"
-            : "evaluated diagnostic cases"}
+            : "ML waveform matches out of 3"}
         </span>
       </div>
       <div className="table-wrap">
@@ -529,9 +533,11 @@ export function Comparison({ cases, selected, onSelect, mode }) {
         </table>
       </div>
       <p className="table-foot">
-        Worst normalised deviation S first, then weighted deviation J. Secondary
-        preferences affect ties only. Diagnostic cases have failed, unknown or
-        unverified eligibility and are not recommended for physical use.
+        Only distinct setups passing every ML waveform threshold fill these
+        slots. Required crest minimum first, then worst normalised deviation S
+        and weighted deviation J. Secondary preferences affect ties only.
+        Diagnostic cases have failed, unknown or unverified eligibility and are
+        not recommended for physical use.
       </p>
     </section>
   );

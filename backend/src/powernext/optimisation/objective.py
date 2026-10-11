@@ -70,13 +70,18 @@ def evaluate_objective(context, metrics):
 
 
 class Archive:
-    def __init__(self, secondary_preference="balanced", require_eligible=True):
+    def __init__(
+        self, secondary_preference="balanced", require_eligible=True, require_waveform=False
+    ):
         self.entries = {}
         self.secondary_preference = secondary_preference
         self.require_eligible = require_eligible
+        self.require_waveform = require_waveform
 
     def add(self, evaluation):
         if not evaluation.get("objective"):
+            return False
+        if self.require_waveform and not evaluation["objective"]["waveform_within_tolerance"]:
             return False
         if self.require_eligible and not evaluation["eligible"]:
             return False

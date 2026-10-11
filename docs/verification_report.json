@@ -2,9 +2,9 @@
   "checked_at": "2026-10-11",
   "software_tests": {
     "status": "passed",
-    "passed": 127,
+    "passed": 134,
     "skipped": 0,
-    "report": "verification/environment-budget-tests.txt"
+    "report": "verification/three-successful-backend-tests.txt"
   },
   "lint": {
     "status": "passed",
@@ -217,5 +217,21 @@
       "frontend loads runtime defaults"
     ],
     "live_report": "verification/environment-budget-api.json"
+  },
+  "three_successful_configurations": {
+    "status": "verified",
+    "success_criterion": "three distinct full-precision ML triplets passing all waveform thresholds",
+    "proposals": 7,
+    "fresh_ml_evaluations": 5,
+    "successful_ml_setups": 3,
+    "hardware_recommendations": 0,
+    "attempt_rows": 7,
+    "frontend_tests": 18,
+    "fixture_tests": "verification/three-successful-backend-tests.txt",
+    "frontend_test_report": "verification/three-successful-frontend-tests.txt",
+    "real_model_report": "verification/three-successful-configurations.json",
+    "browser_report": "verification/three-successful-browser.json",
+    "dashboard_screenshot": "verification/three-successful-dashboard.png",
+    "hardware_note": "All three tested diagnostic waveform matches retain stage/total energy failures; no physical eligibility claim."
   }
 }

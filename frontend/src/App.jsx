@@ -3,6 +3,7 @@ import { Download, Info, RefreshCw, X } from "lucide-react";
 import Configuration from "./components/Configuration.jsx";
 import Networks from "./components/Networks.jsx";
 import Waveform from "./components/Waveform.jsx";
+import AttemptHistory from "./components/AttemptHistory.jsx";
 import {
   SettingsPanel,
   PerformanceMetrics,
@@ -10,7 +11,7 @@ import {
   Comparison,
   DecisionSummary,
 } from "./components/Results.jsx";
-import { api, post, sleep } from "./lib/api.js";
+import { api, post, sleep, allAttempts } from "./lib/api.js";
 import {
   initialForm,
   toRequest,
@@ -30,6 +31,8 @@ export default function App() {
     [busy, setBusy] = useState(false),
     [dirty, setDirty] = useState(false),
     [error, setError] = useState("");
+  const [attempts, setAttempts] = useState(null),
+    [historyError, setHistoryError] = useState("");
   const [status, setStatus] = useState("Connecting to backend…"),
     [runId, setRunId] = useState(null),
     [summary, setSummary] = useState(null),
@@ -143,6 +146,8 @@ export default function App() {
     setBusy(true);
     setError("");
     setSummary(null);
+    setAttempts(null);
+    setHistoryError("");
     setWorkbookBaseline(null);
     setBaselineError("");
     setStatus("Validating inputs…");
@@ -172,7 +177,7 @@ export default function App() {
           signal: controller.signal,
         });
         setStatus(
-          `${state.status} · ${state.counters?.proposals ?? 0} proposals · ${number(state.elapsed_seconds ?? 0, 1)} s`,
+          `${state.status} · ${state.returned_successful_predictions ?? 0}/3 successful setups · ${state.counters?.proposals ?? 0} proposals · ${number(state.elapsed_seconds ?? 0, 1)} s`,
         );
         if (["queued", "running"].includes(state.status))
           await sleep(600, controller.signal);
@@ -204,10 +209,18 @@ export default function App() {
         });
       }
       setDashboard(data);
+      try {
+        setAttempts(
+          await allAttempts(created.run_id, { signal: controller.signal }),
+        );
+      } catch (e) {
+        if (e.name === "AbortError") throw e;
+        setHistoryError(`Attempt history unavailable: ${e.message}`);
+      }
       setSelected(0);
       setDirty(latest.current !== submitted);
       setStatus(
-        `Calculated in ${number(data.run.performance?.elapsed_seconds ?? data.run.elapsed_seconds, 2)} s · ${data.cases.length} ML-predicted cases · ${data.run.ml_converged ? "ML targets met" : `stopped: ${data.run.stop_reason}`}`,
+        `Calculated in ${number(data.run.performance?.elapsed_seconds ?? data.run.elapsed_seconds, 2)} s · ${data.cases.length}/3 successful ML setups · ${data.run.ml_converged ? "All three meet waveform thresholds" : `stopped: ${data.run.stop_reason}`}`,
       );
       try {
         setSummary(
@@ -253,6 +266,7 @@ export default function App() {
     result: dashboard,
     workbook_baseline: workbookBaseline,
     decision_summary: summary,
+    attempt_history: attempts,
   };
   const reportPreview = {
     request: exported.request,
@@ -392,6 +406,12 @@ export default function App() {
             context={dashboard?.context}
             mode={dashboard?.display_mode}
           />
+          <Comparison
+            cases={cases}
+            selected={selected}
+            onSelect={setSelected}
+            mode={dashboard?.display_mode}
+          />
           <Networks
             key={record?.candidate_id || "empty"}
             record={record}
@@ -413,11 +433,10 @@ export default function App() {
             />
           </div>
           <PhysicsBaseline record={record} />
-          <Comparison
-            cases={cases}
-            selected={selected}
-            onSelect={setSelected}
-            mode={dashboard?.display_mode}
+          <AttemptHistory
+            key={`attempts-${runId || "empty"}`}
+            history={attempts}
+            error={historyError}
           />
           <DecisionSummary
             runId={runId}

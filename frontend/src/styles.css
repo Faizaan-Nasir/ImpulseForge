@@ -1384,6 +1384,22 @@
   .table-wrap {
     @apply min-w-0 max-w-full overflow-x-auto;
   }
+  table.attempts-table {
+    table-layout: auto;
+    min-width: 2200px;
+  }
+  table.attempts-table th,
+  table.attempts-table td {
+    white-space: nowrap;
+    cursor: default;
+  }
+  table.attempts-table th:last-child,
+  table.attempts-table td:last-child {
+    min-width: 260px;
+    max-width: 380px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
   .trace-detail pre {
     @apply max-h-72 overflow-auto rounded border p-3 text-xs;
     background: var(--sunken);

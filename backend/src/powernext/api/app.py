@@ -27,6 +27,7 @@ from powernext.contracts.models import (
     WorkbookBaseline,
 )
 from powernext.correction.model import ResidualModel
+from powernext.dashboard.attempts import attempt_history
 from powernext.dashboard.baseline import reference_request, workbook_baseline
 from powernext.dashboard.summary import DecisionSummary, SummaryRequest, generate_summary
 from powernext.dashboard.view import cases_for_run, evidence, plot_bundle
@@ -536,6 +537,25 @@ def create_app(artifacts=None, schedule_jobs=True, settings=None):
         return {
             "total": len(ids),
             "items": [get("candidate", i) for i in ids[offset : offset + limit]],
+        }
+
+    @app.get("/v1/runs/{identifier}/attempts")
+    def attempts_route(
+        identifier,
+        offset: int = Query(default=0, ge=0),
+        limit: int = Query(default=100, ge=1, le=1000),
+    ):
+        state = get("run", identifier)
+        ctx = Context.model_validate(get("context", state["context_id"]))
+        rows = attempt_history(store, identifier, ctx)
+        return {
+            "run_id": identifier,
+            "total": len(rows),
+            "proposal_count": len({row["attempt_number"] for row in rows}),
+            "offset": offset,
+            "limit": limit,
+            "ordering": "proposal then ML evaluation, from first to last; repeated proposals retained",
+            "items": rows[offset : offset + limit],
         }
 
     @app.get("/v1/runs/{identifier}/result")

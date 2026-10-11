@@ -137,6 +137,42 @@ def test_diagnostic_cases_and_plot_origin(context, tmp_path):
     assert "No verified recommendation" in result["narrative"]["lead"]
 
 
+def test_dashboard_retains_three_matches_when_only_one_is_eligible(context, tmp_path):
+    store = Store(tmp_path / "dashboard.sqlite")
+    matches = [
+        {
+            "candidate_id": f"passing-{i}",
+            "correction": {
+                "corrected_metrics": {
+                    "front_s": context.test["front_s"],
+                    "tail_s": context.test["tail_s"],
+                    "crest_V": context.request.target.crest_V * (1 + i * 0.001),
+                }
+            },
+            "eligible": i == 0,
+        }
+        for i in range(3)
+    ]
+    failure = {
+        "candidate_id": "legacy-shortfall",
+        "correction": {
+            "corrected_metrics": {
+                "front_s": context.test["front_s"],
+                "tail_s": context.test["tail_s"],
+                "crest_V": context.request.target.crest_V * 0.999,
+            }
+        },
+    }
+    store.save(
+        "result",
+        "fixture",
+        {"recommendations": matches[:1], "predicted_setups": matches + [failure]},
+    )
+    cases, mode = cases_for_run(store, "fixture", context)
+    assert mode == "diagnostic_evaluated_cases"
+    assert [c["candidate_id"] for c in cases] == [f"passing-{i}" for i in range(3)]
+
+
 def test_gemini_summary_is_grounded_cached_and_validated(context, tmp_path, monkeypatch):
     store, data, _cases = saved_diagnostic(context, tmp_path)
     calls = []

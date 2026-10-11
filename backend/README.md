@@ -84,3 +84,9 @@ POWERNEXT_CALIBRATION_MAX_ATTEMPTS=24
 ```
 
 Restart the backend and refresh the dashboard after changes. Bootstrap exposes active values under `defaults.search`. Omitted API proposal/physics/ML caps use the configured attempt count; omitted worker wall time uses the configured seconds. Explicit per-run values override these defaults, and saved/resumed runs keep their frozen request. Attempts include the initial proposal. Repeated or rejected proposals can mean fewer fresh ML predictions, and waveform success or another stopping rule can finish earlier.
+
+### Successful alternatives and complete attempt history
+
+`predicted_setups` contains only distinct ML waveform matches passing all three thresholds; `returned_successful_predictions` reports the count. One match does not satisfy the three-configuration goal. Outside-threshold predictions remain in `evaluated_setups` and history, and budget exhaustion with fewer than three matches is an explicit shortfall. Hardware/laboratory eligibility remains separate. During a run, `top_three_successful_ids` identifies accumulated matches.
+
+`GET /v1/runs/{id}/attempts?offset=0&limit=1000` returns every proposal and inner correction attempt in chronological order, with requested/realised settings, exact recipes, SI ML predictions, acceptance checks, hardware checks and reasons. Cached repeats remain rows and are labelled cached; they do not count as additional successful configurations. Rejected/unsupported attempts have null prediction fields where ML did not produce values. `/candidates` remains the distinct-candidate endpoint. See `tests/test_attempts.py` and `docs/verification/three-successful-configurations.json` for fixture and real-model verification.

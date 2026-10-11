@@ -7,6 +7,49 @@ from powernext.pipeline.storage import Store
 from powernext.profiles.resolve import resolve
 
 
+def test_one_match_does_not_stop_and_failures_do_not_fill_success_slots(request_data, tmp_path):
+    request_data["search"]["max_proposals"] = 6
+    context = resolve(RunRequest.model_validate(request_data))
+    store = Store(tmp_path / "jobs.sqlite")
+    ident, _ = store.create_run(context)
+    errors = [0, 1, 1, 1, 0.01, 0.02]
+    result = run(
+        context,
+        ident,
+        store,
+        tmp_path,
+        proposer=MockProposer(),
+        evaluator=lambda p: evaluation(context, str(p.proposal_index), errors[p.proposal_index]),
+    )
+    assert result["counters"]["proposals"] == 6
+    assert result["ml_converged"] and result["returned_successful_predictions"] == 3
+    assert {e["candidate_id"] for e in result["predicted_setups"]} == {"0", "4", "5"}
+    assert all(e["objective"]["waveform_within_tolerance"] for e in result["predicted_setups"])
+
+
+def test_one_match_plus_failures_returns_one_success_with_shortfall(context, tmp_path):
+    store = Store(tmp_path / "jobs.sqlite")
+    ident, _ = store.create_run(context)
+    result = run(
+        context,
+        ident,
+        store,
+        tmp_path,
+        proposer=MockProposer(),
+        evaluator=lambda p: evaluation(
+            context, str(p.proposal_index), 0 if p.proposal_index == 0 else 1
+        ),
+    )
+    assert result["stop_reason"] == "maximum_proposals"
+    assert not result["ml_converged"]
+    assert result["returned_successful_predictions"] == result["returned_predictions"] == 1
+    assert len(result["evaluated_setups"]) == 3
+    assert (
+        result["prediction_shortfall_reason"]
+        == "fewer_than_three_distinct_successful_ml_predictions"
+    )
+
+
 def test_resume_preserves_budgets_and_archive(context, tmp_path):
     store = Store(tmp_path / "jobs.sqlite")
     ident, _ = store.create_run(context)

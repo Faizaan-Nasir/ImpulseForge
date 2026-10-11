@@ -255,7 +255,7 @@ flowchart TB
     G --> O[Optimisation and Calibration Engine]
     F --> H[Always invoke residual ML: fixed actual settings plus physics baseline]
     H --> I[Score corrected predictions; any crest shortfall requires calibration]
-    I --> J[Update ML prediction archive and separate eligible archive]
+    I --> J[Update successful ML and eligible archives; retain every attempt]
     J --> K{Three ML matches or bounded stop?}
     K -->|No| O
     O --> L[New N and required per-stage Rf and Rt]
@@ -649,10 +649,11 @@ The mapping can be stepped or flat: several required resistance values may produ
 
 ### 8.4 Retain the three best distinct evaluated configurations
 
-Keep a history entry for every proposal and two ordered archives:
+Keep a history entry for every proposal and three ordered archives:
 
-- `predicted_setups`: up to three distinct realised configurations with valid ML-corrected outputs. Failed/unknown hardware and domain verdicts remain visible. These can be displayed as diagnostic alternatives, with no claim of verified hardware eligibility.
-- `recommendations`: up to three separately eligible configurations. Eligibility additionally requires hardware pass verdicts and appropriate model/laboratory evidence. The synthetic model is not laboratory validated.
+- `predicted_setups`: up to three distinct realised configurations whose ML-corrected outputs **pass all three waveform thresholds**. Failed/unknown hardware and domain verdicts remain visible. These can be displayed as diagnostic waveform matches, with no claim of verified hardware eligibility.
+- `recommendations`: up to three waveform matches that are also separately eligible configurations. Eligibility additionally requires hardware pass verdicts and appropriate model/laboratory evidence. The synthetic model is not laboratory validated.
+- `evaluated_setups`: the best three evaluated ML predictions, including outside-threshold predictions, retained for search progress and diagnostic inspection. These do not fill the dashboard's successful top-three slots. The complete chronological history is stored separately and is not limited to three rows.
 
 The same minimum-crest, S/J and tie ordering applies to both. Later worse candidates do not overwrite earlier better ones. These are the best evaluated configurations within the declared search scope, not a proof of the globally optimal three. Alternative setups are evaluated individually; their inventories are not consumed simultaneously. If fewer than three qualify for either archive, expose that archive's shortfall.
 
@@ -672,7 +673,7 @@ If fewer than three eligible distinct configurations have been found when the ru
 2. DP constructs a feasible front/tail assembly pair within the resistance tolerances and search budget.
 3. Physics recomputes the achievable waveform and verifies the actual configuration.
 4. The fixed ML model predicts `tf`, `tt` and `V` for that configuration under the declared conditions.
-5. Score only corrected predictions and update the diagnostic prediction archive and the separate eligible recommendation archive.
+5. Score only corrected predictions and update the successful waveform archive, the diagnostic progress archive and the separate eligible recommendation archive.
 6. Evaluate stopping conditions.
 7. If continuing, the optimiser proposes revised `N`, `Rf_req` and `Rt_req`.
 8. Repeat from DP, including forward physics, with the new proposal.
@@ -718,7 +719,7 @@ For reproducible stopping, fix maximum counts, model versions, search policies a
 context = resolve_and_freeze(request, inventory, model, crest_acceptance_policy)
 seed = physics.propose_initial_configuration(context)
 smac = initialise_smac(context, seed)
-prediction_archive = empty; eligible_archive = empty; cache = empty
+successful_archive = empty; progress_archive = empty; eligible_archive = empty; cache = empty
 
 while proposal/evaluation/time budgets remain:
     proposal = smac.ask()
@@ -739,7 +740,11 @@ while proposal/evaluation/time budgets remain:
             eligibility = separately_check_hardware_and_model_evidence()
             evaluation = record(baseline, correction, objective, eligibility)
         cache[identity] = evaluation
-    update_prediction_and_eligible_archives(evaluation)
+    progress_archive.add_valid_ML(evaluation)
+    if evaluation meets all waveform thresholds:
+        successful_archive.add_distinct(evaluation)
+        if evaluation is separately eligible:
+            eligible_archive.add_distinct(evaluation)
     smac.tell(evaluation.cost)
     if three selected ML predictions meet every waveform bound:
         mark ml_converged=true
@@ -748,7 +753,8 @@ while proposal/evaluation/time budgets remain:
     if declared repetition/stagnation limit reached:
         stop with that reason
 
-return both archives, exact recipes, waveforms, metrics, constraints and stop reason
+return successful and eligible setups, diagnostic progress, complete attempt history,
+       exact recipes, waveforms, metrics, constraints and stop reason
 # Budget/repetition/stagnation stopping is not a claim that a shortfall was resolved.
 ```
 
@@ -772,7 +778,15 @@ Three outcomes are possible:
 - It performs worse than the retained top three, so the earlier three remain stored; the new evaluation remains in the history.
 - The required-value change maps back to the same actual assemblies and stage count/charge, so the realised candidate is unchanged and the stagnation policy applies.
 
-If three distinct candidates reach the thresholds, return those best satisfactory configurations. If the maximum iterations or stagnation condition is reached first, return up to three available diagnostic ML predictions plus the separately eligible recommendations, with individual deviations, constraint verdicts and `ml_converged=false` unless three accepted waveforms were actually obtained. The dashboard never substitutes ideal requested resistance for the selected wiring.
+If three distinct candidates reach the thresholds, return those best satisfactory configurations. If the maximum iterations or stagnation condition is reached first, return only the available successful waveform matches in the top-three slots and report the missing count. Outside-threshold predictions remain in diagnostic progress and the attempt table. Set `ml_converged=false` unless three accepted waveforms were actually obtained. The dashboard never substitutes ideal requested resistance for the selected wiring.
+
+### 9.6 See every attempt from first to last
+
+The dashboard's **Top three successful configurations** table appears before the wiring diagrams. It compares the three distinct waveform matches, ordered by the existing S/J objective and deterministic tie preferences. Selecting a case changes its detailed wiring and waveform panels. Finding one match is insufficient; continue until three are found or a declared stopping limit is reached.
+
+A separate **All calibration attempts · ML predictions** table shows every optimiser proposal in chronological order. It includes requested and realised Rf/Rt, N, charge, ML front/peak time and tail time in microseconds, crest in kilovolts, each threshold verdict, prediction source, hardware verdict and rejection/support reasons. A repeated realised setup remains as a cached row rather than counting as another successful configuration. Multiple ML calls during one proposal's resistor-pair retries appear as separate rows. Attempts rejected before inference have empty ML values and an explicit reason; physics values are never substituted for absent ML predictions.
+
+`GET /v1/runs/{id}/attempts?offset=0&limit=1000` supplies this history. The frontend retrieves all pages, displays 50 rows per page with First/Previous/Next/Last controls and includes the complete history in JSON export. Pagination changes only how many rows are visible at once, not which attempts are retained.
 
 This walkthrough illustrates the control flow. It does not assert a measured improvement or prescribe an optimiser.
 

@@ -1,0 +1,1243 @@
+{
+  "verification": "Real SMAC3 + inventory DP/CP-SAT + trained TabPFN v2 residual models",
+  "target": {
+    "crest_V": 1425000.0,
+    "front_s": 1.2e-06,
+    "tail_s": 4.9999999999999996e-05,
+    "tolerances": {
+      "front": 0.3,
+      "tail": 0.2,
+      "crest": 0.03
+    }
+  },
+  "stop_reason": "three_ml_waveforms_within_tolerance",
+  "ml_converged": true,
+  "counters": {
+    "proposals": 7,
+    "physics_evaluations": 5,
+    "ml_evaluations": 5,
+    "physics_predictions": 5,
+    "ml_predictions": 5,
+    "cache_hits": 0,
+    "unique_realised": 5
+  },
+  "returned_successful_predictions": 3,
+  "returned_hardware_recommendations": 0,
+  "candidates": [
+    {
+      "candidate_id": "527142feff71c13366fc2168f6edda11",
+      "N": 9,
+      "Rf_stage_ohm": 49.523809523809526,
+      "Rt_stage_ohm": 23.943661971830984,
+      "front_recipe": {
+        "op": "parallel",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "series",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "front_100",
+                "ohm": 100.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_30",
+                "ohm": 30.0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "op": "series",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "front_30",
+                "ohm": 30.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_50",
+                "ohm": 50.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "tail_recipe": {
+        "op": "parallel",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "resistor",
+            "type_id": "tail_200",
+            "ohm": 200.0,
+            "children": []
+          },
+          {
+            "op": "resistor",
+            "type_id": "tail_40",
+            "ohm": 40.0,
+            "children": []
+          },
+          {
+            "op": "series",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "tail_10",
+                "ohm": 10.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "tail_75",
+                "ohm": 75.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "ml_metrics": {
+        "front_s": 1.1973093282961048e-06,
+        "tail_s": 4.97492293137919e-05,
+        "crest_V": 1431851.5810682012
+      },
+      "waveform_within_tolerance": true,
+      "hardware_feasible": false,
+      "failed_constraints": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ]
+    },
+    {
+      "candidate_id": "a516b51541151c976a94480bc86dacc0",
+      "N": 9,
+      "Rf_stage_ohm": 50.0,
+      "Rt_stage_ohm": 25.0,
+      "front_recipe": {
+        "op": "resistor",
+        "type_id": "front_50",
+        "ohm": 50.0,
+        "children": []
+      },
+      "tail_recipe": {
+        "op": "resistor",
+        "type_id": "tail_25",
+        "ohm": 25.0,
+        "children": []
+      },
+      "ml_metrics": {
+        "front_s": 1.2071976194677583e-06,
+        "tail_s": 5.201252652366061e-05,
+        "crest_V": 1430419.2992323423
+      },
+      "waveform_within_tolerance": true,
+      "hardware_feasible": false,
+      "failed_constraints": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ]
+    },
+    {
+      "candidate_id": "974234c81bfcf2ef2cba80068d19acc6",
+      "N": 9,
+      "Rf_stage_ohm": 47.04545454545455,
+      "Rt_stage_ohm": 25.136612021857925,
+      "front_recipe": {
+        "op": "series",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "parallel",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "front_150",
+                "ohm": 150.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_20",
+                "ohm": 20.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_500",
+                "ohm": 500.0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "op": "resistor",
+            "type_id": "front_30",
+            "ohm": 30.0,
+            "children": []
+          }
+        ]
+      },
+      "tail_recipe": {
+        "op": "parallel",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "resistor",
+            "type_id": "tail_200",
+            "ohm": 200.0,
+            "children": []
+          },
+          {
+            "op": "series",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "parallel",
+                "type_id": null,
+                "ohm": null,
+                "children": [
+                  {
+                    "op": "resistor",
+                    "type_id": "tail_15",
+                    "ohm": 15.0,
+                    "children": []
+                  },
+                  {
+                    "op": "resistor",
+                    "type_id": "tail_5",
+                    "ohm": 5.0,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "op": "resistor",
+                "type_id": "tail_25",
+                "ohm": 25.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "ml_metrics": {
+        "front_s": 1.149530270837687e-06,
+        "tail_s": 5.226711653844271e-05,
+        "crest_V": 1427597.568595843
+      },
+      "waveform_within_tolerance": true,
+      "hardware_feasible": false,
+      "failed_constraints": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ]
+    }
+  ],
+  "attempt_history": [
+    {
+      "event_sequence": 2,
+      "candidate_id": null,
+      "N": null,
+      "U_charge_V": null,
+      "Rf_actual_ohm": null,
+      "Rt_actual_ohm": null,
+      "front_recipe": null,
+      "tail_recipe": null,
+      "ml_metrics": null,
+      "ml_evaluation_number": null,
+      "prediction_source": "not_invoked",
+      "correction_status": "not_invoked",
+      "model_version": null,
+      "model_support": null,
+      "objective": null,
+      "waveform_within_tolerance": false,
+      "hardware_feasible": null,
+      "failed_hardware_constraints": [],
+      "eligible": null,
+      "reason_codes": [
+        "resistance_tolerance_unmet"
+      ],
+      "status": "ml_unavailable",
+      "attempt_number": 1,
+      "evaluation_in_attempt": 1,
+      "proposal": {
+        "N": 12,
+        "Rf_required_ohm": 1.7007918357014,
+        "Rt_required_ohm": 2731.8121241721033,
+        "proposal_index": 0,
+        "source": "SMAC3"
+      },
+      "attempt_status": "rejected"
+    },
+    {
+      "event_sequence": 4,
+      "candidate_id": null,
+      "N": null,
+      "U_charge_V": null,
+      "Rf_actual_ohm": null,
+      "Rt_actual_ohm": null,
+      "front_recipe": null,
+      "tail_recipe": null,
+      "ml_metrics": null,
+      "ml_evaluation_number": null,
+      "prediction_source": "not_invoked",
+      "correction_status": "not_invoked",
+      "model_version": null,
+      "model_support": null,
+      "objective": null,
+      "waveform_within_tolerance": false,
+      "hardware_feasible": null,
+      "failed_hardware_constraints": [],
+      "eligible": null,
+      "reason_codes": [
+        "resistance_tolerance_unmet"
+      ],
+      "status": "ml_unavailable",
+      "attempt_number": 2,
+      "evaluation_in_attempt": 1,
+      "proposal": {
+        "N": 7,
+        "Rf_required_ohm": 4664.771984199176,
+        "Rt_required_ohm": 1.8363383259585,
+        "proposal_index": 1,
+        "source": "SMAC3"
+      },
+      "attempt_status": "rejected"
+    },
+    {
+      "event_sequence": 9,
+      "candidate_id": "58914b019c4c2cc0ef424ca84aa2f957",
+      "N": 4,
+      "U_charge_V": 193089.43089430896,
+      "Rf_actual_ohm": 18.89483065953654,
+      "Rt_actual_ohm": 63.48837209302326,
+      "front_recipe": {
+        "op": "series",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "parallel",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "front_10",
+                "ohm": 10.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_100",
+                "ohm": 100.0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "op": "parallel",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "front_10",
+                "ohm": 10.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_500",
+                "ohm": 500.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "tail_recipe": {
+        "op": "series",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "parallel",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "tail_100",
+                "ohm": 100.0,
+                "children": []
+              },
+              {
+                "op": "series",
+                "type_id": null,
+                "ohm": null,
+                "children": [
+                  {
+                    "op": "resistor",
+                    "type_id": "tail_100",
+                    "ohm": 100.0,
+                    "children": []
+                  },
+                  {
+                    "op": "resistor",
+                    "type_id": "tail_15",
+                    "ohm": 15.0,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "resistor",
+            "type_id": "tail_10",
+            "ohm": 10.0,
+            "children": []
+          }
+        ]
+      },
+      "ml_metrics": {
+        "front_s": 4.728782017690903e-07,
+        "tail_s": 0.00013209057268033956,
+        "crest_V": 620706.1170200959
+      },
+      "ml_evaluation_number": 1,
+      "prediction_source": "fresh_ml",
+      "correction_status": "predicted_extrapolation",
+      "model_version": "residual-tabpfn-v2-standardised-v1",
+      "model_support": {
+        "status": "extrapolated_diagnostic",
+        "reasons": [
+          "feature_outside_training_envelope:N",
+          "feature_outside_training_envelope:Rf_stage_actual_ohm",
+          "feature_outside_training_envelope:Rt_stage_actual_ohm",
+          "feature_outside_training_envelope:C_generator_F",
+          "feature_outside_training_envelope:R_front_effective_ohm",
+          "feature_outside_training_envelope:R_tail_effective_ohm",
+          "feature_outside_training_envelope:physics_front_s",
+          "feature_outside_training_envelope:physics_tail_s",
+          "feature_outside_training_envelope:physics_crest_V"
+        ],
+        "joint_domain_validated": false,
+        "lab_validated": false,
+        "prediction_trusted": false
+      },
+      "objective": {
+        "acceptance_policy": "crest_no_shortfall_v1",
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 4.728782017690903e-07,
+            "signed_delta": -7.271217982309096e-07,
+            "absolute_delta": 7.271217982309096e-07,
+            "percentage_delta": -60.59348318590914,
+            "absolute_percentage_delta": 60.59348318590914,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "allowed_negative_delta": 3.6e-07,
+            "allowed_positive_delta": 3.6e-07,
+            "normalised_error": 2.0197827728636377,
+            "within_tolerance": false,
+            "reason_code": null
+          },
+          "tail": {
+            "unit": "s",
+            "target": 4.9999999999999996e-05,
+            "predicted": 0.00013209057268033956,
+            "signed_delta": 8.209057268033956e-05,
+            "absolute_delta": 8.209057268033956e-05,
+            "percentage_delta": 164.18114536067915,
+            "absolute_percentage_delta": 164.18114536067915,
+            "allowed_delta": 9.999999999999999e-06,
+            "lower_limit": 3.9999999999999996e-05,
+            "upper_limit": 5.9999999999999995e-05,
+            "allowed_negative_delta": 9.999999999999999e-06,
+            "allowed_positive_delta": 9.999999999999999e-06,
+            "normalised_error": 8.209057268033957,
+            "within_tolerance": false,
+            "reason_code": null
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1425000.0,
+            "predicted": 620706.1170200959,
+            "signed_delta": -804293.8829799041,
+            "absolute_delta": 804293.8829799041,
+            "percentage_delta": -56.441675998589766,
+            "absolute_percentage_delta": 56.441675998589766,
+            "allowed_delta": 42750.0,
+            "lower_limit": 1425000.0,
+            "upper_limit": 1467750.0,
+            "allowed_negative_delta": 0,
+            "allowed_positive_delta": 42750.0,
+            "normalised_error": 18.81389199952992,
+            "within_tolerance": false,
+            "reason_code": "crest_below_required"
+          }
+        },
+        "S": 19.81389199952992,
+        "J": 9.680910680142505,
+        "cost": 0.9519551653279172,
+        "crest_minimum_satisfied": false,
+        "crest_shortfall_V": 804293.8829799041,
+        "calibration_required": true,
+        "waveform_within_tolerance": false
+      },
+      "waveform_within_tolerance": false,
+      "hardware_feasible": false,
+      "failed_hardware_constraints": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ],
+      "eligible": false,
+      "reason_codes": [
+        "feature_outside_training_envelope:N",
+        "feature_outside_training_envelope:Rf_stage_actual_ohm",
+        "feature_outside_training_envelope:Rt_stage_actual_ohm",
+        "feature_outside_training_envelope:C_generator_F",
+        "feature_outside_training_envelope:R_front_effective_ohm",
+        "feature_outside_training_envelope:R_tail_effective_ohm",
+        "feature_outside_training_envelope:physics_front_s",
+        "feature_outside_training_envelope:physics_tail_s",
+        "feature_outside_training_envelope:physics_crest_V"
+      ],
+      "status": "outside_thresholds",
+      "attempt_number": 3,
+      "evaluation_in_attempt": 1,
+      "proposal": {
+        "N": 4,
+        "Rf_required_ohm": 18.892248267951,
+        "Rt_required_ohm": 63.495556575758,
+        "proposal_index": 2,
+        "source": "SMAC3"
+      },
+      "attempt_status": "evaluated"
+    },
+    {
+      "event_sequence": 14,
+      "candidate_id": "d46bdf24c98b71d47d11dbb6bb78ccf8",
+      "N": 8,
+      "U_charge_V": 193089.43089430896,
+      "Rf_actual_ohm": 235.78947368421052,
+      "Rt_actual_ohm": 5.042016806722689,
+      "front_recipe": {
+        "op": "series",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "parallel",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "front_20",
+                "ohm": 20.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_75",
+                "ohm": 75.0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "op": "resistor",
+            "type_id": "front_20",
+            "ohm": 20.0,
+            "children": []
+          },
+          {
+            "op": "resistor",
+            "type_id": "front_200",
+            "ohm": 200.0,
+            "children": []
+          }
+        ]
+      },
+      "tail_recipe": {
+        "op": "parallel",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "resistor",
+            "type_id": "tail_10",
+            "ohm": 10.0,
+            "children": []
+          },
+          {
+            "op": "resistor",
+            "type_id": "tail_15",
+            "ohm": 15.0,
+            "children": []
+          },
+          {
+            "op": "resistor",
+            "type_id": "tail_150",
+            "ohm": 150.0,
+            "children": []
+          },
+          {
+            "op": "resistor",
+            "type_id": "tail_40",
+            "ohm": 40.0,
+            "children": []
+          }
+        ]
+      },
+      "ml_metrics": {
+        "front_s": 4.739189663432919e-06,
+        "tail_s": 1.0284327713918834e-05,
+        "crest_V": 1261686.0547901234
+      },
+      "ml_evaluation_number": 2,
+      "prediction_source": "fresh_ml",
+      "correction_status": "predicted_extrapolation",
+      "model_version": "residual-tabpfn-v2-standardised-v1",
+      "model_support": {
+        "status": "extrapolated_diagnostic",
+        "reasons": [
+          "feature_outside_training_envelope:Rf_stage_actual_ohm",
+          "feature_outside_training_envelope:Rt_stage_actual_ohm",
+          "feature_outside_training_envelope:R_front_effective_ohm",
+          "feature_outside_training_envelope:R_tail_effective_ohm",
+          "feature_outside_training_envelope:physics_front_s",
+          "feature_outside_training_envelope:physics_tail_s",
+          "feature_outside_training_envelope:physics_crest_V"
+        ],
+        "joint_domain_validated": false,
+        "lab_validated": false,
+        "prediction_trusted": false
+      },
+      "objective": {
+        "acceptance_policy": "crest_no_shortfall_v1",
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 4.739189663432919e-06,
+            "signed_delta": 3.539189663432919e-06,
+            "absolute_delta": 3.539189663432919e-06,
+            "percentage_delta": 294.93247195274324,
+            "absolute_percentage_delta": 294.93247195274324,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "allowed_negative_delta": 3.6e-07,
+            "allowed_positive_delta": 3.6e-07,
+            "normalised_error": 9.831082398424776,
+            "within_tolerance": false,
+            "reason_code": null
+          },
+          "tail": {
+            "unit": "s",
+            "target": 4.9999999999999996e-05,
+            "predicted": 1.0284327713918834e-05,
+            "signed_delta": -3.971567228608116e-05,
+            "absolute_delta": 3.971567228608116e-05,
+            "percentage_delta": -79.43134457216233,
+            "absolute_percentage_delta": 79.43134457216233,
+            "allowed_delta": 9.999999999999999e-06,
+            "lower_limit": 3.9999999999999996e-05,
+            "upper_limit": 5.9999999999999995e-05,
+            "allowed_negative_delta": 9.999999999999999e-06,
+            "allowed_positive_delta": 9.999999999999999e-06,
+            "normalised_error": 3.9715672286081167,
+            "within_tolerance": false,
+            "reason_code": null
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1425000.0,
+            "predicted": 1261686.0547901234,
+            "signed_delta": -163313.94520987663,
+            "absolute_delta": 163313.94520987663,
+            "percentage_delta": -11.460627734026431,
+            "absolute_percentage_delta": 11.460627734026431,
+            "allowed_delta": 42750.0,
+            "lower_limit": 1425000.0,
+            "upper_limit": 1467750.0,
+            "allowed_negative_delta": 0,
+            "allowed_positive_delta": 42750.0,
+            "normalised_error": 3.820209244675477,
+            "within_tolerance": false,
+            "reason_code": "crest_below_required"
+          }
+        },
+        "S": 9.831082398424776,
+        "J": 5.874286290569457,
+        "cost": 0.9076731241426585,
+        "crest_minimum_satisfied": false,
+        "crest_shortfall_V": 163313.94520987663,
+        "calibration_required": true,
+        "waveform_within_tolerance": false
+      },
+      "waveform_within_tolerance": false,
+      "hardware_feasible": false,
+      "failed_hardware_constraints": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ],
+      "eligible": false,
+      "reason_codes": [
+        "feature_outside_training_envelope:Rf_stage_actual_ohm",
+        "feature_outside_training_envelope:Rt_stage_actual_ohm",
+        "feature_outside_training_envelope:R_front_effective_ohm",
+        "feature_outside_training_envelope:R_tail_effective_ohm",
+        "feature_outside_training_envelope:physics_front_s",
+        "feature_outside_training_envelope:physics_tail_s",
+        "feature_outside_training_envelope:physics_crest_V"
+      ],
+      "status": "outside_thresholds",
+      "attempt_number": 4,
+      "evaluation_in_attempt": 1,
+      "proposal": {
+        "N": 8,
+        "Rf_required_ohm": 235.818878136519,
+        "Rt_required_ohm": 5.0452358228131,
+        "proposal_index": 3,
+        "source": "SMAC3"
+      },
+      "attempt_status": "evaluated"
+    },
+    {
+      "event_sequence": 19,
+      "candidate_id": "a516b51541151c976a94480bc86dacc0",
+      "N": 9,
+      "U_charge_V": 193089.43089430896,
+      "Rf_actual_ohm": 50.0,
+      "Rt_actual_ohm": 25.0,
+      "front_recipe": {
+        "op": "resistor",
+        "type_id": "front_50",
+        "ohm": 50.0,
+        "children": []
+      },
+      "tail_recipe": {
+        "op": "resistor",
+        "type_id": "tail_25",
+        "ohm": 25.0,
+        "children": []
+      },
+      "ml_metrics": {
+        "front_s": 1.2071976194677583e-06,
+        "tail_s": 5.201252652366061e-05,
+        "crest_V": 1430419.2992323423
+      },
+      "ml_evaluation_number": 3,
+      "prediction_source": "fresh_ml",
+      "correction_status": "predicted_diagnostic",
+      "model_version": "residual-tabpfn-v2-standardised-v1",
+      "model_support": {
+        "status": "supported_diagnostic",
+        "reasons": [],
+        "joint_domain_validated": false,
+        "lab_validated": false
+      },
+      "objective": {
+        "acceptance_policy": "crest_no_shortfall_v1",
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 1.2071976194677583e-06,
+            "signed_delta": 7.1976194677583316e-09,
+            "absolute_delta": 7.1976194677583316e-09,
+            "percentage_delta": 0.5998016223131943,
+            "absolute_percentage_delta": 0.5998016223131943,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "allowed_negative_delta": 3.6e-07,
+            "allowed_positive_delta": 3.6e-07,
+            "normalised_error": 0.019993387410439812,
+            "within_tolerance": true,
+            "reason_code": null
+          },
+          "tail": {
+            "unit": "s",
+            "target": 4.9999999999999996e-05,
+            "predicted": 5.201252652366061e-05,
+            "signed_delta": 2.0125265236606158e-06,
+            "absolute_delta": 2.0125265236606158e-06,
+            "percentage_delta": 4.025053047321232,
+            "absolute_percentage_delta": 4.025053047321232,
+            "allowed_delta": 9.999999999999999e-06,
+            "lower_limit": 3.9999999999999996e-05,
+            "upper_limit": 5.9999999999999995e-05,
+            "allowed_negative_delta": 9.999999999999999e-06,
+            "allowed_positive_delta": 9.999999999999999e-06,
+            "normalised_error": 0.2012526523660616,
+            "within_tolerance": true,
+            "reason_code": null
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1425000.0,
+            "predicted": 1430419.2992323423,
+            "signed_delta": 5419.29923234228,
+            "absolute_delta": 5419.29923234228,
+            "percentage_delta": 0.38030170051524775,
+            "absolute_percentage_delta": 0.38030170051524775,
+            "allowed_delta": 42750.0,
+            "lower_limit": 1425000.0,
+            "upper_limit": 1467750.0,
+            "allowed_negative_delta": 0,
+            "allowed_positive_delta": 42750.0,
+            "normalised_error": 0.1267672335050826,
+            "within_tolerance": true,
+            "reason_code": null
+          }
+        },
+        "S": 0.2012526523660616,
+        "J": 0.11600442442719466,
+        "cost": 0.16753565702407558,
+        "crest_minimum_satisfied": true,
+        "crest_shortfall_V": 0,
+        "calibration_required": false,
+        "waveform_within_tolerance": true
+      },
+      "waveform_within_tolerance": true,
+      "hardware_feasible": false,
+      "failed_hardware_constraints": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ],
+      "eligible": false,
+      "reason_codes": [],
+      "status": "thresholds_met",
+      "attempt_number": 5,
+      "evaluation_in_attempt": 1,
+      "proposal": {
+        "N": 9,
+        "Rf_required_ohm": 50.0,
+        "Rt_required_ohm": 25.0,
+        "proposal_index": 4,
+        "source": "SMAC3"
+      },
+      "attempt_status": "evaluated"
+    },
+    {
+      "event_sequence": 24,
+      "candidate_id": "527142feff71c13366fc2168f6edda11",
+      "N": 9,
+      "U_charge_V": 193089.43089430896,
+      "Rf_actual_ohm": 49.523809523809526,
+      "Rt_actual_ohm": 23.943661971830984,
+      "front_recipe": {
+        "op": "parallel",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "series",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "front_100",
+                "ohm": 100.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_30",
+                "ohm": 30.0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "op": "series",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "front_30",
+                "ohm": 30.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_50",
+                "ohm": 50.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "tail_recipe": {
+        "op": "parallel",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "resistor",
+            "type_id": "tail_200",
+            "ohm": 200.0,
+            "children": []
+          },
+          {
+            "op": "resistor",
+            "type_id": "tail_40",
+            "ohm": 40.0,
+            "children": []
+          },
+          {
+            "op": "series",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "tail_10",
+                "ohm": 10.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "tail_75",
+                "ohm": 75.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "ml_metrics": {
+        "front_s": 1.1973093282961048e-06,
+        "tail_s": 4.97492293137919e-05,
+        "crest_V": 1431851.5810682012
+      },
+      "ml_evaluation_number": 4,
+      "prediction_source": "fresh_ml",
+      "correction_status": "predicted_extrapolation",
+      "model_version": "residual-tabpfn-v2-standardised-v1",
+      "model_support": {
+        "status": "extrapolated_diagnostic",
+        "reasons": [
+          "feature_outside_training_envelope:Rt_stage_actual_ohm",
+          "feature_outside_training_envelope:physics_tail_s"
+        ],
+        "joint_domain_validated": false,
+        "lab_validated": false,
+        "prediction_trusted": false
+      },
+      "objective": {
+        "acceptance_policy": "crest_no_shortfall_v1",
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 1.1973093282961048e-06,
+            "signed_delta": -2.6906717038951045e-09,
+            "absolute_delta": 2.6906717038951045e-09,
+            "percentage_delta": -0.22422264199125871,
+            "absolute_percentage_delta": 0.22422264199125871,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "allowed_negative_delta": 3.6e-07,
+            "allowed_positive_delta": 3.6e-07,
+            "normalised_error": 0.00747408806637529,
+            "within_tolerance": true,
+            "reason_code": null
+          },
+          "tail": {
+            "unit": "s",
+            "target": 4.9999999999999996e-05,
+            "predicted": 4.97492293137919e-05,
+            "signed_delta": -2.507706862080948e-07,
+            "absolute_delta": 2.507706862080948e-07,
+            "percentage_delta": -0.5015413724161896,
+            "absolute_percentage_delta": 0.5015413724161896,
+            "allowed_delta": 9.999999999999999e-06,
+            "lower_limit": 3.9999999999999996e-05,
+            "upper_limit": 5.9999999999999995e-05,
+            "allowed_negative_delta": 9.999999999999999e-06,
+            "allowed_positive_delta": 9.999999999999999e-06,
+            "normalised_error": 0.02507706862080948,
+            "within_tolerance": true,
+            "reason_code": null
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1425000.0,
+            "predicted": 1431851.5810682012,
+            "signed_delta": 6851.581068201223,
+            "absolute_delta": 6851.581068201223,
+            "percentage_delta": 0.48081270654043673,
+            "absolute_percentage_delta": 0.48081270654043673,
+            "allowed_delta": 42750.0,
+            "lower_limit": 1425000.0,
+            "upper_limit": 1467750.0,
+            "allowed_negative_delta": 0,
+            "allowed_positive_delta": 42750.0,
+            "normalised_error": 0.16027090218014559,
+            "within_tolerance": true,
+            "reason_code": null
+          }
+        },
+        "S": 0.16027090218014559,
+        "J": 0.06427401962244346,
+        "cost": 0.13813231192732406,
+        "crest_minimum_satisfied": true,
+        "crest_shortfall_V": 0,
+        "calibration_required": false,
+        "waveform_within_tolerance": true
+      },
+      "waveform_within_tolerance": true,
+      "hardware_feasible": false,
+      "failed_hardware_constraints": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ],
+      "eligible": false,
+      "reason_codes": [
+        "feature_outside_training_envelope:Rt_stage_actual_ohm",
+        "feature_outside_training_envelope:physics_tail_s"
+      ],
+      "status": "thresholds_met",
+      "attempt_number": 6,
+      "evaluation_in_attempt": 1,
+      "proposal": {
+        "N": 9,
+        "Rf_required_ohm": 49.5221392206637,
+        "Rt_required_ohm": 23.9422837730453,
+        "proposal_index": 5,
+        "source": "SMAC3"
+      },
+      "attempt_status": "evaluated"
+    },
+    {
+      "event_sequence": 29,
+      "candidate_id": "974234c81bfcf2ef2cba80068d19acc6",
+      "N": 9,
+      "U_charge_V": 193089.43089430896,
+      "Rf_actual_ohm": 47.04545454545455,
+      "Rt_actual_ohm": 25.136612021857925,
+      "front_recipe": {
+        "op": "series",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "parallel",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "resistor",
+                "type_id": "front_150",
+                "ohm": 150.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_20",
+                "ohm": 20.0,
+                "children": []
+              },
+              {
+                "op": "resistor",
+                "type_id": "front_500",
+                "ohm": 500.0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "op": "resistor",
+            "type_id": "front_30",
+            "ohm": 30.0,
+            "children": []
+          }
+        ]
+      },
+      "tail_recipe": {
+        "op": "parallel",
+        "type_id": null,
+        "ohm": null,
+        "children": [
+          {
+            "op": "resistor",
+            "type_id": "tail_200",
+            "ohm": 200.0,
+            "children": []
+          },
+          {
+            "op": "series",
+            "type_id": null,
+            "ohm": null,
+            "children": [
+              {
+                "op": "parallel",
+                "type_id": null,
+                "ohm": null,
+                "children": [
+                  {
+                    "op": "resistor",
+                    "type_id": "tail_15",
+                    "ohm": 15.0,
+                    "children": []
+                  },
+                  {
+                    "op": "resistor",
+                    "type_id": "tail_5",
+                    "ohm": 5.0,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "op": "resistor",
+                "type_id": "tail_25",
+                "ohm": 25.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "ml_metrics": {
+        "front_s": 1.149530270837687e-06,
+        "tail_s": 5.226711653844271e-05,
+        "crest_V": 1427597.568595843
+      },
+      "ml_evaluation_number": 5,
+      "prediction_source": "fresh_ml",
+      "correction_status": "predicted_extrapolation",
+      "model_version": "residual-tabpfn-v2-standardised-v1",
+      "model_support": {
+        "status": "extrapolated_diagnostic",
+        "reasons": [
+          "feature_outside_training_envelope:Rt_stage_actual_ohm",
+          "feature_outside_training_envelope:physics_tail_s"
+        ],
+        "joint_domain_validated": false,
+        "lab_validated": false,
+        "prediction_trusted": false
+      },
+      "objective": {
+        "acceptance_policy": "crest_no_shortfall_v1",
+        "errors": {
+          "front": {
+            "unit": "s",
+            "target": 1.2e-06,
+            "predicted": 1.149530270837687e-06,
+            "signed_delta": -5.046972916231287e-08,
+            "absolute_delta": 5.046972916231287e-08,
+            "percentage_delta": -4.205810763526073,
+            "absolute_percentage_delta": 4.205810763526073,
+            "allowed_delta": 3.6e-07,
+            "lower_limit": 8.4e-07,
+            "upper_limit": 1.5599999999999999e-06,
+            "allowed_negative_delta": 3.6e-07,
+            "allowed_positive_delta": 3.6e-07,
+            "normalised_error": 0.14019369211753577,
+            "within_tolerance": true,
+            "reason_code": null
+          },
+          "tail": {
+            "unit": "s",
+            "target": 4.9999999999999996e-05,
+            "predicted": 5.226711653844271e-05,
+            "signed_delta": 2.2671165384427114e-06,
+            "absolute_delta": 2.2671165384427114e-06,
+            "percentage_delta": 4.534233076885423,
+            "absolute_percentage_delta": 4.534233076885423,
+            "allowed_delta": 9.999999999999999e-06,
+            "lower_limit": 3.9999999999999996e-05,
+            "upper_limit": 5.9999999999999995e-05,
+            "allowed_negative_delta": 9.999999999999999e-06,
+            "allowed_positive_delta": 9.999999999999999e-06,
+            "normalised_error": 0.22671165384427117,
+            "within_tolerance": true,
+            "reason_code": null
+          },
+          "crest": {
+            "unit": "V",
+            "target": 1425000.0,
+            "predicted": 1427597.568595843,
+            "signed_delta": 2597.568595842924,
+            "absolute_delta": 2597.568595842924,
+            "percentage_delta": 0.18228551549774905,
+            "absolute_percentage_delta": 0.18228551549774905,
+            "allowed_delta": 42750.0,
+            "lower_limit": 1425000.0,
+            "upper_limit": 1467750.0,
+            "allowed_negative_delta": 0,
+            "allowed_positive_delta": 42750.0,
+            "normalised_error": 0.06076183849924968,
+            "within_tolerance": true,
+            "reason_code": null
+          }
+        },
+        "S": 0.22671165384427117,
+        "J": 0.14255572815368553,
+        "cost": 0.18481250515049874,
+        "crest_minimum_satisfied": true,
+        "crest_shortfall_V": 0,
+        "calibration_required": false,
+        "waveform_within_tolerance": true
+      },
+      "waveform_within_tolerance": true,
+      "hardware_feasible": false,
+      "failed_hardware_constraints": [
+        "HW_STAGE_ENERGY",
+        "HW_TOTAL_ENERGY"
+      ],
+      "eligible": false,
+      "reason_codes": [
+        "feature_outside_training_envelope:Rt_stage_actual_ohm",
+        "feature_outside_training_envelope:physics_tail_s"
+      ],
+      "status": "thresholds_met",
+      "attempt_number": 7,
+      "evaluation_in_attempt": 1,
+      "proposal": {
+        "N": 9,
+        "Rf_required_ohm": 47.0460322596305,
+        "Rt_required_ohm": 25.1393979616976,
+        "proposal_index": 6,
+        "source": "SMAC3"
+      },
+      "attempt_status": "evaluated"
+    }
+  ]
+}

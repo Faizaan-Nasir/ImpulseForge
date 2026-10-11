@@ -51,6 +51,7 @@ The displayed diagnostic ML values for this run were front 1.189383868 µs, tail
 | `POST /v1/runs/{id}/cancel` | Stop at backend iteration boundary |
 | `GET /v1/runs` | Lightweight durable history list (available for later navigation) |
 | `GET /v1/runs/{id}/dashboard` | Resolved context, up to three eligible or diagnostic cases, waveform samples and compact summary evidence |
+| `GET /v1/runs/{id}/attempts?offset=0&limit=1000` | Every proposal and ML prediction in chronological order, including cached repeats, pair retries and rejected/unsupported attempts |
 | `POST /v1/candidates/{id}/diagnostic-evaluation` | Optional direct residual inspection using stored physics; stores separate diagnostic record, never modifies production eligibility/archive |
 | `POST /v1/runs/{id}/decision-summary` | `{refresh:false}` caches a valid generated explanation; `{refresh:true}` requests regeneration |
 | `POST /v1/waveforms/reconstruct` | Target-only reference before a calculation |
@@ -99,3 +100,11 @@ Crest acceptance now uses `crest_no_shortfall_v1`: zero shortfall is allowed. Th
 Search time budget default is 600 seconds (10 minutes). The dashboard retains a separate default Maximum iterations of 24, setting proposal/physics/ML count caps together. A longer time budget does not raise this count. Stop earlier for three accepted ML predictions, repeated/stagnant search, cancellation or other applicable limits. Saved historical runs retain their submitted budgets.
 
 Budget values now come from backend `.env`: `POWERNEXT_CALIBRATION_WALL_TIME_SECONDS` (fallback 600) and `POWERNEXT_CALIBRATION_MAX_ATTEMPTS` (fallback 24). Bootstrap returns `defaults.search`; App initialises budget fields from it instead of frontend numeric constants. Edits remain explicit per-run overrides. Restart the backend and refresh the dashboard after changing environment defaults.
+
+## Three successful configurations and all attempts
+
+The comparison table now appears directly below Recommended settings and before the wiring diagrams. Only distinct ML predictions passing every waveform threshold fill its three columns. One successful setup keeps calibration running; cached repeats do not count as alternatives. Failed predictions stay in search history. The existing budgets still apply; fewer than three matches produce an explicit shortfall rather than filled slots with failed cases. Hardware eligibility remains separate from successful diagnostic waveform matching.
+
+The separate **All calibration attempts · ML predictions** table follows the physics/ML metrics panel. It shows each proposal from first to last and each inner ML retry, including rejected proposals, unavailable correction and cached predictions. Front/peak and tail use µs; crest uses kV; requested/actual Rf/Rt and per-output acceptance checks remain visible. The API supplies exact recipes and full-precision SI outputs. All pages are retrieved; First/Previous/Next/Last controls display 50 rows per page. Exported JSON includes the entire attempt history. A history-loading failure is reported without hiding completed configurations.
+
+Real trained-model verification found three distinct waveform matches after 7 proposals and 5 ML calls. The two other proposals had no ML inference and remain visible as rejected attempts. See `verification/three-successful-configurations.json` for exact predictions, wiring, counters and constraint failures. The tested workbook setup still fails stage/total stored-energy limits; successful waveform matching does not approve the hardware.

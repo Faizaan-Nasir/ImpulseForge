@@ -17,6 +17,20 @@ export async function api(path, options = {}) {
 }
 export const post = (path, data = {}, options = {}) =>
   api(path, { ...options, method: "POST", body: JSON.stringify(data) });
+export async function allAttempts(runId, options = {}) {
+  const items = [];
+  let history;
+  do {
+    history = await api(
+      `/v1/runs/${runId}/attempts?offset=${items.length}&limit=1000`,
+      options,
+    );
+    if (!history.items.length && items.length < history.total)
+      throw new Error("Attempt history ended before all rows were retrieved");
+    items.push(...history.items);
+  } while (items.length < history.total);
+  return { ...history, items };
+}
 export const sleep = (ms, signal) =>
   new Promise((resolve, reject) => {
     if (signal?.aborted)

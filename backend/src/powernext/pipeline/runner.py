@@ -16,8 +16,11 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
     req = context.request
     start = monotonic()
     epoch_started_at = datetime.now(UTC).isoformat()
-    archive = Archive(req.objective.secondary_preference)
+    archive = Archive(req.objective.secondary_preference, require_waveform=True)
     prediction_archive = Archive(req.objective.secondary_preference, require_eligible=False)
+    successful_archive = Archive(
+        req.objective.secondary_preference, require_eligible=False, require_waveform=True
+    )
     engine = AssemblyEngine()
     model = model or ResidualModel(artifact_dir / "models")
     previous_run = store.get("run", run_id) or {}
@@ -53,6 +56,7 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
                 cache[record["candidate_id"]] = cached
                 archive.add(cached)
                 prediction_archive.add(cached)
+                successful_archive.add(cached)
         if record["pipeline_stage_name"] in ("evaluation", "rejection") and hasattr(
             proposer, "replay"
         ):
@@ -80,6 +84,8 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
                 "counters": counters.copy(),
                 "top_three_ids": [e["candidate_id"] for e in archive.best()],
                 "top_three_prediction_ids": [e["candidate_id"] for e in prediction_archive.best()],
+                "top_three_successful_ids": [e["candidate_id"] for e in successful_archive.best()],
+                "returned_successful_predictions": len(successful_archive.best()),
                 "loop_policy": "ml_correction_required_v1",
                 "rejections": dict(rejections),
                 "stagnant": stagnant,
@@ -289,6 +295,7 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
             )
             improved = archive.add(evaluation)
             improved = prediction_archive.add(evaluation) or improved
+            improved = successful_archive.add(evaluation) or improved
             if req.purpose == "diagnostic" and evaluation.get("objective"):
                 key = list(objective_order(evaluation["objective"]))
                 if diagnostic_best_key is None or key < diagnostic_best_key:
@@ -313,11 +320,7 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
         if len(best) == 3 and all(e["objective"]["waveform_within_tolerance"] for e in best):
             stop = "three_satisfactory_setups"
             break
-        if (
-            req.purpose == "diagnostic"
-            and len(prediction_archive.best()) == 3
-            and all(e["objective"]["waveform_within_tolerance"] for e in prediction_archive.best())
-        ):
+        if req.purpose == "diagnostic" and len(successful_archive.best()) == 3:
             stop = "three_ml_waveforms_within_tolerance"
             break
         if repeated >= req.search.repeat_window:
@@ -327,7 +330,7 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
             stop = "archive_stagnation"
             break
     best = archive.best()
-    predicted = prediction_archive.best()
+    predicted = successful_archive.best()
     waveforms = bundle(context, predicted if req.purpose == "diagnostic" else best)
     store.save("waveforms", run_id, waveforms)
     result = {
@@ -347,11 +350,13 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
         else "fewer_than_three_supported_hardware_verified_candidates",
         "recommendations": best,
         "predicted_setups": predicted,
+        "evaluated_setups": prediction_archive.best(),
+        "returned_successful_predictions": len(predicted),
         "requested_predictions": 3,
         "returned_predictions": len(predicted),
         "prediction_shortfall_reason": None
         if len(predicted) == 3
-        else "fewer_than_three_distinct_ml_predictions",
+        else "fewer_than_three_distinct_successful_ml_predictions",
         "ml_converged": len(predicted) == 3
         and all(e["objective"]["waveform_within_tolerance"] for e in predicted),
         "calibration_basis": "ML corrected metrics only; no physics-only objective fallback",
@@ -359,6 +364,7 @@ def run(context, run_id, store, artifact_dir, model=None, proposer=None, evaluat
         "counters": counters,
         "rejections": dict(rejections),
         "history_url": f"/v1/runs/{run_id}/candidates",
+        "attempts_url": f"/v1/runs/{run_id}/attempts",
         "waveform_plot_bundle_url": f"/v1/runs/{run_id}/waveforms",
         "guarantee": "Best distinct eligible setups among evaluated candidates only",
         "physical_recommendation_verified": bool(best) and evaluator is None,

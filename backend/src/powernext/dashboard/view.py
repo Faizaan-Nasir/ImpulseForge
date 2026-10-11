@@ -8,10 +8,21 @@ from powernext.physics.plot_reconstruction import bundle
 
 def cases_for_run(store, run_id, context):
     result = store.get("result", run_id) or {}
-    eligible = result.get("recommendations", [])
-    if eligible:
+
+    def passing(records):
+        return [
+            e
+            for e in records
+            if e.get("correction", {}).get("corrected_metrics")
+            and evaluate_objective(context, e["correction"]["corrected_metrics"])[
+                "waveform_within_tolerance"
+            ]
+        ]
+
+    eligible = passing(result.get("recommendations", []))
+    predicted = passing(result.get("predicted_setups", []))
+    if eligible and (context.request.purpose != "diagnostic" or len(eligible) >= len(predicted)):
         return eligible, "eligible_recommendations"
-    predicted = result.get("predicted_setups", [])
     if predicted:
         return predicted, "diagnostic_evaluated_cases"
     ids = list(
@@ -22,7 +33,7 @@ def cases_for_run(store, run_id, context):
         )
     )
     evaluated = [store.get("diagnostic_candidate", i) or store.get("candidate", i) for i in ids]
-    evaluated = [e for e in evaluated if e and e.get("correction", {}).get("corrected_metrics")]
+    evaluated = passing([e for e in evaluated if e])
 
     def key(record):
         metrics = record["correction"]["corrected_metrics"]
